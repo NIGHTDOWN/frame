@@ -1,0 +1,38 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+		<div class="fn-right">
+<div class="block">
+    <div class="i-block">
+        <h2>我的银行卡</h2>
+       
+    </div>
+        <div class="form">
+                <div class="cardlist">
+                        <ul>
+                              <!--{foreach $data as $volist}-->
+                            <li onclick="_go_url('<!--{url action='show' args="cardid:{$volist.cardid}"}-->')">
+                                <div><span class="wone">    <!--{$volist.bankuser}-->	</span>
+                                <span class="wthr">    <!--{$volist.banknum|hidecard}--></span></div>
+                          <div>  <span class="wtwo"> <!--{$volist.bankname}-->
+                                
+                                </span>
+                                
+                                <span class="wfou"> <!--{$volist.bankaddress}--></span></div>
+                               
+                            </li>
+                            
+                            <!--{/foreach}--> 
+                            <li onclick="_go_url('<!--{url action='add' }-->')"> 
+                                <i class="add"></i>
+                                <strong class="addtext">添加新银行卡</strong></li>
+                        </ul>
+                        <div style="clear: both"></div>
+                    </div>
+    </div>
+    <div class="tg_pages">
+            <span><!--{$page}--></span>
+      </div>
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

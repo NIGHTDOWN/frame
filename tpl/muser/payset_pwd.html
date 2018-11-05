@@ -1,0 +1,189 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+<script>
+	_ajax_file_url="<!--{url mod='upimg'}-->";
+</script>
+<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="history.back();" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='index' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">修改支付密码</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					<form method="POST" action="" >
+
+				
+					
+					<section class="order-act" >
+							
+					
+						<div class="label4" style="display:none">
+									
+										
+								<div class="title">
+									<span class="tl">手机验证码</span>
+								</div>
+								
+								<div class="next">
+										<input type="text" class="wtext w2" tag=' fixnum ' name='nickname' value=''>
+										<span class="input-group-btn"> <input name="sendsms" id="sendsms" type="button" class="btn-primary w2 save" value="获取短信验证码"></span>
+									</div>
+										
+
+						</div>
+						<div class="label4">
+									
+										
+								<div class="title">
+									<span class="tl"> 原密码</span>
+								</div>
+								
+								<div class="next">
+										<input name="oldpass" type="password" tag="notnull" id="oldpass" class="wtext w1">
+										
+									</div>
+										
+
+						</div>
+						<div class="label4">
+									
+										
+								<div class="title">
+									<span class="tl">新密码</span>
+								</div>
+								
+								<div class="next">
+										<input type="password" class="wtext w1" tag='notnull iscomplex' name='pass' value=''>
+									</div>
+										
+
+						</div>
+						<div class="label4">
+									
+										
+								<div class="title">
+									<span class="tl">确认新密码</span>
+								</div>
+								
+								<div class="next">
+										<input type="password" class="wtext w1" name='cpass' value='' tag='notnull isequal'>
+									</div>
+										
+
+						</div>
+						
+					</section>
+				
+					<button class='btn save'  type="submit"  >确认修改</button>
+						<div style="clear:both;margin-bottom:1rem"></div>
+				</form>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+			<script>
+					$(function(){
+							var intDiff =0;
+							$('#sendsms').click(function() {
+									if(intDiff<=0){
+		
+										var $mobile = '<!--{$user.mobile}-->';
+								
+										var $action = '<!--{url action='sendmsg'}-->';
+									
+										$.post($action,{mobile:$mobile},function(data){
+		
+												intDiff = parseInt(60);//倒计时总秒数量
+												var timer = window.setInterval(function(){
+														$("#sendsms").attr("disabled", true);
+														$("#sendsms").val(''+intDiff+'秒后重新获取');
+														intDiff--;
+														if(intDiff<0){
+															clearInterval(timer);
+															$("#sendsms").removeAttr("disabled");
+															$("#sendsms").val('获取短信验证码');
+														}
+													}, 1000);
+		
+		
+												if(data.flag ){
+													alert(data.data);
+												}
+											});
+									}
+		
+								});
+						});
+				</script>
+		
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

@@ -1,0 +1,11 @@
+<div id="footer">
+   <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+       <p> <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a><em>|
+              
+               <!--{/foreach}-->
+			</p>
+			<!--{$config.copyright}--><br>
+</div>
+
+

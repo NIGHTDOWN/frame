@@ -1,0 +1,49 @@
+<div class="left_con">
+					<dl class="user">
+						<dd>
+							<div class="pic">
+								<a href="<!--{url mod='set'}-->"><!--{if $user.headimg}-->
+								<img height="100" width="100" src="<!--{$user.headimg}-->"><!--{else}-->
+									<img height="100" width="100" src="<!--{$usertpl}-->res/avatar.png">
+									<!--{/if}-->
+								</a>
+							</div>
+						</dd>
+					</dl>
+               
+					<div class="business_handle" id="my_menu">
+						<h3>交易操作</h3>
+						<div <!--{if $c=='order'}-->class="active"<!--{/if}-->><em class="i1"></em><a href="<!--{url mod='order'}-->">已买到的商品</a></div>
+						   
+				<!--		<div class="normal"><em class="i2"></em><a href="">我的代金券</a></div>
+						   
+						<div class="normal"><em class="i3"></em><a href="">我的会员卡</a></div>-->
+						   
+						<dl>
+							<dt><em class="i4"></em><a href="javascript:void(0)">我的收藏</a></dt>
+							<dd <!--{if $c=='collect' && $a=='product'}-->class="active"<!--{/if}-->><a href="<!--{url mod='collect' action='product'}-->">收藏商品</a>
+							</dd>
+							<dd <!--{if $c=='collect' && $a=='shop'}-->class="active"<!--{/if}-->><a href="<!--{url mod='collect' action='shop'}-->">收藏店铺</a>
+							</dd>
+							<dd <!--{if $c=='collect' && $a=='history'}-->class="active"<!--{/if}-->><a href="<!--{url mod='collect' action='history'}-->">我的足迹</a>
+							</dd>
+						</dl>
+                           
+						<dl>
+							<dt><em class="i5"></em><a href="javascript:void(0)">我的积分</a></dt>
+							<dd <!--{if $c=='jf' && $a=='run'}-->class="active"<!--{/if}-->><a href="<!--{url mod='jf'}-->">积分明细</a>
+							</dd>
+							<dd <!--{if $c=='jf' && $a=='product'}-->class="active"<!--{/if}-->><a href="<!--{url mod='jf' action='product'}-->">已兑换的商品</a>
+							</dd>
+						</dl>
+                           
+						<div <!--{if $c=='comment' }-->class="active"<!--{/if}-->><em class="i6"></em><a href="<!--{url mod='comment'}-->">评价管理</a></div>
+						   
+					<!--	<dl>
+							<dt><em class="i7"></em><a href="javascript:void(0)">咨询与维权</a></dt>
+							<dd class="normal"><a href="">我的咨询</a>
+							</dd>
+						</dl>-->
+                           
+					</div>
+				</div>

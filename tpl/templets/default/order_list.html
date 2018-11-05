@@ -1,0 +1,33 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+	
+					
+				
+					<div id="deal-record" class="i-con ">
+					<table width="100%" cellpadding="0" cellspacing="0" class="record">
+						
+							<tbody>
+							<!--{if ($data|sizeof)}-->
+							<!--{foreach $data as $volist}-->
+								<tr>
+									<td class="pl15"><!--{$volist.username}--></td>
+									<td><!--{$volist.subtotal/100}--></td>
+									<td><!--{$volist.num}--></td>
+									<td><!--{$volist.paytime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+									<td><!--{$volist.spec}--></td>
+								</tr>
+								<!--{/foreach}-->
+<!--{else}-->
+								<tr>
+									<td class="no-result" colspan="5">暂时还没有买家购买此商品</td>
+								</tr>
+<!--{/if}-->
+							</tbody>  
+						</table>
+						<!--{if ($data|sizeof)}-->
+						<div class="pages"><!--{$page}--></div>
+						<!--{/if}-->
+					</div>
+					
+					
+			

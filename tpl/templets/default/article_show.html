@@ -1,0 +1,87 @@
+  <!--{include file={$indextpl}"head.html"}-->
+<style>
+.menu{ margin-bottom:0px !important;}
+.new_bg{background:#F2F2F2; width:100%; padding:15px 0px;}
+.new_nei{margin:0 auto; width:1200px; background:#fff;}
+.new_nei h2{background:#fbfbfb; height:35px; line-height:35px; border-bottom:1px solid #f5f4f4; font-family:微软雅黑; font-size:16px; font-weight:normal; padding-left:20px;}
+.new_neiz{float:left; width:949px; border-right:1px solid #f5f4f4;}
+.new_neinr p{line-height:24px;}
+.new_xq{padding:20px;}
+.new_xqh{border-bottom:1px solid #f5f4f4; width:900px; margin:0 auto;}
+.new_xqh h3{font-family:微软雅黑; font-size:24px; text-align:center; padding:20px 0px;}
+.new_xqsj{color:#939393; text-align:center; padding-bottom:10px;}
+.new_xqzw{font-size:12px; color:#333333; padding:20px;}
+.new_xqzw p{line-height:26px;}
+.new_xqzw img{ text-align:center; padding-bottom:20px;}
+.new_tp{margin:0px 25px; border:1px solid #eeeeee; margin-bottom:30px; padding:20px; background-color:#f9f9f9;}
+.new_tp h3{font-size:18px; padding-bottom:15px; font-family:微软雅黑;}
+.new_tp td{ padding-top:5px; padding-right:80px;}
+
+.new_ym{padding-bottom:30px; padding-left:30px;}
+.clear{clear:both;}
+.new_neiy{float:right; width:250px; margin:0 auto; padding-top:20px;}
+.new_neiy b{ font-size:16px; padding:20px 15px 0px; font-family:微软雅黑; color:#333;}
+.new_neiy_a{width:100px;}
+.new_neiy_a img{width:100px; height:75px;}
+.new_neiy ul{list-style:none; padding:0px 15px;}
+.new_neiy li{margin: 15px 0 0;}
+.new_banner{ margin-top:30px; border-top:1px solid #F5F4F4;}
+.new_banner img{width:217px; padding:15px 15px 0;}
+.footer{margin-top:0px !important;}
+
+</style>
+
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	
+	<div class="new_bg">
+	<div class="new_nei">
+        <h2><!--{$data.catname}--></h2>
+        <div class="new_neiz">
+            <div class="new_xq">
+                <div class="new_xqh">
+                    <h3><!--{$data.title|tostr}--></h3>
+                    <div class="new_xqsj"><a>时间：<!--{$data.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></a>&nbsp;<a>阅读数：<!--{$data.hits}--></a></div>
+                </div>
+                <div class="new_xqzw"><!--{$data.content}-->
+ </div>
+            </div>
+                    
+                    </div>
+        <div class="new_neiy">
+            <b>推荐阅读</b>
+              <!--{assign var="elite" vo_list("fun={getarticle} type={im} mod={index} ")}-->
+            <ul>
+        <!--{foreach $elite as $volist}-->    
+            <li>
+    <a style="float:left; margin-right:10px;" class="new_neiy_a" href="<!--{url mod='article' action='show' args="articleid:{$volist.articleid}"}-->" title="<!--{$volist.title|tostr}-->" target="_blank"><img height="123" width="183" src="<!--{$volist.pic}-->"></a>
+    <div>
+        <p style="height:55px; overflow:hidden;"><a href="<!--{url mod='article' action='show' args="articleid:{$volist.articleid}"}-->" title="<!--{$volist.title|tostr}-->" target="_blank"> <!--{$volist.title|tostr}--></a></p>
+        <p style="padding-top:5px; color:#999999;"><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></p>
+    </div>
+</li>
+
+<!--{/foreach}-->
+
+</ul>
+            <div class="new_banner"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+	<script type="text/javascript">
+		$(".dt span").hover(function(){
+				var index=$(this).index();
+				$(this).addClass("current").siblings().removeClass("current");
+				$(this).parent().parent().find(".i-mc").eq(index).show().siblings(".i-mc").hide();
+			});
+	</script>
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

@@ -1,0 +1,169 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right">	
+<div class="block">
+	<div class="i-block">
+    	 <h2>提取到银行卡<span><a class="withdraw" href="<!--{url mod='log' action='withdraw'}-->">提取记录</a></span></h2>
+    </div>
+	<div class="form">
+    <form method="post" >
+ 
+    	<fieldset id="bank">
+    <!--{if $card|sizeof>0}-->	<dl>
+        	<dt>选择收款方式</dt>
+            <dd>
+            <select name='cardid' tag='notnull' class="text w210">
+              <option value="">--请选择--</option>
+           <!--{foreach $card as $value}-->
+           <option value="<!--{$value.cardid}-->"><!--{$value.bankname}--> <!--{$value.banknum|hidecard}--></option>
+           <!--{/foreach}-->
+            </select>
+            
+         </dd>
+        </dl><!--{else}-->
+<dl>
+        	<dt></dt>
+            <dd style="font-size:150%">还未添加收款方式，点击<a href='<!--{url mod='card' action='add'}-->' style="color:red">添加</a></dd>
+        </dl>
+    	<!--{/if}-->
+
+        </fieldset>
+        <fieldset id="amount">
+        <dl>
+        	<dt>提取金额：</dt>
+            <dd><input type="text" class="text w100" name="amount" id="amount" datatype="Require" tag='notnull fixnum in' min='0' max='<!--{$user.cash}-->'> 元</dd>
+        </dl>
+        <dl>
+        	<dt>到账时间：</dt>
+            <dd class="time">
+            	                <p>
+                    <label>
+                        <input type="radio" name="choosetype" value="1" checked="checked" data-param="{'max':'<!--{$config.draw_time_1_max}-->','min':'<!--{$config.draw_time_1_min}-->','rates':'<!--{$config.draw_time_1_fee_rate}-->'}">
+                        <span><!--{$config.draw_time_1}--></span>
+                        <em><!--{$config.draw_time_1_fee_rate*100}-->%服务费</em>
+                    </label>
+                </p>
+                             <p>
+                    <label>
+                        <input type="radio" name="choosetype" value="2"  data-param="{'max':'<!--{$config.draw_time_2_max}-->','min':'<!--{$config.draw_time_2_min}-->','rates':'<!--{$config.draw_time_2_fee_rate}-->'}">
+                        <span><!--{$config.draw_time_2}--></span>
+                        <em><!--{$config.draw_time_2_fee_rate*100}-->%服务费</em>
+                    </label>
+                </p>
+                  <p>
+                    <label>
+                        <input type="radio" name="choosetype" value="3"  data-param="{'max':'<!--{$config.draw_time_3_max}-->','min':'<!--{$config.draw_time_3_min}-->','rates':'<!--{$config.draw_time_3_fee_rate}-->'}">
+                        <span><!--{$config.draw_time_3}--></span>
+                        <em><!--{$config.draw_time_3_fee_rate*100}-->%服务费</em>
+                    </label>
+                </p>
+                           
+                           
+                                
+                            </dd>
+        </dl>
+        <dl class="free">
+        	<dt>服务费：</dt>
+            <dd>
+            <span id="extraFee">0</span> 元（付款总额<span id="amountTotal" class="org">0</span>元）
+            <div class="freeItem">
+                <div class="i-item">
+                    <a href="#">点击查看收费标准</a>
+                    <div class="fn-hide">	
+                        <table>
+                            <tbody><tr>
+                                <th>到账时间</th>
+                                <th>服务费率</th>
+                                <th>服务费下限</th>
+                                <th>服务费上限</th>
+                            </tr>
+            				                            <tr>
+                            	<td><!--{$config.draw_time_1}--></td>
+                            	<td><!--{$config.draw_time_1_fee_rate*100}-->%</td>
+                            	<td><!--{$config.draw_time_1_min}-->元/笔</td>
+                            	<td><!--{$config.draw_time_1_max}-->元/笔</td>
+                            </tr>
+               			 	                            <tr>
+                            	<td><!--{$config.draw_time_2}--></td>
+                            	<td><!--{$config.draw_time_2_fee_rate*100}-->%</td>
+                            	<td><!--{$config.draw_time_2_min}-->元/笔</td>
+                            	<td><!--{$config.draw_time_2_max}-->元/笔</td>
+                            </tr><tr>
+                            	<td><!--{$config.draw_time_3}--></td>
+                            	<td><!--{$config.draw_time_3_fee_rate*100}-->%</td>
+                            	<td><!--{$config.draw_time_3_min}-->元/笔</td>
+                            	<td><!--{$config.draw_time_3_max}-->元/笔</td>
+                            </tr>
+               			 	                        </tbody></table>
+                    </div>
+                </div>
+            </div>
+            
+            </dd>
+        </dl>
+        </fieldset>
+        <fieldset id="other">
+        <dl>
+        	<dt>提取说明：</dt>
+            <dd><input type="text" class="text w210" name="desc" id="reason" placeholder="可选" autocomplete="off"></dd>
+        </dl>
+        </fieldset>
+        <fieldset>
+            <dl>
+                <dt>确认支付密码：</dt>
+                <dd><input type="password" class="text w210" name="pay_passwd" id="pay_passwd" placeholder="支付密码" autocomplete="off"></dd>
+            </dl>
+        </fieldset>
+        <dl>
+            <dt></dt>
+            <dd>
+            <input type="button" class="submit" tag="submit" value="确定信息并付款">
+            </dd>
+        </dl>
+    </form>    
+    </div>
+</div>	
+<script type="text/javascript">
+$('.freeItem').hover(function(){					 
+	$(this).addClass("hover");
+},function(){
+	$(this).removeClass("hover")
+});
+
+$(".time").find("input[type='radio']").click(function(){
+	var val = $("input[name='amount']").val();	
+	calculateFee(val);
+});
+$("[name=amount]").blur(function(){
+	var val = $("input[name='amount']").val();	
+	calculateFee(val);
+});
+function calculateFee(val){
+	if(!val)
+	{
+		return false;	
+	}
+	var amount = parseFloat(val).toFixed(2);
+	if (amount <= 0) return;
+	var data = $(".time").find("input[type='radio']:checked").attr('data-param');
+	
+	eval("data = "+data);
+	var i=data.min;
+	var a=data.max;
+	
+	var r=data.rates;
+	var n=0;
+	if(r*amount<=i){ n=i; }
+	else if(r*amount>=a){ n=a; }
+	else{ n=r*amount; }
+	//n=Math.round(n);//小叶写的
+    var pn=new Number(n);//poy改的
+    n=pn.toFixed(2);//poy改的
+	$('#extraFee').html(n);
+	$('#amountTotal').html((parseFloat(n)+parseFloat(amount)).toFixed(2));
+}
+</script>
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

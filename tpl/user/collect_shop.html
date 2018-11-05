@@ -1,0 +1,80 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con"><script>
+$(function(){
+    /* 全选 */
+	 $('.checkall').click(function(){
+        var _self = this;
+        $('.checkitem').each(function(){
+            if (!this.disabled)
+            {
+                $(this).attr('checked', _self.checked);
+            }
+        });
+        $('.checkall').attr('checked', this.checked);
+    });
+	 
+	
+});
+</script>
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span> 
+        收藏店铺
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li <!--{if $a=='product'}-->class="active"<!--{else}-->class="normal"<!--{/if}-->><a href="<!--{url mod='collect' action='product'}-->">收藏商品</a></li>
+                <li <!--{if $a=='shop'}-->class="active"<!--{else}-->class="normal"<!--{/if}-->><a href="<!--{url mod='collect' action='shop'}-->">收藏店铺</a></li>
+              
+            </ul>
+        </div>
+        <table class="table-list-style">
+            <thead>
+            <tr>
+                <th width="30"></th>
+                <th width="70"></th>
+                <th class="tl">店铺</th>
+                <th width="150">收藏时间</th>
+                <th width="90">收藏人气</th>
+                <th width="90">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--{foreach $data as $volist}-->
+                        <tr>
+            	<td><input type="checkbox" value="<!--{$volist.cid}-->" class="checkitem" name="cid[]"></td>
+                <td><div class="pic_small"><a target="_blank" href="<!--{url group='index' mod='shop' action='show' args="id:{$volist.muid}"}-->"><img height="50" width="50" src="<!--{$volist.logo|imgsize:'50,50'}-->"></a></div></td>
+                <td class="tl"><a target="_blank" href="<!--{url group='index' mod='shop' action='show' args="id:{$volist.muid}"}-->"><!--{$volist.merchantname}--></a>
+                <p><img src='<!--{vo_list("fun={getlevelimg1} type={am} mod={shoplevel}  param1={$volist.muid}")}-->'/></p>
+                <p><!--{$volist.provinceid|getprovince}--><!--{$volist.cityid|getcity}--><!--{$volist.areaid|getarea}--><!--{$volist.address}--> </p></td>
+                <td><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                <td><!--{$volist.scollects}--></td>
+                <td>
+                <p><a href="<!--{url group='user' mod='collect' action='sdel' args="cid:{$volist.cid}"}-->">删除</a></p>
+                </td>
+            </tr>
+<!--{/foreach}-->
+                        </tbody>
+            <tfoot>
+            <tr>
+            	<td class="tc"><input type="checkbox" class="checkall"></td>
+                <td colspan="20">
+                <label for="del" class="btn2">全选</label>
+                <a do="tools_submit({action:'<!--{url action='sdel'}-->',id:'cid'})" title="删除" onclick="boxyn($(this))" class="btn2" href="javascript:void(0);">删除</a>
+                <div class="pagination">   </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+     </div>   
+</div></div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+		<title>选择店铺类型 - 免费开店</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="<!--{$usertpl}-->res/user_admin.css" rel="stylesheet" type="text/css">
+	
+		<script src="<!--{$usertpl}-->res/jquery-1.4.4.min.js" type="text/javascript"></script>
+		
+		
+		
+		
+		
+	<body><div id="shortcut">
+			<div class="w">
+				<div class="fl">
+					欢迎<a class="name" href="<!--{url group='user'}-->"><!--{$user.username}--></a>! &nbsp;<a href="<!--{url mod='login' group='index' action='logout'}-->">退出</a>
+				</div>
+				<div class="fr">
+					<a href="<!--{url group='user' mod='index'}-->">进入买家中心</a>
+					<a href="<!--{url group='user' mod='collect'}-->">我的收藏</a>
+					<a href="<!--{url group='user' mod='message'}-->">站内消息</a>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<h1>
+				<a href="<!--{$config.site_url}-->" title="<!--{$config.site_name}-->">
+					<img title="<!--{$config.site_name}-->" alt="<!--{$config.site_name}-->" src="<!--{$static}-->logo/logo.png">
+				</a>
+				<i>卖家中心</i>
+			</h1>
+			<div class="search">
+				<div class="i-search ld">
+					<form method="get" class="form" action="<!--{url mod='search' group='index'}-->">
+						<input type="text" autocomplete="off" value="" id="key" name="key" class="text">
+						<input type="submit" class="search_button" value="搜索">
+					</form>
+				</div>
+				<div class="hotwords">
+					<strong>热门搜索：</strong>
+					 <!--{assign var="hot" vo_list("fun={get} mod={hotword} type={im}")}-->
+                <!--{foreach $hot as $volist}-->
+                <!--{if $i==1}-->
+                <a class="first" target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+                <!--{else}-->
+			<a target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+<!--{/if}-->
+<!--{/foreach}-->
+					
+
+				</div>
+			</div>
+		</div>
+		<div class="layout">
+	<div class="wrap_shadow">
+    	<div class="wrap_all">
+            <div class="chart">
+                <div title="请选择店铺分类" class="pos_x1 bg_a2"></div>
+                <div title="填写店主和店铺信息" class="pos_x2 bg_b1"></div>
+                <div title="完成" class="pos_x3 bg_c"></div>
+            </div>
+                                    <div class="shop_grade">
+
+            <table>
+                <tbody>
+                  
+  				  
+                    <tr>
+                        <th width="300">个人商户认证</th>
+                        <td>个人认证</td>
+                        <td width="120"><a class="btn2" href="<!--{url mod='shop' action='step2' args='type:1'}-->">立即开店</a></td>
+                	</tr>
+                  
+                    <tr>
+                        <th width="300">企业商户认证</th>
+                        <td>企业认证</td>
+                        <td width="120"><a class="btn2" href="<!--{url mod='shop' action='step2' args='type:2'}-->">立即开店</a></td>
+                	</tr>
+
+                </tbody>
+            </table>    
+            </div>
+    	</div>
+    </div>
+</div>
+		
+		
+		
+		<div id="footer">
+		 <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+       <p> <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title}--></a><em>|
+              
+               <!--{/foreach}-->
+			</p>
+			<!--{$config.copyright}--><br>
+		</div>
+		
+
+
+
+
+	</body></html>

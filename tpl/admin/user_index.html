@@ -1,0 +1,219 @@
+<!--{include file={$admintpl}"top/headerjs.html"}-->
+<body>
+<div class="oemarry_layout"> 
+     <div class="oe_top_nav"><!--{include file={$admintpl}"a_nav.html"}--></div>
+  <div class="a_content">
+    <form action="" method="post">
+    <input type="hidden" name='html'/>
+      <div class="oe_tools_bar clearfix">
+           <a class="icon-checkbox-checked icon-checkbox-unchecked" href="javascript:;" onClick="tools_select('uid[]',this)" title="全选" data="true"> 全选 </a> 
+        <script>
+        	function dcexcel($html){
+        		$url='<!--{url action='excel'}-->';
+        		$('[name=html]').val($html.get(0).outerHTML);
+        		$('form:first').attr('action',$url);
+        		$('form:first').submit();
+        	}
+        	
+        	
+        </script>
+            <a class="" href="javascript:dcexcel($('.oe_table_list'));" > 导出excel</a>
+           <a href="<!--{url group='admin' action='add_view'}-->" class="icon-plus"> 添加</a>
+        
+            <div style="display:none" id="area_serach">
+          <input id="areaname" type="text">
+          <input name="查找" value="查找" type="button" onClick="search_str($(this).prev('#areaname').val())">
+        </div>
+         <span class="fr"><a id="condition" class="icon-search <!--{if $where}-->red<!--{/if}-->" href="javascript:;" onclick="lbox('筛选条件')"> 筛选条件</a></span> </div>
+      <table class="oe_table_list table_cs"  id="paixun">
+        <tbody>
+          <tr>
+            <th style="width:4%;text-align:center;">选择</th>
+              <th style="width:8%;" key="uid" data="<!--{if $orderby.f=="uid" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="uid" && $orderby.s=="down"}-->up<!--{/if}-->"      >用户ID</th>
+               <th style="width:8%;"  
+               key="username" data="<!--{if $orderby.f=="username" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="username" && $orderby.s=="down"}-->up<!--{/if}-->"
+               >用户名</th>
+              <th style="width:8%;"
+              key="realname" data="<!--{if $orderby.f=="realname" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="realname" && $orderby.s=="down"}-->up<!--{/if}-->"
+              
+              >真实姓名</th>
+               <th style="width:8%;text-align:center;"
+               key="mobile" data="<!--{if $orderby.f=="mobile" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="mobile" && $orderby.s=="down"}-->up<!--{/if}-->"
+               
+               >手机</th>
+             
+               <th style="width:6%;text-align:center;"
+               key="email" data="<!--{if $orderby.f=="email" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="email" && $orderby.s=="down"}-->up<!--{/if}-->"
+               
+               >邮箱</th>
+                 <th style="width:6%;text-align:center;"
+               key="logtime" data="<!--{if $orderby.f=="logtime" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="logtime" && $orderby.s=="down"}-->up<!--{/if}-->"
+               
+               >最后登陆</th>
+                 <th style="width:6%;text-align:center;"
+               key="cash" data="<!--{if $orderby.f=="cash" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="cash" && $orderby.s=="down"}-->up<!--{/if}-->"
+               
+               >账号余额</th>
+               
+               <th style="width:4%;text-align:center;"
+               key="level" data="<!--{if $orderby.f=="level" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="level" && $orderby.s=="down"}-->up<!--{/if}-->"
+               
+               >等级</th>
+                  
+            <th style="width:5%;text-align:center;"
+            key="flag" data="<!--{if $orderby.f=="flag" && $orderby.s=="up"}-->down<!--{else if $orderby.f=="flag" && $orderby.s=="down"}-->up<!--{/if}-->"
+           
+            >锁定</th>
+              
+            <th style="text-align:center;">操作</th>
+          </tr>
+          <tbody>
+          <!--{foreach $user as $volist}-->
+          <tr>
+            <td style="text-align:center;"><input type="checkbox" value="<!--{$volist.uid}-->" name="uid[]">
+              </input></td>
+                <td style="text-align:center;"><!--{$volist.uid}-->
+              </td>
+            <td > <!--{$volist.username}--></td>
+                <td  ><!--{$volist.realname}--></td>
+               <td  ><!--{$volist.mobile}--></td>
+                 <td  ><!--{$volist.email}--></td>
+                <td ><!--{$volist.logtime|date_format:"%Y-%m-%d "}--></td>
+                 <td ><!--{$volist.cash}--></td>
+                  <td >
+                  <img src="
+                  	<!--{vo_list("fun={getlevelimg2} type={am} mod={userlevel}  param1={$volist.ugood-$volist.ubad}")}-->">
+                  </td>
+         
+          
+         
+                  <td who="user" key="<!--{$volist.uid}-->" name="flag" tag="ajaxchoose" style="cursor:pointer"><!--{if $volist.flag==0}-->
+              <div class="no"></div>
+              <!--{else}-->
+              <div class="yes"></div>
+              <!--{/if}--></td>
+            <td style="text-align:center;" class="a_edit_del">
+               <a class="oe_ico_green" target="_blank" href="<!--{url mod="login_user" group="admin" action="login" args="uid:{$volist.uid}"}-->">快速登入</a>
+              
+               <a class="oe_ico_blue" href="<!--{url action="" mod="order" args="uid:{$volist.uid}"}-->">查看交易记录</a> 
+               <a class="oe_ico_orange" href="<!--{url action="cgpwd" args="uid:{$volist.uid}"}-->">修改密码</a> 
+                <a class="oe_ico_blue" href="<!--{url action="show" args="uid:{$volist.uid}"}-->">查看</a>  
+              <a class="oe_ico_green" href="<!--{url action="edit" args="uid:{$volist.uid}"}-->">充值</a> 
+              <a class="oe_ico_green" href="<!--{url action="edit" args="uid:{$volist.uid}"}-->">发信</a> 
+                <a class="oe_ico_red" a="<!--{url action="del" args="uid:{$volist.uid}"}-->" onClick="boxyn($(this))">删除</a>
+            </td>
+          </tr>
+          <!--{/foreach}--></tbody>
+        </tbody>
+      </table>
+      <div class="oe_page_box"> 
+        <!--{$page}--> 
+      </div>
+    </form> <!--{include file={$admintpl}"paix.html"}-->
+  </div>
+</div>
+     <div style="display:none;" id="searchbox">
+  <form method="post" style="width:400px;" action="">
+       <input name="sflag" type="hidden" value="1">
+     <table  align="center" width="473" class="oe_table_warp">
+     <tr>
+        <td height="40"  style="text-align:right;">用户ID：</td>
+        <td>
+        <input name="uid" class="input-b" type="text" value="<!--{$where.uid}-->" />
+            
+        </td>
+           
+      </tr>
+      <tr>
+        <td height="40"  style="text-align:right;">用户账号：</td>
+        <td>
+        <input name="username" class="input-b" type="text" value="<!--{$where.username}-->" />
+            
+        </td>
+           
+      </tr>
+         
+             <tr>
+        <td height="40"  style="text-align:right;">手机号码：</td>
+        <td>
+        <input name="mobile" class="input-b" type="text" value="<!--{$where.mobile}-->" />
+            
+        </td>
+           
+      </tr> 
+      
+        
+      
+    
+    </table>
+        <div style="text-align:center">
+           <input name="" value="清空" class="oe_boxbut" tag="reset" type="button">
+        <span style="padding-left:50px;"></span>
+          <input name="" value="提交查询" class="oe_boxbut" tag="submit" type="button">
+    </div>
+  </form>
+</div>
+</body>
+
+<script>
+   
+    
+  
+
+
+</script>
+<div class="addmp none">
+<form method="post" action="<!--{url mod="" action="addmp" args="" group=""}-->" >
+    <input name="uid" type="hidden" value="<!--{$select.uid}-->">
+
+     <table class="oe_table_warp">
+         <tr>
+             <th ><span class="red">*</span>输入数量：</th>
+             <td >
+                 <input type="text" name="mp" value="<!--{$user.alias}-->" class="input-b" tag="notnull isfixnum"/><span class="oe_trap"><em></em></span>
+              </td>
+         </tr>
+ </table>
+
+  <div class="oe_button_layout">
+	  <input type="button" class="button_2" value="提交保存" tag="submit" /> 
+	  <span id="submit_tips" class="error"></span>
+	</div>
+</form>
+</div>
+<div class="addpdb none">
+<form method="post" action="<!--{url mod="" action="addpdb" args="" group=""}-->" >
+    <input name="uid" type="hidden" value="<!--{$select.uid}-->">
+
+     <table class="oe_table_warp">
+         <tr>
+             <th ><span class="red">*</span>输入数量：</th>
+             <td >
+                 <input type="text" name="mp" value="<!--{$user.alias}-->" class="input-b" tag="notnull isfixnum"/><span class="oe_trap"><em></em></span>
+              </td>
+         </tr>
+ </table>
+
+  <div class="oe_button_layout">
+	  <input type="button" class="button_2" value="提交保存" tag="submit" /> 
+	  <span id="submit_tips" class="error"></span>
+	</div>
+</form>
+</div>
+<div class="delhcash none">
+<form method="post" action="<!--{url mod="" action="hcash" args="" group=""}-->" >
+    <input name="uid" type="hidden" value="<!--{$select.uid}-->">
+     <table class="oe_table_warp">
+         <tr>
+             <th ><span class="red">*</span>要划去的金额：</th>
+             <td >
+                 <input type="text" name="hcash" value="<!--{$user.alias}-->" class="input-b" tag="notnull isnum"/><span class="oe_trap"><em>不能超过用户H钱包的现有金额</em></span>
+              </td>
+         </tr>
+ </table>
+  <div class="oe_button_layout">
+	  <input type="button" class="button_2" value="提交保存" tag="submit" /> 
+	  <span id="submit_tips" class="error"></span>
+	</div>
+</form>
+</div>

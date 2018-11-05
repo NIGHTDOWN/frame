@@ -1,0 +1,524 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/order.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+<div>
+	<div id="content">
+
+
+
+
+		<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+			<div class="a-msp-index">
+				<div id="bodyCont" class="fullscreen index">
+
+					<header class="jd-header header-section-search header-banner">
+						<div class="jd-header-new-bar">
+							<div onclick="history.back();" class="jd-header-icon-back ">
+								<span>
+								</span>
+							</div>
+							<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+								<div class="jd-header-new-title">
+									<div class="header-content">
+										<span class="header-title">
+											订单详情
+										</span>
+
+									</div>
+								</div>
+							</form>
+							<div onclick="_go_url('<!--{url mod='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+								<span>
+								</span>
+							</div>
+						</div>
+					</header>
+
+
+				</div>
+
+
+
+
+
+				<div class="order-manage detail">
+
+
+					<div class=" order" id="order2">
+						<ul class="order-list">
+							<li>
+
+								<div class="module  logisticsholder">
+									<div class="o-t-contmsg " style='    font-size: 120%;'>
+
+										<div class="cont">
+											<h5>
+												<div>
+													<!--{if $data.status==0}-->
+
+													<b>
+														当前订单状态：未付款
+													</b>
+
+
+													<!--{elseif $data.status==1}-->
+													当前订单状态：等待卖家发货
+
+													<!--{elseif $data.status==2}-->
+													当前订单状态：卖家已经发货
+
+													<!--{elseif $data.status==5}-->
+													当前订单状态：订单退款中
+
+													<!--{elseif $data.status==3}-->当前订单状态：交易成功
+
+													<!--{elseif $data.status==4}-->
+													当前订单状态：交易关闭
+
+													<!--{/if}-->
+												</div>
+												<div>
+												</div>
+											</h5>
+											<div class="subtime">
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<!--{if $data.sendtime}-->
+
+								<div class="module  logisticsholder">
+									<div class="o-t-contmsg express">
+
+										<div class="cont">
+											<h5>
+												<div>
+													卖家发货
+												</div>
+												<div>
+													<!--{$data.sender}-->
+												</div>
+												<div>
+													<!--{$data.sendnum}-->
+												</div>
+											</h5>
+											<div class="subtime">
+												<!--{$data.sendtime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<!--{/if}-->
+								<div class="module  address">
+									<div class="o-t-contmsg">
+
+										<div class="cont">
+											<h5 class="">
+
+
+
+												<div>
+													收货人：
+													<!--{$data.realname}-->
+												</div>
+												<div>
+													<!--{$data.mobile}-->
+													<!--{$data.phone}-->
+												</div>
+											</h5>
+											<div class="submsg">
+												收货地址：
+												<!--{$data.address}-->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--{if $data.mark}-->
+								<div class="module  memo">
+									<div class="o-t-contmsg memobook">
+										<div class="ico">
+											<span class="icon-comment">
+											</span>
+										</div>
+										<div class="cont">
+											<h5 class="">
+												<div>
+													买家留言：
+												</div>
+												<div>
+												</div>
+											</h5>
+											<div class="submsg">
+												<!--{$data.mark}-->
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<!--{/if}-->
+								<div class="module  seller" id="seller7">
+									<div class="o-t-title-shop">
+										<div class="tcont">
+											<div class="ico">
+												<img src="<!--{$usertpl}-->images/store.png">
+											</div>
+											<div class="contact">
+												<a
+													href="<!--{url mod='shop' action='show' args=" id:{$data.muid}" group='index'}-->">
+													<p class="title">
+														<!--{$data.merchantname}-->
+													</p>
+													<p class="arrow">
+														<span class="icon-right">
+														</span>
+													</p>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--{foreach $data.productlist as $volist}-->
+								<div class="module  item">
+									<div class="item-list o-t-item">
+										<div class="item-img">
+											<p>
+												<img class="" src="<!--{$volist.smallimg|imgsize:'80,80'}-->" data-src-checked="true">
+											</p>
+										</div>
+										<div class="item-info">
+											<h3 class="title">
+												<a
+													href="<!--{url mod='product' action='detail' group='index' args=" productid:{$volist.productid}"}-->" target="_blank">
+													<!--{$volist.productname|tostr}-->
+												</a>
+											</h3>
+											<p class="sku">
+												<!--{$volist.spec}-->
+											</p>
+											<ul class="order-serviceinfo none" style="">
+												<li>
+												</li>
+											</ul>
+										</div>
+										<div class="item-pay">
+											<div class="item-pay-data">
+												<p class="price">
+													￥
+													<!--{$volist.price/100}-->
+												</p>
+												<!-- <p class="price">
+												<del class=""> </del>
+												</p> -->
+												<p class="nums">
+													x
+													<!--{$volist.num}-->
+												</p>
+											</div>
+											<div class="item-pay-btn">
+												<!--{if $data.status==0}-->
+												<!--{elseif $data.status==1}-->
+												<!--{if $volist.tkflag==0}-->
+												<a
+													href="<!--{url mod='tk' action='apply' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款/退货
+												</a>
+												<!--{elseif $volist.tkflag==1}-->
+												<a
+													style='color:red' href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款/退货处理中
+												</a>
+												<!--{elseif $volist.tkflag==2}-->
+												<a
+													href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款完成
+												</a>
+												<!--{elseif $volist.tkflag==3}-->
+												<a
+													style='color:red' href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},id:
+													{$volist.id}"}-->">退款/退货处理中
+												</a>
+												<!--{elseif  $volist.tkflag==4}-->
+												<a
+													href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款关闭
+												</a>
+												<!--{/if}-->
+												<!--{elseif $data.status==2}-->
+												<!--{if $volist.tkflag==0}-->
+												<a
+													href="<!--{url mod='tk' action='apply' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款/退货
+												</a>
+												<!--{elseif $volist.tkflag==1}-->
+												<a
+													style='color:red' href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},pid:{$volist.id}"}-->">退款/退货处理中
+												</a>
+												<!--{elseif $volist.tkflag==2}-->
+												<a
+													href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},id:$volist.id"}-->">退款完成
+												</a>
+												<!--{elseif $volist.tkflag==3}-->
+												<a
+													style='color:red' href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},pid:
+													{$volist.productid}"}-->">退款/退货处理中
+												</a>
+												<!--{elseif $volist.tkflag==4}-->
+												<a
+													href="<!--{url mod='tk' action='detail' args=" oid:{$data.ordernum},pid:
+													{$volist.productid}"}-->">退款关闭
+												</a>
+												<!--{/if}-->
+												<!--{elseif $data.status==3}-->
+
+												<!--{if $volist.shflag==0}-->
+												<a
+													href="<!--{url mod='sh' action='apply' args=" oid:{$data.ordernum},id:
+													{$volist.id}"}-->">申请售后
+												</a>
+												<!--{elseif $volist.shflag==1}-->
+												<a
+													style='color:red' href="<!--{url mod='sh' action='detail' args=" oid:{$data.ordernum},id:
+													{$volist.id}"}-->">已申请
+												</a>
+												<!--{elseif $volist.shflag==2}-->
+												<a
+													href="<!--{url mod='sh' action='detail' args=" oid:{$data.ordernum},id:
+$volist.id"}-->">售后完成
+												</a>
+												<!--{elseif $volist.shflag==3}-->
+												<a
+													style='color:red' href="<!--{url mod='sh' action='detail' args=" oid:{$data.ordernum},id:
+													$volist.id"}-->">已申请
+												</a>
+												<!--{elseif $volist.shflag==4}-->
+												<a
+													href="<!--{url mod='sh' action='detail' args=" oid:{$data.ordernum},id:
+													{$volist.id}"}-->">售后关闭
+												</a>
+												<!--{/if}-->
+
+
+
+												<!--{elseif $data.status==4}-->
+												<!--{if $volist.tkflag}-->
+												<a
+													href="<!--{url mod='log' group='pay' action='glide' args="type:1,desc:{$volist.ordernum}退款"}-->">查看退款
+												</a>
+												<!--{/if}-->
+												<!--{elseif $data.status==5}-->
+												<a
+													href="<!--{url mod='order' action='tkdetail'  args=" oid:{$data.ordernum}"}-->">退款中的订单
+												</a>
+												<!--{/if}-->
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--{/foreach}-->
+
+
+
+
+
+
+
+								<div class="module _7 item none" id="">
+									<div class="item-list o-t-item">
+										<div class="item-info">
+											<h3 class="title">
+												保险服务
+											</h3>
+											<p class="sku">
+											</p>
+										</div>
+										<div class="item-pay">
+											<div class="item-pay-data">
+												<p class="price">
+													￥0.00
+												</p>
+												<p class="nums">
+													x1
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="module  paydetail" id="paydetail21">
+									<div class="order-price-freight">
+										<dl>
+											<dt>
+												运费
+											</dt>
+											<dd>
+												￥
+												<!--{$data.logisfee/100}-->
+											</dd>
+										</dl>
+										<!-- <dl>
+										<dt></dt>
+										<dd>全国包邮</dd>
+										</dl> -->
+										<dl>
+											<dt>
+												订单总价
+											</dt>
+											<dd>
+												￥
+												<!--{$data.totals/100}-->
+											</dd>
+										</dl>
+										<dl>
+											<dt>
+												实付款（含运费）
+											</dt>
+											<dd class="h">
+												￥
+												<!--{$data.paytotal/100}-->
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="module  talkseller ">
+									<div class="order-tablink o-t-tablink">
+										<div class="cont ww">
+
+											<p>
+												<span>
+													卖家电话
+												</span>
+											</p>
+										</div>
+										<a class="cont phone" calluptaobao="true" href="tel: <!--{$data.sphone}-->">
+
+											<p>
+												<span>
+													<!--{$data.sphone}-->
+												</span>
+											</p>
+										</a>
+									</div>
+								</div>
+								<div class="module  orderinfo" id="orderinfo23">
+									<div class="order-box order-message">
+										<p class="">
+											订单编号:
+											<!--{$data.ordernum}-->
+										</p>
+										<p class="none">
+											交易号:
+										</p>
+										<p class="">
+											创建时间:
+											<!--{$data.createtime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+										</p>
+										<!--{if $data.paytime}-->
+										<p class="">
+											付款时间:
+											<!--{$data.paytime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+										</p>
+										<!--{/if}-->
+										<!--{if $data.suretime}-->
+										<p class="">
+											成交时间:
+											<!--{$data.suretime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+										</p>
+										<!--{/if}-->
+									</div>
+								</div>
+								<div class="  " id="">
+									<div class="o-tab-btn">
+										<ul>
+											<!--{if $data.status==0}-->
+											<li
+												class="h" onclick="_go_url('<!--{url group='pay' mod='pay' args=" oid:{$data.ordernum}" action='product'}-->')">立刻付款
+											</li>
+
+											<li
+												onclick="boxyn($(this),'确认取消订单？')" a="<!--{url  mod='order' args=" oid:{$data.ordernum}" action='cancel'}-->">取消订单
+											</li>
+
+											<!--{elseif $data.status==1}-->
+											<li
+												onclick="_go_url('<!--{url  mod='order' args=" oid:{$data.ordernum}" action='txfh'}-->')">提醒卖家发货
+											</li>
+
+											<!--{elseif $data.status==2}-->
+
+											<li
+												onclick="_go_url('<!--{url  mod='order' args=" oid:{$data.ordernum}" action='sure'}-->')">确认收货
+											</li>
+
+
+
+
+											<!--{elseif $data.status==3}-->
+											<!--{if !$data.cflag}-->
+											<li
+												class="h" onclick="_go_url('<!--{url mod='order' action='comment' args=" oid:{$data.ordernum}"}-->')">评价
+											</li>
+											<!--{/if}-->
+											<li
+												onclick="_go_url('<!--{url mod='order' action='del' args=" oid:{$data.ordernum}"}-->')">删除订单
+											</li>
+											<!--{else}-->
+											<li
+												onclick="_go_url('<!--{url mod='order' action='del' args=" oid:{$data.ordernum}"}-->')">删除订单
+											</li>
+											<!--{/if}-->
+
+										</ul>
+									</div>
+								</div>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div style="clear:both;margin-bottom:4rem">
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>

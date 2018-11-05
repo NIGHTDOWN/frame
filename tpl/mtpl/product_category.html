@@ -1,0 +1,199 @@
+<!--{include file={$indextpl}"top.html"}-->
+<link href="<!--{$indextpl}-->css/shop.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div  class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+								
+								<div class="jd-header-new-title-all">
+									<div class="header-content" >
+										<div  class="header-search-all">
+											
+											<input type="text" name="word" autocomplete="off" id="keywordShow" tag=' enter' class="search-input" value="<!--{$where.word}-->" placeholder="搜索店铺内商品"
+											 maxlength="20">
+											<button type="submit"><i class="search-icon-r" ></i></button> 
+										</div>
+									
+									
+									</div>
+								</div>
+							</form>
+								<div  onclick="_go_url('<!--{url mod='index' action='run' }-->')"
+								 class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+
+
+
+
+
+
+						<section class="J_lazyShopListOrder list_m_mdv">
+							<div class="J_orderWrapper">
+								<section id="J_order" class="list_m_mdv order">
+
+									<div class="o_item <!--{if $orderby.f=='collects'}-->o_cur <!--{$orderby.s}--><!--{/if}-->" onclick="_go_url('<!--{if $orderby.f=='collects'}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:collects"}--><!--{else}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:collects"}--><!--{/if}-->')">推荐
+										<div class="price-icon-wrapper  ">
+											
+										</div></div>
+
+								<div class="o_item  <!--{if $orderby.f=='sells'}-->o_cur <!--{$orderby.s}--><!--{/if}-->" onclick="_go_url('<!--{if $orderby.f=='sells'}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:sells"}--><!--{else}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:sells"}--><!--{/if}-->')">销量
+									<div class="price-icon-wrapper  ">
+										
+									</div></div>
+
+								
+
+								<div class="o_item  <!--{if $orderby.f=='addtime'}-->o_cur <!--{$orderby.s}--><!--{/if}-->" onclick="_go_url('<!--{if $orderby.f=='addtime'}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:addtime"}--><!--{else}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:addtime"}--><!--{/if}-->')">上新
+									
+									<div class="price-icon-wrapper  ">
+										
+									</div>
+								</div>
+
+								<div class="o_item <!--{if $orderby.f=='price'}-->o_cur <!--{$orderby.s}--><!--{/if}-->" onclick="_go_url('<!--{if $orderby.f=='price'}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:price"}--><!--{else}--><!--{url mod='search'  args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:price"}--><!--{/if}-->')">
+									价格
+									<div class="price-icon-wrapper  ">
+									
+									</div>
+								</div>
+
+							</section>
+							</div>
+
+
+
+
+						</section>
+
+
+
+
+
+
+
+
+
+
+					
+					</div>
+
+					<div id="commonList">
+					
+						<div class="sort-list">
+								<!--{if $data|sizeof}-->
+							<ul>
+						
+								<!--{foreach $data as $volist1}-->
+								<li>
+									<a href="<!--{url mod='product' action='detail' args=" productid:{$volist1.productid}"}-->">
+										<span class="img-box">
+											<img src="<!--{$volist1.smallimg1}-->" alt="<!--{$volist1.productname|tostr}-->">
+
+										</span>
+										<span class="pro-desc">
+											<!--{$volist1.productname|tostr}-->
+										</span>
+										<span class="pro-price">
+											<span class="price-info">
+												<em class="price-yen">¥</em>
+												<em class="price-int">
+													<!--{$volist1.price}-->
+												</em>
+												<!-- <em class="price-decimal">.00</em> -->
+											</span>
+										</span>
+										<span class="pro-price-sams"><!--{$volist1.sells}-->人购买</span>
+									</a>
+								</li>
+								<!--{/foreach}-->
+							</ul>
+							<!--{else}-->
+
+							<div class="empty-section">
+									<i class="empty-icon"></i>
+									<div class="empty-title">抱歉，暂无符合条件的商品</div>
+									<p >
+											<div class="empty-tips">建议您：</div>
+											<div class="empty-tips">1、适当减少筛选条件，可以获得更多结果</div>
+											<div class="empty-tips">2、尝试其他关键字</div>
+										</p>
+									<div class="empty-tips">去其他地方看看吧</div>
+									<div class="empty-btn-box">
+										<div class="empty-btn" type="home" onclick="_go_url('<!--{$config.site_url}-->')">查看首页</div>
+										<div class="empty-btn" type="all" style="display: none">查看全部商品</div>
+									</div>
+								</div>
+								<!--{/if}-->
+							<div style="clear:both"></div>
+							<div class="page">   <!--{$page}--></div>  
+							<div style="clear:both;margin-bottom:1rem"></div>
+						</div>
+
+						
+					</div>
+
+
+
+				
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+			<div class="page"><!--{$page}--></div>
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+	  <!--{include file={$indextpl}"foot.html"}-->

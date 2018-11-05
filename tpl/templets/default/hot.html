@@ -1,0 +1,39 @@
+
+
+
+<!--{foreach $data as $list}-->
+			<dl>
+				<div class="i-m">
+					<dt style="border-left-color:"><a target="_blank" href="<!--{url mod='product' action='category' args="catid:{$list.catid}"}-->"><!--{$list.catname}--></a></dt>
+					<dd class="fn-clear">
+						<ul class="fn-clear">
+							<!--{assign var="hotcatep" vo_list("fun={getcategoryproduct} mod={index} type={im}  param1={$list.catid}")}-->
+							
+						
+						
+							<!--{foreach $hotcatep.hot as $k=>$volist}-->
+						<!--{set $i=$k+1}-->
+							<li class="fore<!--{$i}-->">
+								<div class="p-img">
+									<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+										<img src="<!--{$volist.smallimg1|imgsize:'220,220'}-->">
+									</a>
+								</div>
+								<div class="p-name">
+								<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></div>
+							</li>
+							<!--{/foreach}-->
+						
+						</ul>
+						<ul class="cat fn-clear">
+							
+						
+							<!--{foreach $hotcatep.cat as $list}-->
+							<li><a target="_blank" href="<!--{url mod='product' action='category' args="catid:{$list.catid}"}-->"><!--{$list.catname}--></a></li>
+							<!--{/foreach}-->
+						
+						</ul>        
+					</dd>
+				</div>
+			</dl>
+			<!--{/foreach}-->

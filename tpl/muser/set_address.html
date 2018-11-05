@@ -1,0 +1,121 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="history.back();" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">收货地址管理</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+
+
+					
+
+					<section class="core-entry">
+						<ul id="addressList" >
+							<!--{foreach $data as $volist}-->
+							<li  class="address-row <!--{if $volist.mflag}-->active<!--{/if}-->" onclick="_go_url('<!--{url mod='address' action='edit'  args="addid:{$volist.addid}"}-->')">
+							 <span="">
+								<div class="font-32">
+									<label>收货人:</label>
+									<label name="user-name"><!--{$volist.realname}--></label>
+									<label name="phone-num" style="float: right"><!--{$volist.recvmobile}--></label>
+								</div>
+								<div class="font-24">
+									<label>收货地址:</label>
+									<label name="address"><!--{$volist.provinceid|getprovince}--><!--{$volist.cityid|getcity}--> <!--{$volist.areaid|getarea}--> <!--{$volist.address}--></label>
+								</div>
+								<span class="right-icons">
+									<i class="iconfont icon-check"></i>
+									
+								</span>
+							</li>
+								<!--{/foreach}-->
+						
+						
+						</ul>
+
+					</section>
+
+
+
+
+
+					<a class='btn' href="<!--{url action='addaddress'}-->">	<span><i class=" icon-add"></i>新增收货地址</span></a>
+					<div style="clear:both;margin-bottom:1rem"></div>
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

@@ -1,0 +1,50 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+<style>
+	.gray{    
+		background: #fff;}
+</style>
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	<link href="<!--{$indextpl}-->res/skin.css" rel="stylesheet" type="text/css">
+	
+	<link href="<!--{$indextpl}-->res/pcss.css" rel="stylesheet" type="text/css">
+	<div class="cat-main w">
+	<!--{foreach $data as $volist}-->
+		<div class="item fn-clear">
+			<div class="link clearfix"><a href="<!--{url mod='product' action='category' args="catid:{$volist.catid}"}-->"><!--{$volist.catname}-->商品 &gt;</a></div>
+			<div class="title clearfix"><h4><!--{$volist.catname}--></h4></div>
+			<div class="list clearfix">
+				<ul>
+					<!--{assign var='cat2'  value=vo_list("mod={product_category} array={flag:0,depth:2,parentid:{$volist.catid}} fun={get_all}")}-->
+					<!--{foreach $cat2 as $volist2}-->
+					<li class="fn-clear">
+						<h5><a href="<!--{url mod='product' action='category' args="catid:{$volist2.catid}"}-->"><!--{$volist2.catname}--></a></h5>
+						
+						<div class="sublist">
+						
+						<!--{assign var='cat3'  value=vo_list("mod={product_category} array={flag:0,depth:3,parentid:{$volist2.catid}} fun={get_all}")}-->
+					<!--{foreach $cat3 as $volist3}-->
+						
+							<a href="<!--{url mod='product' action='category' args="catid:{$volist3.catid}"}-->"><!--{$volist3.catname}--></a><!--{/foreach}-->
+						</div>
+					</li>
+					<!--{/foreach}-->
+				</ul>
+			</div>
+		</div>
+<!--{/foreach}-->
+		
+		
+	</div>
+	
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

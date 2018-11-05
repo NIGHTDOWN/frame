@@ -1,0 +1,440 @@
+
+<title>选择分类 - 发布产品</title>
+
+<!--{include file={$shoptpl}"menu.html"}-->
+
+   
+<script
+        type='text/javascript' src='<!--{$static}-->js/kindeditor.js'>
+    </script>
+ <script
+        type='text/javascript' src='<!--{$static}-->js/zh_CN.js'>
+    </script>
+  <style>
+  	[id^="viewimg_"]{   
+        left: -8px;
+    margin: 1px;
+    padding: 1px;
+    position: absolute;
+    top: -120px;
+    width: 60px;
+    z-index: 1;
+}
+  </style>   
+     
+<script>
+
+        _ajax_edit_url = '<!--{url action="json_up" mod="upimg" group="user" }-->';
+ $use_K_item=[ "fullscreen","source", "quickformat", "justifyleft", "justifycenter", "justifyright", "justifyfull", "insertorderedlist", "insertunorderedlist",  "formatblock", "fontname", "fontsize", "|", "forecolor", "hilitecolor", "bold", "italic", "underline", "strikethrough", "removeformat", "|", "image", "multiimage", "emoticons"];
+ KindEditor.options.items =  $use_K_item;
+	 KindEditor.ready(function(K) {
+                window.editor = K.create('#editor_id', { uploadJson: _ajax_edit_url, afterBlur: function () { this.sync(); } });
+window.editor = K.create('.editor_id', { uploadJson: _ajax_edit_url, afterBlur: function () { this.sync(); } });
+            });
+</script>
+<style type="text/css">
+.admin_table{border:1px solid #C1DBFF;margin:auto;border-collapse:inherit;border-spacing:1px;}
+.admin_table td{padding:10px;background:#FFF;}
+.admin_table th{padding:10px 15px 10px 10px;text-align:right;vertical-align:top;background:#FFF;}
+.admin_table .hd{background:url(<!--{$shoptpl}-->res/ico/product_edit.png) 15px 16px no-repeat #E1EEFE;}
+.admin_table .hd p{line-height:30px;float:right;}
+.admin_table em{color:#F00;}
+.admin_table h1{font-size:14px;font-weight:bold;padding:5px 5px 5px 30px;color:#004D80;}
+.admin_table h2{font-size:14px;font-weight:bold;padding-left:30px;}
+.admin_table table{border:1px solid #ECECEC;}
+.admin_table .firstvalue td{background-color:#F8F8F8;padding-bottom:0;}
+.admin_table .spec td,.admin_table .spec th{background-color:#F8F8F8;}
+.admin_table table th{width:100px;text-align:right;}
+.admin_table table .hint{padding:10px 0 5px 50px;color:#999999;}
+.admin_table table select{min-width:162px;}
+.admin_table .spec .text{min-width:160px;}
+#brand input,#brand select{float:left;margin-right:10px;}
+</style>
+<form method="post" action="<!--{url action='edit'}-->" >
+<table width="959" bgcolor="#EEE" border="0" cellpadding="0" cellspacing="1" class="admin_table">
+    <tbody><tr>
+        <td colspan="2" class="hd">
+            <p><em>*</em> 表示该项必填</p>
+            <h1>填写商品基本信息</h1>
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="2"><h2>1. 基本信息</h2></td>
+    </tr>
+    
+    <tr>
+        <th width="95"><font color="red">*</font>商品类目</th>
+        <td>
+        <span id="cate_show"><!--{$cat.catname}--></span>
+          <input name="catid" type="hidden" value="<!--{$cat.catid}-->">
+       		<input name="pid"  type="hidden" value="<!--{$pid}-->">
+            <a href="<!--{url action='cgcate' args="pid:$pid"}-->">编辑</a>
+        </td>
+    </tr>
+    
+    <tr>
+        <th><font color="red">*</font>商品类型</th>
+        <td>
+        <!--{if !$cat.ptype}--><label> <input name="ptype" checked="checked" disabled="disabled" type="radio" class="radio" value="0" checked="checked"> 实物商品</label><!--{/if}-->
+          <!--{if $cat.ptype}--><label> <input name="ptype" checked="checked" disabled="disabled" type="radio" class="radio" value="0" checked="checked"> 虚拟商品</label><!--{/if}-->
+        	
+        </td>
+    </tr>
+    
+    
+    <tr>
+        <th>商品属性</th>
+        <td>
+            <table width="100%" class="spec">
+            <tbody>
+            <tr>
+            	<td colspan="4" class="hint">填错商品属性，可能会引起商品下架，影响您的正常销售。请认真准确填写</td>
+            </tr>
+            <tr>
+             <!--{assign var="attribute" vo_list("fun={get_all} mod={product_category_attribute} orderby={f:weight,s:up}   array={type:0,catid:{$cat.catid}}")}-->
+            
+		 
+		   
+		<!--{foreach $attribute as $k=>$volist}-->
+		 <!--{assign var="thisattribute" vo_list("fun={get_one} mod={product_attribute}   array={productid:$data.productid,aname:$volist.sname}")}-->
+	
+		<th> <!--{if $volist.stype}-->
+		 <span class="red">*</span><!--{/if}--><!--{$volist.sname}-->:</th>
+		<td><input type="hidden" class="input-b" name="aname[]" value="<!--{$volist.sname}-->"/>
+		<input type="hidden" class="input-b" name="weights[]"  value="<!--{$volist.weight}-->" />
+		<!--{if !$volist.var }-->
+		<input type="text" class="input-b" name="avalue[]" <!--{if $volist.stype}-->tag='notnull'<!--{/if}--> value="<!--{$thisattribute.avalue}-->" />
+		<!--{else}-->
+		<select  <!--{if $volist.stype}-->tag='notnull'<!--{/if}--> name="avalue[]" >
+		<option value="">-请选择-</option>
+		<!--{set $var=explode(',',$volist.var)}-->
+	
+			<!--{foreach $var as $value}-->
+			
+			<option value="<!--{$value}-->" <!--{if $thisattribute.avalue==$value}-->selected <!--{/if}-->   ><!--{$value}--> </option>
+			<!--{/foreach}-->
+		</select>
+		<!--{/if}-->
+		</td>
+		<!--{if $k%2==1}--></tr><tr><!--{/if}-->
+		<!--{/foreach}-->
+            
+
+            </tr>
+                        </tbody></table>
+        </td>
+    </tr>
+    
+    <tr>
+        <th><font color="red"> *</font>商品标题</th>
+        <td><input max="60" min='10' name="productname" tag='notnull in' type="text" id="title" style="width:420px;" value="<!--{$data.productname|tostr}-->">标题最多28个字符</td>
+    </tr>
+    
+    
+      
+   
+   
+    
+    <tr>
+        <th><font color="red">*</font>销售价格</th>
+        <td>
+            <input type="text"  name="price" id="price" tag='notnull isnum fixnum' maxlength="10" value="<!--{$data.price/100}-->"> 元
+        </td>
+    </tr>
+
+    
+        
+    <tr>
+        <th><font color="red"> *</font>商品数量</th>
+        <td><input maxlength="8" id="amount" name="count" type="text" value="<!--{$data.count}-->" tag='notnull isnum fixnum'> </td>
+    </tr>
+   <tr>
+        <th><font color="red"> *</font>商品单位</th>
+        <td><input maxlength="8" id="amount" name="unit" value="<!--{$data.unit}-->" type="text" value="" tag='notnull' > </td>
+    </tr>
+    
+    <tr>
+        <th>商品规格</th>
+        <td>
+            <table width="100%" class="spec">
+            <tbody>
+            <tr>
+            	<td colspan="4" class="hint">规格：（值填写以逗号分隔,如白色,黄色,黑色）<span class="addgg" style="color:#000;">添加自定义规格</span></td>
+            </tr>
+             <!--{assign var="attribute" vo_list("fun={getspeclist} mod={pcate} type={im}  array={muid:$user.muid,catid:{$cat.catid}}")}-->
+            
+            <tr>
+            	<td colspan="3" class="hint">
+            	 <!--{foreach $attribute as $volist}-->
+            	 <span class="addspacs"><!--{$volist.sname}--></span>
+             <!--{/foreach}-->	
+            	</td><td colspan="1" class="hint"></td>
+            </tr>
+            <tr class="isguige">
+            
+		   <!--{assign var="thisattribute" vo_list("fun={get_all} mod={product_specs}  orderby={s:up,f:id} array={productid:$data.productid}")}-->
+		<td colspan="4" class="gglisttd">
+		<!--{foreach $thisattribute as $k=>$volist}-->
+		<div class="gglist " attr='<!--{$volist.sname}-->'>
+		<span class="snamestyle"> <!--{$volist.sname}-->:</span>
+		<span><input type="hidden" class="input-150" name="sname[<!--{$volist.id}-->]" value="<!--{$volist.sname}-->"/>
+		
+		<input type="text" class="input-150" name="svalue[<!--{$volist.id}-->]" <!--{if $volist.stype}-->tag='notnull'<!--{/if}--> value="<!--{$volist.svalue}-->" />
+		<input type="button" class="btn delgg"   value="删除" />
+		
+		</span>
+		</div>
+		
+		<!--{/foreach}-->
+          </td>  
+
+            </tr>
+                        </tbody></table>
+        </td>
+    </tr>
+    
+    <tr>
+        <th><font color="red"> *</font>商品图片</th>
+        <td>
+        <div class="product_image">
+            <ul id="list1" data-listidx="0">
+             <li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='smallimg1' type="button" style="background: none;" >上传</button>
+                       <!--{if $data.smallimg1}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.smallimg1}-->" width="80px" onclick="window.open('<!--{$data.smallimg1}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.smallimg1}-->" name="smallimg1"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}--> 
+                    </div>
+ 
+                        
+                  
+                </li>
+                             <li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='smallimg2' type="button" style="background: none;" >上传</button>   <!--{if $data.smallimg2}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.smallimg2}-->" width="80px" onclick="window.open('<!--{$data.smallimg2}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.smallimg2}-->" name="smallimg2"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}-->  
+                    </div>
+ 
+                       
+                  
+                </li>
+<li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='smallimg3' type="button" style="background: none;" >上传</button>
+                    
+ 
+                          <!--{if $data.smallimg3}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.smallimg3}-->" width="80px" onclick="window.open('<!--{$data.smallimg3}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.smallimg3}-->" name="smallimg3"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}-->  
+                  </div>
+                </li>
+                <li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='smallimg4' type="button" style="background: none;" >上传</button>
+                    
+ 
+                          <!--{if $data.smallimg4}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.smallimg4}-->" width="80px" onclick="window.open('<!--{$data.smallimg4}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.smallimg4}-->" name="smallimg4"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}-->  
+                  </div>
+                </li>
+                <li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='smallimg5' type="button" style="background: none;" >上传</button>
+                   
+ 
+                          <!--{if $data.smallimg5}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.smallimg5}-->" width="80px" onclick="window.open('<!--{$data.smallimg5}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.smallimg5}-->" name="smallimg5"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}-->  
+                 </div>  
+                </li>
+                            </ul>
+        </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <th><font color="red">*</font>商品描述</th>
+        <td>
+      
+	
+      
+        <textarea name="content" id="editor_id" style="width: 98%; height: 400px; display: ;" tag='notnull in' min='10' ><!--{$data.content}--></textarea>
+        </td>
+    </tr>
+         <tr>
+      	<td colspan="2"><h2>2. 物流信息</h2></td>
+    </tr>    
+
+    <tr>
+        <th><font color="red">*</font>物流体积(立方米)</th>
+        <td><input value="<!--{$data.weight}-->"  tag='notnull fixnum isnum' name="weight" type="text"></td>
+    </tr>
+    
+    <tr>
+        <th><font color="red">*</font>物流重量(千克)</th>
+        <td><input value="<!--{$data.cubage}-->"  tag='notnull fixnum isnum' name="cubage" type="text"></td>
+    </tr>
+    
+    <tr>
+    	<th><font color="red">*</font>运费</th>
+    	<td>
+       <select name="logistempid" id="freight" tag='notnull' >
+			<option value="">-请选择-</option>
+			 <!--{assign var="cat2" vo_list("fun={get_all} mod={logistemp} field={logistempid,logisname} array={muid:{$user.muid}}")}-->
+			  <!--{foreach $cat2 as $volist}-->
+               
+                <option value='<!--{$volist.logistempid}-->'
+                    <!--{if $data.logistempid==$volist.logistempid}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.logisname}--></option>
+                <!--{/foreach}-->
+		</select>
+        <a target="_blank" href="<!--{url mod='logistics' action='add'}-->">新建运费模板</a>
+        <div class="freight"></div>
+       
+        </td>
+    </tr>
+         <tr>
+      	<td colspan="2"><h2>3. 售后保障信息</h2></td>
+    </tr>
+    <tr>
+        <th>发票</th>
+        <td>
+        <label><input type="radio" value="0" name="invoice" checked="checked"> 无</label>&nbsp;&nbsp;&nbsp;
+		<label><input type="radio" value="1" name="invoice"> 有</label>
+        </td>                
+    </tr>
+    
+    <tr>
+		<td colspan="2"><h2>4. 其他信息</h2></td>
+    </tr>
+    
+   
+    
+  
+     <tr>
+     <th>开始时间</th>
+		<td >
+		<LABEL><INPUT style="" name=shelves value=0 <!--{if !$data.shelves}-->CHECKED<!--{/if}-->  type=radio> 放入仓库</LABEL>
+		<LABEL><INPUT style="" name=shelves value=1  <!--{if $data.shelves}-->CHECKED<!--{/if}-->  type=radio> 立刻上架</LABEL>
+		
+		</td></tr>
+<tr>
+		 <th>橱窗推荐</th>
+		<td >	<LABEL><INPUT style="" name=melite value=0 <!--{if !$data.melite}-->CHECKED<!--{/if}-->  type=radio> 否</LABEL>
+		<LABEL><INPUT style="" name=melite value=1  type=radio <!--{if $data.melite}-->CHECKED<!--{/if}--> > 是</LABEL>
+	
+		</td>
+	  </tr>
+
+
+
+     
+    
+	<tr>
+        <td align="center" colspan="2" style="padding-bottom:20px;">
+        <input tag="submit" type="button" value="发布" class="submit" >
+    
+       
+        </td>
+    </tr>
+</tbody></table>
+</form>
+<box style='display: none' id='addsp'>
+	<div>
+		<form id="form" action="<!--{url action='addspecs'}-->" method="post" tag='jqform'>
+		<input name="catid" type="hidden" id="action" value="<!--{$cat.catid}-->">
+        
+        <dl>
+            <dt><em>*</em>规格名称：</dt>
+            <dd>
+            <input type="text" name="name" value="" class="w150 text">
+         
+            <div class="form-error"></div>
+            </dd>
+        </dl>
+        
+        
+       
+      
+       
+        
+        <dl class="foot">
+            <dt>&nbsp;</dt>
+            <dd>
+            <input type="submit" name="submit" value="确定" class="submit">
+            </dd>
+        </dl>
+    </form>
+	</div>
+</box>
+<box style='display: none' id='addsp2'>
+	<div class="gglist" attr=''>
+		<span class="name snamestyle"> </span>
+		<span>
+		<input type="hidden" class="input-150 sname" name="sname[]" value=""/>
+		
+		<input type="text" class="input-150 " name="svalue[]"  value="" />
+		
+		<input type="button" class="btn delgg"   value="删除" />
+		</span>
+		</div>
+</box>
+<script>
+	$(function(){
+		$('.addgg').click(function(){
+			msgbox('添加自定义规格',$('#addsp'));
+		});
+		$('.delgg').live('click',function(){
+			delgg($(this));
+		});
+		$('.addspacs').live('click',function(){
+			addgg($(this).text());
+		});
+	});
+	function delgg($obj){
+		
+		$obj.parents('.gglist').remove();
+	}
+	function addgg($name){
+		if($('.gglisttd .gglist').length>=6){
+			showd('最多添加6种规格');
+			return  false;
+		}
+		$box=$('#addsp2');
+		$box.find('.name').text($name+':');
+		$box.find('.sname').val($name);
+		
+		$('.gglisttd').append($box.html());
+	}
+	_jqformdeal=function($data){
+		if($data.flag){
+			addgg($data.data.sname);
+		}else{
+			showd($data.error.errormsg);
+		}
+	}
+</script>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

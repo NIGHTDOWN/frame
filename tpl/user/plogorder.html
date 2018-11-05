@@ -1,0 +1,73 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right"><div class="block fn-clear">
+	<div class="record">
+        <h2>
+            交易记录            <span>可用余额<strong><!--{$user.cash}--></strong>元</span>
+        </h2>
+    	   		<div class="filter">
+    	<div class="date"></div>
+        <dl class="fn-clear" style='    display: none;'>
+        	<dt>交易分类：</dt>
+            <dd>
+            <a class="current" href="">全部</a>
+            <a href="">付款</a>
+            <a href="">收款</a>
+            </dd>
+        </dl>
+        <dl class="fn-clear">
+        <!--{set $vwhere=count($where)}-->
+        	<dt>交易状态：</dt>
+            <dd>
+            
+            <a <!--{if $vwhere==0}-->class="current"<!--{/if}--> href="<!--{url mod='log' action='order'}-->">全部</a>
+            <a <!--{if $where.status==0 && $vwhere!=0}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="status:0" action='order'}-->">未付款</a>
+            <a <!--{if $where.status==1}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="status:1" action='order'}-->">等待发货</a>
+            <a <!--{if $where.status==2}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="status:2" action='order'}-->">未确认收货</a>
+			<a <!--{if $where.status==3}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="status:3" action='order'}-->">成功</a>
+            <a <!--{if $where.status==4}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="status:4" action='order'}-->">失败</a>
+            </dd>
+        </dl>
+    </div>
+            <table width="100%" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <th class="al" width="80">创建时间</th>
+                <th class="al">名称 | 交易号
+                </th>               <th width="100">金额(元)</th>
+                <th width="80">状态</th>
+                <th width="60">操作</th>
+            </tr>
+                       
+                       
+                                     <!--{foreach $data as $volist}-->
+        	            <tr>
+            	<td class="al"><!--{$volist.createtime|date_format:"%Y-%m-%d"}--></td>
+            	<td class="al">订单【<!--{$volist.ordernum}-->】消费</td>
+            	<td class="price  minus">
+                	<!--{$volist.paytotal/100}-->
+                </td>
+            	<td>
+                                	 <!--{if $volist.status==0}-->等待买家付款
+                             
+                     <!--{elseif $volist.status==1}-->买家已付款
+                     <!--{elseif $volist.status==2}-->卖家已发货
+                     <!--{elseif $volist.status==3}-->交易成功
+                     <!--{elseif $volist.status==4}-->交易关闭
+                     <!--{elseif $volist.status==5}-->退款中的订单
+                     <!--{/if}-->                                </td>
+            	<td>
+                                	<a href="<!--{url group='user' mod='order' args="oid:{$volist.ordernum}" action='detail'}-->">查看订单</a>
+                                </td>
+            </tr>
+                         <!--{/foreach}--> 
+                                                <tr>
+                <td colspan="99">
+                <div class="page">   <!--{$page}--></div>
+                </td>
+            </tr>
+                    </tbody></table>
+    </div>
+</div></div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

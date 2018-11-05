@@ -1,0 +1,107 @@
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+	<!--{include file={$shoptpl}"leftmenu.html"}-->
+
+	<div class="right_content">
+		<script src="script/my_lightbox.js"></script>
+
+
+
+		<div class="path">
+			<div>
+				<a href="<!--{url mod='shop' action='run'}-->">卖家中心</a>
+				<span>&gt;</span>
+				<a href="<!--{url mod='set' action='run'}-->">店铺设置</a>
+				<span>&gt;</span> 店铺设置</div>
+		</div>
+
+
+		<DIV class=main sizcache="1" sizset="5">
+			<DIV class=wrap sizcache="1" sizset="5">
+				<DIV class=hd>
+					<UL class=tabs>
+
+						<LI class=normal>
+							<A href="<!--{url action='run'}-->">店铺设置</A>
+						</LI>
+						<LI class=active>
+							<A href="<!--{url action='mobile'}-->">手机店铺设置</A>
+						</LI>
+						<LI class=normal>
+							<A href="<!--{url action='kf'}-->">客服中心</A>
+						</LI>
+
+					</UL>
+				</DIV>
+				<DIV class=form-style sizcache="1" sizset="5">
+					<FORM id=form method=post action=''>
+
+					
+						<DL sizcache="0" sizset="8">
+							<DT>店招：</DT>
+							<DD style="position: relative">
+
+
+								<button type='button' id=upload-button class="mstorepic" value="" tag='img_up_one'>上传</button>
+								<span id="viewimg_mstorepic" class='pic'>
+									<!--{if $data.mstorepic}-->
+									<div style="float:left;width:auto;">
+										<div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;">
+											<img alt="点击查看大图" src="<!--{$data.mstorepic}-->" width="80px" onclick="window.open('<!--{$data.logo}-->');" style="height: 71px; width: 80px; margin-top: 4.5px; margin-left: 0px;"> </div>
+										<input type="hidden" value="<!--{$data.mstorepic}-->" name="mstorepic">
+										<button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;"
+										 onclick="javascript:delobj($(this).parent('div'));">删除</button>
+									</div>
+									<!--{/if}-->
+								</span>
+
+
+								<P class=hint>此处为您的店铺店招；
+									<BR>
+									<SPAN style="COLOR: orange">建议使用宽640像素-高200像素内的GIF或PNG透明图片；点击下方"提交"按钮后生效。</SPAN>
+								</P>
+							</DD>
+						</DL>
+						<DL sizcache="0" sizset="9">
+							<DT>店铺Banner：</DT>
+							<DD style="position: relative">
+								<button type='button' id=upload-button class="mbanner" value="" tag='img_up_one'>上传</button>
+								<span id="viewimg_mbanner" class='pic'>
+									<!--{if $data.mbanner}-->
+									<div style="float:left;width:auto;">
+										<div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;">
+											<img alt="点击查看大图" src="<!--{$data.mbanner}-->" width="80px" onclick="window.open('<!--{$data.mbanner}-->');" style="height: 71px; width: 80px; margin-top: 4.5px; margin-left: 0px;"> </div>
+										<input type="hidden" value="<!--{$data.mbanner}-->" name="mbanner">
+										<button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;"
+										 onclick="javascript:delobj($(this).parent('div'));">删除</button>
+									</div>
+									<!--{/if}-->
+								</span>
+
+								<P class=hint>此处为您的店铺Banner；
+									<BR>
+									<SPAN style="COLOR: orange">建议使用宽640像素*高120像素的图片；点击下方"提交"按钮后生效。</SPAN>
+								</P>
+							</DD>
+						</DL>
+
+						<DL class=foot sizcache="0" sizset="19">
+							<DT>&nbsp;</DT>
+							<DD><INPUT style="" class=submit tag='submit' value=提交 type='button' ></DD></DL>
+
+
+					</FORM>
+				</DIV>
+			</DIV>
+		</DIV>
+
+	</div>
+	<div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+<style>
+	.gray{    
+		background: #fff;}
+</style>
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	<link href="<!--{$indextpl}-->res/skin.css" rel="stylesheet" type="text/css">
+	
+	<link href="<!--{$indextpl}-->res/pcss.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+				$(".add-cart").click(function(){
+						if ('<!--{$user.uid}-->'=='')
+						{
+							alert('请登入用户');
+							window.location.href='<!--{url mod='login' action='run'}-->';
+							return;
+						}
+						if ('<!--{$data.muid}-->'=='<!--{$user.muid}-->')
+						{
+							alert('不能购买自己店铺的商品！');
+							return;
+						}
+						flag=buy();
+							
+						if(flag)
+						{
+									
+							var num=$('#nums').val();
+							var pid='<!--{$data.productid}-->';
+							var spec=goodsspec.getSpecstring();
+									
+								
+							$arr={'pid':pid,'num':num,'spec':spec};
+							yAjax('<!--{url group='user' mod='cart' action='add'}-->',$arr,function(data){
+										
+									if(data.flag){
+										$('#cart_show').fadeIn(500);
+										$('#cartnum').text(data.data);
+										x=$(".buy_box").offset();
+										$("#cart_show").offset({top:x.top,left:x.left});
+									}else{
+										showd(data.error.errormsg);
+									}
+							
+								});
+								
+							return false;
+						}
+					});
+				$("#low_num").click(function(){
+						var num=$('#nums').val()*1;
+						if(num>1)
+						$('#nums').val(num-1);
+						check_nums()
+					});
+				$("#add_num").click(function(){
+						var num=$('#nums').val()*1;
+						if(num<$('#stock').html())
+						$('#nums').val(num+1);
+						check_nums()
+					});
+			});
+			
+			
+		function buy()
+		{
+			var flag = false;
+			$('ul[genre="property"]').each(function(){
+					if(!$(this).find('a').hasClass('checked')){
+						flag = true;
+					}
+				});
+			if (goodsspec.getSpec() == null || flag)
+			{
+				alert('请选择相关规格');
+				return !flag;
+			}
+			else
+			{
+				return !flag;
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+				$(".sell-counter").click(function(){
+						$("body,html").animate({scrollTop:$(".inner-wrap").offset().top});
+						$(".inner-wrap li").eq(2).addClass("cur").siblings().removeClass("cur");
+						$(".con .i-con").eq(2).show().siblings(".i-con").hide();
+					});
+				$(".rate-counter").click(function(){
+						$("body,html").animate({scrollTop:$(".inner-wrap").offset().top});
+						$(".inner-wrap li").eq(1).addClass("cur").siblings().removeClass("cur");
+						$(".con .i-con").eq(1).show().siblings(".i-con").hide();
+					});
+				$(".inner-wrap li").click(function(){
+						var b=$(".inner-wrap li").index($(this));
+						$(this).addClass("cur").siblings().removeClass("cur");
+						$(".con .i-con").eq(b).show().siblings(".i-con").hide();
+					});
+				$('#jqzoom li').hover(function(){
+						$(this).addClass("hover").siblings().removeClass("hover");;
+					});
+			
+				$("#jqzoom li").mouseover(function(){
+						$(".jqzoom").attr('src',$(this).find("img").attr("big"));
+						$(".jqzoom").attr('rel',$(this).find("img").attr("big"));
+					});
+				$('.ercode a').click(function(){
+					
+						if($('.qrcode').css('display')=='block')
+						$('.qrcode').hide();
+						else
+						$('.qrcode').show();
+					});
+			
+				
+				$(".btn-buy").click(function(){
+						$("#form").find('[name=num]').val($('#nums').val());
+						$("#form").find('[name=spec]').val(goodsspec.getSpecstring());
+						$("#form").submit();
+					});
+			});
+		function check_nums()
+		{
+			var v=document.getElementById('nums').value*1;
+			var stock = $('#stock').html()*1;
+			var maxbuy = ""
+
+			if(maxbuy > 0 && maxbuy<stock)
+			{
+				stock = maxbuy;
+			}
+			if(!v)
+			document.getElementById('nums').value=1;
+			if(v>stock)
+			{
+				document.getElementById('nums').value=stock;
+				return false;
+			}
+		}
+		function spec(id, spec, price, stock)
+		{
+			this.id    = id;
+			this.spec  = spec;
+			this.price = price;
+			this.stock = stock;
+		}
+		function goodsspec(specs, specQty, defSpec)
+		{
+			this.specs = specs;
+			this.value = new Array();
+			this.name = new Array();
+			this.specQty = specQty;
+			this.defSpec = defSpec;
+			/*this.spec1 = null;
+			this.spec2 = null;*/
+			if (this.specQty >= 1)
+			{
+				for(var i = 0; i < this.specs.length; i++)
+				{
+					if (this.specs[i].id == this.defSpec)
+					{
+						break;
+					}
+				}
+			}
+			this.getSpec = function()
+			{
+				for (var i = 0; i < this.specs.length; i++)
+				{
+					return this.specs[i];
+				}
+				return null;
+			}
+			this.getSpecstring = function()
+			{
+				var string='';
+				for(var key in goodsspec.name){string+=goodsspec.name[key]+':'+goodsspec.value[key]+',';}  
+				string=trim(string,',');
+				return string;
+			}
+		}
+		function selectSpec(num,obj, name,SID)
+		{
+			goodsspec['name'][num] = name;
+			goodsspec['value'][ num] = SID;
+		
+
+			$(obj).addClass("checked");
+			$(obj).parents('li').siblings().find('a').removeClass("checked");
+
+			var spec = goodsspec.getSpec();
+					
+			var sign = 't';
+			$('ul[genre="property"]').each(function(){
+					if(!$(this).find('a').hasClass('checked')){
+						sign = 'f';
+					}
+				});
+			if (spec != null && sign == 't')
+			{
+				
+				if(parseInt(spec.stock) == 0)
+				{
+					$('.choose_result').show().html('<div class="dd"><em>库存量不足，请选择其它。</em></div>');
+					$('#addcart_submit').attr('disabled',true).css('cursor','pointer');
+				}
+				else
+				{
+					SP_V = '';
+					$('ul[genre="property"]').find('li > .checked').each(function(i){
+							SP_V += '<strong>"'+$(this).text()+'"</strong>，';
+						});
+					SP_V = SP_V.substr(0,SP_V.length-1);
+					$('.choose_result').show().html('<em>您选择了：</em>'+SP_V+'');
+					$('#addcart_submit').attr('disabled',false).css('cursor','auto');
+					$('#nums').val("1");
+				}
+			}
+
+		}
+				
+				
+			
+	</script>
+	<script type="text/javascript">
+		$(".block_ico,.none_ico").click(function(e){
+				var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
+				var lo = $(this).offset().left
+
+				if($(this).parents("li").find("ul").length > 0)
+				{
+					if($(this).parents("li").find("ul").is(":visible"))
+					{
+
+						$(this).parents("li").find("ul").slideUp()
+						$(this).removeClass("none_ico").addClass("block_ico")
+					}
+					else
+					{
+						$(this).parents("li").find("ul").slideDown()
+						$(this).removeClass("block_ico").addClass("none_ico")
+					}
+				}
+        
+				if(xx*1 - lo*1 < 22)
+				{
+					return false
+				}
+			})
+
+
+		$(".search_btn").mouseover(function(e){
+				$('#search_form').attr('action', "");
+			})
+
+		$(".search_btn_platform").mouseover(function(e){
+				$('#search_form').attr('action', "");
+			})
+
+
+		function get_search_word(k)
+		{
+			if(k!='')
+			{
+				var url = '';
+				var sj = Math.random();
+				var pars = 'shuiji=' + sj+'&search_flag=1&key='+k;
+				$.post(url, pars,showResponse);
+			}
+
+			function showResponse(originalRequest)
+			{
+				if(originalRequest)
+				{
+					$('#key_select').show();
+					//$('#key_select').css("display",'block');
+					$('#key_select').html(originalRequest);
+				}
+				else
+				$('#key_select').hide();
+			}
+
+		}
+		function select_word(v)
+		{
+			$('#keyword').val(v);
+			$('#key_select').hide();
+		}
+
+	</script>
+	<style>
+	.btn-buy:hover{text-decoration: none;}
+		.btn-buy{
+			background-color: rgb(228, 80, 80);border-radius: 3px;
+			box-shadow: rgba(204, 204, 204, 0.247059) 0px 0px 0px 2px;
+			color: #fff!important;
+			cursor: pointer;
+			display: inline-block;
+			font-family: 'Microsoft YaHei', tahoma, arial, 'Hiragino Sans GB', '\\5b8b体', sans-serif;
+			font-size: 16px;
+			font-weight: 100;
+			height: 20px;
+			line-height: 20px;
+			margin-right: 10px;
+			padding-bottom: 6px;
+			padding-left: 18px;
+			padding-right: 18px;
+			padding-top: 6px;
+			position: relative;
+			text-align: center;
+			text-decoration: none;width: 70px
+			
+		}
+	</style>
+	
+	<div class="bbc-breadcrumb-layout">
+		<div class="bbc-breadcrumb wrapper"><i class="icon-home"></i>
+			<span><a href="<!--{url mod='index'}-->">首页</a></span><span class="arrow">></span>
+			<span><a href="<!--{url mod='jfstore'}-->">积分商城</a></span><span class="arrow">>></span>
+			<span>兑换礼品详情</span>
+		</div>
+	</div>
+
+	
+
+	<div class="bbc-container">
+		<div class="bbc-detail">
+			<div class="bbc-gift-picture">
+				<a href="<!--{$data.smallimg1}-->">
+					<img src="<!--{$data.smallimg1}-->">
+				</a>
+			</div>
+			<div class="bbc-gift-summary">
+				<div class="name">
+					<h1><!--{$data.productname|tostr}--></h1>
+				</div>
+				<div class="bbc-meta">
+					<dl>
+						<dt>原 价：</dt>
+						<dd class="cost-price"><strong>¥<!--{$data.price}--></strong></dd>
+					</dl>
+					<dl>
+						<dt>所需积分：</dt>
+						<dd class="points"> <strong><em class="bbc_color"><!--{$data.originalprice}--></em> 积分</strong><!--<span class="bbc_btns"></span>--></dd>
+					</dl>
+				</div>
+				<div class="bbc-key clearfix">
+					<form id="form" onsubmit="return buy()" action="<!--{url mod='buy' action='jf' }-->" method="post">
+						<input name="spec" type="hidden" value="">
+						<input name="num" type="hidden" value="">
+						<input name="pid"  type="hidden" value="<!--{$data.productid}-->">
+						<div class="select_style clearfix">
+							<script>var $gg=new Array();</script>
+							<!--{foreach $spec as $volist}-->	
+							<script>$gg[<!--{$i-1}-->]='<!--{$volist.id}-->';</script>
+							<dl id="spec_10">
+								<dt><!--{$volist.sname}--></dt>
+								<dd>
+									<ul genre="property">
+             <!--{set $svr=explode(',',$volist.svalue)}-->
+										<!--{foreach $svr as $value}-->
+		
+										<li title="<!--{$value}-->">	<a onclick="selectSpec('<!--{$volist.id}-->',this,'<!--{$volist.sname}-->','<!--{$value}-->');"><!--{$value}--><i></i></a>
+										</li>
+										<!--{/foreach}-->
+            
+                
+									</ul>
+								</dd>
+							</dl>						
+							<!--{/foreach}-->
+							<script>
+								var specs = new Array();
+								specs.push(new spec(<!--{$data.productid}-->, $gg, <!--{$data.price}-->, <!--{$data.count}-->));
+				
+								var specQty = 0;
+								var defSpec = <!--{$data.productid}-->;
+								var goodsspec = new goodsspec(specs, specQty, defSpec);
+             	
+							</script>  
+   
+							<dl>	<dt>数量</dt>
+								<dd class="stock">	<a href="javascript:void(0);" id="low_num">-</a>
+									<input onkeyup="check_nums();" size="3" name="nums" id="nums" type="text" value="1">	<a href="javascript:void(0);" id="add_num">+</a>
+									<em>件 （库存 <span id="stock"><!--{$data.count}--></span> <!--{$data.unit}-->） </em>
+								</dd>
+							</dl>
+						</div>
+										
+						<div class="choose_result"></div>
+						<div class="clear"></div>
+						<div class="ncs-btn">
+							<a class=" btn-buy" href="javascript:void(0);" style="cursor:pointer;">我要兑换</a>
+						</div>	
+					</form>
+				</div>
+				
+				
+			</div>
+			<div style=" position: absolute; z-index: 1; top: -1px; right: -1px;">
+				<div class="bbc-info">
+					<div class="title">商城提供</div>
+					<div class="content">
+
+						<dl>
+							<dt>添加时间：</dt>
+							<dd><!--{$data.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></dd>
+						</dl>
+						<dl>
+							<dt>浏览人次：</dt>
+							<dd><!--{$data.hits}--></dd>
+						</dl>
+					</div>
+					<div class="title"><h4>最多兑换</h4></div>
+					
+					<ul class="bbc-exchangeNote">
+						
+						<!--{foreach $other as $volist}-->
+						<li>
+							<div class="gift-pic">
+								<a target="_blank" href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" >
+									<img src="<!--{$volist.smallimg1}-->" style="width: 190px;height:160px;" >
+								</a>
+							</div>
+								
+							<div class="gift-name">
+								<a href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" target="_blank" tile="<!--{$volist.productname|tostr}-->"><!--{$volist.productname|tostr}--></a>
+							</div>
+							<div class="pgoods-points">
+								<span class="bbc_color"><!--{$volist.originalprice}--></span>积分<!-- <span class="bbc_btns">V0专享</span>-->
+							</div>
+						</li>
+						<!--{/foreach}-->	
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="bbc-goods-layout">
+			<div class="bbc-sidebar">
+				<div class="bbc-sidebar-container">
+				
+					<div class="title">热门兑换</div>
+					<div class="content">
+						<ul class="bbc-exchangeNote">
+						
+							<!--{foreach $hot as $volist}-->
+							<li>
+								<div class="gift-pic">
+									<a target="_blank" href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" >
+										<img src="<!--{$volist.smallimg1}-->" style='width: 160px;height:160px;' >
+									</a>
+								</div>
+								<div class="gift-name">
+									<a href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" target="_blank" tile="<!--{$volist.productname|tostr}-->"><!--{$volist.productname|tostr}--></a>
+								</div>
+								<div class="pgoods-points">
+									<span class="bbc_color"><!--{$volist.originalprice}--></span>积分<!-- <span class="bbc_btns">V0专享</span>-->
+								</div>
+							</li>
+							<!--{/foreach}-->	
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="bbc-goods-main">
+				<div class="tabbar">
+					<div class="bbc-goods-title-nav">
+						<ul id="categorymenu">
+							<li class="current"> <a id="tabGoodsIntro" href="#intro">商品</a> </li>
+						</ul>
+					</div>
+				</div>
+				<div class="bbc-goods-info-content">
+					<!--{$data.content}-->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

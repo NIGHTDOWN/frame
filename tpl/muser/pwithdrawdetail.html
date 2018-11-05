@@ -1,0 +1,284 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+<script>
+	_ajax_file_url="<!--{url mod='upimg'}-->";
+</script>
+<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="history.back();" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">提现详情</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					<form method="POST" action="<!--{url action='save'}-->" >
+
+				
+					
+					<section class="order-act" data-spm="2" data-spm-max-idx="6">
+							<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">状态</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " style="color:red"><!--{if $data.status==0}-->进行中    
+													<!--{elseif $data.status==1}-->完成
+													<!--{elseif $data.status==2}-->关闭
+												  <!--{if $data.admindesc}-->【<!--{$data.admindesc}-->】<!--{/if}-->
+													<!--{/if}--> </span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">交易号</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.soleid}--> </span>
+												
+											</div>
+										
+									
+								</div>	
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">金额</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{($data.money+$data.fee)}--></span>
+												
+											</div>
+										
+									
+								</div>	
+
+
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">提现时间</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">提现银行</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.recvbank}-->   </span>
+												
+											</div>
+										
+									
+								</div>	
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">银行卡号</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.recvnum}-->  </span>
+												
+											</div>
+										
+									
+								</div>	
+
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">开户行地址</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.recvbankadd}--></span>
+												
+											</div>
+										
+									
+								</div>	
+
+
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">开户人</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.recvrealname}--> </span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">提现金额</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.money}-->   </span>
+												
+											</div>
+										
+									
+								</div>	
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">服务费</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.fee}-->  </span>
+												
+											</div>
+										
+									
+								</div>	
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">到账时间</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{if $data.choosetype==1}-->  <!--{$config.draw_time_1}--> 
+													<!--{elseif $data.choosetype==2}-->  <!--{$config.draw_time_2}--> 
+													<!--{elseif $data.choosetype==3}-->  <!--{$config.draw_time_3}--> <!--{/if}--></span>
+												
+											</div>
+										
+									
+								</div>	
+
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">备注</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc " ><!--{$data.desc}-->  </span>
+												
+											</div>
+										
+									
+								</div>	
+
+
+
+
+
+						
+					</section>
+				
+				
+						<div style="clear:both;margin-bottom:1rem"></div>
+				</form>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

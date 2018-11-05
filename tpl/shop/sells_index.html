@@ -1,0 +1,142 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+	<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+	
+	<DIV class=right_content><DIV class=path>
+			<DIV><A href="<!--{url mod='shop'}-->">卖家中心</A> <SPAN>&gt;</SPAN> <A href="<!--{url mod='sells'}-->">订单管理</A> <SPAN>&gt;</SPAN>  订单列表</DIV></DIV>
+		<DIV class=main>
+			<DIV class=wrap>
+				<DIV class="searchbar top_searchbar" style="display: none">
+					<FORM method=post >
+					<SPAN style="FLOAT: right;background: #fff;" class=search-btn>
+					<INPUT style=""  value=订单搜索 type=submit></SPAN> 
+					<INPUT style="FLOAT: right;background: #fff;height: 23px;" class=w200 name='ordernum' placeholder="请输入订单编号">
+						
+					</FORM></DIV>
+				<DIV class=hd>
+					<UL class=tabs>
+	<LI class='<!--{if $a=='run'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells'}-->">所有订单</A> </LI>
+						<LI class='<!--{if $a=='waitpay'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='waitpay'}-->">等待付款</A></LI>
+						<LI class='<!--{if $a=='waitsend'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='waitsend'}-->">等待发货</A></LI>
+						<LI class='<!--{if $a=='waitsure'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='waitsure'}-->">已经发货</A></LI>
+						<LI class='<!--{if $a=='wpj'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='wpj'}-->">待评价</A></LI>
+						<LI class='<!--{if $a=='over'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='over'}-->">已经完成</A></LI>
+					
+						<LI class='<!--{if $a=='close'}-->active<!--{else}-->normal<!--{/if}-->'><A href="<!--{url mod='sells' action='close'}-->">交易关闭</A> <li class="search-box">
+							<form method="post">
+						
+							<input type="text" class="w200" placeholder="请输入订单编号" name="ordernum" value="<!--{$where.ordernum}-->" />
+							<input type="submit" class="btn2" value="搜索" />
+							</form>
+							</li></LI></UL>
+
+</DIV>
+				<TABLE class="table-list-style order">
+					<THEAD>
+						<TR>
+							<TH width=10></TH>
+							<TH width=280>商品详情</TH>
+							<TH width=80>单价</TH>
+							<TH width=80>数量</TH>
+							<TH width=80>售后</TH>
+							<TH width=120>买家</TH>
+							<TH width=120>订单总价</TH>
+							<TH width=120>状态与操作</TH></TR></THEAD>
+				<tbody>
+				<!--{foreach $data as $volist}-->
+					<TR>
+							<TD class=sep-row colSpan=20></TD></TR>
+						<TR>
+							<TH colSpan=20><SPAN class="fl ml10">订单编号：<SPAN style="FONT-FAMILY: Tahoma; COLOR: #339900"><!--{$volist.ordernum}--></SPAN></SPAN> <SPAN class="fl ml20">下单时间：<SPAN style="FONT-FAMILY: Tahoma; COLOR: #999999"><!--{$volist.createtime|date_format:"%Y-%m-%d %H:%M:%S"}--></SPAN></SPAN> <SPAN class="fl ml20">
+							<A class=order_show href="<!--{url mod='sells' action='detail' args="ordernum:{$volist.ordernum}"}-->" target=_blank>查看订单</A></SPAN> <SPAN class=fr><A title=打印订单 href="<!--{url action='print' args="ordernum:{$volist.ordernum}"}-->" target=_blank><I class=order_print></I></A></SPAN></TH></TR>
+							
+							<!--{foreach $volist.productlist as $i=>$volist2}-->
+							<!--{set $a=sizeof($volist.productlist)}-->
+						<TR>
+							<TD class=bdl></TD>
+							<TD colSpan=4>
+								<TABLE>
+									<TBODY>
+										<TR>
+											<TD class=w80>
+												<DIV class=pic-small><A href="<!--{url mod='product' group='index' action='detail' args="productid:{$volist2.productid}"}-->" target=_blank><IMG alt="" src="<!--{$volist2.smallimg}-->" width=60 height=60></A></DIV></TD>
+											<TD class=tl><A href="<!--{url mod='product' group='index' action='detail' args="productid:{$volist2.productid}"}-->" target=_blank><!--{$volist2.productname|tostr}--></A>
+											<br />
+            <!--{$volist2.spec}-->
+            	
+            </TD>
+											<TD class=w80><!--{$volist2.price/100}--></TD>
+											<TD class=w80><!--{$volist2.num}--></TD>
+											<TD class=w80>
+											<!--{if $volist2.tkflag==1 || $volist2.shflag==1}-->  
+						<a class="org" href="<!--{url mod='server' action='detail' args="ordernum:{$volist2.ordernum},id:{$volist2.id}"}-->">处理中</a>						<!--{elseif $volist2.tkflag==2 || $volist2.shflag==2}-->  
+						<a class="org" href="<!--{url mod='server' action='detail' args="ordernum:{$volist2.ordernum},id:{$volist2.id}"}-->">完成</a>	
+						<!--{elseif $volist2.tkflag==4 || $volist2.shflag==4}-->  
+						<a class="red" href="<!--{url mod='server' action='detail' args="ordernum:{$volist2.ordernum},id:{$volist2.id}"}-->">关闭</a>	
+					<!--{/if}-->						
+											
+											
+												
+											</TD></TR></TBODY></TABLE></TD>
+							
+					
+							<!--{if $i==0}-->
+							<TD class=bdl rowspan="<!--{$a}-->" >
+								<P><!--{$volist.username}--><A class=message href="" target=_blank></A></P></TD>
+							<TD class="price bdl" rowspan="<!--{$a}-->" >
+								<P><B><!--{$volist.paytotal/100}--></B></P>
+								<P>含运费 <!--{$volist.logisfee/100}--></P></TD>
+							<TD class="bdl bdr" rowspan="<!--{$a}-->" style='min-width: 70px;'>
+								<P><A href="<!--{url mod='sells' action='detail' args="ordernum:{$volist.ordernum}"}-->">订单详情</A></P>
+						<!--{if $volist.status==0}-->等待买家付款
+						<P><A href="<!--{url mod='sells' action='changecash' args="ordernum:{$volist.ordernum}"}-->">修改价格</A></P>
+						<P><A style='color:red' href="<!--{url mod='sells' action='closeorder' args="ordernum:{$volist.ordernum}"}-->">关闭订单</A></P>
+						<!--{elseif $volist.status==2}-->	
+						等待买家确认
+						
+						<p class="countdown">
+                        <i></i>
+                        <em>还剩<!--{set echo residual_time($volist.autosuretime-$time)}--></em>
+                    </p>
+						<P><A href="<!--{url  action='suretimeadd' args="ordernum:{$volist.ordernum}"}-->">延迟收货时间</A></P>
+							<!--{elseif $volist.status==1}-->
+						<P><A href="<!--{url mod='sells' action='send' args="ordernum:{$volist.ordernum}"}-->">发货</A></P>
+							<!--{elseif $volist.status==3 && $volist.scflag==0}-->交易完成
+						<P><A href="<!--{url mod='sells' action='comment' args="ordernum:{$volist.ordernum}"}-->">评价</A></P>
+						<!--{elseif $volist.status==3 &&  $volist.scflag==1 &&  $volist.cflag==1}-->	双方已评
+						<!--{elseif $volist.status==3 &&  $volist.scflag==1 &&  $volist.cflag==0}-->	买家未评论
+							<!--{elseif $volist.status==4}-->交易关闭
+							
+						<!--{/if}-->		
+								</TD>
+								
+								
+								
+								
+<!--{/if}-->
+
+</TR>	<!--{/foreach}-->
+<!--{/foreach}-->
+				</tbody>
+					<TFOOT>
+						<TR>
+							<TD colSpan=20>
+								<DIV class=pagination>
+									
+									<!--{$page}-->
+								</DIV></TD></TR></TFOOT>
+
+
+</TABLE></DIV></DIV>
+		
+	</DIV>
+	<div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

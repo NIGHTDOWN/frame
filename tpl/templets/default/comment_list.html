@@ -1,0 +1,75 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+	
+					
+					<div id="reviews" class="i-con ">
+						<div class="reviews-hd">
+							
+							<div class="reviews-hd-fore2">
+								<div class="filter clearfix">
+									<ul>
+										
+										<li><label><input type="radio" name="reviews-type" <!--{if $im==0 && $cm==-1}-->checked="checked"<!--{/if}--> value="<!--{url action='list' mod='comment' args="productid:{$get.productid}"}-->"><span>全部</span></label></li>
+										<li><label><input  <!--{if ($get.cmlevel)==1}-->checked="checked"<!--{/if}--> type="radio" name="reviews-type" value="<!--{url action='list' mod='comment' args="cmlevel:1,productid:{$get.productid}"}-->"><span>好评</span></label></li>
+										<li><label><input <!--{if ($get.img)==1}-->checked="checked"<!--{/if}--> type="radio" name="reviews-type" value="<!--{url action='list' mod='comment' args="img:1,productid:{$get.productid}"}-->"><span>图片</span></label></li>
+										<li><label><input <!--{if $im==0 && $cm==0 }-->checked="checked"<!--{/if}--> type="radio" name="reviews-type" value="<!--{url action='list' mod='comment' args="cmlevel:0,productid:{$get.productid}"}-->"><span>中评</span></label></li>
+										<li><label><input <!--{if ($get.cmlevel)==2}-->checked="checked"<!--{/if}--> type="radio" name="reviews-type" value="<!--{url action='list' mod='comment' args="cmlevel:2,productid:{$get.productid}"}-->"><span>差评</span></label></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--{if ($data|sizeof)}-->
+						
+						<div class="reviews-bd clearfix">
+<ul>
+<!--{foreach $data as $volist}-->
+    <li class="clearfix">
+        <div class="buyer">
+            <div class="avatar">
+                <span>
+                    <img width="40" height="40" src="<!--{$volist.headimg}-->"><br>
+                    <span><!--{$volist.username|incode}--></span>
+                </span><br>
+                <img src="<!--{vo_list("fun={getlevelimg} type={am} mod={userlevel}  param1={<!--{$volist.uid}-->}")}-->">
+            </div>
+        </div>
+        <dl>
+            <dt class="buyerconten"><span><!--{$volist.cmcontent}--></span>
+            <span>
+            <!--{if $volist.cmimg}-->
+            <!--{set $t=explode(',',$volist.cmimg)}-->
+            	<!--{foreach $t as $value}-->
+            	<img src='<!--{$value|imgsize:'60,60'}-->'  onclick="window.open('<!--{$value}-->')" />
+            	<!--{/foreach}-->
+            	<!--{/if}-->
+            </span>
+            </dt>
+            <dd><!--{$volist.cmtime|date_format:"%Y-%m-%d %H:%M:%S"}--> <span style="margin-left: 20px"><!--{$volist.specs}--></span></dd>
+        </dl>
+    </li>
+<!--{/foreach}-->
+</ul>
+<div class="pages"> <!--{$page}-->  </div>
+</div>
+<!--{else}-->
+						<div class="reviews-bd clearfix">
+							<ul>
+								<li class="no-result">没有找到结果</li>
+							</ul>
+							<div class="pages"></div>
+						</div>
+<!--{/if}-->
+					</div>
+			<script>
+				$(function(){
+					$('[name=reviews-type]').change(function(){
+						location.href=$(this).val();
+						
+					});
+					
+				});
+				
+			</script>		
+					
+					
+			

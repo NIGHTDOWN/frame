@@ -1,0 +1,314 @@
+h5{
+	margin: 0;
+}
+img{
+	max-width: 100%;
+    vertical-align: middle
+}
+input{
+	outline: none;	
+}
+body{
+   /* max-width: 720px;*/
+    margin: 0 auto;
+    background: #f1f1f1;
+    color:#333;
+    font-size: 0.26rem;
+}
+#bodyCont .jd-header .jd-header-new-bar {
+	    position: fixed;
+    	width: 100%;
+}
+.message{
+   /* background-color: #f1f1f1;*/
+	/*padding: 0rem 0.1rem 1rem 0.1rem;*/
+	height: 100%;
+	/*max-height: 900px;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 45px 0 45px 0;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+.message .msglist {
+	margin: 0rem 0.1rem 0rem 0.1rem;
+}
+.time{
+        font-size: 0.18rem;
+    color: #999;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    text-align: center;
+}
+.addmore{
+	    font-size: 0.18rem;
+    color: #999;
+    
+    text-align: center;
+}
+.footer{
+	    position: fixed;
+    bottom: 0;
+         min-height: 0.45rem;
+         height: auto;
+     max-height: 5rem;
+    background-color: #fff;
+    /* line-height: 1rem; */
+    width: 100%;
+    /* max-width: 720px; */
+    border-top: 1px solid #ddd;
+    padding-top: 0.1rem;
+ /*  padding-bottom: 0.1rem;*/
+    padding-right: 00.1rem;
+        text-align: center;
+}
+.footer img.bq{
+    margin-left:0.1rem;
+    width: 0.35rem;
+    height: 0.35rem;
+     vertical-align: bottom;
+     display: block;
+  
+}
+.footer .add{
+    margin-right:0.1rem;
+    width: 0.35rem;
+    height: 0.35rem;
+     vertical-align: bottom;
+   display: block;
+}
+.footer .add img{
+    margin-right:0.1rem;
+    width: 0.35rem;
+    height: 0.35rem;
+     vertical-align: bottom;
+   display: block;
+}
+.footer .bq{
+	float: left;
+	display: block;
+	/* width: 0.4rem;*/
+    height: 0.35rem; width: 13%;    vertical-align: bottom;text-align: center;
+}
+.footer .hc{
+	float: right;
+	display: block;
+	/* width: 0.4rem;*/
+    height: 0.35rem; width: 13%;vertical-align: bottom;text-align: center;
+}
+ .footer .msgdiv{
+ 	 width: auto;
+ 	/*  min-width: 2rem;
+ 	  max-width: 3rem;*/
+    display: inline-block;
+    text-align: left;    font-size: 0.25rem;
+    line-height: 0.4rem;
+     /*   max-width: 73%;
+    min-width: 65%;*/
+  width: 73%;    margin: 0 auto;
+ /* width:auto;*/
+    float: left;
+/*overflow-x: hidden;
+overflow-y: scroll;*/
+ height: 0.35rem;vertical-align: bottom;
+ }
+ .footer #sendmsg{
+   /* margin-left:0.2rem;*/
+        
+       display: block; 
+  	width: auto;
+   /* border-radius: 0.1rem;
+    border: 0.01rem solid #ddd;*/
+    overflow: hidden;
+    height: 0.35rem;
+    padding: 0px 0.1rem;
+/*overflow-y: scroll;*/
+/*word-break: break-all;*/
+   margin: 0 0.1rem;
+   border-bottom: 0.01rem solid #ddd;
+
+}
+.footer button{
+        /* font-size: 0.2rem; */
+    color: #fff;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    text-align: center;
+    background-color: #ddd;
+    border-radius: 0.05rem;
+    float: right;
+    min-width: 0.35rem;
+    margin-right: 0.1rem;
+    width: auto;
+    border: none;
+    vertical-align: bottom;
+    /*overflow: scroll;*/
+    background: rgb(17, 79, 142);
+}
+.msg{
+	width: 100%;
+	display: block;
+}
+.send:after,.show:after,.msg:after{
+	content: "";
+	clear: both;
+	display: table;	
+}
+
+.msg>img{
+	width: 0.5rem;    height: 0.5rem;
+	border-radius:50%; 
+	float: left;max-width: 20%;
+	    overflow: hidden;
+}
+.msg>pp{
+	    float: left;
+	    margin: 0 0.1rem;
+	    padding: 0.15rem;
+	    background: #fff;
+	    font-size: 0.2rem;
+	    position: relative;
+	    border-radius: 0.2rem;
+	    max-width: 65%;    
+    word-wrap: break-word;
+}
+
+.msg_input{
+	position: absolute;
+	background: url(../images/msg-input.png) no-repeat;
+	background-size: 0.31rem auto;
+	width: 0.31rem;
+	height: 0.21rem;
+	left: -0.25rem;
+	top: 0.15rem;
+}
+.show .msg img,.show .msg pp,.show .msg{
+	float: right;
+}
+
+
+.show .msg_input{
+	left: auto;
+	right: -0.25rem;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 	/* IE 9 */
+	-moz-transform:rotate(180deg); 	/* Firefox */
+	-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+	-o-transform:rotate(180deg); 	/* Opera */
+}
+.send,.show{
+	/*padding-bottom: 0.3rem;*/
+}
+.alert_novip,.flower_num,.give_flower{
+	display: none;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.28rem;
+}
+.alert_novip p,.flower_num  p{
+	margin-bottom: 0.45rem;
+}
+.layui-layer-wrap button{
+	font-size: 0.28rem;
+	padding: 0.2rem 0.3rem;
+	margin-top: 0.1rem;
+	background: #f8f8f8;
+	border-radius: 10px;
+}
+
+.flower_num button{
+	padding: 0.2rem 0.5rem;
+	border-radius: 10px;
+}
+.layui-layer-wrap button:first-child{
+	float: left;
+}
+.layui-layer-wrap button:last-child{
+	float: right;
+	background: #FF7171;
+	color: #fff;
+}
+.alert_novip button{
+	padding: 0.2rem 0.3rem;
+    border-radius: 10px
+}
+.flower{
+	width: 0.8rem;
+	margin: 0 auto;
+}
+.give_flower{
+	text-align: center;
+}
+.give_flower p{
+	text-align: center;
+	line-height: 1.5;
+}
+.give_flower input{
+	width: 1rem;
+	margin-right: 0.1rem;
+	margin-top: 0.2rem;
+}
+.give_flower button{
+	display: block;
+	width: 3rem;
+	font-size: 0.28rem;
+	margin: 0 auto;
+	margin-top: 0.6rem;
+	float: none!important;
+	line-height: 0.65rem;
+	border-radius: 10px;
+}
+.nots{
+	-webkit-user-select:none!important;
+    -moz-user-select:none!important;
+    -ms-user-select:none!important;
+    user-select:none!important;
+}
+.footer .bqlist{
+	display: block;
+    width: 100%;
+    /*height: 2rem;*/
+}.footer .bqpages{
+	display: inline-block;
+    width: 100%;
+    height: 132px;position: relative;    vertical-align: top;
+}.footer .imgbox{
+	
+    width: 44px;
+    height: 44px;
+    text-align: center;display: inline-block;
+}
+.footer .imgbox img{
+	padding-top: 10px;
+	width: auto;
+    height: auto;
+	 display: block;
+    margin: 0 auto;
+
+}
+.footer .bqlist ul.biaozhi {
+    display: block;
+    width: 100%;
+    height: 10px;
+    padding:5px 0;
+}
+
+.footer .bqlist li.on {
+	background: #000;
+	/*display:block;*/
+}
+
+.footer .bqlist li {
+    display: inline-block;
+    width: 0.07rem;
+    height: 0.07rem;
+    background: #ccc;
+        margin-right: 0.1rem;
+    border-radius: 50%;
+}
+
+.footer .bqlist .bqs {    position: relative;
+    height: 132px;    padding-top: 10px;
+    overflow: hidden;
+    width: 100%;
+}

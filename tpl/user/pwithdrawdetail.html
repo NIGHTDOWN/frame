@@ -1,0 +1,66 @@
+<!--{include file={$usertpl}"pframe.html"}-->
+
+
+<DIV class=fn-right>
+  <DIV class="block fn-clear">
+    <DIV class=i-block>
+
+      <H2>提现详情</H2>
+      <DL class=detail>
+        <DT> 状态：
+          <span style="color: red">
+            <!--{if $data.status==0}-->进行中
+            <!--{elseif $data.status==1}-->完成
+            <!--{elseif $data.status==2}-->关闭
+            <!--{if $data.admindesc}-->【
+            <!--{$data.admindesc}-->】
+            <!--{/if}-->
+            <!--{/if}-->
+          </span>
+          <DD>
+            <SPAN>交易号：</SPAN>
+            <!--{$data.soleid}-->
+            <DD>
+              <SPAN>金额：</SPAN>
+              <!--{($data.money+$data.fee)/100}-->元
+              <DD>
+                <SPAN>提现时间：</SPAN>
+                <!--{$data.addtime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+
+                <DD>
+                  <SPAN>提现银行：</SPAN>
+                  <!--{$data.recvbank}-->
+                  <DD>
+                    <SPAN>银行卡号：</SPAN>
+                    <!--{$data.recvnum}-->
+                    <DD>
+                      <SPAN>开户行地址：</SPAN>
+                      <!--{$data.recvbankadd}-->
+                      <DD>
+                        <SPAN>开户人：</SPAN>
+                        <!--{$data.recvrealname}-->
+                        <DD>
+                          <SPAN>提现金额：</SPAN>
+                          <!--{$data.money/100}-->
+                          <DD>
+                            <SPAN>服务费：</SPAN>
+                            <!--{$data.fee/100}-->
+                            <DD>
+                              <SPAN>到账时间：</SPAN>
+                              <!--{if $data.choosetype==1}-->
+                              <!--{$config.draw_time_1}-->
+                              <!--{elseif $data.choosetype==2}-->
+                              <!--{$config.draw_time_2}-->
+                              <!--{elseif $data.choosetype==3}-->
+                              <!--{$config.draw_time_3}-->
+                              <!--{/if}-->
+                              <DD>
+                                <SPAN>备注：</SPAN>
+                                <!--{$data.desc}-->
+                              </DD>
+      </DL>
+    </DIV>
+  </DIV>
+</DIV>
+
+<!--{include file={$usertpl}"pfoot.html"}-->

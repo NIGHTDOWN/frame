@@ -1,0 +1,5 @@
+<!--{assign var='gg'  value=vo_list("mod={notice} type={im} fun={getlist}")}-->
+					<!--{foreach $gg as $volist}-->
+					<li>
+						<a href="<!--{url mod='article' action='show' agrs="articleid:{$volist.articleid}"}-->" target="_blank" title="<!--{$volist.title|tostr}-->"><!--{$volist.title|tostr}--></a></li>
+					<!--{/foreach}-->

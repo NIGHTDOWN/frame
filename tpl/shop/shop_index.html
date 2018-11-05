@@ -1,0 +1,183 @@
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+<div class="intro clearfix">
+    <div class="left">
+        <div class="store-pic">
+            <!--{if $user.logo}-->
+            <img width="95" height="95" src="    <!--{$user.logo}-->">
+            <!--{else}-->
+            <img width="95" height="95" src="<!--{$shoptpl}-->res/default_logo.gif">
+            <!--{/if}-->
+        </div>
+        <div class="userinfo">
+            <div class="basic clearfix">
+                <strong><!--{$user.username}--></strong>
+                <a href="">
+                <img src="<!--{$shoptpl}-->res/certification_no.gif">
+                </a>
+                <a href="">
+                <img src="<!--{$shoptpl}-->res/certautonym_no.gif">
+                </a>
+                &nbsp;白金店铺
+            </div>
+            <div>
+                <span>卖家信誉:</span>
+               	<img align="0" title="0" src="<!--{$shoptpl}-->res/s_red_1.gif">
+            </div>
+            <div>
+                <span>店铺名称:</span>
+                <a target="_blank" href="<!--{url mod='shop' action='show' group='index' args="id:{$user.muid}"}-->"><!--{$user.merchantname}--></a>
+            </div>
+            <div>
+                <span>店铺状态:</span>
+                <!--{if $user.storeflag==0}-->
+                已开启，展示中     
+                <!--{else}-->
+                 已关闭     
+                <!--{/if}--> 
+                      </div>
+        </div>
+    </div>
+    <div class="right seller-rate">
+        <h2>店铺动态评分</h2>
+        <dl>
+            <dt>描述相符:</dt>
+            <dd class="rate-star"><em><i style="width: <!--{$user.mspf/5*100}-->%;"></i></em></dd>
+            <dd><!--{$user.mspf}-->分</dd>
+        </dl>
+        <dl>
+            <dt>服务态度:</dt>
+            <dd class="rate-star"><em><i style=" width: <!--{$user.fwpf/5*100}-->%;"></i></em></dd>
+            <dd><!--{$user.fwpf}-->分</dd>
+        </dl>
+        <dl>
+            <dt>发货速度:</dt>
+            <dd class="rate-star"><em><i style=" width: <!--{$user.wlpf/5*100}-->%;"></i></em></dd>
+            <dd><!--{$user.wlpf}-->分</dd>
+        </dl>
+    </div>
+</div>
+<div class="layout">
+<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+    <div class="right_content"><div class="fl i-fl">
+    <div class="container h166">
+        <div class="hd"><h2>店铺提示</h2></div>
+        <div class="content">
+            <dl class="focus">
+                <h2>您需要关注的店铺情况：</h2>
+                <dt>消息：</dt>
+               <dd><a href="<!--{url mod='message' group='user'}-->">系统消息 (<strong><!--{$data.xxnum}--></strong>)</a></dd>
+                
+                <dt>商品提示：</dt>
+                <dd><a href="<!--{url mod='product' action='waitcheck'}-->">待审核商品 (<strong><!--{$data.wchnum}--></strong>)</a></dd>
+                <dd><a href="<!--{url mod='product' action='depot'}-->">仓库待上架商品 (<strong><!--{$data.cknum}--></strong>)</a></dd>
+               
+                <!--  <dt>咨询提示：</dt>
+               <dd><a href="">买家的留言 (<strong>0</strong>)</a></dd>
+                <dt>违规提示：</dt>
+                <dd><a href="">被举报禁售 (<strong>0</strong>)</a></dd> -->
+            </dl>
+            <ul>
+                <li><a href="<!--{url mod='product' action='sell'}-->">出售中的商品 (<strong><!--{$data.csnum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='product' action='Illegal'}-->">违规下架的商品 (<strong><!--{$data.wgnum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='product' action='add'}-->">商品发布</a></li>
+             
+            </ul>
+        </div>
+    </div>
+    <div class="container h166">
+        <div class="hd"><h2>交易提示</h2></div>
+        <div class="content">
+            <dl class="focus">
+                <h2>您需要立即处理的交易订单：</h2>
+                <dt>近期售出：</dt>
+                <dd><a href="<!--{url mod='sells' action='run'}-->">交易中的订单 (<strong><!--{$data.doingnum}--></strong>)</a></dd>
+                <dt>销售总额：</dt>
+                <dd>订单总额 (<strong><!--{$data.cashall}--></strong>)</dd>
+                <dd>实际总额 (<strong><!--{$data.cashsjall}--></strong>)</dd>
+            </dl>
+            <ul>
+                  
+                <li><a href="<!--{url mod='sells' action='waitpay'}-->">待付款 (<strong><!--{$data.wfknum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='sells' action='waitsend'}-->">待发货 (<strong><!--{$data.yfknum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='sells' action='waitsure'}-->">待收货 (<strong><!--{$data.yfhnum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='sells' action='over'}-->">完成的 (<strong><!--{$data.oallnum}--></strong>)</a></li>
+                <li><a href="<!--{url mod='sells' action='run'}-->">退货 (<strong><!--{$data.thnum}--></strong>)</a></li>
+               
+                <li><a href="<!--{url mod='sells' action='wpj'}-->">待评价 (<strong><!--{$data.pjnum}--></strong>)</a></li>
+            </ul>
+        </div>
+    </div>
+
+	<!--[if IE]><script src=""></script><![endif]-->
+    <div class="container">
+        <div class="hd"><h2>店铺流量</h2></div>
+        <div class="content">
+		<canvas id="cv" width="575" height="142" style="width: 575px; height: 142px;"></canvas>
+		</div>
+	</div>
+	<script type="text/javascript" src="<!--{$shoptpl}-->res/Chart.js"></script>
+    <script>
+       
+	window.onload = function() {
+
+         $labels=new Array();
+        $data=new Array();
+        <!--{foreach $data.visit as $k=>$volist}-->
+        $labels[<!--{$k}-->]='<!--{$volist.date}-->'
+        $data[<!--{$k}-->]='<!--{$volist.usernum}-->'
+        <!--{/foreach}--> 
+		var ctx = document.getElementById('cv').getContext('2d');
+		var data = {
+				labels : $labels,
+				datasets : 
+				[
+					{
+						fillColor : "rgba(220,220,220,0.5)",
+						strokeColor : "#DCDCDC",
+						pointColor : "#DCDCDC",
+						pointStrokeColor : "#fff",
+						data : $data
+					}
+				]
+			}
+		new Chart(ctx).Line(data);
+	};
+    </script>
+</div>
+<div class="fr i-fr">
+        <div class="news container h166">
+            <div class="hd"><h2>商城公告</h2></div>
+            <div class="content">
+                <ul>
+                    <!--{foreach $data.scnews as $volist}-->
+                    <li>
+                        <a href="<!--{url mod='single' action='show' group='index' args="abid:{$volist.abid},alias:{$volist.alias}"}-->" target="_blank" title="<!--{$volist.title}-->"><!--{$volist.title}--></a>
+                    </li>
+                   <!--{/foreach}-->
+                
+                
+                </ul>
+            </div>
+        </div>
+        <div class="contact container h166">
+            <div class="hd"><h2>平台联系方式</h2></div>
+            <div class="content">
+                <ul>
+                    <li>客服电话: <!--{$config.site_phone}--></li>
+                    <li>客服手机: <!--{$config.site_mobile}--></li>
+                    <li>电子邮箱: <!--{$config.site_email}--></li>
+                    <li>联系地址: <!--{$config.site_addr}--></li>
+                    <li>服务时间:9:00-18:00(周一至周日)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

@@ -1,0 +1,183 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+
+  <!--{include file={$indextpl}"pmenu.html"}-->
+
+
+		<div class="w">
+          
+         <!--{include file={$indextpl}"pleft.html"}-->  
+	<div id="right"><style>
+.score td{text-align:right;}
+.score td .div{float:right;text-align:right;}
+.scroller{background: url(<!--{$indextpl}-->res/ico/credit.png) 17px 23px no-repeat; display: block; height: 22px; padding: 0 0 17px 30px; text-align: left; width: 400px; margin-right:25px; }
+.scroller span {  display: block; height: 22px; width: 0; }
+.scroller em { background: url(<!--{$indextpl}-->res/ico/credit.png)  -417px 2px no-repeat;  color: white; display: block; float: right; height: 22px; padding-top: 1px;  text-align: center; width: 30px; }
+.rate-desc { height: auto; overflow: hidden; width: 400px; }
+.rate-desc li { display: block; float: left; text-align: center; width: 80px; }
+.span { background: url(<!--{$indextpl}-->res/ico/star.gif) 0 -27px ; display: inline-block; height: 12px; overflow: hidden; text-align: left; vertical-align: inherit; width: 60px; }
+</style>
+<div class="module_special">
+	<h2>动态评价</h2>
+    <div class="score">
+    <table width="88%" style="margin:auto;">  
+        <tbody><tr>
+            <td width="85">
+            <div class="div">
+            与描述相符
+            <p><!--{($data.mspf)}-->分</p>
+            <span class="star"><em style=" width: <!--{set echo ($data.mspf)/0.05}-->%"><!--{($data.mspf)}--></em></span>
+            </div>
+            </td>
+            <td>
+            <div class="scroller">
+                <span style="width: <!--{set echo ($data.mspf)/0.05}-->%;"><em><!--{($data.mspf)}--></em></span>
+            </div>
+            <div class="rate-desc">
+                <ul>
+                    <li>非常不满</li>
+                    <li>不满意</li>
+                    <li>一般</li>
+                    <li>满意</li>
+                    <li>非常满意</li>
+                </ul>
+            </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td align="right">
+            卖家的服务态度
+            <p><!--{($data.fwpf)}-->分</p>
+            <span class="star"><em style=" width: <!--{set echo ($data.fwpf)/0.05}-->%"><!--{($data.fwpf)}--></em></span>
+            </td>
+            <td align="right">
+            <div class="scroller">
+                <span style="width: <!--{set echo ($data.fwpf)/0.05}-->%;"><em><!--{($data.fwpf)}--></em></span>
+            </div>
+            <div class="rate-desc">
+                <ul>
+                    <li>非常不满</li>
+                    <li>不满意</li>
+                    <li>一般</li>
+                    <li>满意</li>
+                    <li>非常满意</li>
+                </ul>
+            </div>
+            </td>
+        </tr>
+       
+        <tr>
+            <td align="right">
+            物流发货的速度
+            <p><!--{($data.wlpf)}-->分</p>
+            <span class="star"><em style=" width: <!--{set echo ($data.wlpf)/0.05}-->%"><!--{($data.wlpf)}--></em></span></td>
+            <td align="right">
+            <div class="scroller">
+                <span style="width: <!--{set echo ($data.wlpf)/0.05}-->%;"><em><!--{($data.wlpf)}--></em></span>
+            </div>
+            <div class="rate-desc">
+                <ul>
+                    <li>非常不满</li>
+                    <li>不满意</li>
+                    <li>一般</li>
+                    <li>满意</li>
+                    <li>非常满意</li>
+                </ul>
+            </div>
+            </td>
+        </tr>
+    </tbody></table>
+    </div>
+</div>   
+<div class="module_special">
+	<h2>信用评价</h2>
+    <div class="con">
+    	<table width="100%" class="credit">
+        	<tbody><tr class="title">
+            	<th width="20%"></th>
+            	<th width="15%">最近1个月</th>
+                <th width="15%">最近3个月</th>
+                <th width="15%">最近6个月</th>
+                <th width="15%">6个月以前</th>
+                <th width="15%">总计</th>
+            </tr>
+                        <tr>
+          	                	<th><b><span class="cg">好评</span></b></th>
+                                <td><!--{$commentnum.m1.good}--></td>
+                                <td><!--{$commentnum.m3.good}--></td>
+                                <td><!--{$commentnum.m6.good}--></td>
+                                <td><!--{$commentnum.m7.good}--></td>
+                                <td><!--{$commentnum.m.good}--></td>
+            </tr>
+                        <tr>
+          	                	<th><b><span class="cm">中评</span></b></th>
+                               <td><!--{$commentnum.m1.center}--></td>
+                                <td><!--{$commentnum.m3.center}--></td>
+                                <td><!--{$commentnum.m6.center}--></td>
+                                <td><!--{$commentnum.m7.center}--></td>
+                                <td><!--{$commentnum.m.center}--></td>
+            </tr>
+                        <tr>
+          	                	<th><b><span class="cb">差评</span></b></th>
+                                <td><!--{$commentnum.m1.bad}--></td>
+                                <td><!--{$commentnum.m3.bad}--></td>
+                                <td><!--{$commentnum.m6.bad}--></td>
+                                <td><!--{$commentnum.m7.bad}--></td>
+                                <td><!--{$commentnum.m.bad}--></td>
+            </tr>
+                        <tr>
+            	<th><b><span class="cz">总计</span></b></th>
+                <td><!--{set echo $commentnum.m1.bad+$commentnum.m1.center+$commentnum.m1.good}--></td>
+                <td><!--{set echo $commentnum.m3.bad+$commentnum.m3.center+$commentnum.m3.good}--></td>
+                <td><!--{set echo $commentnum.m6.bad+$commentnum.m6.center+$commentnum.m6.good}--></td>
+                <td><!--{set echo $commentnum.m7.bad+$commentnum.m7.center+$commentnum.m7.good}--></td>
+                                                <td><!--{set echo $data.m.bad+$data.m.good+$data.m.center}--></td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+<div class="module_special">    
+    <h2>来自买家的评论</h2>
+    <div class="con">
+        <table width="100%" class="comment">
+            <tbody><tr class="title">
+                <th width="50"></th>
+                <th></th>
+                <th align="left" width="150">评价人</th>
+                <th align="left" width="200">商品</th>
+                <th width="100">时间</th>
+            </tr>
+            <!--{foreach $comment as $volist}-->
+                        <tr>
+            	<td align="center">
+            	<!--{if $volist.cmlevel==1}-->
+            	<span class="cg">好评</span>
+            	<!--{elseif $volist.cmlevel==2}-->
+            	<span class="cb">差评</span>
+            	<!--{elseif $volist.cmlevel==0}-->
+            	<span class="cb">中评</span>
+            	<!--{/if}-->
+            	</td>
+                <td>
+                	<!--{$volist.cmcontent}-->
+                </td>
+                <td><a  href="#"><!--{$volist.username|incode}--></a></td>
+  <td>
+  <a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|truncate:24}--></a><p>￥ <!--{$volist.total}--></p></td>
+                <td align="center"><!--{$volist.cmtime|date_format:"%Y-%m-%d %H:%M:%S"}--> </td>
+            </tr>
+                      <!--{/foreach}-->
+                    </tbody></table>
+    </div>
+</div></div>
+    <div class="clear"></div>
+	</div>
+
+		
+
+
+		  <!--{include file={$indextpl}"pfoot.html"}-->
+
+
+</body></html>

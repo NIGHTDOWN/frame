@@ -1,0 +1,64 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right"><div class="block fn-clear">
+	<div class="record">
+        <h2>
+            充值记录            <span>可用余额<strong><!--{$user.cash}--></strong>元</span>
+        </h2>
+        <div class="filter">
+    	<div class="date"></div>
+      <!--{set $vvv=sizeof($where)}-->
+        <dl class="fn-clear">
+        	<dt>交易分类：</dt>
+            <dd>
+            <a <!--{if $vvv==0}-->class="current"<!--{/if}--> href="<!--{url mod='log' action='glide'}-->">全部</a>
+              <a <!--{if $where.type==1}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="type:1" action='glide'}-->">收人</a>
+            <a <!--{if $where.type==0 && $vvv!=0}-->class="current"<!--{/if}--> href="<!--{url mod='log' args="type:0" action='glide'}-->">支出</a>
+          
+            
+            </dd>
+        </dl>
+    </div>
+    	        <table width="100%" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <th class="al" width="80">时间</th>
+                <th class="al">描述
+                 </th>
+                <th width="80">类型</th>
+                <th width="100">金额(元)</th>
+              
+              
+            </tr>
+            
+            <!--{foreach $data as  $volist}-->
+                        <tr>
+                <td class="al"><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                <td class="al" align="center">
+                <!--{$volist.desc}-->
+                 
+               
+                </td>
+                                <td class="price">
+                                	<!--{if $volist.type==0}--> <span style="color: red">支出</span>
+                 <!--{else}-->收人
+                 <!--{/if}-->
+                                	
+                                </td>
+                <td>
+              	<!--{if $volist.type==0}-->-
+                 <!--{else}-->+
+                 <!--{/if}-->   <!--{$volist.money/100}-->                           </td>
+               
+            </tr>
+                        <!--{/foreach}-->          
+                                                <tr>
+                <td colspan="99">
+                <div class="page">  <!--{$page}--></div>
+                </td>
+            </tr>
+                    </tbody></table>
+    </div>
+</div></div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

@@ -1,0 +1,48 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+
+<body >
+	<!--{include file={$indextpl}"nav.html"}-->
+
+
+	<div class="w">
+    <div class="detailnav">
+        <strong><a href="#"><!--{$data.catname}--></a></strong>
+        <span> &gt;  <!--{$data.title|tostr}--></span>
+    </div>
+</div>
+<div class="w help">
+    <div class="left">
+    	<div class="help_side">
+           	<div class="current">
+                <h4><span><!--{$data.catname}--></span><b></b></h4>
+                <ul>  
+                <!--{foreach  $other as $volist}-->
+                                            <li>
+                        <a href="<!--{url action='show' args="abid:{$volist.abid}"}-->"><!--{$volist.title|tostr}--></a>
+                        </li>
+                          <!--{/foreach}-->                
+                                    </ul>
+            </div>
+        </div>
+    </div>		
+    
+    <div class="right">
+        <h3 class="help_tit"><!--{$data.title|tostr}--></h3>
+        <div class="help_box">
+            
+               <!--{$data.content}-->         
+	   
+	                    </div>
+    </div>
+</div>
+	
+
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

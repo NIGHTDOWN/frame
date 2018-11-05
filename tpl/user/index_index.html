@@ -1,0 +1,200 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				
+				<div class="right_con"><style>
+	.shortcut li:hover a{color: #000000;}
+	.qrcode{text-align: center;display: none;}
+	.weixin_code{text-align:center;}
+	.weixin_code img{width:180px;height: 180px;}
+	.sh_img{width: 190px;height: 190px;margin-top:5px;}
+	#my_qr{cursor:pointer;}
+	.team-list .item{margin: 0 30px;}
+</style>
+<div class="wrap_buyer clearfix">
+    <div class="layout_l">
+        <div class="member_info">
+            <dl>
+                <dt>
+                	<a title="编辑用户信息" href="<!--{url mod='set'}-->"><!--{$user.nickname}-->(<!--{$user.username}-->)</a>&nbsp;
+                	<img align="absmiddle" src="<!--{vo_list("fun={getlevelimg2} type={am} mod={userlevel}  param1={$user.ugod-$ubad}")}-->">
+                	<br>
+                	
+                </dt>
+                <dd class="qd payment">
+                <!--{if !$user.emailrz}-->
+                    <span class="iconfont"></span>&nbsp;<a href="<!--{url mod='set'}-->">未认证</a><!--{else}-->
+                    <span class="iconfont" style='color:orange'></span>&nbsp;<a href="<!--{url mod='set'}-->">已认证</a> 
+                    <!--{/if}-->
+                     <!--{if !$user.mobilerz}-->
+                    <span class="iconfont"></span><a href="<!--{url mod='set'}-->">未认证</a><!--{else}-->
+                     <span class="iconfont" style='color:orange'></span><a href="<!--{url mod='set'}-->">已认证</a>
+                     <!--{/if}-->
+                </dd>
+				<dd class="payment">
+                    <a target="_blank" href="<!--{url mod='set' action='address'}-->">我的收货地址</a>
+                  
+                    </dd>
+            </dl>
+            <div class="s-content">
+        <ul>
+            <li>
+                <a  target="_blank" href="<!--{url mod='order' action="waitpay"}-->" ><span>待付款<em><!--{vo_list("fun={getwaitpay} mod={order} type={im}")}--></em></span></a>
+            </li>
+            <li>
+                <a  target="_blank" href="<!--{url mod='order' args="status:1"}-->" ><span>待发货<em><!--{vo_list("fun={getwaitfh} mod={order} type={im}")}--></em></span></a>
+            </li>
+            <li>
+                <a target="_blank" href="<!--{url mod='order' action="waitsure"}-->" ><span>待收货<em><!--{vo_list("fun={getwaitsure} mod={order} type={im}")}--></em></span></a>
+            </li>
+            <li>
+                <a  target="_blank" href="<!--{url mod='order' action="waitcomment"}-->" ><span>待评价<em><!--{vo_list("fun={getwaitcomment} mod={order} type={im}")}--></em></span></a>
+            </li>
+            <li>
+                <a  target="_blank" href="<!--{url mod='order' args="status:5"}-->" ><span>退款<em><!--{vo_list("fun={getwaittk} mod={order} type={im}")}--></em></span></a>
+            </li>
+        </ul>
+    </div>
+            
+            <div class="clear"></div>
+            
+        </div>
+
+       
+
+        <div class="tabmenu">
+            <ul class="tab">
+                <li class="active"><a href="javascript:void(0)">&nbsp;&nbsp;&nbsp;足迹</a><div></div></li>
+            </ul>
+        </div>
+         <div class="footprint">
+        <!--{foreach $data as $volist}-->
+                <div class="team">
+        	<div class="team-title clearfix">
+        	
+        	<!--{set $sb=(date("%Y-%m-%d",$volist.stime)==date("%Y-%m-%d",$time))}-->
+            	<h3><!--{if $sb}-->今天<!--{else}--><!--{$volist.stime|date_format:"%d"}-->日<!--{/if}--></h3>
+                <div class="date-info">
+                	<p><!--{$volist.stime|date_format:"%Y-%m"}--></p>
+                    <span>浏览了<!--{$volist.num}-->件商品</span>
+                </div>
+            </div>
+        	<div class="team-list">
+            	<div class="list-box clearfix">
+            	<!--{assign var="plist" vo_list("fun={getlist} array={theday:$volist.theday,uid:$user.uid} mod={history}   type={im}")}-->
+            	<!--{foreach $plist as $list}-->
+                                        <div class="item">
+                        <div class="item-box">
+                            <div class="p-pic">
+                            <a href="<!--{url group='index' mod='product' action='detail' args="productid:{$list.productid}"}-->">
+                            <img width="200" height="200" src="<!--{$list.smallimg1|imgsize:'220,220'}-->">
+                            </a> 
+                            <a class="delete" href="<!--{url group='user' mod='collect' action='hdel' args="logid:$volist.logid"}-->"><i></i>删除</a>
+                            </div>
+                            <div class="p-pname"><!--{$list.productname|tostr}-->  </div>
+                            <div class="p-pirce">
+                            	<span>￥</span>
+                            	<b><!--{$list.price}--></b>
+                            </div>
+                        </div>
+					</div>
+                      <!--{/foreach}-->                  
+                                   	</div>
+            </div>
+        </div>
+<!--{/foreach}-->
+               
+               
+                </div>
+        
+        
+        
+    </div>
+    
+    <div class="layout_r">
+        <div class="user_atten clearfix">
+            <ul>
+                <li><a href="<!--{url mod='collect' action='shop'}-->"><strong><!--{vo_list("fun={get_shopsum} mod={collect} type={im}")}--></strong><span>收藏的店铺 </span></a></li>
+                <li><a href="<!--{url mod='collect' action='product'}-->"><strong><!--{vo_list("fun={get_productsum} mod={collect} type={im}")}--></strong><span>收藏的商品 </span></a></li>
+               
+            </ul>
+        </div>
+        <div class="right_module">            
+            <form class="right_module_title">
+                <fieldset><legend>可能感兴趣的店铺</legend></fieldset>
+            </form>
+            <div class="right_module_content friends">
+               
+    <!--{assign var="shop" vo_list("fun={get_all} mod={merchant} num={6}  array={rzflag:[1|2]}")}-->
+   
+    <!--{foreach $shop as $volist}-->
+    <dl class="clearfix">
+        <dt><a target="_blank" href="<!--{url group='index' mod='shop' action='show' args="id:{$volist.muid}"}-->"><img height="50" width="50" src="<!--{$volist.logo}-->"></a></dt>
+        <dd>
+        <p class="name"><a target="_blank" href="<!--{url group='index' mod='shop' action='show' args="id:{$volist.muid}"}-->"><!--{$volist.merchantname}--></a></p>
+        <a class="addicon" href="<!--{url group='index' mod='shop' action='show' args="id:{$volist.muid}"}-->"  target="_blank"><span>查看店铺</span></a>
+        </dd>
+    </dl>
+<!--{/foreach}-->
+  
+
+            </div>
+        </div>
+        
+      <!--  <div class="right_module">            
+            <form class="right_module_title">
+                <fieldset><legend>热门活动</legend></fieldset>
+            </form>
+            <div class="right_module_content ad174">
+           
+            </div>
+        </div>
+        
+        <div class="right_module">            
+            <form class="right_module_title">
+                <fieldset><legend>商品推荐</legend></fieldset>
+            </form>
+            <div class="right_module_content ad174">
+           
+            </div>
+        </div>-->
+        <div class="right_module">            
+            <form class="right_module_title">
+                <fieldset><legend>公告栏</legend></fieldset>
+            </form>
+            <div class="right_module_content con">
+            <!--{assign var='gg'  value=vo_list("mod={notice} type={im} fun={getlist} ")}-->
+				<!--{foreach $gg as $volist}-->
+				<li>
+				<a href="<!--{url group='index' mod='article' action='show' agrs="articleid:{$volist.articleid}"}-->" target="_blank" title="<!--{$volist.title}-->"><!--{$volist.title}--></a></li>
+				<!--{/foreach}-->
+           
+
+
+            </div>
+        </div>
+    
+      <!--  <div class="right_module">
+            <form class="right_module_title" id="weixin">
+                <fieldset><legend>扫一扫 关注微信公众号</legend></fieldset>
+            </form>
+            <div class="weixin_code">
+				<img src="">;
+			</div>
+        </div>-->
+    </div>
+</div>
+</div>
+				
+				
+				
+				
+				
+				
+				
+				
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

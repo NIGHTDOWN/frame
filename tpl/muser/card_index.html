@@ -1,0 +1,50 @@
+<!--{include file={$usertpl}"top.html"}-->
+<body class="bgee">
+		<header class="jd-header header-section-search header-banner">
+				<div class="jd-header-new-bar">
+					<div onclick="_go_url('<!--{url mod='index'}-->')" class="jd-header-icon-back ">
+						<span></span>
+					</div>
+				
+
+
+						<div class="jd-header-new-title">
+							<div class="header-content">
+								<span class="header-title">我的银行卡</span>
+
+							</div>
+						</div>
+				
+					<div onclick="_go_url('<!--{url  action='add' }-->')" class="header-right ">
+						<span class="cardadd"></span>
+					</div>
+				</div>
+			</header>
+<div class="">
+	
+	<div class="cardlist">
+		<ul>
+			  <!--{foreach $data as $volist}-->
+            <li onclick="_go_url('<!--{url action='show' args="cardid:{$volist.cardid}"}-->')">
+            	<div><span class="wone">    <!--{$volist.bankuser}-->	</span>
+            	<span class="wthr">    <!--{$volist.banknum|hidecard}--></span></div>
+          <div>  <span class="wtwo"> <!--{$volist.bankname}-->
+            	
+            	</span>
+                
+                <span class="wfou"> <!--{$volist.bankaddress}--></span></div>
+               
+            </li>
+            
+            <!--{/foreach}--> 
+		</ul>
+	</div>
+	
+<div class="pages">
+        	  <span><!--{$page}--></span>
+        </div>
+    
+</div>
+<div class="clear" style='margin-bottom: 1rem;'></div>
+
+<!--{include file={$usertpl}"foot.html"}-->

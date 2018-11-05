@@ -1,0 +1,385 @@
+<!--{include file={$indextpl}"top.html"}-->
+<link href="<!--{$indextpl}-->css/shop.css" rel="stylesheet" type="text/css" />
+<link href="<!--{$indextpl}-->css/cart.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='cart' }-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+
+
+
+								<div class="jd-header-new-title">
+									<div class="header-content">
+										<span class="header-title">确认订单</span>
+
+									</div>
+								</div>
+
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+					<div id="commonList">
+							<form action="<!--{url action='sure'}-->" method="post">
+									<section class="core-entry">
+											<ul id="addressList">
+
+  <!--{if $address|sizeof}-->
+		<!--{foreach $address as $i=>$volist}-->
+		
+		<!--{if $i==0}-->
+		<input name="addid" value="<!--{$volist.addid}-->" type="hidden"/>
+		<li class="address-row active" id='showaddressbox'>
+			<div class="left-icons">
+					<i class="iconfont icon-address"></i>
+					
+				</div>
+			<div class="center">
+					
+					<div class="font-32">
+						<label>收货人:</label>
+						<label name="user-name"><!--{$volist.realname}--></label>
+						<label name="phone-num" style="float: right"><!--{$volist.recvmobile}--> <!--{$volist.recvphone}--></label>
+					</div>
+					<div class="font-24">
+						<label>收货地址:</label>
+						<label name="address"><!--{$volist.province}--> <!--{$volist.city}--> <!--{$volist.area}--> <!--{$volist.address}--></label>
+					</div>
+					<span class="right-icons">
+						<i class="iconfont icon-check"></i>
+						
+					</span>
+				</div>
+<div class="moveico">
+	<ico class="moreicoc"></ico>
+</div>
+
+
+
+			
+		</li>
+		<!--{/if}-->
+		<li class="address-row addressbox none" addid='<!--{$volist.addid}-->'>
+			<div class="left-icons">
+					<i class="iconfont icon-address"></i>
+					
+				</div>
+			<div class="center">
+					
+					<div class="font-32">
+						<label>收货人:</label>
+						<label name="user-name"><!--{$volist.realname}--></label>
+						<label name="phone-num" style="float: right"><!--{$volist.recvmobile}--> <!--{$volist.recvphone}--></label>
+					</div>
+					<div class="font-24">
+						<label>收货地址:</label>
+						<label name="address"><!--{$volist.province}--> <!--{$volist.city}--> <!--{$volist.area}--> <!--{$volist.address}--></label>
+					</div>
+					<span class="right-icons">
+						
+						
+						
+					</span>
+				</div>
+<div class="moveico">
+	
+	<ico class="icon-select <!--{if !$volist.mflag}-->none <!--{/if}-->"></ico>
+	
+</div>
+
+
+
+			
+		</li>
+		<!--{/foreach}-->
+<!--{else}-->
+<li class="address-row selected" onclick="_go_url('<!--{url mod='set' action='addaddress' group='user'}-->')">
+			<div class="center">
+			
+					<div class="addaddress">
+		
+			请添加收货地址 
+			 <em></em>
+			</div></div>
+		</li>
+<!--{/if}-->
+
+
+																			
+											
+											</ul>
+					
+										</section>
+
+										<input type="hidden" name="pid" value="<!--{$get.pid}-->">
+										<input type="hidden" name="gpid" value="<!--{$groupon.gpid}-->">
+									
+									   <input type="hidden" name="logis" value="<!--{$logistype}-->">
+									   <input type="hidden" name="num" value="<!--{$get.num}-->">
+										<input type="hidden" name="spec" value="<!--{$get.spec}-->">
+
+									<input name="id" value="<!--{$randid}-->" type="hidden"/>
+						<div id="listContent">
+							<div id="huangtiao" primary="0" style="display:none;"></div>
+							<!-- 购物车商品列表容器 #list -->
+							<div id="cmdtylist" attr-tag="cmdtylist">
+
+ 
+						
+                            
+
+
+								<div class="section">
+									<div class="head_wrap ">
+										<div class="head  gs p10" data-type='shop' imuid="<!--{$volist.muid}-->">
+
+											<i class="icon_shop"></i>
+											<div class="title oneline">
+												<!--{$data.merchantname}-->
+												<i class="icon_arrow_right"></i>
+											</div>
+
+										</div>
+									</div>
+								
+								
+								
+									<div class="item">
+										<div class="goods  gs " data-type='good' style="padding-left: 108px" imuid="<!--{$data.muid}-->">
+
+											<img class="image" style="left: 15px;" src="<!--{$data.smallimg1}-->">
+
+
+											<div class="content">
+												<div class="name">
+													<i class="mod_tag ">
+														<!--{if $data.yhtype}-->
+														团购
+														<!--{/if}-->
+													</i>
+													<span class="proNameJs">
+														<!--{$data.productname|tostr}-->
+													</span>
+												</div>
+												<!--{if $get.specs}-->
+												<p class="sku">
+													<!--{$get.specs}-->
+												</p>
+												<!--{/if}-->
+												<div class="goods_line">
+													<p class="price   " attr-tag="">
+														<span class="priceJs" goodprice="<!--{$volist2.nowprice}-->">¥
+															<em class="int">
+																<!--{if $groupon}--> <span style='    text-decoration: line-through;'><!--{$data.price/100}--></span><br><!--{$groupon.gprice/100}--><!--{else}--><!--{$data.price/100}--><!--{/if}-->
+															</em>
+														</span>
+													</p>
+													<div class="num_and_more">
+														<div class="nums">
+
+
+															X
+															<!--{$get.num}-->
+
+
+														</div>
+													</div>
+												</div>
+												
+
+											</div>
+
+										</div>
+									
+									</div>
+								
+									<div class="order-row">
+										<label class="buy-single-row" >
+											<div class="title cell " >配送方式</div>
+											<div class="content cell" >
+												<div class="select-face">
+													 <!--{if $logisfee}-->
+													
+               
+															普通配送&nbsp;
+																							<select id="wuliu" onchange="count_price($(this));">
+																<!--{foreach $logisfee as $k=>$v}-->
+																<script>
+																	logisfee['<!--{$k}-->']='<!--{$v}-->';
+																</script>
+																							<option value="<!--{$k}-->">
+																<!--{if $k=='py'}-->平邮<!--{elseif $k=='ems'}-->EMS<!--{elseif $k=='kd'}-->快递<!--{/if}-->&nbsp;&nbsp;<!--{$v}-->元
+															</option>
+																<!--{if !$logis}-->
+																<!--{set $logis=$v}-->
+																 <!--{set $logistype=$k}-->
+																<!--{/if}-->                
+															  <!--{/foreach}-->                  
+																			</select>
+																			
+															<td class="price">  
+																				<b id="show_cem">
+															   <!--{$logis/100}-->
+																</b>
+																			
+											<!--{else}-->
+											
+														   
+															卖家包邮&nbsp;
+																						   
+																			
+																				<b id="show_cem">
+																0.00
+																 <!--{set $logis=0}-->
+																</b>
+																		
+											<!--{/if}-->
+													
+													</div>
+											
+											</div>
+											<div class="pointer cell ">
+												<div class="nav" ></div>
+											</div>
+										</label>
+										<label class="buy-single-row" >
+											<div class="title cell " >给卖家留言</div>
+											<div class="content cell" >
+												<div class="select-face">
+													<input placeholder="选填，可告诉卖家您的特殊要求" name="mark">
+												</div>
+											
+											</div>
+											<div class="pointer cell ">
+												<div class="nav" ></div>
+											</div>
+										</label>
+									
+									</div>
+								</div>
+               
+
+							
+
+
+							</div>
+
+						</div>
+						<div style="clear: both;margin-bottom:1rem"></div>
+						<div class="fixBar gs " data-type='all' name="checkgroup" id="fixBarBot">
+
+							<div class="total" id="totalConfirmDiv">
+								
+								<p>
+										<em id="totalNum">共<!--{$get.num}-->件 </em>
+									总计：
+									<strong id="totalPrice">¥  <!--{set echo ($sumtatal+$logis)/100}--></strong>
+									
+								</p>
+								<a href="javascript:;" class="buy buyJs " tag='submit' id="confirmEve">提交订单
+									
+								</a>
+							</div>
+							
+						</div></form>
+					</div>
+
+
+				</div>
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+	<script>
+	$(function(){
+$('#showaddressbox').click(function(){
+$('.addressbox').toggle();
+});
+$('.addressbox').click(function(){
+$('[name=addid]').val($(this).attr('addid'));
+$('.addressbox .icon-select').addClass('none');
+$(this).find('.icon-select').removeClass('none');
+$text=$(this).find('.center').html();
+$('#showaddressbox').find('.center').html($text);
+$('.addressbox').toggle();
+});
+
+	});
+	</script>

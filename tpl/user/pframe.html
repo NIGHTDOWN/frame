@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><style type="text/css" ></style><head>
+<title>我的钱包 － 钱包</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="<!--{$staticjs}-->jquery.min.js"></script>
+<script type="text/javascript" src="<!--{$staticjs}-->night_Trad.v1.0.js"></script>
+<link href="<!--{$usertpl}-->res/pay.css" rel="stylesheet" type="text/css">
+<style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style></head>
+<body>
+<div class="top">
+	<div class="w fn-clear">
+		<div class="top-a fn-clear">
+            <ul class="fn-left">
+                <li>你好, <!--{$user.username}--></li>
+                <li><a href="<!--{url mod='index' group='user'}-->">买家中心</a></li>
+			</ul>
+            <ul class="fn-right">
+            <!--{assign var="single" vo_list("fun={footgetxfz} mod={index} type={im} ")}-->
+                <li><a href="<!--{url mod='single' action='show' args="alias:about" group='index' }-->">帮助中心</a></li>
+            </ul>
+        </div>
+		<div class="top-b fn-clear">
+        	<h2><a style="position: relative" href="<!--{url mod='index'}-->"><img  src="<!--{$static}-->logo/logo.png" style="width: 150px;position: absolute;top: -15px;"></a></h2>
+              	<ul class="nav">
+            	<li class="current">
+                	<a href="<!--{url mod='index'}-->">我的钱包</a>
+                </li>
+            	<li>
+                	<a href="<!--{url mod='log' action='order'}-->">交易记录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="banner w">
+	<div class="user">
+	<!--{if $user.headimg}-->
+	<div class="img"><img height="72" src="<!--{$user.headimg}-->"></div>
+	<!--{else}-->
+    	<div class="img"><img height="72" src="<!--{$usertpl}-->res/avatar.png"></div>
+    	<!--{/if}-->
+        <div class="img-cover"></div>
+        <div class="info">
+        	<div class="user_info">
+            <p>个人账户：</p>
+            <p>
+                <span><!--{$user.username}--></span>
+              <!--{if !$user.userrz}-->  <a href="<!--{url mod='rz'}-->"></a><!--{/if}-->
+            </p>
+            </div>
+            <div class="user_account">账户余额：<em><!--{$user.cash/100}--></em>元</div>
+        </div>
+    </div>
+    <div class="greeting">
+    	<span>您好，</span>
+    	 <!--{assign var="text" vo_list("fun={get} mod={paytext} type={im} ")}-->
+        <p><!--{$text}--></p>
+    </div>
+</div>
+<div class="container w fn-clear">
+	<div class="fn-left">
+        <div class="sidenav">
+            <div class="m fore1">
+            	<div class="mt">资金管理</div>
+            	<div class="mc fn-clear">
+                	<a class="btncz" href="<!--{url mod='recharge'}-->">充值</a>
+                    <a class="btntx" href="<!--{url mod='withdraw'}-->">提现</a>
+                  
+                </div>
+            </div>
+            <div class="m fore2">
+            	<div class="mt">交易查询</div>
+            	<div class="mc fn-clear">
+            	 <a  href="<!--{url mod='log' action='glide'}-->">余额流水</a>
+                <a  href="<!--{url mod='log' action='order'}-->">交易记录</a>
+                    <a  href="<!--{url mod='log' action='recharge'}-->">充值记录</a>
+                    <a  href="<!--{url mod='log' action='withdraw'}-->">提现记录</a>
+                </div>
+            </div>
+            <div class="m fore3">
+            	<div class="mt">账户管理</div>
+            	<div class="mc fn-clear">
+                	<a href="<!--{url mod='set' group='user'}-->">账户信息</a>
+                	<a href="<!--{url mod='card' group='pay'}-->">银行卡</a>
+                    <a href="<!--{url mod='payset' action='pwd'}-->">支付密码</a>
+                    <!--{if !$user.userrz}-->
+                    <a href="<!--{url mod='rz'}-->">实名认证</a>
+                    <!--{/if}-->
+                </div>
+            </div>
+        </div>
+        <div class="m1">
+            <div class="mt"><a  href="#">常见问题</a></div>
+            <div class="mc">
+                <ul>
+                <!--{assign var="single" vo_list("fun={footgetxfz} mod={index} type={im} ")}-->
+                  <!--{foreach $single as $volist}-->
+                	                    <li><a href="<!--{url group='index' mod='single' action='show'  args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title}--></a></li>
+                	                    <!--{/foreach}-->
+                                       
+                                    </ul>
+            </div>
+        </div>
+    </div>

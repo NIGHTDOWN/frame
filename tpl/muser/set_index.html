@@ -1,0 +1,160 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="history.back();" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">设置</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					
+					
+					<section class="order-act" data-spm="2" data-spm-max-idx="6">
+					
+						<div class=" label-act label-act2">
+							<a href="<!--{url action='user' }-->">
+								<div class="ico">
+									<p class="ico-head">
+										<!--{if $user.headimg}-->
+										<img src="<!--{$user.headimg}-->"><!--{else}-->
+										
+										<img src="<!--{$static}-->/images/head.png">
+										<!--{/if}-->
+									</p>
+								</div>
+								<div class="title">
+									<h1><!--{$user.username}--></h1>
+								</div>
+								<div class="sub"></div>
+								<div class="arrow">
+									<span class="icon-right"></span>
+								</div>
+							</a>
+						</div>
+					</section>
+
+					<section class="core-entry">
+						<div class="label-act">
+							<a href="<!--{url action='cgpwd' }-->">
+								<div class="icc">
+									
+								</div>
+								<div class="title">
+									<h1>修改密码</h1>
+								</div>
+								<div class="arrow">
+									<span class="icon-right"></span>
+								</div>
+							</a>
+						</div>
+						<div class="label-act">
+								<a href="<!--{url action='cgemail' }-->">
+									<div class="icc">
+										
+									</div>
+									<div class="title">
+										<h1>修改邮箱</h1>
+									</div>
+									<div class="arrow">
+										<span class="icon-right"></span>
+									</div>
+								</a>
+							</div>
+						
+							<div class="label-act">
+									<a href="<!--{url action='cgmobile' }-->">
+										<div class="icc">
+											
+										</div>
+										<div class="title">
+											<h1>修改手机</h1>
+										</div>
+										<div class="arrow">
+											<span class="icon-right"></span>
+										</div>
+									</a>
+								</div>
+					</section>
+					
+						
+							
+						
+
+						<a class='btn' href="<!--{url mod='login' action='logout' group='index'}-->">注销</a>
+						<div style="clear:both;margin-bottom:1rem"></div>
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

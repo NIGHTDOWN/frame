@@ -1,0 +1,358 @@
+
+<title>售后管理</title>
+<!--{include file={$shoptpl}"menu.html"}-->
+	<script>
+		_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+	</script>	
+<style>
+	.lineD>div{
+		width: 100px;
+		float: left;
+	}
+</style>
+  <div class="layout"><div class="apply_detail">
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='shop'}-->">我的商城</a> <span>&gt;</span>	<a href="<!--{url mod='sells'}-->">已售的商品</a> 
+    </div>
+</div>
+<div class="main">
+<div class="wrap">
+<div class="apply clearfix">
+    <div class="apply_left"> 
+    
+    	<div class="main-box">
+        	       <!--{if $data.orderstatus==0}--><h2>请处理退款申请</h2>
+        	         <!--{elseif $data.orderstatus==1}--><h2>等待买家操作</h2>
+        	           <!--{elseif $data.orderstatus==2}--><h2>已经拒绝申请</h2>
+        	             <!--{elseif $data.orderstatus==3}-->  <h2>等待确认</h2>                        	<!--{elseif $data.orderstatus==4}-->  <h2>完成</h2>  
+        	              
+                  <!--{elseif $data.orderstatus==5}-->  <h2>关闭</h2>                 	                 <!--{/if}-->   
+                               
+                        <form id="form" method="post">
+                        
+                      <input type="hidden" name="do" value="1">
+                          <!--{if $data.orderstatus==0}-->
+                          
+                        <a class="btn mt20"  data=1 id="agree" href="#">同意申请</a>
+                         <!--{/if}--> 
+                       
+                        <!--{if $data.orderstatus==1 && $data.stype==0 && ($data.servertype!=3 ||$data.servertype!=4 )}-->
+                       
+                        <a class="btn mt20" data=2 id="agree" href="#">确认退款</a>
+                        <!--{/if}-->  
+                         <!--{if $data.orderstatus==1 && ($data.servertype!=1 || $data.servertype!=2 )}-->
+                       
+                       
+                        <!--{/if}--> 
+                        <!--{if $data.orderstatus==0}-->
+                       
+                        <a class="btn mt20 white" data=0 href="#">拒绝申请</a>
+                       <!--{/if}--> 
+                        </form>
+                        <div class="refuse hidden">
+                        <form method="post">
+           			 		<input type="hidden" name="do" value="0">	
+                        	<p>
+                            	<textarea placeholder="拒绝原因" name="refuse_reason"></textarea>
+                            </p>
+                            <p>
+                            	<input class="btn" type="submit" value="确定拒绝退货申请">
+                        	</p>
+                        </form>    
+
+                        </div>
+                        
+                        <script type="text/javascript">
+                        $(".white").click(function(){
+                        	$('[name=do]').val(0);
+							$(".refuse").show();
+						})
+                        </script>
+                       <script type="text/javascript">
+                        $("#agree").click(function(){
+                        	$('[name=do]').val($(this).attr('data'));
+							$("#form").submit();
+						})
+                        </script>
+                        
+                                                         </div>
+        <div class="review-panel">
+        <!--{if $data.tkflag<2}-->
+        	<div class="mt">
+        	<h2>留言板</h2></div>
+             	<div class="mc">
+            <form method="post" action="<!--{url action='tkhd'}-->">
+            <input  type="hidden" name='refundid' value="<!--{$data.refundid}-->"/>
+                <p><textarea name="remark"></textarea></p>
+                <dl class="lineD" id="viewimg_userimg" style="height: auto"></dl>
+                <b style="clear: both;display: block;"></b>
+                <div class="control-bar" style="padding:0 14px;height:51px;line-height:51px;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;background-color:#fafafa;">
+                    <span>      
+         <button type='button' class='userimg' tag='img_up_more'>上传凭证</button>
+                    </span>
+                    <em>单张不超过0M，最多5张，支持<!--{$config.filetype}-->格式</em>
+                    <p><input type="submit" class="btn" value="发表留言"></p>    
+                </div>
+            </form>
+            </div><!--{/if}-->
+                <div class="mb">
+                
+                <div class="reivew-item clearfix">
+            		<p><img width="38" src="<!--{$data.headimg}-->"></p>
+                    <dl>
+                    	<dt><em><!--{$data.username}--></em> (2016-12-18&nbsp;19:16:48)</dt>
+                        <dd>买家（<!--{$data.username}-->）于 <!--{$data.apptime|date_format:"%Y-%m-%d %H:%M:%S"}--> 创建了退款申请。买家要求：
+                        <!--{if $data.servertype==1}-->退款
+                        <!--{elseif $data.servertype==2}-->退货退款
+                        
+                        <!--{elseif $data.servertype==3}-->换货
+                        <!--{elseif $data.servertype==4}-->返修
+                        <!--{/if}-->
+                        ，退款金额：<!--{$data.cash}-->元，退款原因：<!--{$data.remark}--></dd>
+                    </dl>
+                                        <ul>
+                               <!--{if $data.userimg}-->  
+                               <!--{set $v=explode(',',$data.userimg)}-->        
+                        <!--{foreach $v as $value}-->
+                        <li><a target="_blank" href="<!--{$value}-->"><img width="80" src="<!--{$value}-->"></a></li><!--{/foreach}--><!--{/if}-->
+                    </ul>
+                                    </div>
+                <!--{foreach $data.list as $volist}-->
+                       	 	<div class="reivew-item clearfix">
+            		
+                    <!--{if !$volist.issystem}-->
+                    <p><img width="38" src="<!--{$volist.headimg}-->"></p>
+                    <dl>
+                    	<dt><em><!--{$volist.username}--></em> (<!--{$volist.apptime|date_format:"%Y-%m-%d %H:%M:%S"}--> )</dt><!--{else}-->
+                    	<p><img width="38" src="<!--{$config.logo}-->"></p>
+                    <dl>
+                    	<dt><em style='color:red'>【系统】</em> (<!--{$volist.apptime|date_format:"%Y-%m-%d %H:%M:%S"}--> )</dt>
+                    	<!--{/if}-->
+                        <dd><!--{$volist.remark}--></dd>
+                          <ul>
+                               <!--{if $volist.userimg}-->   
+                               <!--{set $v=explode(',',$volist.userimg)}-->       
+                        <!--{foreach $v as $value}-->
+                        <li><a target="_blank" href="<!--{$value}-->"><img width="80" src="<!--{$value}-->"></a></li><!--{/foreach}--><!--{/if}-->
+                    </ul>
+                    </dl>
+                                    </div>
+<!--{/foreach}-->
+                       
+                       	 	
+                        </div>
+        </div>	
+    </div>
+    <div class="apply_right">
+    <!--{if $data.stype==1}-->
+    	<h1><strong>售后申请</strong></h1>
+    	 <!--{elseif $data.stype==0}-->  	<h1><strong>退款/退货申请</strong></h1>
+    	 <!--{/if}-->
+        <table>
+        	<tbody><tr>
+            	<th><img src="<!--{$data.smallimg}-->" style='width:50px;height:50px;'></th>
+                <td><a target="_blank" href="<!--{url mod='product' action='detail' grou='index' args="productid:{$data.productid}"}-->"><!--{$data.productname|tostr}--></a></td>
+            </tr>
+            <tr class="empty dotted">
+            	<th></th>
+            	<td></td>
+            </tr>
+            <tr class="empty">
+            	<th></th>
+            	<td></td>
+            </tr>
+            <tr>
+            	<th>买家要求：</th>
+                <td><em><strong>
+                 <!--{if $data.servertype==1}-->仅退款
+                  <!--{elseif $data.servertype==2}-->退货退款
+                   <!--{elseif $data.servertype==3}-->换货
+                   <!--{elseif $data.servertype==4}-->维修
+                <!--{/if}-->
+                
+                
+                </strong></em></td>
+            </tr>
+            <tr>
+            	<th>退款金额：</th>
+                <td><em><!--{$data.cash}--></em> 元</td>
+            </tr>
+            <tr>
+            	<th>原　　因：</th>
+                <td><!--{$data.remark}--></td>
+            </tr>
+            <tr>
+            	<th>货物状态：</th>
+                <td>已收到货
+                <!--{if $data.status<2}-->未发货
+                  <!--{elseif $data.servertype==2}-->已发货
+                  <!--{elseif $data.servertype>2}-->已收到货
+                <!--{/if}-->
+                </td>
+            </tr>
+            <tr>
+            	<th>退款编号：</th>
+                <td><!--{$data.refundid}--></td>
+            </tr>
+            <tr>
+            	<th>申请时间：</th>
+                <td><!--{$data.apptime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+            </tr>
+        </tbody></table>
+        <table class="seller">
+            <tbody><tr class="empty">
+            	<th></th>
+            	<td></td>
+            </tr>
+            <tr>
+            	<th>卖　　家：</th>
+            	<td><!--{$data.username}--></td>
+            </tr>
+            <tr>
+            	<th>订单编号：</th>
+            	<td><a target="_blank" href=""><!--{$data.ordernum}--></a></td>
+            </tr>
+        	<tr>
+            	<th>单　　价：</th>
+            	<td><!--{$data.price}-->元 * <!--{$data.num}-->（数量）</td>
+            </tr>
+            <tr>
+            	<th>订单实付：</th>
+            	<td><b><!--{$data.paytotal}--></b> 元</td>
+            </tr>
+                    </tbody></table>
+    </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+$("#pic_img").load(function(){
+	var src = $(this).attr("src");
+	if(src) $(this).show();	
+});
+</script></div></div>
+
+<script>
+	function district($obj,id,level){
+		$obj.parent().find('a').removeClass('classDivClick');
+		$obj.children('a').addClass('classDivClick');
+		//class变化
+		$url='<!--{url mod='product' action='cate'}-->';
+		$ar={'catid':id,'depth':level};
+		$html='';
+		$newlevel=level+1;
+		switch(level){
+			case 1:
+			yAjax($url,$ar,function(data){
+				if(data.flag){
+					$.each(data.data,function(i,v){
+						$html+=' <li onclick="district($(this),'+v.catid+','+$newlevel+');"><a href="javascript:void(0)" ><span class="has_leaf">'+v.catname+'</span></a></li>';
+					});
+					$('#class_div_'+$newlevel).children('ul').html($html);
+					
+				}
+				
+				
+			});
+				break;
+			case 2:yAjax($url,$ar,function(data){
+				if(data.flag){
+					$.each(data.data,function(i,v){
+						$html+=' <li onclick="district($(this),'+v.catid+','+$newlevel+');"><a href="javascript:void(0)" ><span class="has_leaf">'+v.catname+'</span></a></li>';
+					});
+					$('#class_div_'+$newlevel).children('ul').html($html);
+					
+				}
+				
+				
+			});
+				break;
+				case 3:yAjax($url,$ar,function(data){
+				if(data.flag){
+					$.each(data.data,function(i,v){
+						$html+=' <li onclick="district($(this),'+v.catid+','+$newlevel+');"><a href="javascript:void(0)" ><span class="has_leaf">'+v.catname+'</span></a></li>';
+					});
+					$('#class_div_'+$newlevel).children('ul').html($html);
+					
+				}
+				
+				
+			});
+				break;
+				case 4:
+				yAjax($url,$ar,function(data){
+				if(data.flag){
+					$.each(data.data,function(i,v){
+						$html+=' <li onclick="district($(this),'+v.catid+','+$newlevel+');"><a href="javascript:void(0)" ><span class="has_leaf">'+v.catname+'</span></a></li>';
+					});
+					$('#class_div_'+$newlevel).children('ul').html($html);
+					/*$('#class_div_'+$newlevel).parent('div').removeClass('blank');*/
+					/*$('.blank').removeClass('blank');*/
+				}
+				
+				
+			});
+				break;
+		}
+		
+		
+		//子分类
+		//input隐藏
+		$('[name=catid]').val(id);
+		//选择的分类
+		$text=$obj.children('a').text();
+		$length=$('#commoditydd').children('.has_leaf').length;
+		if($length>level){
+			$('#commoditydd').html('  <span class="has_leaf">'+$text+'</span>');
+		}else if($length==level){
+			$($('#commoditydd').children('.has_leaf').get(level-1)).text($text);
+			
+		}else{
+			$('#commoditydd').html($('#commoditydd').html()+'  &nbsp;&gt;&nbsp;<span class="has_leaf">'+$text+'</span>');
+			
+		}
+		
+		
+		
+	}
+	function catechoose($obj,id){
+			$('[name=catid]').val(id);
+			$text=$obj.text();
+			$('#commoditydd').html('  <span class="has_leaf">'+$text+'</span>');
+	}
+	function catesearch(){
+		$url='<!--{url mod='product' action='searchcate'}-->';
+		$ar={'catname':$('[name=catname]').val()};
+		$('.sort_block').hide();
+		$('.search_result').show();
+		$html='';
+		yAjax($url,$ar,function(data){
+				if(data.flag){
+					$('#searchSome').show();
+					
+					
+						$('#searchNone').hide();
+					$.each(data.data,function(i,v){
+						$html+=' <li genre="searchList_name" onclick="catechoose($(this),'+v.catid+');" >'+v.catname+'</li>';
+					});
+					$('#searchList').children('ul').html($html);
+					
+				}else{
+					$('#searchSome').hide();
+						$('#searchNone').show();
+				}
+				
+				
+			});
+	}
+	function backmain(){
+				$('.search_result').hide();
+				$('.sort_block').show();
+						
+	}
+</script>
+
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

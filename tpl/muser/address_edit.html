@@ -1,0 +1,281 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+<script>
+	_ajax_file_url="<!--{url mod='upimg'}-->";
+</script>
+<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="history.back();" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">编辑地址</span>
+
+										</div>
+									</div>
+							
+								<div a="<!--{url mod='address' action='del' args="addid:{$data.addid}" }-->" onclick='boxyn($(this))' class="icon-del">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					<form method="POST" action="" >
+
+				
+					
+					<section class="order-act" >
+							
+					
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">收货人</span>
+								</div>
+								
+								<div class="next">
+										<input type="text" class="wtext w1" tag='notnull  ' name='realname' value='<!--{$data.realname}-->'>
+									
+									</div>
+										
+
+						</div>
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">区域</span>
+								</div>
+								
+								<div class="next">
+										  <!--{assign var="cat" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+										  <select name='provinceid' class='wtext w3'>
+												<option value='0'>-请选择-</option>
+											   <!--{foreach $cat as $volist}-->
+											  
+											   <option value='<!--{$volist.provinceID}-->'
+												   <!--{if $data.provinceid==$volist.provinceID}-->
+												 selected="selected"
+															   <!--{/if}-->
+												   >
+												   <!--{$volist.province}--></option>
+											   <!--{/foreach}-->
+										   </select>
+											
+											<!--{if $data.cityid}-->
+											 <!--{assign var="cat" vo_list("fun={get_all} mod={city} field={cityID,city} array={flag:0,fatherID:{$data.provinceid}}")}-->
+										   <select name='cityid' class='wtext w3'>
+												 <option value='0'>-请选择-</option>
+											   <!--{foreach $cat as $volist}-->
+											   <option value='<!--{$volist.cityID}-->'
+												   <!--{if $data.cityid==$volist.cityID}-->
+												 selected="selected"
+															   <!--{/if}-->
+												   >
+												   
+												   
+												   <!--{$volist.city}--></option>
+											   <!--{/foreach}-->
+										   </select>
+											<!--{/if}-->
+											<!--{if $data.areaid}-->
+											 <!--{assign var="cat" vo_list("fun={get_all} mod={area} field={areaID,area} array={flag:0,fatherID:{$data.cityid}}")}-->
+										   <select name='areaid' class='wtext w3'>
+											  <option value='0'>-请选择-</option>
+											   <!--{foreach $cat as $volist}-->
+											   <option value='<!--{$volist.areaID}-->'
+												   <!--{if $data.areaid==$volist.areaID}-->
+												 selected="selected"
+															   <!--{/if}-->
+												   >
+												   <!--{$volist.area}--></option>
+											   <!--{/foreach}-->
+										   </select>
+											<!--{/if}-->  
+									
+									</div>
+										
+
+						</div>
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">街道地址</span>
+								</div>
+								
+								<div class="next">
+										<input type="text" class="wtext w1" tag='notnull  ' name='address' value='<!--{$data.address}-->'>
+									
+									</div>
+										
+
+						</div>
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">手机号码</span>
+								</div>
+								
+								<div class="next">
+										<input type="text" class="wtext w1" tag='notnull  ismobile' name='recvmobile' value='<!--{$data.recvmobile}-->'>
+									
+									</div>
+										
+
+						</div>
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">邮政编码</span>
+								</div>
+								
+								<div class="next">
+										<input type="text" class="wtext w1" tag='notnull  ' name='recvnum' value='<!--{$data.recvnum}-->'>
+									
+									</div>
+										
+
+						</div>
+						<div class="label4" >
+									
+										
+								<div class="title">
+									<span class="tl">默认地址</span>
+								</div>
+								
+								<div class="next">
+										<select name='mflag' class="wtext w1">
+											<option value="0" <!--{if $data.mflag==0}-->selected<!--{/if}-->>否</option>
+											<option value="1" <!--{if $data.mflag==1}-->selected<!--{/if}-->>是</option>
+										</select>
+									
+									</div>
+										
+
+						</div>
+					</section>
+				
+					<button class='btn save'  type="submit"  >确认添加</button>
+						<div style="clear:both;margin-bottom:1rem"></div>
+				</form>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+			<script>
+					$cityurl='<!--{url action='city' group='index' mod='merchant'}-->';
+					$areaurl='<!--{url action='area' group='index' mod='merchant'}-->';
+					$(function(){
+						$("[name='provinceid']").change(function(){
+							yAjax($cityurl,{provinceid:$(this).val()},function($data){
+								if($data.flag){
+									$html='';
+									$.each($data.data,function(i,v){
+										$html+='<option value='+v.cityID+'>'+v.city+'</option>';
+									});
+									
+									if($("[name='cityid']").get(0)){
+										$("[name='cityid']").html($html);	
+									}else{
+										$html="<select name='cityid' class='wtext w3'>"+$html+'</select>';
+									$("[name='provinceid']").after($html);	
+									}
+								}else{
+									showd('数据获取失败');
+								}
+							});
+						});
+						
+						$("[name='cityid']").live('change',function(){
+							yAjax($areaurl,{cityid:$(this).val()},function($data){
+								if($data.flag){
+									$html='';
+									$.each($data.data,function(i,v){
+										$html+='<option value='+v.areaID+'>'+v.area+'</option>';
+									});
+									
+									if($("[name='areaid']").get(0)){
+										$("[name='areaid']").html($html);	
+									}else{
+										$html="<select name='areaid' class='wtext w3'>"+$html+'</select>';
+									$("[name='cityid']").after($html);	
+									}
+		 
+								}else{
+									showd('数据获取失败');
+								}
+							});
+						});
+						
+						
+						
+						
+					});
+						
+					</script>
+				
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

@@ -1,0 +1,99 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right">	
+<div class="block">
+	<div class="i-block">
+    	 <h2>查看银行卡信息<span></h2>
+    </div>
+	<div class="form">
+    <form method="post" >
+ 
+    	<fieldset id="bank">
+              
+    	<dl>
+        	<dt>卡号</dt>
+            <dd style='    line-height: 30px;'>
+                    <!--{$data.banknum}-->
+            
+         </dd>
+        </dl>
+        <dl>
+                <dt>户名</dt>
+                <dd style='    line-height: 30px;'>
+                        <!--{$data.bankuser}-->
+                
+             </dd>
+            </dl>
+            <dl>
+                    <dt>银行</dt>
+                    <dd style='    line-height: 30px;'>
+                            <!--{$data.bankname}-->
+                    
+                 </dd>
+                </dl>
+                <dl>
+                        <dt>开户地址</dt>
+                        <dd style='    line-height: 30px;'>
+                                <!--{$data.bankaddress}-->
+                        
+                     </dd>
+                    </dl>
+
+
+        </fieldset>
+       
+       
+        <dl>
+            <dt></dt>
+            <dd>
+                	<input class='btn del'  type="button" value="删除银行卡"  onclick="boxyn($(this))" a='<!--{url action='del' args="cardid:{$data.cardid}"}-->'  >
+           
+            </dd>
+        </dl>
+    </form>    
+    </div>
+</div>	
+<script type="text/javascript">
+$('.freeItem').hover(function(){					 
+	$(this).addClass("hover");
+},function(){
+	$(this).removeClass("hover")
+});
+
+$(".time").find("input[type='radio']").click(function(){
+	var val = $("input[name='amount']").val();	
+	calculateFee(val);
+});
+$("[name=amount]").blur(function(){
+	var val = $("input[name='amount']").val();	
+	calculateFee(val);
+});
+function calculateFee(val){
+	if(!val)
+	{
+		return false;	
+	}
+	var amount = parseFloat(val).toFixed(2);
+	if (amount <= 0) return;
+	var data = $(".time").find("input[type='radio']:checked").attr('data-param');
+	
+	eval("data = "+data);
+	var i=data.min;
+	var a=data.max;
+	
+	var r=data.rates;
+	var n=0;
+	if(r*amount<=i){ n=i; }
+	else if(r*amount>=a){ n=a; }
+	else{ n=r*amount; }
+	//n=Math.round(n);//小叶写的
+    var pn=new Number(n);//poy改的
+    n=pn.toFixed(2);//poy改的
+	$('#extraFee').html(n);
+	$('#amountTotal').html((parseFloat(n)+parseFloat(amount)).toFixed(2));
+}
+</script>
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

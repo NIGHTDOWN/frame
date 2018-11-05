@@ -1,0 +1,21 @@
+</div>
+</div>
+<div class="footer fn-clear">
+    <div class="w">
+		 <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+		  <div class="links">
+       <p> <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' group='index' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title}--></a><em>|</em>
+              
+               <!--{/foreach}-->
+			</p>
+			</div>  <div class="copyright">
+			<br><!--{$config.powerby}--> <!--{$config.copyright}--><br>
+		</div>
+
+
+
+</div>
+
+
+</body></html>

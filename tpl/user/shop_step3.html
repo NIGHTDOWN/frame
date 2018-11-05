@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+		<title>店铺资料 - 免费开店</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		
+		<link href="<!--{$usertpl}-->res/user_admin.css" rel="stylesheet" type="text/css">
+		
+		
+		
+		
+		<link href="<!--{$usertpl}-->res/default.css" rel="stylesheet">
+		</head>
+	<body>
+	<div id="shortcut">
+			<div class="w">
+				<div class="fl">
+					欢迎<a class="name" href="<!--{url group='user'}-->"><!--{$user.username}--></a>! &nbsp;<a href="<!--{url mod='login' group='index' action='logout'}-->">退出</a>
+				</div>
+				<div class="fr">
+					<a href="<!--{url group='user' mod='index'}-->">进入买家中心</a>
+					<a href="<!--{url group='user' mod='collect'}-->">我的收藏</a>
+					<a href="<!--{url group='user' mod='message'}-->">站内消息</a>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<h1>
+				<a href="<!--{$config.site_url}-->" title="<!--{$config.site_name}-->">
+					<img title="<!--{$config.site_name}-->" alt="<!--{$config.site_name}-->" src="<!--{$static}-->logo/logo.png">
+				</a>
+				<i>卖家中心</i>
+			</h1>
+			<div class="search">
+				<div class="i-search ld">
+					<form method="get" class="form" action="<!--{url mod='search' group='index'}-->">
+						<input type="text" autocomplete="off" value="" id="key" name="key" class="text">
+						<input type="submit" class="search_button" value="搜索">
+					</form>
+				</div>
+				<div class="hotwords">
+					<strong>热门搜索：</strong>
+					 <!--{assign var="hot" vo_list("fun={get} mod={hotword} type={im}")}-->
+                <!--{foreach $hot as $volist}-->
+                <!--{if $i==1}-->
+                <a class="first" target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+                <!--{else}-->
+			<a target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+<!--{/if}-->
+<!--{/foreach}-->
+				</div>
+			</div>
+		</div>
+		<div class="layout">
+			<div class="wrap_shadow">
+				<div class="wrap_all main">
+					<div class="chart">
+						<div title="请选择店铺分类" class="pos_x1 bg_a1"></div>
+						<div title="填写店主和店铺信息" class="pos_x2 bg_b1"></div>
+						<div title="完成" class="pos_x3 bg_c2"></div>
+					</div>
+					<div class="form-style">
+						<form action="<!--{url mod='shop' action='step3'}-->" method="post" onsubmit="return chk()">
+							<input type="hidden" name="type" value="<!--{$type}-->" />
+							<dl>
+								<dt><em>*</em>店铺名称：</dt>
+								<dd>
+									<!--{$user.merchantname}-->
+								</dd>
+							</dl>
+							<dl>
+								<dt>主营商品：</dt>
+								<dd>
+								<!--{$user.licence}-->
+								
+								</dd>
+							</dl>
+							<dl>
+								<dt><em>*</em>店铺分类：</dt>
+								<dd>
+									
+										
+					<!--{assign var="cat" vo_list("fun={get_one} mod={merchant_category}  array={catid:{$user.catid}}")}-->
+											<!--{$cat.catname}-->
+											
+										
+								</dd>
+							</dl> 
+							<dl>
+								<dt><em>*</em>联系地址</dt>
+								<dd>
+								              
+              <!--{assign var="cat" vo_list("fun={get_one} mod={province}  array={provinceID:{$user.provinceid}")}-->
+             <!--{assign var="cat2" vo_list("fun={get_one} mod={city}  array={cityID:{$user.cityid}")}-->
+              <!--{assign var="cat3" vo_list("fun={get_one} mod={area}  array={areaID:{$user.areaid}}")}-->
+              <!--{$cat.province}--><!--{$cat2.city}--><!--{$cat3.area}--><!--{$user.address}-->
+								</dd>
+							</dl>
+						
+							
+							<dl>
+								<dt><em>*</em>联系电话：</dt>
+								<dd><!--{$user.phone}--></dd>
+							</dl>
+							<dl>
+								<dt>店铺简介：</dt>
+								<dd>
+<!--{$user.intro}-->
+								</dd>
+							</dl>
+
+<dl>
+								<dt>身份证正面</dt>
+								<dd>
+	
+                 <!--{if $data.sfzzmimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzzmimg}-->" width="80px" onclick="window.open('<!--{$data.sfzzmimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzzmimg}-->" name="sfzzmimg"> </div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+<dl>
+								<dt>身份证反面</dt>
+								<dd>
+                 <!--{if $data.sfzfmimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzfmimg}-->" width="80px" onclick="window.open('<!--{$data.sfzfmimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzfmimg}-->" name="sfzfmimg"> </div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+							<dl>
+								<dt>身份证手持照</dt>
+								<dd>
+	
+                 <!--{if $data.sfzscimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzscimg}-->" width="80px" onclick="window.open('<!--{$data.sfzscimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzscimg}-->" name="sfzscimg"> </div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl> <!--{if $data.rztype=='2'}-->
+							<dl>
+								<dt>营业执照</dt>
+								<dd>
+	
+                 <!--{if $data.yyzjimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.yyzjimg}-->" width="80px" onclick="window.open('<!--{$data.yyzjimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.yyzjimg}-->" name="yyzjimg"> </div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+<!--{/if}-->
+							<dl class="foot">
+								<dt>&nbsp;</dt>
+								<dd>
+								<h3 style="text-align: center">
+							<!--{if $data.status==1}-->
+								审核成功
+							<!--{elseif $data.status==2}-->
+								审核失败
+							<!--{elseif $data.status==0}-->
+									待审核
+							<!--{/if}-->
+							</h3>
+
+							</dl>
+						</form> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+		 <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+       <p> <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title}--></a><em>|
+              
+               <!--{/foreach}-->
+			</p>
+			<!--{$config.copyright}--><br>
+		</div>
+
+	</body></html>

@@ -1,0 +1,57 @@
+
+
+<div class="footer">
+    <ul class="line">
+        <li <><a href="<!--{url mod='index' group='index' }-->"><i class="i1"></i><span>首页</span></a></li>
+   
+        <li ><a href="<!--{url mod='category'  group='index'}-->"><i class="i2"></i><span>分类</span></a></li>
+        <li><a href="<!--{url mod='purchase' action=''  group='index' }-->"><i class="i3"></i><span>聚实惠</span></a></li>
+      
+       <li ><a href="<!--{url mod='cart'  group='index' }-->"><i class="i4"></i><span>购物车</span></a></li>
+        <li class="current"><a href="<!--{url mod='index' group='user' action=''}-->"><i class="i5"></i><span>我的 </span></a></li>
+    </ul>
+</div>
+
+
+<div id="back_top" class="slide-box " >
+	
+	<a href="javascript:void(0);" class="back-top " style="display: none">
+		<img src="<!--{$usertpl}-->/images/ico/download.png">
+	</a>
+</div>
+
+
+<script>
+	
+	
+     $(function(){
+     	$(".back-top").click(function(){
+     	
+     		 $("html,body").animate({scrollTop:0},500);
+
+     	});
+$(window).scroll(function(){
+		$ob=$('.back-top');
+		$h=$(window).height();
+		$sh=$(window).scrollTop();
+		$up=$sh>$h?1:0;
+	
+	
+		if($up){
+			/*$ob=$('.back-top .none').fadeIn();*/
+			
+			$('.back-top:hidden').fadeIn();
+		}else{
+			$('.back-top').fadeOut();
+			
+		}
+		
+	});
+     });
+</script>
+
+
+
+ 
+</body>
+</html>

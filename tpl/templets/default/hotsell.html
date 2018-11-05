@@ -1,0 +1,59 @@
+<!--{assign var='a1'  value=vo_list("type={im} mod={index} fun={get1}")}-->
+ <!--{assign var='a2'  value=vo_list("type={im} mod={index} fun={get2}")}-->
+ <!--{assign var='a3'  value=vo_list("type={im} mod={index} fun={get3}")}-->
+ 
+ 
+ 	<div class="i-mc fn-clear">
+					<!--{foreach $a1 as $volist}-->
+					<li class="fore1">
+						<div class="p-img">
+							<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->">
+								<img src="<!--{$volist.gimg}-->">
+							</a>
+						</div>
+						<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+						<div class="p-price">
+							<strong><em>￥</em><!--{$volist.gprice/100}--></strong>
+							<s class="none">￥</s>
+						</div>
+						<a class="btn" target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"></a>
+					</li>
+					<!--{/foreach}-->
+					
+				</div>
+
+				<div class="i-mc fn-clear fn-hide">
+					<!--{foreach $a2 as $volist}-->
+					<li class="fore1">
+						<div class="p-img">
+							<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->">
+								<img src="<!--{$volist.gimg}-->">
+							</a>
+						</div>
+						<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+						<div class="p-price">
+							<strong><em>￥</em><!--{$volist.gprice/100}--></strong>
+							<s class="none">￥</s>
+						</div>
+						<a class="btn" target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"></a>
+					</li>
+					<!--{/foreach}-->
+				</div>
+	
+				<div class="i-mc fn-clear fn-hide">
+					<!--{foreach $a3 as $volist}-->
+					<li class="fore1">
+						<div class="p-img">
+							<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->">
+								<img src="<!--{$volist.gimg}-->">
+							</a>
+						</div>
+						<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+						<div class="p-price">
+							<strong><em>￥</em><!--{$volist.gprice/100}--></strong>
+							<s class="none">￥</s>
+						</div>
+						<a class="btn" target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.pid}"}-->"></a>
+					</li>
+					<!--{/foreach}-->
+				</div>

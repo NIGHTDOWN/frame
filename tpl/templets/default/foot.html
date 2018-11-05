@@ -1,0 +1,71 @@
+<div class="footer fn-clear">
+    <div class="footer_1">
+        <div class="w">
+            <div class="helps fn-clear">    <dl>
+        <dt style="background:url(<!--{$indextpl}-->res/ico/1.png) no-repeat left center;">
+            <strong>消费者保障</strong>
+        </dt>
+        <!--{assign var="single" vo_list("fun={footgetxfz} mod={index} type={im} ")}-->
+        <!--{foreach $single as $volist}-->
+                <dd><a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a></dd>
+               <!--{/foreach}-->
+            </dl>
+    <dl>
+        <dt style="background:url(<!--{$indextpl}-->res/ico/2.png) no-repeat left center;">
+            <strong>新手上路</strong>
+        </dt>
+              <!--{assign var="single" vo_list("fun={footgetxssl} mod={index} type={im} ")}-->
+        <!--{foreach $single as $volist}-->
+                <dd><a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a></dd>
+               <!--{/foreach}-->
+            </dl>
+    <dl>
+        <dt style="background:url(<!--{$indextpl}-->res/ico/3.png) no-repeat left center;">
+            <strong>付款方式</strong>
+        </dt>
+              <!--{assign var="single" vo_list("fun={footgetfkfs} mod={index} type={im} ")}-->
+        <!--{foreach $single as $volist}-->
+                <dd><a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a></dd>
+               <!--{/foreach}-->
+            </dl>
+    <dl>
+        <dt style="background:url(<!--{$indextpl}-->res/ico/4.png) no-repeat left center;">
+            <strong>帮助信息</strong>
+        </dt>
+              <!--{assign var="single" vo_list("fun={footgethelp} mod={index} type={im} ")}-->
+        <!--{foreach $single as $volist}-->
+                <dd><a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a></dd>
+               <!--{/foreach}-->
+            </dl>
+</div>
+        </div>
+    </div>
+    <div class="footer_2">
+        <div class="w">
+            <dl class="link fn-clear">
+                <dt>合作伙伴</dt>
+                <dd>   
+                <!--{assign var="cat" vo_list("fun={get} mod={friend} type={im} ")}-->
+                <!--{foreach $cat as $list}-->
+    <a href="<!--{$list.url}-->" title="<!--{$list.name}-->" target="_blank"><!--{$list.name}--></a>
+    <!--{/foreach}-->
+    
+</dd>
+            </dl>
+            <div class="links">
+                <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+        <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title|tostr}--></a><em>|
+              
+               <!--{/foreach}-->
+           </div>
+            <div class="copyright"><!--{$config.copyright}--></div>
+        </div>
+    </div>
+</div>
+<script>
+    var vlogurl='<!--{url mod='index' action='logset' group='index'}-->';
+    var vlogid='<!--{$vlogid}-->';
+    
+</script>
+<script src="<!--{$staticjs}-->log.js" type="text/javascript"></script>  

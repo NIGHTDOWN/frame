@@ -1,0 +1,7 @@
+ <!--{assign var="province" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+                        <ul>
+                                                 <li key="0">不限</li>
+                                                     <!--{foreach $province as $volist}-->  
+                                                      <li key="<!--{$volist.provinceID}-->"><!--{$volist.province}--></li>
+                                                     <!--{/foreach}-->
+                                                    </ul>

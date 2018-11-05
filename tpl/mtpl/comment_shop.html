@@ -1,0 +1,223 @@
+<!--{include file={$indextpl}"top.html"}-->
+<script>
+	_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+</script>
+<script type="text/javascript" src="<!--{$staticjs}-->ajaxFileUpload.js"></script>
+<link href="<!--{$indextpl}-->css/comment.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+		<form method="POST">
+	<div class='s1'>
+		<div class='s2'>
+			<div class="sbk" onclick="_go_url('<!--{url mod='order' group='user' action='waitcomment'}-->')">
+				<img src='<!--{$indextpl}-->/images/ico/back.png' class="sbico">
+			</div>
+			<div >
+				<span class="stitle">发表评价</span>
+			</div>
+			<div class=" s15">
+			</div>
+		</div>
+		<div class="s6">
+
+  <!--{foreach $product as $volist}-->
+			<div class="spro">
+				<div class="spt">
+					<img src="<!--{$volist.smallimg}-->"  onclick='_go_url("<!--{url group='index' mod='product' args="productid:{$volist.productid}" action='detail'}-->")'
+					 class="sico spimg">
+					
+					<div class="  stt" id='clk_<!--{$volist.productid}-->'>
+							<input type="hidden" name='g[<!--{$volist.productid}-->]'>
+						<div class='sgp' data='1' >
+							<div class=" sgp1">
+								
+								<span class="sico g1"></span>
+							</div>
+							<span class="  sgp2">好评</span>
+						</div>
+						<div class="sgp" data='0'>
+							<div class=" sgp1">
+								
+								<span class="sico b1"></span>
+							</div>
+							<span class="  sgp2">中评</span>
+						</div>
+						<div class="sgp" data='-1'>
+							<div class=" sgp1">
+								
+								<span class="sico b1"></span>
+							</div>
+							<span class="  sgp2">差评</span>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="s16">
+						<textarea maxlength="500" placeholder="商品满足你的期待吗？说说你的使用心得，分享给想买的他们吧" name='cmcontent[<!--{$volist.productid}-->]' maxrows="4" class="s12"></textarea>
+					</div>
+				</div>
+				<div class="spbox">
+					<span class="spanimg"><img src='' id='viewimg_proimg_<!--{$volist.productid}-->' onclick='_go_url_new(this.src)'></span>
+					<span class="spanbtn"><input type="button" value="上传图片" class="sbtn" tag='img_up' imgname='proimg_<!--{$volist.productid}-->'/></span>
+				</div>
+
+
+
+			</div>
+			  <!--{/foreach}-->
+			<div class="s7"></div>
+			<div class="s8">
+				<img src="<!--{$indextpl}-->/images/store.png" class="sico">
+				<span class="sdp">店铺评分</span>
+			</div>
+			<div class="s101">
+					<div class="s10">
+						<input type="hidden" value="" name='snuma' class='xh'>
+						<div class="s30">
+							<span class=" s31">商品与描述相符</span>
+						</div>
+						<div class="s11">
+							<div class="sx1">
+								<span class="sico x1"></span>
+								
+							</div>
+							<div class="sx1">
+									<span class="sico x1"></span>
+							</div>
+							<div class="sx1">
+									<span class="sico x1"></span>
+							</div>
+							<div class="sx1">
+									<span class="sico x1"></span>
+							</div>
+							<div class="sx1">
+									<span class="sico x1"></span>
+							</div>
+							<div class="sx1msg">
+									<span class="sx1msgspan"></span>
+							</div>
+						</div>
+						
+					</div>
+					<div class="s10">
+							<input type="hidden" value="" name='snumb' class='xh'>
+							<div class="s30">
+								<span class=" s31">卖家的服务态度</span>
+							</div>
+							<div class="s11">
+								<div class="sx1">
+									<span class="sico x1"></span>
+									
+								</div>
+								<div class="sx1">
+										<span class="sico x1"></span>
+								</div>
+								<div class="sx1">
+										<span class="sico x1"></span>
+								</div>
+								<div class="sx1">
+										<span class="sico x1"></span>
+								</div>
+								<div class="sx1">
+										<span class="sico x1"></span>
+								</div>
+								<div class="sx1msg">
+										<span class="sx1msgspan"></span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="s10"><input type="hidden" value="" name='snumc' class='xh'>
+								<div class="s30">
+									<span class=" s31">卖家的发货速度</span>
+								</div>
+								<div class="s11">
+									<div class="sx1">
+										<span class="sico x1"></span>
+										
+									</div>
+									<div class="sx1">
+											<span class="sico x1"></span>
+									</div>
+									<div class="sx1">
+											<span class="sico x1"></span>
+									</div>
+									<div class="sx1">
+											<span class="sico x1"></span>
+									</div>
+									<div class="sx1">
+											<span class="sico x1"></span>
+									</div>
+									<div class="sx1msg">
+											<span class="sx1msgspan"></span>
+									</div>
+								</div>
+								
+							</div>
+							<div class="s10"><input type="hidden" value="" name='snumd' class='xh'>
+									<div class="s30">
+										<span class=" s31">物流发货的速度</span>
+									</div>
+									<div class="s11">
+										<div class="sx1">
+											<span class="sico x1"></span>
+											
+										</div>
+										<div class="sx1">
+												<span class="sico x1"></span>
+										</div>
+										<div class="sx1">
+												<span class="sico x1"></span>
+										</div>
+										<div class="sx1">
+												<span class="sico x1"></span>
+										</div>
+										<div class="sx1">
+												<span class="sico x1"></span>
+										</div>
+										<div class="sx1msg">
+												<span class="sx1msgspan"></span>
+										</div>
+									</div>
+									
+								</div>
+								<div style='    margin-bottom: 20px;'></div>
+				</div>
+		</div>
+		<div class="s4">
+			<span class="s5" tag='submit'>发表评价</span>
+		</div>
+	
+	</div>
+</form>
+<script>
+	$(function(){
+$('.stt .sgp').click(function(){
+$val=$(this).attr('data');
+$(this).parent().children('input:hidden').val($val);
+$(this).addClass('on').siblings('.sgp').removeClass('on');
+});
+$('.sx1').click(function(){
+$val=$(this).index()+1;
+$(this).parents('.s10').children('input:hidden').val($val);
+$(this).parent().children().removeClass('on');
+$(this).parent().children(':lt('+$val+')').addClass('on');
+switch($val){
+case 1:$msg='很差';
+break;
+case 2:$msg='差';break;
+case 3:$msg='一般';break;
+case 4:$msg='好';break;
+case 5:$msg='很好';break;
+}
+$(this).parents('.s10').children('.sx1msgspan').text('$msg');
+});
+
+
+	});
+
+
+
+</script>
+	</div>

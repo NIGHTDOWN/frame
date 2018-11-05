@@ -1,0 +1,200 @@
+<!--{include file={$indextpl}"top.html"}-->
+<link href="<!--{$indextpl}-->css/shop.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div id="mallPage" class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+
+
+						<header id="mp-header" class="tm-mdv" >
+
+							<section class="tm-shop-header">
+
+								<div class="shop-back-img">
+									<img src="<!--{$data.mstorepic}-->" class="back">
+								</div>
+
+								<div class="tm-shop-header-info">
+									<a class="shop_logo logo" href="#">
+										<img src="<!--{$data.logo}-->" alt="logo">
+									</a>
+									<div class="collect-wrapper">
+
+										<div class="collect-btn collect-item">收藏</div>
+
+
+
+										<!-- <div class="collect-cnt collect-item">
+											<p class="collect-counter">
+
+
+												3.1万
+
+											</p>
+											<p>粉丝</p>
+										</div> -->
+									</div>
+
+									<div class="contact">
+										<div class="ctn">
+											<span class="name"><!--{$data.merchantname}--></span><p></p>
+											<span class="name"><img title="卖家信用：<!--{$data.slevel}-->" align="absmiddle" src="<!--{vo_list("fun={getlevelimg1} type={am} mod={shoplevel}  param1={$data.muid}")}-->"></span>
+										</div>
+
+									</div>
+								</div>
+							</section>
+							
+						</header>
+
+
+
+
+						<section class="nav-bar-wrapper J_tabNavBar">
+							<div class="nav J_navBar ui-tab-slider-wrapper">
+								<a href="<!--{url mod='shop' action='show' args="id:{$data.muid}"}-->" class="item selected-tab J_tabItem" data-index="0" data-out="false" data-page="index">
+									<span class="count tm-shop-m-iconfont"></span>
+									<span class="text">首页</span>
+								</a>
+
+
+
+
+								<a href="<!--{url mod='product' action='list' args="id:{$data.muid}"}-->" class="item J_tabItem" data-index="1" data-out="false"
+								 data-page="allItems">
+									<span class="count tm-shop-m-iconfont"></span>
+									<span class="text">全部商品</span>
+								</a>
+
+
+
+
+
+
+								<a href="<!--{url mod='shop' action='purchase' args="id:{$data.muid}"}-->" class="item J_tabItem" data-index="2" data-out="false" data-page="newItems">
+									<span class="count tm-shop-m-iconfont"></span>
+									<span class="text">店铺活动</span>
+								</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<a href="<!--{url mod='shop' action='intro' args="id:{$data.muid}"}-->" class="item J_tabItem" data-index="3" data-out="false" data-page="dynamic">
+									<span class="count tm-shop-m-iconfont"></span>
+									<span class="text">店铺信息</span>
+								</a>
+
+							</div>
+						</section>
+
+
+						<section class="J_lazyShopListOrder lazy-shop-list-order list_m_mdv" >
+							<div class="J_orderWrapper">
+								<section id="J_order" class="list_m_mdv order" >
+									<div class="o_item J_itemSort J_sortType_s" data-param="sort=s">综合</div>
+
+									<div class="o_item J_itemSort J_sortType_d" data-param="sort=d">销量</div>
+
+									<div class="o_item J_itemSort J_sortType_oldstarts" data-param="sort=oldstarts">上新</div>
+
+									<div class="o_item J_itemSort order-pirce-item J_sortType_price " data-param="sort=pd">
+										价格
+										<div class="price-icon-wrapper J_priceIcon ">
+											<i class="J_price_up_icon list_m_font oi_icon"></i>
+											<i class="J_price_down_icon list_m_font oi_icon"></i>
+										</div>
+									</div>
+									<div class="list_m_font o_item o_style">
+
+										<span class="order-style-wrapper J_styleIcon J_itemSort" data-param="style=tile"></span>
+
+									</div>
+								</section>
+							</div>
+
+
+
+
+						</section>
+
+
+
+
+
+
+
+
+
+
+						<section class="search-ctn">
+							<div onclick="_go_url('<!--{url mod='shop' args="id:{$data.muid}" action='search'}-->')" class="open-search">
+								<span class="icon-search"></span>
+								在店铺内搜索
+							</div>
+						</section>
+
+						<section class="ui-panel-slider J_panelSlider">
+
+						</section>
+					</div>
+<!--{if $data.mbanner}-->
+					<div v-type="hotArea"   >
+						<img src="<!--{$data.mbanner}-->" >
+							</div>
+							<!--{/if}-->
+					<div id="commonList">
+						<div class="sort-list">
+							<ul>
+   <!--{assign var="hotsell" vo_list("fun={get_all} num={25} mod={product} orderby={f:sells,s:down} field={productname,productid,smallimg1,price} array={pflag:1,shelves:1:status:0,muid:{$data.muid}}")}-->
+                       
+                        <!--{foreach $hotsell as $volist1}-->
+								<li>
+									<a href="<!--{url mod='product' action='detail' args="productid:{$volist1.productid}"}-->">
+										<span class="img-box">
+											<img src="<!--{$volist1.smallimg1}-->" 
+											alt="<!--{$volist1.productname|tostr}-->">
+											
+										</span>
+										<span class="pro-desc"><!--{$volist1.productname|tostr}--></span>
+										<span class="pro-price">
+											<span class="price-info">
+												<em class="price-yen">¥</em>
+												<em class="price-int"><!--{$volist1.price}--></em>
+												<!-- <em class="price-decimal">.00</em> -->
+											</span>
+										</span>
+										<span class="pro-price-sams"></span>
+									</a>
+								</li>
+								<!--{/foreach}-->
+							</ul>
+							<div style="clear:both;margin-bottom:1rem" ></div>
+						</div>
+					</div>
+
+
+<!--{include file={$indextpl}"shopfoot.html"}-->

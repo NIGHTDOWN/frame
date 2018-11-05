@@ -1,0 +1,112 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/collect.css" rel="stylesheet" type="text/css" />
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='index'}-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">我的收藏</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+					<div>
+						<div style="display: block;" class="search-bar">
+
+
+							<span class="category on" onclick="_go_url('<!--{url action='product'}-->')">商品</span>
+							<span class="category " onclick="_go_url('<!--{url action='shop'}-->')">店铺</span>
+
+						</div>
+
+						<div class="product-list" style="display: block;">
+							<div class="list-items">
+								<!--{foreach $data as $volist}-->
+								<a href="#" >
+									<div class="img" onclick="_go_url('<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->')">
+										<img src="<!--{$volist.smallimg1|imgsize:'150,150'}-->"
+										>
+									</div>
+									<div class="text" onclick="_go_url('<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->')">
+										<!--{$volist.productname|tostr}--></div>
+									<div class="status" ></div>
+									<div class="price" ><!--{$volist.price}--></div>
+									<div class="cancel" onclick="_go_url('<!--{url group='user' mod='collect' action='pdel' args="cid:{$volist.cid}"}-->')"></div>
+								</a>
+								<!--{/foreach}-->
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="page">
+					<!--{$page}-->
+				</div>
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

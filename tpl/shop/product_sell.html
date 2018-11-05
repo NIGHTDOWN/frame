@@ -1,0 +1,136 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+<div class="right_content">
+<script type="text/javascript">
+
+$(function(){
+    /* 全选 */
+	 $('.checkall').click(function(){
+        var _self = this;
+        $('.checkitem').each(function(){
+            if (!this.disabled)
+            {
+                $(this).attr('checked', _self.checked);
+            }
+        });
+        $('.checkall').attr('checked', this.checked);
+    });
+	
+});
+</script>
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='shop'}-->">卖家中心</a> <span>&gt;</span> 
+        出售中的商品
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+            <!--{if $a=='sell'}-->
+                <li class="active"><a href="#">出售中的商品</a></li>
+                <!--{/if}-->
+            <!--{if $a!='sell'}-->
+                <li <!--{if $a=='depot'}-->class="active"<!--{else}-->class='normal'<!--{/if}-->><a href="<!--{url action='depot'}-->">仓库中的商品</a></li>
+                  <li <!--{if $a=='Illegal'}-->class="active"<!--{else}-->class='normal'<!--{/if}-->><a href="<!--{url action='Illegal'}-->">违规商品</a></li>
+                    <li <!--{if $a=='waitcheck'}-->class="active"<!--{else}-->class='normal'<!--{/if}-->><a href="<!--{url action='waitcheck'}-->">待审核商品</a></li>
+                <!--{/if}-->
+                <li class="search-box">
+                    <form method="post" action='<!--{url action=$a}-->'>
+						
+                        <input type="text" class="w200" placeholder="请输入商品关键字或商家编码" name="productname" value="<!--{$where.productname|tostr}-->">
+                        <input type="submit" class="btn2" value="搜索">
+                    </form>
+                </li>
+            </ul>
+        </div> <form method="post" >
+       <table class="table-list-style">
+        	<thead>
+            <tr>
+            	<th width="30"></th>
+            	<th width="70"></th>
+            	<th>商品名称</th>
+                <th width="100">价格</th>
+            	<th width="100">库存</th>
+            	<th width="100">发布时间</th>
+            	<th width="100">推荐</th>
+            	<th width="90">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--{foreach $data as $volist}-->
+                        <tr>
+            	<th class="tc"><input type="checkbox" value="<!--{$volist.productid}-->" class="checkitem" name="productid[]"></th>
+            	<th colspan="6">商品货号: <!--{$volist.productid}--> </th>
+                <th class="tc">
+                
+                
+                </th>
+            </tr>
+            <tr> 
+                <td></td>
+                <td>
+                <div class="pic-small">
+                    <a target="_blank" href="<!--{url mod='product' group='index' action='detail' args="productid:{$volist.productid}"}-->">
+                    	<img width="60" height="60" src="<!--{$volist.smallimg1}-->" alt="gfh">
+                    </a>
+                </div>
+                </td>
+                <td class="tl" valign="top"><a target="_blank" href="<!--{url mod='product' group='index' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></td>
+                <td><!--{$volist.price/100}--></td>
+                <td><!--{$volist.count}--></td>
+                <td><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                <td>
+                <!--{if $volist.melite}-->
+                <span id="rec1_1267"><a href="<!--{url mod='product'  action='downmelite' args="productid:{$volist.productid}"}-->">点击取消推荐</a></span>
+               <!--{else}-->
+                <span style="display:" id="rec2_1267"><a href="<!--{url mod='product'  action='upmelite' args="productid:{$volist.productid}"}-->">点击橱窗推荐</a></span>
+                <!--{/if}-->
+                </td>
+                <td>
+               
+                <p>
+                <!--{if $volist.shelves}-->
+                <a href="<!--{url mod='product'  action='downshelves' args="productid:{$volist.productid}"}-->">下架</a><!--{else}-->
+                <a href="<!--{url mod='product'  action='upshelves' args="productid:{$volist.productid}"}-->">上架</a>
+                <!--{/if}-->
+                </p>
+                <p><a href="<!--{url mod='product'  action='edit' args="pid:{$volist.productid}"}-->">编辑</a></p>
+                <p><a href="<!--{url mod='product'  action='del' args="productid:{$volist.productid}"}-->" onclick="return confirm('确定删除');">删除</a></p>
+                </td>
+            </tr>
+<!--{/foreach}-->
+           
+                        </tbody>
+            <tfoot>
+            <tr>
+                <td class="tc"><input type="checkbox" class="checkall"></td>
+                <td colspan="20">
+                <label for="del" class="btn2 checkall">全选</label>
+               <a class="btn2" href="javascript:;" do="tools_submit({action:'<!--{url action='del'}-->',id:'productid'})" title="删除" onclick="boxyn($(this))" > 删除</a>
+                <div class="pagination">   
+               <!--{$page}-->
+                </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        </form>
+    </div>    
+</div></div>
+
+
+
+
+    <div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

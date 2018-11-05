@@ -1,0 +1,47 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right"><div class="block fn-clear">
+	<div class="record">
+        <h2>
+            充值记录            <span>可用余额<strong><!--{$user.cash/100}--></strong>元</span>
+        </h2>
+    	        <table width="100%" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <th class="al" width="80">创建时间</th>
+                <th class="al">名称 | 交易号
+                                </th><th width="100">金额(元)</th>
+                <th width="80">状态</th>
+              
+            </tr>
+            
+            <!--{foreach $data as  $volist}-->
+                        <tr>
+                <td class="al"><!--{$volist.addtime|date_format:"%Y-%m-%d"}--></td>
+                <td class="al">
+                 <!--{$volist.paytypestring}--> 资金充值
+                <div>
+                    交易号
+                                            <!--{$volist.soleid}-->
+               		             	</div>
+                </td>
+                                <td class="price">+<!--{$volist.paycash/100}--></td>
+                <td>
+              	 <!--{if $volist.paystatus==0}-->待付款    
+                     <!--{elseif $volist.paystatus==1}-->完成
+                     <!--{elseif $volist.paystatus==2}-->关闭
+                   
+                     <!--{/if}-->                               </td>
+               
+            </tr>
+                        <!--{/foreach}-->          
+                                                <tr>
+                <td colspan="99">
+                <div class="page">  <!--{$page}--></div>
+                </td>
+            </tr>
+                    </tbody></table>
+    </div>
+</div></div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

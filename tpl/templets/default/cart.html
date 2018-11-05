@@ -1,0 +1,29 @@
+ <!--{if !$user}-->
+        	<li class="nav cart drop-down">
+            	<div class="nav-fore1">
+                	<a href="<!--{url group='user' mod='cart'}-->">
+                    <span>购物车</span><font>0</font>件
+                    </a>
+                    <i><em></em></i>
+                </div>
+               <div class="nav-fore2">
+               <ul><li class="first">您购物车里还没有任何宝贝。</li></ul></div>
+            </li>
+<!--{else}-->
+<script>
+		
+			$(function(){
+				$u='<!--{url mod='index' action='cart'}-->';
+				
+				$.get($u,function(data){
+					$('#cartysn').append(data);
+					
+				});
+				
+			});
+		</script>
+
+<li class="nav cart drop-down" id='cartysn'>
+            	
+            </li>
+  <!--{/if}-->  

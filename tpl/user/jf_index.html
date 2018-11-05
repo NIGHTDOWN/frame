@@ -1,0 +1,48 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con"><div class="path">
+    <div>
+    	    		<a href="<!--{url group='user' mod='index'}-->">我的商城</a> <span>&gt;</span>
+                积分明细
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li class="active"><a href="#">积分明细</a></li>
+                <li class="fr">我的积分: <!--{$user.points}--></li>
+			</ul>
+        </div>
+        <table class="table-list-style">
+            <thead>
+            <tr>
+                <th width="10"></th>
+                <th class="tl" width="100">积分变更</th>
+                <th class="tl">描述</th>
+                <th class="tl" width="140">操作时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                   <!--{foreach $data as $volist}-->
+                        <tr>
+            	<td></td>
+                <td class="tl"><!--{$volist.money}--></td>
+                <td class="tl"><!--{$volist.desc}--></td>
+                <td class="tl"><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+            </tr><!--{/foreach}-->
+                        <tr>
+            	<td colspan="4">
+                <div class="pagination">  <!--{$page}--></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+     </div>   
+</div></div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

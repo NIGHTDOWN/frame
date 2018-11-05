@@ -1,0 +1,6 @@
+﻿//版本说明 php5.5.38
+环境要求 线程安全ts版 ，组件pthread ，ssl,websocket
+
+安装要求：必须访问 域名/install.php 安装 
+登入链接 域名/admin.php  账号admin 密码admin
+ 

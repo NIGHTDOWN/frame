@@ -1,0 +1,52 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+		<div class="fn-right">
+<div class="block fn-clear">
+	<div class="i-block payment">
+        
+        <div class="i-block">
+    	 <h2><!--{$data.title|tostr}--> <span ><strong><!--{$data.paycash/100}--></strong>元</span></h2>
+    	
+    </div>
+        <div>
+		<style>
+			[tag='not']{ background-color: #ddd;}
+		</style>
+                <div class="form">
+        <form method="post">
+        <input type="hidden" name="act" value="pay">
+       
+           
+
+            <dl>
+                <dt>确认支付密码：</dt>
+                <dd><input type="password" class="text w210" name="pay_passwd" id="pay_passwd" placeholder="支付密码" tag='notnull'></dd>
+            </dl>
+     
+                        <dl>
+                <dt></dt>
+                <dd>
+                <input type="submit" class="submit" value="确定支付">
+                </dd>
+            </dl>
+        </form>   
+        </div>
+            
+    </div>
+</div>
+   	</div> 
+<script>
+$(".pay li").bind("click",function(){
+	$tag=$(this).children('img').attr('tag');
+	if($tag=='not'){
+		alert('余额不足，请使用其他方式支付');return false;
+	}
+	var data = $(this).children('img').attr('data-param');
+	eval("data = "+data);
+		$("[name=payment_type]").val(data.id);
+	$(this).addClass("checked").siblings().removeClass("checked");
+});
+</script>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

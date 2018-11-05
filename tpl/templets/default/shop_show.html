@@ -1,0 +1,52 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+
+  <!--{include file={$indextpl}"pmenu.html"}-->
+
+
+		<div class="w">
+         <!--{include file={$indextpl}"pleft.html"}--> 
+        
+	<div id="right">
+	<div class="module_special">
+	<h2>橱窗推荐</h2>
+    <div class="con">
+    	<ul class="list">
+    	<!--{foreach $plist as $volist}-->
+                        <li>
+                <div class="pic">
+                <a target="_blank" title="<!--{$volist.productname|tostr}-->"  href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><img src="<!--{$volist.smallimg1|imgsize:'220,220'}-->" width="220" height="220" alt="<!--{$volist.productname|tostr}-->"></a></div>
+                <h3><a target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></h3>
+                <p><!--{$config.currency}--><!--{$volist.price/100}--></p>
+            </li>
+<!--{/foreach}-->
+                     
+                    </ul>
+    </div>
+</div>
+<div class="module_special">
+	<h2>热销商品</h2>
+    <div class="con">
+    	<ul class="list">
+                        <!--{foreach $hot as $volist}-->
+                        <li>
+                <div class="pic">
+                <a target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><img src="<!--{$volist.smallimg1|imgsize:'220,220'}-->" width="220" height="220" alt="<!--{$volist.productname|tostr}-->"></a></div>
+                <h3><a target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></h3>
+                <p><!--{$config.currency}--><!--{$volist.price/100}--></p>
+            </li>
+<!--{/foreach}-->
+                    </ul>
+    </div>
+</div>
+</div>
+    <div class="clear"></div>
+	</div>
+
+		
+
+
+		  <!--{include file={$indextpl}"pfoot.html"}-->
+
+
+</body></html>

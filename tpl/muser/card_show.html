@@ -1,0 +1,156 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+<script>
+	_ajax_file_url="<!--{url mod='upimg'}-->";
+</script>
+<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='card'}-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">银行卡</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					<form method="POST" action="<!--{url action='save'}-->" >
+
+				
+					
+					<section class="order-act" data-spm="2" data-spm-max-idx="6">
+							<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">卡号</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc"><!--{$data.banknum}--></span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">户名</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc"><!--{$data.bankuser}--></span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">银行</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc"><!--{$data.bankname}--></span>
+												
+											</div>
+										
+									
+								</div>
+								<div class="label3">
+									
+										
+										<div class="title">
+											<span class="tl">开户地址</span>
+										</div>
+										<div class="sub"></div>
+										<div class="ico">
+												<span class="tc"><!--{$data.bankaddress}--></span>
+												
+											</div>
+										
+									
+								</div>
+					
+						
+					</section>
+				
+					<button class='btn '  type="button"  onclick="boxyn($(this))" a='<!--{url action='del' args="cardid:{$data.cardid}"}-->'  >删除</button>
+						<div style="clear:both;margin-bottom:1rem"></div>
+				</form>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

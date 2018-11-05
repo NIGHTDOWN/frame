@@ -1,0 +1,135 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+    <div class="right_content"><script type="text/javascript">
+
+$(function(){
+    /* 全选 */
+	 $('.checkall').click(function(){
+        var _self = this;
+        $('.checkitem').each(function(){
+            if (!this.disabled)
+            {
+                $(this).attr('checked', _self.checked);
+            }
+        });
+        $('.checkall').attr('checked', this.checked);
+    });
+	$('#del').click(function(){
+		return false;
+		if($('.checkitem:checked').length == 0){
+			return false;
+		}
+		var url = "";
+		var items = '';
+			$('.checkitem:checked').each(function(){
+				items += this.value + ',';
+		});
+		items = items.substr(0, (items.length - 1));
+		$.get(url, 'pid=' + items,showResponse);
+		function showResponse(originalRequest)
+		{
+			document.location.reload();
+		}
+		return false;
+	});
+});
+</script>
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='shop'}-->">卖家中心</a> <span>&gt;</span> 
+        出售中的商品
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li class="<!--{if $a=='run'}--> active<!--{else}--> normal <!--{/if}-->"><a href="<!--{url action='run'}-->">团购商品</a></li>
+                
+           
+                <li class="<!--{if $a=='waitcheck'}--> active<!--{else}--> normal <!--{/if}-->" ><a href="<!--{url action='waitcheck'}-->">待审核</a></li>
+                <li class="normal"><a href="<!--{url action='add'}-->">团购发布</a></li>
+                <li class="search-box">
+                    <form method="post">
+						
+                        <input type="text" class="w200" placeholder="请输入商品关键字" name="word" value="">
+                        <input type="submit" class="btn2" value="搜索">
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <table class="table-list-style">
+        	<thead>
+            <tr>
+            	<th width="30"></th>
+            	<th width="70"></th>
+            	<th>商品名称</th>
+                <th width="100">价格</th>
+            	<th width="100">库存</th>
+            	<th width="100">发布时间</th>
+            	<!--{if $a=='waitcheck'}--><th width="100">状态</th><!--{/if}-->
+            	<th width="90">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--{foreach $data as $volist}-->
+                        <tr>
+            	<th class="tc"><input type="checkbox" value="<!--{$volist.gpid}-->" class="checkitem" name="gpid[]"></th>
+            	<th colspan="7">团购ID: <!--{$volist.gpid}--> </th>
+            </tr>
+            <tr> 
+                <td></td>
+                <td>
+                <div class="pic-small">
+                    <a target="_blank" href="<!--{url mod='purchase' group='index' action='detail' args="gpid:{$volist.gpid}"}-->">
+                    	<img width="60" height="60" src="<!--{$volist.gimg}-->" alt="<!--{$volist.gtitle}-->">
+                    </a>
+                </div>
+                </td>
+                <td class="tl" valign="top"><a target="_blank" href="<!--{url mod='purchase' group='index' action='detail' args="gpid:{$volist.gpid}"}-->"><!--{$volist.gtitle}--></a></td>
+                <td><!--{$volist.gprice}--></td>
+                <td><!--{$volist.count}--></td>
+                <td><!--{$volist.gaddtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                
+                <!--{if $a=='waitcheck'}--><td >  <!--{if $volist.gcheck=='0'}-->待审核
+                           <!--{elseif $volist.gcheck=='1'}--> 审核成功
+                           <!--{elseif $volist.gcheck=='2'}--> 审核失败
+                           <!--{elseif $volist.gcheck=='2'}--> 已失效
+                    <!--{/if}-->
+              </td><!--{/if}-->
+                
+                <td>
+                
+                                
+                
+                <p><a href="<!--{url action='edit' args="gpid:{$volist.gpid}"}-->">编辑</a></p>
+                <p><a href="<!--{url action='del' args="gpid:{$volist.gpid}"}-->" onclick="return confirm('确信删除？');">删除</a></p>
+                </td>
+            </tr>
+             <!--{/foreach}-->
+                        </tbody>
+            <tfoot>
+            <tr>
+                <td class="tc"><input type="checkbox" id="delete" class="checkall"></td>
+                <td colspan="20">
+                <label for="delete" class="btn2">全选</label>
+                <a id="del" confirm="您确定要删除吗?" class="btn2" do="tools_submit({action:'<!--{url action='del'}-->',id:'gpid'})" href="javascript:void(0);" onclick="boxyn($(this))">删除</a>
+                <div class="pagination"> <!--{$page}-->  </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        
+    </div>    
+</div></div>
+    <div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

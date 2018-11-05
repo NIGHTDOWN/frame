@@ -1,0 +1,80 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con"><script>
+$(function(){
+    /* 全选 */
+	 $('.checkall').click(function(){
+        var _self = this;
+        $('.checkitem').each(function(){
+            if (!this.disabled)
+            {
+                $(this).attr('checked', _self.checked);
+            }
+        });
+        $('.checkall').attr('checked', this.checked);
+    });
+	 
+	
+});
+</script>
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span> 
+        我的足记
+    </div>
+</div>
+<div class="main">
+    <div class="wrap">
+    	<div class="hd">
+            <ul class="tabs">
+                <li class="active"><a href="#">我的足迹</a></li>
+			</ul>
+        </div>
+        <div class="footprint">
+        <!--{foreach $data as $volist}-->
+                <div class="team">
+        	<div class="team-title clearfix">
+            	<h3><!--{if ($volist.stime|date_format:"%Y-%m-%d")==($time|date_format:"%Y-%m-%d")}-->今天<!--{else}--><!--{$volist.stime|date_format:"%d"}-->日<!--{/if}--></h3>
+                <div class="date-info">
+                	<p><!--{$volist.stime|date_format:"%Y-%m"}--></p>
+                    <span>浏览了<!--{$volist.num}-->件商品</span>
+                </div>
+            </div>
+        	<div class="team-list">
+            	<div class="list-box clearfix">
+            	<!--{assign var="plist" vo_list("fun={getlist} array={theday:$volist.theday,uid:$user.uid} mod={history}   type={im}")}-->
+            	<!--{foreach $plist as $list}-->
+                                        <div class="item">
+                        <div class="item-box">
+                            <div class="p-pic">
+                            <a href="<!--{url group='index' mod='product' action='detail' args="productid:{$list.productid}"}-->">
+                            <img width="200" height="200" src="<!--{$list.smallimg1|imgsize:'220,220'}-->">
+                            </a> 
+                            <a class="delete" href="<!--{url group='user' mod='collect' action='hdel' args="logid:{$volist.logid}"}-->"><i></i>删除</a>
+                            </div>
+                            <div class="p-pname"><!--{$list.productname|tostr}-->  </div>
+                            <div class="p-pirce">
+                            	<span>￥</span>
+                            	<b><!--{$list.price/100}--></b>
+                            </div>
+                        </div>
+					</div>
+                      <!--{/foreach}-->                  
+                                   	</div>
+            </div>
+        </div>
+<!--{/foreach}-->
+               
+               
+                </div>
+    </div>
+</div>
+
+
+</div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

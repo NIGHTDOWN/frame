@@ -1,0 +1,28 @@
+  <!--{include file={$usertpl}"pframe.html"}-->
+  	
+	<div class="fn-right">
+	<div class="block fn-clear weixinqr-modal">
+	<div class="modal-box"><div class="modal-left"><p><span>请使用 </span><span class="orange">微信</span><i class="icon icon-qrcode"></i><span class="orange"> 扫一扫</span><br>扫描二维码支付</p><div class="modal-qr"><img class="modal-qrcode" src="<!--{url mod='login' group='index' action='qr' args="url:{$data.url}"}-->">
+	<div class="modal-info"><span>二维码有效时长为2小时, 请尽快支付</span></div></div></div><div class="modal-right"><i class="icon icon-close"></i><img src="<!--{$usertpl}-->/res/weixin-qrcode.jpg" alt="微信扫码"></div></div>
+</div>
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+<script>
+
+// 执行动作，+数据
+ywebsock('<!--{$ip}-->','<!--{$port}-->','wxpay',{'orderid':'<!--{$data.orderid}-->'},function(data){
+	
+	if(data.status==1){
+		if(data.url){showd('支付成功');_go_url(data.url);}else{showd('支付成功');}
+		
+		
+	}else{
+		showd('支付失败');
+	}
+	
+	
+	});
+
+</script>
+

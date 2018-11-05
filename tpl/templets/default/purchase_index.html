@@ -1,0 +1,171 @@
+  <!--{include file={$indextpl}"head.html"}-->
+<script type="text/javascript" src="<!--{$indextpl}-->js/jquery.yomi.js"></script>
+<link rel="stylesheet" type="text/css" href="<!--{$indextpl}-->res/iconfont.css"></link>
+<style>
+	.gray{    background: #fff;}
+</style>
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	<link href="<!--{$indextpl}-->res/skin.css" rel="stylesheet" type="text/css">
+	
+	<link href="<!--{$indextpl}-->res/pcss.css" rel="stylesheet" type="text/css">
+	<div class="w">
+    
+    
+    	     <!--{if $pcat}-->   
+                <div class="detailnav">
+                
+                 <strong><a href="<!--{url mod=$c action=$a}-->">团购</a></strong>
+          
+                <!--{foreach $pcat as $volist}-->
+                <!--{if $i==1}-->   
+                
+                <a href="<!--{url mod=$c action=$a args="catid:$volist.catid"}-->"><!--{$volist.catname}--></a>
+                
+                <!--{else}-->
+                 <span>
+            
+                 &gt; <a href="<!--{url mod=$c action=$a args="catid:$volist.catid"}-->"><!--{$volist.catname}--></a>
+                   </span>
+                
+                <!--{/if}-->
+                <!--{/foreach}-->
+               
+    </div>
+                <!--{else}-->
+                <div class="detailnav">
+    
+    	        
+                
+              <strong><a href="<!--{url mod=$c action=$a}-->">团购</a></strong>&gt;团购列表
+                
+                
+                
+                
+        </span>
+    </div>
+                <!--{/if}-->
+                
+      
+</div>
+	<div class="w">
+	 <!--{set $cnum=sizeof($ccat)}-->
+	<!--{set $anum=sizeof($attribute)}-->
+	 <!--{if $cnum || $anum}-->
+         <div id="select">
+        <!--{if $cnum}-->
+    	        <dl class="first">
+            <dt>分类：</dt>
+            <dd>
+            <!--{foreach $ccat as $volist}-->
+                                                <div>
+                <a href="<!--{url mod=$c action=$a args="word:$where.word,catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                </div>
+<!--{/foreach}-->
+                          
+                            </dd>
+        </dl>
+         <!--{/if}-->
+         <!--{foreach $attribute as $volist}-->
+                <dl>
+            <dt><!--{$volist.sname}-->：</dt>
+            <dd>
+            <!--{set $key='att'.$volist.weight}-->
+                                <div><a <!--{if $attrwhere[$key]==null}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action='category'  args2=$attrwhere args="att{$volist.weight}:null"}-->">不限</a></div>
+                                <!--{set $k=explode(',',$volist.var)}-->
+                              <!--{foreach $k as $value}-->  
+                             
+                                <div>
+ <a <!--{if $attrwhere[$key]==$value}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action=$a args="att{$volist.weight}:$value}"   args2=$attrwhere }-->"><!--{$value}--></a>
+                </div>
+                               <!--{/foreach}-->
+                            </dd>
+        </dl>
+                    <!--{/foreach}-->
+                              
+            </div>
+ <!--{/if}-->
+       <style>
+       .order .up,.order .down{
+       	background: #E4393C;
+    font-weight: bold;
+    color: #FFF;
+    border-color: #E4393C;
+       }
+       	.order .up b{background-position: right -23px;}
+		.order .down b{background-position: right -30px;}
+       	
+       </style> 
+    <div class="filter clearfix">
+        <div class="fore1 clearfix">
+            <div class="order">
+                                <a <!--{if !$orderby.f}-->class="current"<!--{/if}--> href="<!--{url mod=$c action=$a  args=$byattr}-->"><span>默认排序</span></a>
+			<a class="<!--{if $orderby.f=='gstime'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":gstime" args1=$byattr}-->"><span>最新</span><b></b></a>
+          
+                
+           <a class="<!--{if $orderby.f=='gsells'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":gsells" args1=$byattr}-->"><span>销量</span><b></b></a>
+               <a class="<!--{if $orderby.f=='gprice'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":gprice" args1=$byattr}-->"><span>价格</span><b></b></a>
+            </div>
+            <div class="total">共<strong><!--{$pagearray.total}--></strong>个商品</div>
+        </div>
+       	
+    </div>
+    
+    <div class="itemSearchList">
+    	        
+        <ul class="gb-index-list clearfix">
+<!--{foreach $data as $volist}-->
+                                                                      <li class="mod-shadow-card">
+                    <a href="<!--{url action='detail' args="gpid:$volist.gpid"}-->" class="img"><img src="<!--{$volist.gimg}-->" alt=""  class="lazy" style="display: inline-block;"></a>
+                    <div class="clearfix">
+                        <div class="price">¥<!--{$volist.gprice/100}--></div>
+                        <div class="man"><!--{$volist.gsells}-->人已参加</div>
+                    </div>
+                    <a href="<!--{url action='detail' args="gpid:$volist.gpid"}-->" target="_blank" class="name"><!--{$volist.gtitle|tostr}--></a>
+                    <div class="lefttime" data-time="<!--{$volist.getime|date_format:"%Y-%m-%d %H:%M:%S"}-->">
+                        <i class="iconfont icon-time"></i>
+                        <span>剩余时间：</span>
+                        <span class="days">0</span>
+                        <em>:</em>
+                        <span class="hours">0</span>
+                        <em>:</em>
+                        <span class="minutes">0</span>
+                        <em>:</em>
+                        <span class="seconds">0</span>
+                    </div>
+                    <!--{if $time>$volist.getime}-->
+                    
+                      <a href="<!--{url action='detail' args="gpid:$volist.gpid"}-->" class="gb-btn bid_end">团购结束</a>
+                    <!--{else}-->
+                                        <a href="<!--{url action='detail' args="gpid:$volist.gpid"}-->" class="gb-btn">立即团</a>
+                                        <!--{/if}-->
+                                    </li>
+                                   
+                        <!--{/foreach}-->                                                                  
+                                                            </ul>
+<div class="itemSearchResult clearfix">
+
+        </div>
+<div class="page">   <!--{$page}--></div>
+
+            </div>
+</div>
+	
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+<script type="text/javascript">
+	$(function(){
+		//倒计时
+		$(".lefttime").each(function(){
+			$(this).yomi();
+		});
+	
+	});
+    </script>
+</body></html>

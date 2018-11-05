@@ -1,0 +1,311 @@
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+<style>
+    iframe {
+    border: none;
+}
+</style>
+<div class="layout">
+    <!--{include file={$shoptpl}"leftmenu.html"}-->
+
+
+    <div class="right_content">
+        <div class="path">
+            <div>
+                <a href="<!--{url mod='shop' action='run'}-->">我的商城</a>
+                <span>&gt;</span>
+                <a href="<!--{url mod='category' action='run'}-->">商品分类</a>
+                <span>&gt;</span> 分类列表
+            </div>
+        </div>
+        <div class="main">
+            <div class="wrap">
+                <div class="hd">
+                    <ul class="tabs">
+                        <li class="active">
+                            <a href="<!--{url mod='category' action='run'}-->">商品分类</a>
+                        </li>
+                    </ul>
+                </div>
+                <form action="" method="post">
+                    <table class="table-list-style">
+                        <thead>
+                            <tr>
+                                <th width="10"></th>
+                                <th width="10"></th>
+                                <th>分类名称</th>
+                                <th width="100">排序</th>
+                                <th width="100">操作  <a id="opt_text8" href="javascript:addcate('0');">[新建分类]</a></th>
+                            </tr>
+                        </thead>
+                        <tbody id='cate1'>
+
+
+
+<!--{foreach $data as $volist}-->
+<tr scatid='<!--{$volist.scatid}-->'>
+        <td>
+            <img src="<!--{$shoptpl}-->/res/icon.jpg">
+        </td>
+        <td></td>
+        <td class="tl">
+            <input value="<!--{$volist.catname}-->" name="catname" class="text w300 fq" type="text">
+         
+        </td>
+        <td>
+            <input name="orders" value="<!--{$volist.orders}-->"  tag='fixnum'  class="text w50 fq" type="text" >
+        </td>
+        <td>
+            <a  href="javascript:;"  onclick="delc($(this));">[删除]</a>
+            <a id="opt_text8" href="javascript:;"  onclick="addcate($(this));">[+]</a>
+            <a  href="javascript:;"  onclick="addpro($(this));">[商品]</a>
+        </td>
+    </tr>
+     <!--{assign var="cat2" vo_list("fun={getl2} mod={scategory} type={im} array={muid:{$volist.muid},scatid:{$volist.scatid}} ")}-->
+      <!--{foreach $cat2 as $volist2}-->                     
+      <tr  pid='<!--{$volist2.pid}-->' scatid='<!--{$volist2.scatid}-->' class="tl">
+            <td colspan="20" >
+                <div style="padding-left:54px;margin:2px;text-align: left;">
+                    <img src="<!--{$shoptpl}-->/res/icon2.jpg">
+                    
+                    <input class="text w300 ez" value="<!--{$volist2.catname}-->" name="catname" type="text">
+                    <input name="orders" value="<!--{$volist2.orders}-->" tag='fixnum' class="text w50 ez" type="text">
+                 
+                    <a  href="javascript:;"  onclick="delc($(this));">[删除]</a>
+                    <a  href="javascript:;"  onclick="addpro($(this));">[商品]</a>
+                </div>
+              
+            </td>
+        </tr>
+     <!--{/foreach}-->
+     <!--{/foreach}-->
+                           
+
+
+                        </tbody>
+
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="20">
+                                  
+                                
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<box id='box1' style="display: none">
+    <table>
+    <tbody>
+        <tr scatid=''>
+                <td>
+                    <img src="<!--{$shoptpl}-->/res/icon.jpg">
+                </td>
+                <td></td>
+                <td class="tl">
+                    <input value="" name="catname" class="text w300 fq" type="text">
+                 
+                </td>
+                <td>
+                    <input name="orders" value=""  tag='fixnum'  class="text w50 fq" type="text" >
+                </td>
+                <td>
+                    <a  href="javascript:;"  onclick="delc($(this));">[删除]</a>
+                    <a id="opt_text8" href="javascript:;"  onclick="addcate($(this));">[+]</a>
+                    <a  href="javascript:;"  onclick="addpro($(this));">[商品]</a>
+                </td>
+            </tr></tbody></table>
+</box>
+<box id='box2' style="display: none">
+        <table>
+        <tbody>
+                <tr  pid='' scatid='' class="tl">
+                        <td colspan="20" >
+                            <div style="padding-left:54px;margin:2px;text-align: left;">
+                                <img src="<!--{$shoptpl}-->/res/icon2.jpg">
+                                
+                                <input class="text w300 ez" value="" name="catname" type="text">
+                                <input name="orders" value="" tag='fixnum' class="text w50 ez" type="text">
+                             
+                                <a  href="javascript:;"  onclick="delc($(this));">[删除]</a>
+                                <a  href="javascript:;"  onclick="addpro($(this));">[商品]</a>
+                            </div>
+                          
+                        </td>
+                    </tr>
+
+
+           </tbody></table>
+    </box>
+    <box id='box3' style="display: none">
+<iframe width="640px" height="600px" sttyle='border: none;' src=''></iframe>
+    </box>
+<script>
+    
+     var url='<!--{url action="change"}-->';
+     var url2='<!--{url action="product"}-->';
+     function addpro($obj){
+        var delob=$obj.parents('tr');
+        $id=delob.attr('scatid');
+        $url=url2+'&scatid='+$id;
+        $('#box3').find('iframe').attr('src',$url);
+        msgbox('选择',$('#box3'));
+    }
+    function delc($obj){
+        var delob=$obj.parents('tr');
+        $id=delob.attr('scatid');
+        if($id=='')delob.remove();
+        $data={action:'del',catid:$id};
+       
+        yAjax(url,$data,function($date){
+          if($date.flag){
+            delob.remove();
+          }else{
+              showd($date.error.errormsg);
+          }
+
+
+        });
+
+
+    }
+    function addl1(){
+        $lv1num=$('#cate1').find('tr').length;
+
+        if( $lv1num>=10){
+            showd('最多添加10个一级分类');
+            return 0;
+        }
+        $html=$('#box1').find('tbody').html();
+       
+        $('#cate1').append($html);
+    }
+    function addl2($obj){
+        $id=$obj.parents('tr').attr('scatid');
+        
+        if($id==''){
+            showd('一级分类未创建');
+            return false;
+        }
+        
+       
+        $str='[pid='+$id+']';
+      
+        $lv1num=$('#cate1').find($str).length;
+       
+        if( $lv1num>=5){
+            showd('最多添加5个二级分类');
+            return 0;
+        }
+        $('#box2').find('.tl').attr('pid',$id);
+        $html=$('#box2').find('tbody').html();
+       
+        $obj.parents('tr').after($html);
+      
+    }
+    function addcate($val){
+     
+switch($val){
+    case '0':
+    
+    addl1();
+    
+    break;
+    default:  
+   
+    addl2($val);break;
+}return true;
+    }
+   $(function(){
+      
+    $('.fq[name=catname]').live('blur', function() {  
+        var ob=$(this).parents('tr'); 
+  $catid=ob.attr('scatid');
+  
+
+  if(($catid)!=''){
+//修改
+
+$val={action:'edit',catname:$(this).val(),catid:$catid};
+      yAjax(url,$val,function($data){
+if($data.flag){
+    d('修改成功');
+}else{
+    showd($data.error.errormsg);
+}
+      }); 
+  }else{
+      //添加
+     
+      $val={action:'add',catname:$(this).val()};
+     
+      yAjax(url,$val,function($data){
+if($data.flag){
+   
+   ob.attr('scatid',$data.data);
+}else{
+    showd($data.error.errormsg);
+}
+      });
+
+
+  }
+});  
+$('[name=orders]').live('blur', function() { 
+    var ob=$(this).parents('tr'); 
+  $catid=ob.attr('scatid');
+  $val={action:'orders',orders:$(this).val(),catid:$catid};
+yAjax(url,$val,function($data){});
+
+ });
+  $('.ez[name=catname]').live('blur', function() {   
+    var ob=$(this).parents('tr'); 
+  $catid=ob.attr('scatid');
+  $pid=ob.attr('pid');
+  
+
+  if(($catid)!=''){
+//修改
+
+$val={action:'edit',catname:$(this).val(),catid:$catid};
+      yAjax(url,$val,function($data){
+if($data.flag){
+    d('修改成功');
+}else{
+    showd($data.error.errormsg);
+}
+      }); 
+  }else{
+      //添加
+     
+      $val={action:'add2',catname:$(this).val(),pid:$pid};
+     
+      yAjax(url,$val,function($data){
+if($data.flag){
+   
+   ob.attr('scatid',$data.data);
+}else{
+    showd($data.error.errormsg);
+}
+      });
+
+
+  }
+});  
+
+
+
+   });
+</script>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body>
+
+</html>

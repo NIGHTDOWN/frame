@@ -1,0 +1,273 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+
+  <!--{include file={$indextpl}"pmenu.html"}-->
+
+<style>
+	.desc{
+		height: 40px;
+    padding: 0 10px;
+    line-height: 40px;
+    border: 1px solid #ffdbad;
+    background: #fff9f5;
+    font-size: 14px;
+    color: #3c3c3c;
+    font-weight: bold;
+	}
+</style>
+		<div class="w">
+			
+			<div class="desc">
+			<div class="claration clearfix">
+    <i class="iconfont-snapshot icon-snapshot-tishi fl"></i>
+    <p class="fl">当前页面内容为订单快照，包含订单创建时的商品描述和下单信息，买卖双方和平台在发生交易争议时，该页面作为判定依据。</p>
+    <a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$data.productid}" }-->" class="fr">点此查看最新商品详情</a>
+  </div>	
+			</div>
+			<div class="detail">
+				<div class="detail-bd clearfix">
+					<div class="summary clearfix">
+						<div class="item-info clearfix">
+							<div class="left">
+								<div class="gallery">
+									<div class="main-pic">
+										<a target="_blank" href="<!--{$data.smallimg1}-->">
+										<img class="jqzoom" height="400" width="400" alt="" src="<!--{$data.smallimg1}-->" rel="<!--{$data.smallimg1}-->" title="" style="cursor: crosshair;">
+											
+										</a>
+									</div>
+									<ul id="jqzoom" class="clearfix">
+									<!--{if $data.smallimg1}-->
+										<li class=""><img src="<!--{$data.smallimg1|imgsize:'60,60'}-->" big="<!--{$data.smallimg1}-->" height="60" width="60"></li><!--{/if}-->
+									<!--{if $data.smallimg2}-->
+										<li class=""><img src="<!--{$data.smallimg2|imgsize:'60,60'}-->" big="<!--{$data.smallimg2}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg3}-->
+										<li class=""><img src="<!--{$data.smallimg3|imgsize:'60,60'}-->" big="<!--{$data.smallimg3}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg4}-->
+										<li class=""><img src="<!--{$data.smallimg4|imgsize:'60,60'}-->" big="<!--{$data.smallimg4}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg5}-->
+										<li class=""><img src="<!--{$data.smallimg5|imgsize:'60,60'}-->" big="<!--{$data.smallimg5}-->" height="60" width="60"></li><!--{/if}-->
+									
+
+									
+										
+									</ul>
+								</div>
+							</div>
+							<div class="right">
+								<div class="wrap">
+									<div class="title">
+										<h3><!--{$data.productname|tostr}--></h3>
+									</div>
+									<ul class="promo-meta clearfix">
+										
+									
+										<li>
+											<span>商品ID</span>
+											<p>
+												<!--{$data.productid}--> 
+											</p>
+											
+										</li>
+										
+									</ul>
+									<ul class="promo-meta clearfix">
+										
+										<li>
+											<span>价格</span>
+											<strong class="promo-price">
+												<em class="rmb"><!--{$config.currency}--></em>
+												<em id="price" class="rmb-num"><!--{$data.price/100}--></em>
+											</strong>
+										</li>
+										<li>
+											<span>所在地</span>
+											<p>
+												<!--{$data.provinceid|getprovince}--><!--{$data.cityid|getcity}--> </a>
+											</p>
+											
+										</li>
+										
+									</ul>
+									<ul class="promo-meta clearfix">
+										
+									
+										<li>
+											<span>购买数量</span>
+											<p>
+												<!--{$data.num}--> 
+											</p>
+											
+										</li>
+									<li>
+											
+											<p>
+												<!--{$data.spec}--> 
+											</p>
+											
+										</li>	
+									</ul>
+												
+								
+									<div class="sep-line clearfix"></div>
+									
+									<div class="clear"></div>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebar clearfix">
+						<div class="shop-info">
+						
+						<!--{assign var="levelimg1" vo_list("fun={getlevelimg} type={am} mod={shoplevel}  param1={$data.muid}")}-->
+							<a class="shop-info-bg" href="">
+							
+							</a>
+							<div class="shop-info-wrap clearfix">
+								<div class="shop-info-hd">
+									<dl>
+										<dt>店铺：</dt>
+										<dd><!--{$data.merchantname}--></dd>
+									</dl>
+									<dl>
+										<dt>信誉：</dt>
+										<dd>
+										<!--{if $levelimg}--><img align="absmiddle" src="<!--{$levelimg}-->">
+											<!--{/if}-->
+										</dd>
+									</dl>
+									<dl>
+										<dt>掌柜：</dt>
+										<dd><a target="_blank" href="#"><!--{$data.username}--></a></dd>
+									</dl>
+									<dl class="shop-icon">
+										<dt>资质：</dt>
+										<dd>
+										<!--{if $data.rzflag}-->
+										 <b ><img src="<!--{$indextpl}-->res/ico/rz.png"/></b>
+										<!--{/if}-->
+											<!--{if $data.bzjcash>0}-->
+											<span title="已缴纳<!--{$data.bzjcash/100}-->元保证金"><!--{$data.bzjcash/100}--> 元</span>
+											<!--{/if}-->
+										</dd>
+									</dl>
+								</div>
+								<div class="shop-info-bd clearfix">
+									<div class="shop-rate clearfix">
+										<dl>
+											<dt>描述&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.mspf}--></b></dd>
+										</dl>
+										<dl>
+											<dt>物流&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.wlpf}--></b></dd>
+										</dl>
+										<dl>
+											<dt>服务&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.fwpf}--></b></dd>
+										</dl>
+									</div>
+								</div>
+								<div class="shop-info-fd clearfix">
+									<a target="_blank" href="<!--{url mod='shop' action='show' args="id:{$data.muid}"}-->">进入店铺</a>
+									<a class="fr" href="javascript:void(0);" onclick="javascript:getfavshop(<!--{$data.muid}-->);">收藏店铺</a>
+								</div>
+							</div>
+						</div>
+						<div class="pine">
+							<div class="pine-hd clearfix">看了又看</div>
+							<div class="pine-bd clearfix">
+							<!--{foreach $other as $volist}-->
+								<li class="fore1">
+									<div class="p-img ld">
+										<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+											<img width="100" src="<!--{$volist.smallimg1}-->">
+										</a>
+									</div>
+									<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+									<div class="p-price"><strong><!--{$volist.currency}--><!--{$volist.price}--></strong></div>
+								</li>
+<!--{/foreach}-->
+							
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tabbar-wrap clearfix">
+				<div class="shop-search">
+					<div class="search-panel">
+						<form action="<!--{url mod='shop' action='search' args="muid:{$data.muid}"}-->" method="post">
+							<div class="search-btn">
+								<input type="submit" value="">
+							</div>
+							<div class="search-fields">
+								<input type="text" value="" name="word">
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="inner-wrap">
+					<ul class="clearfix">
+						<li class="cur"><a href="javascript:void(0);">商品详情</a></li>
+						
+						
+						
+					</ul>
+				</div>
+			</div>
+			<div class="layout clearfix">
+				<div class="left">
+					<div class="m">
+						<div class="mt"><h3>热销产品</h3></div>
+						<div class="mc">
+						<!--{foreach $hot as $volist}-->
+							<li class="fore1">
+								<div class="p-img ld">
+									<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+										<img width="100" src="<!--{$volist.smallimg1}-->">
+									</a>
+								</div>
+								<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+								<div class="p-price"><strong><!--{$volist.currency}--><!--{$volist.price}--></strong></div>
+							</li>
+<!--{/foreach}-->
+							
+						</div>
+					</div>
+				</div>
+				<div class="con clearfix">
+					<div class="i-con">
+						<div class="attributes clearfix">
+							<ul class="clearfix">
+							<!--{foreach $attribute as $volist}-->	
+								<li><!--{$volist.aname}-->：<!--{$volist.avalue}--></li>
+								<!--{/foreach}-->
+							</ul>
+						</div>
+						<div class="description">
+						<div style="text-align:center;">
+								<!--{$data.content}-->
+								
+								<span style="line-height:1.5;"></span> 
+							</div></div>
+					</div>
+					
+					
+					
+				</div>
+				<div class="right"><ul></ul></div>
+			</div>
+			
+
+		</div>
+
+		
+
+
+		  <!--{include file={$indextpl}"pfoot.html"}-->
+
+
+</body></html>

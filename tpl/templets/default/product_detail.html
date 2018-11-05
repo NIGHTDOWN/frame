@@ -1,0 +1,365 @@
+  <!--{include file={$indextpl}"phead.html"}-->
+
+
+  <!--{include file={$indextpl}"pmenu.html"}-->
+
+
+		<div class="w">
+			
+			
+			<div class="detail">
+				<div class="detail-bd clearfix">
+					<div class="summary clearfix">
+						<div class="item-info clearfix">
+							<div class="left">
+								<div class="gallery">
+									<div class="main-pic">
+										<a target="_blank" href="<!--{$data.smallimg1}-->">
+										<img class="jqzoom" height="400" width="400" alt="" src="<!--{$data.smallimg1}-->" rel="<!--{$data.smallimg1}-->" title="" style="cursor: crosshair;">
+											
+										</a>
+									</div>
+									<ul id="jqzoom" class="clearfix">
+									<!--{if $data.smallimg1}-->
+										<li class=""><img src="<!--{$data.smallimg1|imgsize:'60,60'}-->" big="<!--{$data.smallimg1}-->" height="60" width="60"></li><!--{/if}-->
+									<!--{if $data.smallimg2}-->
+										<li class=""><img src="<!--{$data.smallimg2|imgsize:'60,60'}-->" big="<!--{$data.smallimg2}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg3}-->
+										<li class=""><img src="<!--{$data.smallimg3|imgsize:'60,60'}-->" big="<!--{$data.smallimg3}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg4}-->
+										<li class=""><img src="<!--{$data.smallimg4|imgsize:'60,60'}-->" big="<!--{$data.smallimg4}-->" height="60" width="60"></li><!--{/if}-->
+										<!--{if $data.smallimg5}-->
+										<li class=""><img src="<!--{$data.smallimg5|imgsize:'60,60'}-->" big="<!--{$data.smallimg5}-->" height="60" width="60"></li><!--{/if}-->
+									
+
+									
+										
+									</ul>
+								</div>
+							</div>
+							<div class="right">
+								<div class="wrap">
+									<div class="title">
+										<h3><!--{$data.productname|tostr}--></h3>
+									</div>
+									<ul class="promo-meta clearfix">
+									
+										<li>
+											<span>价格</span>
+											<strong class="promo-price">
+												<em class="rmb"><!--{$config.currency}--></em>
+												<em id="price" class="rmb-num"><!--{set echo $data.price/100}--></em>
+											</strong>
+										</li>
+										<li>
+											<span>配送</span>
+											<p>
+												<!--{$data.provinceid|getprovince}--><!--{$data.cityid|getcity}--> 至
+												<a class="region" href="javascript:void(0);"><!--{$city.province}--><!--{$city.city}--></a>
+											</p>
+											<p style="margin-left:60px;">
+												<!--                                  快递:10元 
+												-->
+											</p>
+										</li>
+										<li class="counter">
+											<div class="sell-counter clearfix">
+												<a href="javascript:;">
+													<b><!--{$data.sells}--></b><span>交易成功</span>
+												</a>
+											</div>
+											<div class="rate-counter clearfix">
+												<a href="javascript:;">
+													<b><!--{$data.pls}--></b><span>累计评论</span>
+												</a>
+											</div>
+										</li>
+									</ul>
+												
+									<div class="buy_box clearfix">
+										<form id="form" onsubmit="return buy()" action="<!--{url mod='buy' }-->" method="post">
+											<input name="spec" type="hidden" value="">
+											<input name="num" type="hidden" value="">
+											<input name="pid"  type="hidden" value="<!--{$data.productid}-->">
+											<input name="gpid"  type="hidden" value="<!--{$data.gpid}-->">
+											<div class="select_style clearfix">
+											<script>var $gg=new Array();</script>
+				<!--{foreach $spec as $volist}-->	
+				 <script>$gg[<!--{$i-1}-->]='<!--{$volist.id}-->';</script>
+				 <dl id="spec_10">
+    <dt><!--{$volist.sname}--></dt>
+        <dd>
+            <ul genre="property">
+             <!--{set $k=explode(',',$volist.svalue)}-->
+            <!--{foreach $k as $value}-->
+		
+			<li title="<!--{$value}-->">	<a onclick="selectSpec('<!--{$volist.id}-->',this,'<!--{$volist.sname}-->','<!--{$value}-->');"><!--{$value}--><i></i></a>
+                </li>
+			<!--{/foreach}-->
+            
+                
+            </ul>
+        </dd>
+    </dl>						
+  <!--{/foreach}-->
+     <script>
+             	var specs = new Array();
+				specs.push(new spec(<!--{$data.productid}-->, $gg, <!--{set echo $data.price/100}-->, <!--{$data.count}-->));
+				
+				var specQty = 0;
+				var defSpec = <!--{$data.productid}-->;
+				var goodsspec = new goodsspec(specs, specQty, defSpec);
+             	
+             </script>  
+   
+    <dl>	<dt>数量</dt>
+        <dd class="stock">	<a href="javascript:void(0);" id="low_num">-</a>
+            <input onkeyup="check_nums();" size="3" name="nums" id="nums" type="text" value="1">	<a href="javascript:void(0);" id="add_num">+</a>
+            <em>件 （库存 <span id="stock"><!--{$data.count}--></span> <!--{$data.unit}-->） </em>
+        </dd>
+    </dl>
+</div>
+										
+											<div class="choose_result"></div>
+											<div class="clear"></div>
+											<div class="choose_btn">
+												<a href="javascript:void(0);" class="btn-buy"></a>
+												<a href="javascript:void(0);" class="add-cart"></a>
+											</div>
+										</form>
+									</div>
+									<div class="sep-line clearfix"></div>
+									<ul class="social clearfix">
+										<li class="like"><a href="javascript:like(<!--{$data.productid}-->);"><i></i>喜欢商品</a></li>
+										<li class="fav"><a href="javascript:getfavp(<!--{$data.productid}-->);"><i></i>收藏商品</a></li>
+										<li class="share" id='share'><a href="javascript:void(0);"><i></i>分享</a></li>
+										<script>
+											$(function() {
+
+								            $("#share").socialShare({
+								                content: '<!--{$data.title}-->',
+												url:'<!--{url mod=$c action=$a args="productid:$data.productid"}-->',
+												titile:'<!--{$data.title}-->'
+								            });
+								           
+								            });
+										</script>
+										<li class="ercode iconfont"><a href="javascript:void(0);" style="padding-left: 0"><span style="color:orange"></span> 二维码
+										
+										</a>
+										
+										</li>
+									</ul>
+									<div class="qrcode" style="float: right; padding-right: 70px;display: none">
+									<img src="<!--{url action='qr' args="productid:$data.productid"}-->"></div>
+									<div class="bshare-custom icon-medium hidden"><div class="bsPromo bsPromo2"></div>
+										<div class="bsPromo bsPromo2"></div>
+										
+										
+									</div>
+									<div class="clear"></div>
+									<div id="cart_show" style="display:none"><div class="cartbg"></div>
+<div class="cartinfo">
+	<a id="close_box" class="cart-shut" href="#" onclick="$('#cart_show').fadeOut(500);return false;"></a>
+    <div class="cart-head">添加成功！</div>
+	<div class="cart-text">
+    	<p class="cart-stats">购物车共有<strong id='cartnum'>0</strong>件</p>
+        <a title="去购物车结算" class="cart-checkout" href="<!--{url group='user' mod='cart'}-->">去购物车结算</a>
+        <a class="close-page" onclick="$('#cart_show').fadeOut(500);return false;" href="#">再逛逛</a>
+    </div>
+</div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebar clearfix">
+						<div class="shop-info">
+						<!--{assign var="levelimg1" vo_list("fun={getlevelimg1} type={am} mod={shoplevel}  param1={{$data.muid}}")}-->
+						<!--{assign var="levelimg" vo_list("fun={getlevelimg} type={am} mod={shoplevel}  param1={{$data.muid}}")}-->
+							<a class="shop-info-bg" href="">
+						<!--{if $levelimg1}-->
+							<img width="198" height="45" src="<!--{$levelimg1}-->">
+							<!--{/if}-->	
+							</a>
+							<div class="shop-info-wrap clearfix">
+								<div class="shop-info-hd">
+									<dl>
+										<dt>店铺：</dt>
+										<dd><!--{$data.merchantname}--></dd>
+									</dl>
+									<dl>
+										<dt>信誉：</dt>
+										<dd>
+										<!--{if $levelimg}--><img align="absmiddle" src="<!--{$levelimg}-->">
+											<!--{/if}-->
+										</dd>
+									</dl>
+									<dl>
+										<dt>掌柜：</dt>
+										<dd><a target="_blank" href="#"><!--{$data.username}--></a></dd>
+									</dl>
+									<dl class="shop-icon">
+										<dt>资质：</dt>
+										<dd>
+										<!--{if $data.rzflag}-->
+										 <b ><img src="<!--{$indextpl}-->res/ico/rz.png"/></b>
+										<!--{/if}-->
+											<!--{if $data.bzjcash>0}-->
+											<span title="已缴纳<!--{$data.bzjcash}-->元保证金"><!--{set echo $data.bzjcash/100}--> 元</span>
+											<!--{/if}-->
+										</dd>
+									</dl>
+								</div>
+								<div class="shop-info-bd clearfix">
+									<div class="shop-rate clearfix">
+										<dl>
+											<dt>描述&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.mspf}--></b></dd>
+										</dl>
+										<dl>
+											<dt>物流&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.wlpf}--></b></dd>
+										</dl>
+										<dl>
+											<dt>服务&nbsp;&nbsp;</dt>
+											<dd><b><!--{$data.fwpf}--></b></dd>
+										</dl>
+									</div>
+								</div>
+								<div class="shop-info-fd clearfix">
+									<a target="_blank" href="<!--{url mod='shop' action='show' args="id:$data.muid"}-->">进入店铺</a>
+									<a class="fr" href="javascript:void(0);" onclick="javascript:getfavshop(<!--{$data.muid}-->);">收藏店铺</a>
+								</div>
+							</div>
+						</div>
+						<div class="pine">
+							<div class="pine-hd clearfix">看了又看</div>
+							<div class="pine-bd clearfix">
+							<!--{foreach $other as $volist}-->
+								<li class="fore1">
+									<div class="p-img ld">
+										<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+											<img width="100" src="<!--{$volist.smallimg1}-->">
+										</a>
+									</div>
+									<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+									<div class="p-price"><strong><!--{$volist.currency}--><!--{set echo $volist.price/100}--></strong></div>
+								</li>
+<!--{/foreach}-->
+							
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tabbar-wrap clearfix">
+				<div class="shop-search">
+					<div class="search-panel">
+						<form action="<!--{url mod='shop' action='search' args="muid:$data.muid"}-->" method="post">
+							<div class="search-btn">
+								<input type="submit" value="">
+							</div>
+							<div class="search-fields">
+								<input type="text" value="" name="word">
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="inner-wrap">
+					<ul class="clearfix">
+						<li class="cur"><a href="javascript:void(0);">商品详情</a></li>
+						<li><a href="javascript:void(0);">累计评论</a></li>
+						<li><a href="javascript:void(0);">成交记录</a></li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="layout clearfix">
+				<div class="left">
+					<div class="m">
+						<div class="mt"><h3>热销产品</h3></div>
+						<div class="mc">
+						<!--{foreach $hot as $volist}-->
+							<li class="fore1">
+								<div class="p-img ld">
+									<a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+										<img width="100" src="<!--{$volist.smallimg1}-->">
+									</a>
+								</div>
+								<div class="p-name"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+								<div class="p-price"><strong><!--{$volist.currency}--><!--{set echo  $volist.price/100}--></strong></div>
+							</li>
+<!--{/foreach}-->
+							
+						</div>
+					</div>
+				</div>
+				<div class="con clearfix">
+					<div class="i-con">
+						<div class="attributes clearfix">
+							<ul class="clearfix">
+							<!--{foreach $attribute as $volist}-->	
+								<li><!--{$volist.aname}-->：<!--{$volist.avalue}--></li>
+								<!--{/foreach}-->
+							</ul>
+						</div>
+						<div class="description">
+						<div style="text-align:center;">
+								<!--{$data.content}-->
+								
+								<span style="line-height:1.5;"></span> 
+							</div></div>
+					</div>
+					<div id="reviews" class="i-con hidden">
+					<div class="reviews-hd-fore1 clearfix">
+								<div class="score">
+									<span>商品与描述相符</span>
+									<strong><!--{$data.plpjf}--></strong>
+									<span>分</span>
+								</div>
+								<div class="links"><a target="_blank" href="<!--{url mod='shop' action='comment' args="id:$data.muid"}-->"><i></i>店铺评价</a></div>
+							</div>
+						<iframe style="border:none;width:100%;height:100%;min-height: 1000px;" src="<!--{url mod='comment' action='list' args="productid:$data.productid"}-->"></iframe>
+					</div>
+					<div id="deal-record" class="i-con hidden">
+						<div id="deal-record" class="i-con ">
+					<table width="100%" cellpadding="0" cellspacing="0" class="record" style='    border-bottom: none;'>
+							<thead>
+								<tr>
+									<td colspan="5">交易中<b><!--{$data.sells}--></b>笔，交易成功<b><!--{set echo $data.sells-$data.jfsell}--></b>笔，纠纷退款<b><!--{$data.jfsell}--></b>笔</td>
+								</tr>
+								<tr>
+									<td colspan="5">原价：<!--{$config.currency}--><em><!--{set echo $data.price/100}--></em><span>拍下价格的不同可能会由促销和打折引起的，详情可以咨询卖家。</span></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="pl15">买家</th>
+									<th>拍下价格</th>
+									<th>数量</th>
+									<th>付款时间</th>
+									<th>款式和型号</th>
+								</tr>
+							</tbody>
+						</table>
+						
+					</div>
+					<iframe style="border:none;width:100%;height:100%;min-height: 1000px;" src="<!--{url mod='order' action='list' args="productid:$data.productid"}-->"></iframe>
+					</div>
+					
+					
+				</div>
+				<div class="right"><ul></ul></div>
+			</div>
+			
+
+		</div>
+
+		
+
+
+		  <!--{include file={$indextpl}"pfoot.html"}-->
+
+
+</body></html>

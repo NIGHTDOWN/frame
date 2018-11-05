@@ -1,0 +1,133 @@
+<div style="clear:both;margin-bottom:1rem" ></div>
+<div class="tm-btm-menu J_btmMenuCtn tm-mdv"  style="bottom: 0px;">
+		<ul class="tm-btm-menu-list muicell">
+
+			<li class="menu-item-index-0 menu-item muicell center  ">
+
+				<a href="<!--{url mod='shop' args="id:{$data.muid}" action='search'}-->"
+				 target="_self">
+					商品分类
+				</a>
+
+
+			</li>
+
+			<li class="menu-item-index-1 menu-item muicell center  " id="xskf">
+
+				<a href="javascript:void();" target="_self">
+					咨询客服
+				</a>
+
+
+			</li>
+
+		
+
+		</ul>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<!--{assign var="kf" vo_list("fun={get} type={im} mod={kf}   param1={$data.muid}")}-->
+
+<div class="kf kf2" style='display: none'>
+		<!--{foreach $kf as $vkf}-->
+		<!--{if $vkf.type==0}-->
+		
+		<li onclick="_go_url('mqqwpa://im/chat?chat_type=wpa&uin=<!--{$vkf.num}-->')">
+		<i class='qq'></i>
+		<div class="kfr"><span>称呼：<!--{$vkf.name}--></span>
+		<span><b><!--{$vkf.num}--></b></span></div>
+		</li>
+		<!--{elseif $vkf.type==1}-->
+		<li onclick="_go_url('http://www.taobao.com/webww/ww.php?ver=3&amp;touid=<!--{$vkf.num}-->&amp;siteid=<!--{$config.site_url}-->&amp;status=1&amp;charset=utf-8')">
+		<i class='ww'></i>
+		<div class="kfr"><span>称呼：<!--{$vkf.name}--></span>
+		<span><b><!--{$vkf.num}--></b></span></div>
+		</li>
+		
+		
+		
+		<!--{elseif $vkf.type==2}-->
+		<li onclick="_go_url('tel: <!--{$vkf.num}-->')">
+		<i class='mobile'></i>
+		<div class="kfr"><span>称呼：<!--{$vkf.name}--></span>
+		<span><b><!--{$vkf.num}--></b></span></div>
+		</li>
+		<!--{elseif $vkf.type==3}-->
+<li onclick="_go_url('<!--{url mod='msg'  action='cheat' group='user' args="user:$vkf.num"}-->')">
+		<i class='ygt'></i>
+		<div class="kfr"><span>称呼：<!--{$vkf.name}--></span>
+		<span><b><!--{$vkf.num}--></b></span></div>
+		</li>
+				
+		
+		<!--{/if}-->
+		<!--{/foreach}-->	
+		</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+<script>
+	function getfavshop($id)
+			{	
+				var url = '<!--{url mod='shop' action='collect'}-->';
+	
+				var uname='霓光网络有限公司';
+				if(uname=='')
+				{
+					alert('请登录以后再进行本操作！');
+					window.location.href='<!--{url mod='login' action='run'}-->';
+					return false;
+				}
+				
+				/*$.post(url, pars,showResponse);*/
+				yAjax(url,{'muid':$id},showResponse);
+				function showResponse(data)
+				{
+					if(data.flag){
+						showd(data.data);
+					}else{
+						showd(data.error.errormsg);
+					}
+				}}
+				$('.collect-btn').live('click',function(){
+					getfavshop('<!--{$data.muid}-->');
+				});
+				$('#xskf').live('click',function(){
+					$('.kf').toggle();
+					
+				});
+</script>

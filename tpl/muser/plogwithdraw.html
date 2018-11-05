@@ -1,0 +1,139 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/pay.css" rel="stylesheet" type="text/css" />
+
+
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='index' group='pay'}-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">提现记录</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+					<div>
+							<div  class="search-bar none">
+
+
+									<div class="label3">
+									
+										
+											<div class="title">
+												<span class="tl">筛选 </span>
+											</div>
+											
+											
+												<select class="wtext" name="gender" onchange="_go_url($(this).val())" >
+													<option  value="<!--{url mod='log' action='order'}-->">全部 </option>
+													<option <!--{if $where|sizeof && $where.status==0}-->selected<!--{/if}-->  value="<!--{url mod='log' action='order' args="status:0"}-->">未付款 </option>
+													<option <!--{if $where.status==1}-->selected<!--{/if}-->  value="<!--{url mod='log' action='order' args="status:1"}-->">等待发货 </option>
+													<option <!--{if $where.status==2}-->selected<!--{/if}-->  value="<!--{url mod='log' action='order' args="status:2"}-->">未确认收货 </option>
+													<option <!--{if $where.status==3}-->selected<!--{/if}-->  value="<!--{url mod='log' action='order' args="status:3"}-->">成功 </option>
+													<option  <!--{if  $where.status==4}-->selected<!--{/if}--> value="<!--{url mod='log' action='order' args="status:4"}-->">失败 </option>
+												</select>
+			
+									</div>
+								</div>
+							<div class="list3" >
+								 <!--{foreach $data as  $volist}-->
+									<a href="<!--{url args="soleid:{$volist.soleid}" action='detail' mod='withdraw'}-->" >
+										
+										
+										<div class="l2f"  >
+											<div class="title tt"><!--{$volist.desc}--> </div>
+											<div class="status">[ <!--{if $volist.status==0}--> 进行中
+												<!--{elseif $volist.status==1}--> 完成
+												<!--{elseif $volist.status==2}--> 关闭
+												<!--{/if}-->  ]</div>
+											<div class="time"><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></div>
+
+										</div>
+										<div class="l2r"  >
+										 <span class="money og" >
+												
+												<!--{$volist.money}-->   </span>
+                
+												<div class="ico">
+														<i class="go"></i>
+													</div>	
+											</div>
+									
+									</a>
+								    <!--{/foreach}-->  
+								</div>	
+
+					
+
+					</div>
+					<div class="page">
+						<!--{$page}-->
+					</div>
+				</div>
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+
+	<!--{include file={$usertpl}"foot.html"}-->

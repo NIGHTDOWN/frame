@@ -1,0 +1,137 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+	<script>
+		_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+	</script>	
+<style>
+	.lineD>div{
+		width: 100px;
+		float: left;
+	}
+</style>
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con">
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span>	已买到的商品 
+    </div>
+</div>
+<div class="main">
+<div class="wrap">
+<div class="apply clearfix">
+    <div class="apply_left">
+     <form action="" method="post">
+    	<h1 class="clearfix">
+        <em>申请服务：</em>
+            <strong>
+                        	<select name="servertype">
+                        		<option value="1">仅退款</option>
+                        		<option value="2">退货/退款</option>
+                        		
+                        	</select>
+                    </strong>
+        <span class="s"><b>*</b> 为必填项</span>
+        </h1>
+       
+       
+       
+    	<table>
+        	            
+            <tbody>
+            
+            <tr>
+            	<th>需要退款金额：<em>*</em></th>
+                <td>
+				
+                	<input type="text" name="price" value="<!--{$data.subtotal}-->">元	最多￥ <font class="org"><!--{$data.subtotal}--></font> 
+                </td>
+            </tr>
+        	<tr>
+            	<th>退款原因：<em>*</em></th>
+                <td>
+                <textarea name="reason"></textarea>
+                </td>
+            </tr>
+        	<tr>
+            	<th>上传凭证：</th>
+                <td>
+                <ul class="pic_list"><li><img class="hidden" width="60" id="pic_img"></li></ul>
+             
+                <button type="button" class="upload-button" tag='img_up_more'>选择凭证</button> 
+                </td>
+            </tr>
+            <tr>
+            	<th></th>
+                <td>
+                <input type="submit" class="btn" value="提交申请">
+                </td>
+            </tr>
+        </tbody></table>
+        </form>
+    </div>
+    <div class="apply_right">
+    	<h1><strong>退款/退货申请</strong></h1>
+        <table>
+        	<tbody>
+        	<tr>
+            	<th>订单编号：</th>
+            	<td><a target="_blank" href=""><!--{$data.ordernum}--></a></td>
+            </tr>
+        	<tr>
+            	<th><img style="width: 50px;height:50px;" src="<!--{$data.smallimg}-->"></th>
+                <td><a target="_blank" href="<!--{url mod='product' action='detail' grou='index' args="productid:{$data.productid}"}-->"><!--{$data.productname|tostr}--></a></td>
+            </tr>
+            <tr class="empty dotted">
+            	<th></th>
+            	<td></td>
+            </tr>
+            <tr class="empty">
+            	<th></th>
+            	<td></td>
+            </tr>
+        	<tr>
+            	<th>单　　价：</th>
+            	<td><!--{$data.price}-->元 * <!--{$data.num}-->（数量）</td>
+            </tr>
+        	<tr>
+            	<th>宝贝优惠：</th>
+            	<td>无优惠</td>
+            </tr>
+            <tr>
+            	<th>宝贝总价：</th>
+            	<td><!--{$data.subtotal}-->元</td>
+            </tr>
+<tr>
+            	<th>订单实付：</th>
+            	<td><!--{$data.paytotal}-->元</td>
+            </tr>
+        	<tr>
+            	<th>运　　费：</th>
+            	<td><!--{$data.logisfee}-->元</td>
+            </tr>
+            
+        </tbody></table>
+        <table class="seller">
+            <tbody><tr class="empty">
+            	<th></th>
+            	<td></td>
+            </tr>
+            <tr>
+            	<th>卖　　家：</th>
+            	<td><a target="_blank" href="<!--{url mod='shop' group='index' action='show' args="id:{$data.muid}"}-->"><!--{$data.merchantname}--></a></td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+$("#pic_img").load(function(){
+	var src = $(this).attr("src");
+	if(src) $(this).show();	
+});
+</script></div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

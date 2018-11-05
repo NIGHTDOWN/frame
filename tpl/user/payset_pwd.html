@@ -1,0 +1,41 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+		<div class="fn-right">
+<div class="block">
+    <div class="i-block">
+        <h2>支付密码</h2>
+    </div>
+        <div class="form">
+        <form method="post" id="form">
+            <input type="hidden" name="act" value="act">
+            <fieldset>
+                                <dl class="oldpass">
+                    <dt>原始支付密码：</dt>
+                    <dd>
+                        <input style="float: left" type="password" class="text" name="oldpwd" id="oldpass" tag='notnull'>
+                      <!--  <div class="findpass"><a href="">忘记密码？</a></div>-->
+                        <div class="form-error" style="clear:both;"></div>
+                    </dd>
+                </dl>
+                 <dl>
+                    <dt>设置支付密码：</dt>
+                    <dd><input type="password" tag='notnull iscomplex' class="text" name="pass" id="pass"><div class="form-error" ></div></dd>
+                </dl>
+
+                <dl>
+                    <dt>确认支付密码：</dt>
+                    <dd><input tag='notnull isequal' type="password" class="text" name="cpass" id="re_pass"><div class="form-error"></div></dd>
+                </dl>
+            </fieldset>
+            <dl>
+                <dt></dt>
+                <dd>
+                    <input type="button" class="submit" value="确定" tag="submit">
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

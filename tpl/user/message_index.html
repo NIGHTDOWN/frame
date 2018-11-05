@@ -1,0 +1,110 @@
+  <!--{include file={$usertpl}"top.html"}-->
+  <script>
+  	_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+  </script>
+<style>
+	.none{display:none}
+</style>
+		
+
+		 <div class="left_con">
+                                                <div class="business_handle" id="my_menu">
+                        <h3 style="text-indent:20px;">消息提醒</h3>
+                        <ul>
+                                                                                                                 <li class="<!--{if $a=='run'}-->active<!--{/if}-->"><a href="<!--{url mod='message' }-->">我的消息 </a>
+                            </li>  
+                              <li ><a href="<!--{url mod='msg' }-->">在线聊天 </a>
+                            </li>
+                                                                                                                                             
+                                                                                </ul>
+                    </div>
+                                    </div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="right_con">
+				
+
+
+<div class="path">
+    <div>
+    	    		<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span>
+              <a href="<!--{url mod='message' action='run'}-->">消息提醒</a>  <span>></span>我的消息
+            </div>
+</div>
+<script>
+	$(function(){
+		$('.tabs').find('a').on('click',function(){
+		
+			$indexnum=$('.tabs').find('a').index($(this));
+				$('.tabs').find('li').removeClass('active');
+				$('.tabs').find('li').addClass('normal');
+$($('.tabs').find('li').get($indexnum)).removeClass('normal');
+				$($('.tabs').find('li').get($indexnum)).addClass('active');
+				$('#content').children().hide();
+				$($('#content').children().get($indexnum)).show();
+		});
+		
+	});
+</script>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+             
+                <li class="active"><a href="#" >消息列表</a></li>
+                
+            </ul>
+        </div>
+        <div id="content">
+                <table class="table-list-style">
+              
+                <tbody>
+                    	<!--{foreach $data as $volist}-->
+                                        <tr>
+                    <td></td>
+                    <td class="tl"  <!--{if $volist.uread==0}-->style='color:#f11057'<!--{/if}-->"><!--{$volist.title}--> </td>
+                    <td class="tl">
+                        <span  style="    max-width: 600px;
+                        overflow: hidden;
+                        width: 500px;
+                        display: block;
+                        margin-left: 10px;
+                        word-wrap: break-word;"><!--{$volist.content}--></span></td>
+                 
+                    <td class="tl" ><!--{$volist.addtime|date_format:"%Y-%m-%d"}--><br>
+                    </td>
+                   
+                    <td><a href="<!--{url  action='show' args="msgid:{$volist.msgid}"}-->">查看</a>
+                         <a a="<!--{url  action='del' args="msgid:{$volist.msgid}"}-->" onclick="boxyn($(this))">删除</a></td>
+                </tr>
+                <!--{/foreach}-->
+                                        </tbody>
+                            <tbody><tr><td colspan="7">
+                            <div class="pagination">  <!--{$page}-->
+                                 </div></td>
+                           
+                                </tr>
+            </tbody></table>
+             
+                 
+                 
+                 
+            </div>
+               
+            </div>
+</div></div>
+				
+				
+				
+				
+				
+				
+				
+				
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html class=" js rgba borderradius boxshadow textshadow opacity cssgradients"><!-- <![endif]--><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<!--{$indextpl}-->css3/public_1.css" type="text/css">
+		<link rel="stylesheet" href="<!--{$indextpl}-->css3/style_1.css" type="text/css">
+	
+
+		<script type="text/javascript" src="<!--{$staticjs}-->/jquery.min.js"></script>
+		<script type="text/javascript" src="<!--{$staticjs}-->/night_Trad.v1.0.js"></script>
+	
+	
+
+		
+		<link rel="stylesheet" href="<!--{$indextpl}-->css2/bootstrap.min.css" type="text/css">
+
+
+		<title><!--{$config.site_name}-->--找回密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+
+		<!-- Favicons -->
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+
+		</head>
+	<body class="login">
+
+
+
+		<div class="loginContainer">
+			<div class="loginBox">
+				<div class="sLogo">
+					<a href="<!--{url action='run' mod='index'}-->">
+						<img src="<!--{$static}-->logo/logo.png" >
+					</a>
+				</div>
+				<form class="form-horizontal margin-none" name="register_form" action="<!--{url action='cgpwd'}-->" method="post">                 
+                
+							<div class="widget widget-body-white padding-none">
+								
+								<div class="widget-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">手机号码<span class="ast">*</span></label>
+										<div class="col-md-9"><input class="form-control" id="account" tag='notnull ismobile' name="username" value="" type="text"></div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-3 control-label">短信验证码<span class="ast">*</span></label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<input class="form-control" name="code" value="" tag=' fixnum' type="text" placeholder="请输入您收到的短信验证码">
+												<span class="input-group-btn"> <input name="sendsms" id="sendsms" type="button" class="btn btn-primary pemailcheck" value="获取短信验证码"></span>
+											</div>
+										</div>
+									</div>
+								
+
+									<div class="form-group">
+										<label class="col-md-3 control-label">新密码<span class="ast">*</span></label>
+										<div class="col-md-9"><input class="form-control" tag='notnull iscomplex' id="password" name="new_password" type="password"></div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">确认新密码<span class="ast">*</span></label>
+										<div class="col-md-9"><input class="form-control" tag='notnull isequal' id="cpassword" name="cnew_password" type="password"></div>
+									</div>
+									
+                            
+								</div>    
+                                        
+							</div>
+                    
+                    
+
+							<div class="widget widget-body-white padding-none">                     
+								<div class="data-footer innerAll half text-right clearfix" style="text-align:center; padding:10px;">
+									<input type="submit" class="btn btn-block btn-primary" value="找回密码">                         
+									
+								</div>
+							</div>
+						</form>
+			</div>
+		</div>
+
+
+	
+
+
+	
+		<script>
+			$(function(){
+					var intDiff =0;
+					$('#sendsms').click(function() {
+							if(intDiff<=0){
+
+								var $mobile = $('[name=username]').val();
+						
+								var $action = '<!--{url action='forget'}-->';
+								$.post($action,{username:$mobile},function(data){
+
+										intDiff = parseInt(60);//倒计时总秒数量
+										var timer = window.setInterval(function(){
+												$("#sendsms").attr("disabled", true);
+												$("#sendsms").val(''+intDiff+'秒后重新获取');
+												intDiff--;
+												if(intDiff<0){
+													clearInterval(timer);
+													$("#sendsms").removeAttr("disabled");
+													$("#sendsms").val('获取短信验证码');
+												}
+											}, 1000);
+
+
+										if(data.flag ){
+											alert(data.data);
+										}
+									});
+							}
+
+						});
+				});
+		</script>
+
+
+	</body></html>

@@ -1,0 +1,69 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td{
+	margin: 0; 
+	padding: 0; 
+	border: 0; 
+	outline: none; 
+	font-weight: normal}
+	html{
+	font-family: sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+body{
+	line-height: 1.1; 
+	font-size: 14px; 
+	font-family: "微软雅黑"; 
+/*	background-color: #26384a;*/}
+
+*{
+	box-sizing: border-box}
+h1, h2, h3, h4, h5, h6{
+	font-size: 100%;}
+ul, ol{
+	list-style: none;}
+a{
+	color: #333;
+	text-decoration: none;}
+em,i{
+	font-style: normal;}
+.clear{
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	line-height: 0;}
+.green{
+	color: #4fba1b;}
+.red{
+	color: #ff6c60;}
+table{
+	border-collapse: collapse;
+	border: 0;}
+.mt20{
+	margin-top: 20px;}
+.mb20{
+	margin-bottom: 20px;}
+.mg0{
+	margin: 0!important;}
+
+#page_box{
+	padding: 20px 0;
+}
+#page_box .current,#page_box .num,#page_box .next,#page_box .prev{
+	padding: 5px 10px;
+}
+#page_box .current:hover,#page_box .num:hover,#page_box .next:hover,#page_box .prev:hover{
+	background: #43A6E7;
+	color: #FFF;
+}
+#page_box .current{
+	background: #43A6E7;
+	color: #FFF;
+}
+
+.feile{
+	position: fixed;
+	top: -1000px;
+	left: -1000px;;
+}

@@ -1,0 +1,70 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con"><div class="path">
+    <div>
+    	    		<a href="<!--{url group='user' mod='index'}-->">我的商城</a> <span>&gt;</span>
+                兑换记录
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li class="active"><a href="#">兑换记录</a></li>
+               
+			</ul>
+        </div>
+       <table class="table-list-style">
+        	<thead>
+            <tr>
+            	<th width="10"></th>
+				<th width="150" class="tl">订单编号</th>
+            	<th class="tl">商品名称</th>
+            	<th width="160">下单日期</th>
+            	<th width="150">订单状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--{foreach $data as $volist}-->
+                        <tr>
+	  			<td></td>
+                <td class="tl"><a href="<!--{url mod='jfstore'  group='index' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.ordernum}--></a></td>
+            	<td class="tl">
+				<a target="_blank" href="<!--{url mod='jfstore'  group='index' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--><span style='font-size: 70%;
+    margin-left: 6px;
+    color: #A29E9E;'>(<!--{$volist.spec}-->)</span></a>
+				</td>
+				<td><!--{$volist.createtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                <td class="td128">
+                 <!--{if $volist.status==0}-->未发货
+                                
+                     <!--{elseif $volist.status==1}-->已发货
+                     <!--{elseif $volist.status==2}-->交易成功
+                     <!--{elseif $volist.status==3}-->交易关闭
+                     <!--{elseif $volist.status==4}-->处理中
+                   
+                     <!--{/if}-->
+                    
+                
+                <a target="_blank" href="<!--{url action='detail' args="ordernum:{$volist.ordernum}"}-->">查看订单</a>
+                
+                                                                            </td>
+            </tr>
+                      <!--{/foreach}-->
+                      
+                        </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td colspan="20"><div class="pagination"><!--{$page}--></div></td>
+            </tr>
+            </tfoot>
+        </table>
+     </div>   
+</div></div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

@@ -1,0 +1,39 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+
+<DIV class=fn-right><DIV class="block fn-clear">
+<DIV class=record>
+<H2>提现记录 <SPAN>可用余额<STRONG><!--{$user.cash}--></STRONG>元</SPAN> </H2>
+<TABLE cellSpacing=0 cellPadding=0 width="100%">
+<TBODY>
+<TR>
+<TH class=al width=80>创建时间</TH>
+<TH class=al>名称 | 交易号</TD> 
+<TH width=100>金额(元)</TH>
+<TH width=80>状态</TH>
+<TH width=60>操作</TH></TR>
+<!--{foreach $data as $volist}-->
+<TR>
+<TD class=al><!--{$volist.addtime|date_format:"%Y-%m-%d"}--></TD>
+<TD class=al> <!--{$volist.desc}-->  
+<DIV>交易号 <!--{$volist.soleid}--> </DIV></TD>
+<TD class="price minus">-<!--{$volist.money/100}-->
+	<DIV>(手续费 <!--{$volist.fee/100}--> )</DIV>
+</TD>
+<TD><!--{if $volist.status==0}--> 进行中
+<!--{elseif $volist.status==1}--> 完成
+<!--{elseif $volist.status==2}--> 关闭
+<!--{/if}--></TD>
+<TD><A href="<!--{url args="soleid:{$volist.soleid}" action='detail' mod='withdraw'}-->" target=_blank>详情</A> </TD></TR>
+<!--{/foreach}-->
+
+<tr>
+                <td colspan="99">
+                <div class="page">   <!--{$page}--></div>
+                </td>
+            </tr>
+
+</TBODY></TABLE></DIV></DIV></DIV>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

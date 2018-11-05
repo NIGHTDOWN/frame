@@ -1,0 +1,96 @@
+
+
+  <!--{include file={$usertpl}"pframe.html"}-->	
+		<div class="fn-right">
+<div class="block fn-clear">
+	<div class="i-block payment">
+        
+        <div class="title">
+       		<span class="money"><strong><!--{$money/100}--></strong>元</span>
+        	<div>
+        	<!--{set $num=sizeof($data)}-->
+        	<!--{if $num>1}-->
+            <h3>合并|<!--{$num}-->笔订单</h3>
+            <div class="showorderinfo"><a href="#">订单详情</a></div>
+           <script>
+           	$(function(){
+           		$('.showorderinfo').click(function(){
+           			$('#orderinfo').toggle();
+           			
+           			
+           		});
+           		
+           		
+           		
+           	});
+           </script>
+             <div  id='orderinfo'  style='display:none'>
+            <!--{else}-->
+             <div id='orderinfo' >
+            <!--{/if}-->
+           
+            <!--{foreach $data as $volist}-->
+            <p> <div class="ordernum">订单【<!--{$volist.ordernum}-->】(担保交易)</div> 
+            <span>店铺名称：<!--{$volist.merchantname}--></span> 
+          <span>【<!--{$volist.productname|tostr|truncate:'25'}-->...】</span> 
+            </p>
+           
+            <!--{/foreach}-->
+             </div>
+            </div>
+        </div>
+		<style>
+			[tag='not']{ background-color: #ddd;}
+		</style>
+                <div class="form">
+        <form method="post">
+        <input type="hidden" name="act" value="pay">
+       
+            <fieldset>
+            <dl>
+                <dt>支付方式：</dt>
+                <dd class="pay">
+                 
+             
+                    <ul class="fn-clear">
+                    <li >
+                    <img <!--{if $user.cash<$money}-->tag='not'<!--{/if}--> title="余额支付" style='width:158px;height:45px' alt="余额支付" data-param="{'id':'-1'}" src="<!--{$usertpl}-->res/bank/yuer.png"><i></i>
+                    </li>
+                    <!--{foreach $api as $i=>$volist}-->
+                    <!--{if $i==0}--> <input type="hidden" name="payment_type" value="<!--{$volist.apiid}-->" ><!--{/if}-->
+                     <li <!--{if $i==0}-->class="checked"<!--{/if}-->>
+                    <img title="<!--{$volist.name}-->" style='width:158px;height:45px' alt="<!--{$volist.name}-->" data-param="{'id':'<!--{$volist.apiid}-->'}" src="<!--{$volist.logo}-->"><i></i>
+                    </li>
+                    <!--{/foreach}-->
+                    </ul>
+                </dd>
+            </dl> 
+            </fieldset>
+                        <dl>
+                <dt></dt>
+                <dd>
+                <input type="submit" class="submit" value="确定支付">
+                </dd>
+            </dl>
+        </form>   
+        </div>
+            
+    </div>
+</div>
+   	</div> 
+<script>
+$(".pay li").bind("click",function(){
+	$tag=$(this).children('img').attr('tag');
+	if($tag=='not'){
+		alert('余额不足，请使用其他方式支付');return false;
+	}
+	var data = $(this).children('img').attr('data-param');
+	eval("data = "+data);
+		$("[name=payment_type]").val(data.id);
+	$(this).addClass("checked").siblings().removeClass("checked");
+});
+</script>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

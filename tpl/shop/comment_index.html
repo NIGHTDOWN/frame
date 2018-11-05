@@ -1,0 +1,195 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+<style>
+.scroller{ background:url(<!--{$shoptpl}-->res//credit.png) 17px 23px no-repeat;display:block;height:22px;padding:0 0 17px 30px;text-align:left;width:400px;margin-right:25px;}
+.scroller span{display:block;height:22px;width:0;}
+.scroller em{background:url(<!--{$shoptpl}-->res//credit.png) -417px 2px no-repeat; color:white;display:block;float:right;height:22px;padding-top:1px; text-align:center;width:30px;}
+.rate-desc{height:auto;overflow:hidden;width:400px;}
+.rate-desc li{display:block;float:left;text-align:center;width:80px;}
+
+caption .l{ float:left;}
+caption .r{ float:right;}
+.credit,.comment{line-height:36px;border-collapse:collapse;margin-bottom:10px;}
+.credit .title,.comment .title{background-color:#F8F8F8;}
+.credit th,.comment th{color:#A9A9A9;font-weight:normal;border-top:1px solid #D7D7D7;text-align:center;}
+.credit td{background-color:#FFF;color:#666666;text-align:center;}
+.credit th,.credit td{border-bottom:1px solid #D7D7D7;}
+.cg{color:#FF0000;}
+.cm{color:#569636;}
+.cb{color:#3E3E3E;}
+.cz{color:#275BCB;}
+
+.comment a{ text-decoration:none;color:#3366CC;}
+.comment th{padding:0 5px;}
+.comment td{background-color:#FFF;color:#666666;padding:10px 5px 8px;border-bottom:1px solid #E2E2E2;vertical-align:top;line-height:18px;}
+.comment td p{color:#FF6600;font-weight:bold;line-height:20px;}
+.comment ul{border-bottom:2px solid #FF8C40;float:left;width:100%;}
+.comment ul li ,.comment ul li a,.comment ul li a span{ background:url(<!--{$shoptpl}-->res/tab1.png) no-repeat 1000px 1000px;display:block;height:29px;line-height:29px;}
+.comment ul li{float:left;margin-right:5px;padding-left:4px;background-position:0 -147px;}
+.comment ul li a{background-position:right -245px;color:#000000;padding-right:4px;cursor:pointer;}
+.comment ul li a span{background-position:right -196px;background-repeat:repeat-x;padding:0 10px;
+}
+.comment ul li.selected{background-position:0 -293px;}
+.comment ul li.selected a{background-position:right -395px;color:#FFFFFF;font-weight:700;}
+.comment ul li.selected a span{background-position:0 -344px;}
+</style>
+<div class="layout">
+	<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+
+<div class='right_content'>
+
+<div class="l"><b>商铺动态评分</b></div>
+
+<div style="border:1px solid #CCC;width:100%;padding:10px 0;">
+  <table width="96%" style="margin:auto;">
+    <tbody><tr>
+      <td width="85" align="right">商品与描述相符
+        <p style="color:#FF6600;font-weight:bold"><!--{$user.mspf}-->分</p></td>
+      <td align="right"><div class="scroller"> <span style="width: <!--{set echo $user.mspf/0.05}-->%;"><em><!--{$user.mspf}--></em></span> </div>
+        <div class="rate-desc">
+          <ul>
+            <li>非常不满</li>
+            <li>不满意</li>
+            <li>一般</li>
+            <li>满意</li>
+            <li>非常满意</li>
+          </ul>
+        </div></td>
+    </tr>
+    <tr>
+      <td align="right">卖家的服务态度
+        <p style="color:#FF6600;font-weight:bold"><!--{$user.fwpf}-->分</p></td>
+      <td align="right"><div class="scroller"> <span style="width: <!--{set echo  $user.fwpf/0.05}-->%;"><em><!--{$user.fwpf}--></em></span> </div>
+        <div class="rate-desc">
+          <ul>
+            <li>非常不满</li>
+            <li>不满意</li>
+            <li>一般</li>
+            <li>满意</li>
+            <li>非常满意</li>
+          </ul>
+        </div></td>
+    </tr>
+    <tr>
+      <td align="right">卖家的发货速度
+        <p style="color:#FF6600;font-weight:bold"><!--{$user.fhpf}-->分</p></td>
+      <td align="right"><div class="scroller"> <span style="width: <!--{set echo  $user.fhpf/0.05}-->%;"><em><!--{$user.fhpf}--></em></span> </div>
+        <div class="rate-desc">
+          <ul>
+            <li>非常不满</li>
+            <li>不满意</li>
+            <li>一般</li>
+            <li>满意</li>
+            <li>非常满意</li>
+          </ul>
+        </div></td>
+    </tr>
+    <tr>
+      <td align="right">物流发货的速度
+        <p style="color:#FF6600;font-weight:bold"><!--{$user.wlpf}-->分</p></td>
+      <td align="right"><div class="scroller"> <span style="width: <!--{set echo  $user.wlpf/0.05}-->%;"><em><!--{$user.wlpf}--></em></span> </div>
+        <div class="rate-desc">
+          <ul>
+            <li>非常不满</li>
+            <li>不满意</li>
+            <li>一般</li>
+            <li>满意</li>
+            <li>非常满意</li>
+          </ul>
+        </div></td>
+    </tr>
+  </tbody></table>
+</div>
+<table width="100%" class="credit">
+  <caption>
+      <div class="l"><b>
+      卖家累计信用：</b>
+            <b style="color:#3366CC"><!--{$user.good}--></b>
+            </div>
+  </caption>
+  <tbody><tr class="title">
+    <th width="20%"></th>
+    <th width="15%">最近1周</th>
+    <th width="15%">最近1个月</th>
+    <th width="15%">最近6个月</th>
+    <th width="15%">6个月前</th>
+    <th width="15%">总计</th>
+  </tr>
+    <tr>     <th><b><span class="cg">好评</span></b></th>
+        <td><!--{set echo  $commentnum.week.good}--></td>
+                                <td><!--{set echo $commentnum.mouth.good}--></td>
+                                <td><!--{$commentnum.smouth.good}--></td>
+                                <td><!--{$commentnum.bsmouth.good}--></td>
+                                <td><!--{set echo $commentnum.bsmouth.good+$commentnum.smouth.good}--></td>
+  </tr>
+    <tr>     <th><b><span class="cm">中评</span></b></th>
+        <td><!--{$commentnum.week.center}--></td>
+                                <td><!--{$commentnum.mouth.center}--></td>
+                                <td><!--{$commentnum.smouth.center}--></td>
+                                <td><!--{$commentnum.bsmouth.center}--></td>
+                                <td><!--{set echo $commentnum.bsmouth.center+$commentnum.smouth.center}--></td>
+  </tr>
+    <tr>     <th><b><span class="cb">差评</span></b></th>
+         <td><!--{$commentnum.week.bad}--></td>
+                                <td><!--{$commentnum.mouth.bad}--></td>
+                                <td><!--{$commentnum.smouth.bad}--></td>
+                                <td><!--{$commentnum.bsmouth.bad}--></td>
+                                <td><!--{set echo $commentnum.bsmouth.bad+$commentnum.smouth.bad}--></td>
+  </tr>
+    <tr>
+    <th><b><span class="cz">总计</span></b></th>
+    <td><!--{set echo  $commentnum.week.bad+$commentnum.week.center+$commentnum.week.good}--></td>
+                <td><!--{set echo  $commentnum.mouth.bad+$commentnum.mouth.center+$commentnum.mouth.good}--></td>
+                <td><!--{set echo $commentnum.smouth.bad+$commentnum.smouth.center+$commentnum.smouth.good}--></td>
+                <td><!--{set echo $commentnum.bsmouth.bad+$commentnum.bsmouth.center+$commentnum.bsmouth.good}--></td>
+                                                <td><!--{set echo $data.bad+$data.good+$data.center}--></td>
+  </tr>
+</tbody></table>
+
+<table width="100%" class="comment">
+  <caption>
+  	  <ul>
+      <li class="selected"><a href="<!--{url action='run'}-->"><span>来自买家的评论</span></a></li>
+      <li><a href="<!--{url action='other'}-->"><span>给他人的评论</span></a></li>
+      </ul>
+  </caption>
+  <tbody><tr class="title">
+    <th width="50"></th>
+    <th></th>
+    <th align="center" width="150">评价人</th>
+    <th align="left" width="200">商品</th>
+    <th width="80">时间</th>
+      </tr>
+      <!--{foreach $datalist as $volist}-->
+    <tr>
+    <td align="center"><span class="cg">
+    	<!--{if $volist.cmlevel==1}--><span class="cg">好评</span>
+    	<!--{elseif $volist.cmlevel==0}--><span class="cm">中评</span>
+    	<!--{elseif $volist.cmlevel==2}-->
+    	<span class="cb">差评</span>
+    	<!--{/if}-->
+    </span></td>
+    <td><!--{$volist.cmcontent}--></td>
+    <td align="center"><a  href="#"><!--{$volist.username|incode}--></a></td>
+    <td><a target="_blank" href="<!--{url mod='product' args="productid:{$volist.productid}" action='detail' group='index'}-->"><!--{$volist.productname|tostr}--></a>
+   <p><span style="color: #969292;
+    font-size: 80%;"><!--{$volist.spec}--></span></p>   <p>￥ <!--{$volist.subtotal}--></p></td>
+    <td align="center"><!--{$volist.cmtime|date_format:"%Y-%m-%d \n %H:%M:%S"}--></td>
+      </tr>
+    <!--{/foreach}-->
+      <tr>
+    <td colspan="20"><div class="page"> 
+    <!--{$page}-->
+    </div></td>
+  </tr>
+  </tbody></table>
+</div>
+	
+	<div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

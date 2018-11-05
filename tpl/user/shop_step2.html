@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+		<title>填写店铺资料 - 免费开店</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		
+		<link href="<!--{$usertpl}-->res/user_admin.css" rel="stylesheet" type="text/css">
+		
+		<script src="<!--{$usertpl}-->res/jquery-1.4.4.min.js" type="text/javascript"></script>
+		
+		
+			<script src="<!--{$staticjs}-->jquery.min.js" type="text/javascript"></script>
+				<script src="<!--{$staticjs}-->ajaxfileupload.js" type="text/javascript"></script>
+			
+		<script src="<!--{$staticjs}-->night_Trad.v1.0.js" type="text/javascript"></script>
+	<script>
+					  _ajax_file_url='<!--{url mod='upimg'}-->';
+				</script>	
+		<script type="text/javascript">
+			var searchTxt = ' 搜索商品！';
+			var SEARCHVALUE = '请输入分类属性名称';
+			var weburl="";
+			function searchFocus(e){
+				if(e.value == searchTxt){
+					e.value='';
+					$('#keyword').css("color","");
+				}
+			}
+			function searchBlur(e){
+				if(e.value == ''){
+					e.value=searchTxt;
+					$('#keyword').css("color","#999999");
+				}
+			}
+
+			function getHTML(v,ob,sscatid,scatid,tcatid)
+			{	
+				if(ob=='tcatid'){
+					document.getElementById('scatid').options.length=0;
+					document.getElementById('sscatid').options.length=0;
+					document.getElementById('scatid').style.visibility="hidden";
+					document.getElementById('sscatid').style.visibility="hidden";
+				}
+				if(ob=='scatid'){
+					document.getElementById('sscatid').options.length=0;
+					document.getElementById('sscatid').style.visibility="hidden";
+				}
+				var url = '';
+				var sj = new Date();
+				var pars = 'shuiji=' + sj+'&cattype=com&pcatid='+v;
+				$.post(url, pars,showResponse);
+				function showResponse(originalRequest)
+				{
+					if(originalRequest=='')
+					return false;
+			
+					var tempStr = 'var MyMe = ' + originalRequest; 
+					var i=1;var j=0;
+					eval(tempStr);
+					for(var s in MyMe)
+					{
+						++j;
+					}
+					if(j>0)
+					document.getElementById(ob).style.visibility="visible";
+					else
+					document.getElementById(ob).style.visibility="hidden";
+					document.getElementById(ob).options.length =j+1;
+					document.getElementById(ob).options[0].value = '';
+					document.getElementById(ob).options[0].text = '请选择子类别';
+					document.getElementById(ob).options[0].selected = true;
+					for(var k in MyMe)
+					{
+						var cityId=MyMe[k][0];
+						var ciytName=MyMe[k][1];
+						document.getElementById(ob).options[i].value = cityId;
+						document.getElementById(ob).options[i].text = ciytName;
+			
+						if(cityId==scatid||cityId==tcatid||cityId==sscatid)
+						{
+							document.getElementById(ob).options[i].selected = true;
+							scityid=cityId;
+						}
+						i++;
+						　}
+					try
+					{
+						if(ob=='tcatid')
+						getHTML(scityid,'scatid',sscatid,scatid,tcatid);
+						if(ob=='scatid')
+						getHTML(scityid,'sscatid',sscatid,scatid,tcatid);
+					}
+					catch(e)
+					{
+			
+					}
+				}
+				　}
+
+
+
+			//是否为固定电话，区号3到4位，号码7到8位,区号和号码用"－"分割开，转接号码为1到6位，用小括号括起来紧跟在号码后面
+			function is_telphone(str)
+			{
+				var reg=/^[0-9]{3,4}\-\d{7,8}(\(\d{1,6}\))?$/;
+
+				if (reg.test(str))
+				return true;
+				else
+				return false;
+			}
+
+			//手机号码验证，验证13系列和158，159几种号码，长度11位
+			function is_mobel(str)
+			{
+				var reg0 = /^13\d{9}$/;
+				var reg1 = /^158\d{8}$/;
+				var reg2 = /^159\d{8}$/;
+
+				return (reg0.test(str)||reg1.test(str)||reg2.test(str))
+			}
+
+
+			function chk()
+			{
+				var flag = true;
+	
+				if(!require("company","请填写店铺名称。"))
+				{
+					return false;
+				}
+				if(!require("catid","请选择店铺分类。"))
+				{	
+					return false;
+				}
+				if(!require("addr","请填写详细地址。"))
+				{	
+					return false;
+				}
+				if(!require("tel","请填写联系电话。"))
+				{
+					return false;
+				}
+
+				if (!is_telphone($("#tel").val())  && !is_mobel($("#tel").val()))
+				{
+					if($("#tel").val())
+					{
+						msgs('tel', '请输入正确的联系电话');
+						return false;
+					}
+					else
+					{
+						$("#tel").next('span').html("");
+
+						return true;
+					}
+
+					return false;
+				}
+
+				if(!limit("company",20,"店铺名称请控制长度不超过20字。"))
+				{
+					return false;
+				}
+				if($("#d_2").css('display')!='none' && !$("#select_1").val())
+				{	
+					id="select_1";
+					flag = false;
+				}
+				else if($("#select_2").find("option").length>0 && !$("#select_2").val())
+				{	
+					id="select_2";
+					flag = false;
+				}
+				else if($("#select_3").find("option").length>0 && !$("#select_3").val())
+				{	
+					id="select_3";
+					flag = false;
+				}
+				else if($("#select_4").find("option").length>0 && !$("#select_4").val())
+				{	
+					id="select_4";
+					flag = false;
+				}
+				if(!flag)
+				{
+					document.getElementById(id).focus();
+					if($("#d_2 .form-error").html())
+					$("#d_2 .form-error").html("请选择所在地区。")
+					else
+					$('#d_2').append("<span class='form-error'>请选择所在地区。</span>")
+					return false;	
+				}	
+		
+			}
+			function require(id,msg)
+			{	
+				if(!$("#"+id).val())
+				{
+					msgs(id,msg);
+					return false;
+				}
+				else
+				{
+					$("#"+id).next('span').html("");
+					return true;	
+				}
+			}
+			function limit(id,m,msg)
+			{	
+				if((($("#"+id).val()).length)>m)
+				{
+					msgs(id,msg);
+					return false;
+				}
+				else
+				{
+					$("#"+id).next('span').html("");
+					return true;	
+				}
+			}
+			function msgs(id,msg)
+			{
+				if($("#"+id).next('span').attr('class'))
+				$("#"+id).next('span').html(msg)
+				else
+				$("#"+id).after("<span class='form-error'>"+msg+"</span>")	
+				document.getElementById(id).focus();
+			}
+		</script>
+		<link href="<!--{$usertpl}-->res/default.css" rel="stylesheet">
+		</head>
+	<body>
+	<div id="shortcut">
+			<div class="w">
+				<div class="fl">
+					欢迎<a class="name" href="<!--{url group='user'}-->"><!--{$user.username}--></a>! &nbsp;<a href="<!--{url mod='login' group='index' action='logout'}-->">退出</a>
+				</div>
+				<div class="fr">
+					<a href="<!--{url group='user' mod='index'}-->">进入买家中心</a>
+					<a href="<!--{url group='user' mod='collect'}-->">我的收藏</a>
+					<a href="<!--{url group='user' mod='message'}-->">站内消息</a>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<h1>
+				<a href="<!--{$config.site_url}-->" title="<!--{$config.site_name}-->">
+					<img title="<!--{$config.site_name}-->" alt="<!--{$config.site_name}-->" src="<!--{$static}-->logo/logo.png">
+				</a>
+				<i>卖家中心</i>
+			</h1>
+			<div class="search">
+				<div class="i-search ld">
+					<form method="get" class="form" action="<!--{url mod='search' group='index'}-->">
+						<input type="text" autocomplete="off" value="" id="key" name="key" class="text">
+						<input type="submit" class="search_button" value="搜索">
+					</form>
+				</div>
+				<div class="hotwords">
+					<strong>热门搜索：</strong>
+					 <!--{assign var="hot" vo_list("fun={get} mod={hotword} type={im}")}-->
+                <!--{foreach $hot as $volist}-->
+                <!--{if $i==1}-->
+                <a class="first" target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+                <!--{else}-->
+			<a target="_blank" href="<!--{url mod='find' args="word:{$volist.word}"}-->"><!--{$volist.word}--></a>
+<!--{/if}-->
+<!--{/foreach}-->
+					
+
+				</div>
+			</div>
+		</div>
+		<div class="layout">
+			<div class="wrap_shadow">
+				<div class="wrap_all main">
+					<div class="chart">
+						<div title="请选择店铺分类" class="pos_x1 bg_a1"></div>
+						<div title="填写店主和店铺信息" class="pos_x2 bg_b2"></div>
+						<div title="完成" class="pos_x3 bg_c"></div>
+					</div>
+					<div class="form-style">
+						<form action="<!--{url mod='shop' action='step3'}-->" method="post" onsubmit="return chk()">
+							<input type="hidden" name="type" value="<!--{$type}-->" />
+							<dl>
+								<dt><em>*</em>店铺名称：</dt>
+								<dd>
+									<p><input name="merchantname" id="company" type="text" value="" class="w400 text"></p>
+									<p class="hint">店铺名称请控制长度不超过20字</p>
+								</dd>
+							</dl>
+							<dl>
+								<dt>主营商品：</dt>
+								<dd>
+									<p><textarea class="textarea w394" rows="2" name="licence"></textarea></p>
+									<p class="hint">主营商品关键字（Tag）有助于搜索店铺时找到您的店铺<br>关键字最多可输入50字，请用","进行分隔，例如"男装,女装,童装"</p>
+								</dd>
+							</dl>
+							<dl>
+								<dt><em>*</em>店铺分类：</dt>
+								<dd>
+									<p>
+										<select class="select" name="catid" id="catid">
+										<!--{assign var="cat" vo_list("fun={get_all} mod={merchant_category}  array={depth:1,flag:0}")}-->
+											<option value="">请选择类别</option>
+											<!--{foreach $cat as $volist}-->
+											<option value="<!--{$volist.catid}-->"><!--{$volist.catname}-->
+											</option>
+										<!--{/foreach}-->
+										</select>
+									
+									</p>
+								</dd>
+							</dl> 
+							<dl>
+								<dt><em>*</em>所在地区：</dt>
+								<dd>
+								               <script>
+           $cityurl='<!--{url action='city' mod='merchant' group='index'}-->';
+           $areaurl='<!--{url action='area' mod='merchant' group='index'}-->';
+           $(function(){
+           	$("[name='provinceid']").change(function(){
+           		yAjax($cityurl,{provinceid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.cityID+'>'+v.city+'</option>';
+           				});
+           				
+           				if($("[name='cityid']").get(0)){
+           					$("[name='cityid']").html($html);	
+           				}else{
+           					$html="<select name='cityid'>"+$html+'</select>';
+           				$("[name='provinceid']").after($html);	
+           				}
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	$("[name='cityid']").live('change',function(){
+           		yAjax($areaurl,{cityid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.areaID+'>'+v.area+'</option>';
+           				});
+           				
+           				if($("[name='areaid']").get(0)){
+           					$("[name='areaid']").html($html);	
+           				}else{
+           					$html="<select name='areaid'>"+$html+'</select>';
+           				$("[name='cityid']").after($html);	
+           				}
+
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	
+           	
+           	
+           });
+           	
+           </script>
+              <!--{assign var="cat" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+            <select name='provinceid'>
+                 <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+               
+                <option value='<!--{$volist.provinceID}-->'
+                    <!--{if $data.provinceid==$volist.provinceID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.province}--></option>
+                <!--{/foreach}-->
+            </select>
+             
+             <!--{if $data.cityid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={city} field={cityID,city} array={flag:0,fatherID:{$data.provinceid}}")}-->
+            <select name='cityid'>
+                  <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.cityID}-->'
+                    <!--{if $data.cityid==$volist.cityID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    
+                    
+                    <!--{$volist.city}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->
+             <!--{if $data.areaid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={area} field={areaID,area} array={flag:0,fatherID:{$data.cityid}}")}-->
+            <select name='areaid'>
+               <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.areaID}-->'
+                    <!--{if $data.areaid==$volist.areaID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.area}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->  		
+								</dd>
+							</dl>
+							<dl>
+								<dt><em>*</em>详细地址：</dt>
+								<dd>
+									<p><input type="text" name="address" id="addr" value="" maxlength="200" class="text w400"></p>
+									<p class="hint">不必重复填写所在地区</p>  
+								</dd>
+							</dl>
+							
+							<dl>
+								<dt><em>*</em>联系电话：</dt>
+								<dd><input type="text" name="phone" id="tel" value="" class="text w150"></dd>
+							</dl>
+							<dl>
+								<dt>店铺简介：</dt>
+								<dd>
+<textarea class="textarea w394" rows="2" name="intro"></textarea>
+								</dd>
+							</dl>
+<h3>上传认证资料</h3>
+<dl>
+								<dt>身份证正面</dt>
+								<dd>
+	 <button tag='img_up_one' class='sfzzmimg' type="button" id="oe_img_button">上传图片</button>
+                 <!--{if $data.sfzzmimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzzmimg}-->" width="80px" onclick="window.open('<!--{$data.sfzzmimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzzmimg}-->" name="sfzzmimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+<dl>
+								<dt>身份证反面</dt>
+								<dd>
+	 <button tag='img_up_one' class='sfzfmimg' type="button" id="oe_img_button">上传图片</button>
+                 <!--{if $data.sfzfmimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzfmimg}-->" width="80px" onclick="window.open('<!--{$data.sfzfmimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzfmimg}-->" name="sfzfmimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+							<dl>
+								<dt>身份证手持照</dt>
+								<dd>
+	 <button tag='img_up_one' class='sfzscimg' type="button" id="oe_img_button">上传图片</button>
+                 <!--{if $data.sfzscimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzscimg}-->" width="80px" onclick="window.open('<!--{$data.sfzscimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.sfzscimg}-->" name="sfzscimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl> <!--{if $type=='2'}-->
+							<dl>
+								<dt>营业执照</dt>
+								<dd>
+	 <button tag='img_up_one' class='yyzjimg' type="button" id="oe_img_button">上传图片</button>
+                 <!--{if $data.yyzjimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.yyzjimg}-->" width="80px" onclick="window.open('<!--{$data.yyzjimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.yyzjimg}-->" name="yyzjimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+     <!--{/if}-->   
+								</dd>
+							</dl>
+<!--{/if}-->
+							<dl class="foot">
+								<dt>&nbsp;</dt>
+								<dd>
+							
+									<input type="submit" value="提交" class="submit"></dd>
+							</dl>
+						</form> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+		 <!--{assign var="single" vo_list("fun={footgetabout} mod={index} type={im} ")}-->
+       <p> <!--{foreach $single as $volist}-->
+        <a href="<!--{url mod='single' action='show' args="abid:{$volist.abid},alias:{$volist.alias}"}-->"><!--{$volist.title}--></a><em>|
+              
+               <!--{/foreach}-->
+			</p>
+			<!--{$config.copyright}--><br>
+		</div>
+
+	</body></html>

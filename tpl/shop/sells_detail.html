@@ -1,0 +1,194 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+	<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+	
+	<div class="right_content"><div class="path">
+    <div>
+    	<a href="<!--{url mod='shop' action='run'}-->">我的商城</a> <span>&gt;</span><a href="<!--{url mod='sells' action='run'}-->">订单列表</a> <span>&gt;</span>	订单详情 
+    </div>
+</div>
+<div class="main">
+<div class="wrap">
+    <div class="hd">
+        <ul class="tabs">
+            <li class="active"><a href="#">订单信息</a></li>
+        </ul>
+    </div>
+    <div class="order-detail">
+    <dl class="clearfix">
+    	<!--{if $a=='changecash'}-->
+    <dt>订单操作：</dt>
+    <dd><form method="post"  action="" >
+ 
+	
+            <td >调整总价：</td>
+            
+            <td ><input type="text" class="text w300" tag='notnull fixnum' name="paytotal"  ></td>
+            <td >
+            <button type="submit"  class="btn2" >确认修改</button>
+         </td>
+     
+   
+    </form></dd>
+<hr>
+<!--{/if}-->
+<!--{if $a=='send'}-->
+    <dt>订单操作：</dt>
+    <dd>
+    <form method="post" id="deliver_form" name="deliver_form">
+    <input type="hidden" name="status" value="send">
+    <input type="hidden" name="id" value="201503100920253">
+	<table class="table-list-style fast" style="width:auto;">
+        <tbody><tr>
+            <td width="150" class="bdl">物流公司名称</td>
+            <td width="10"></td>
+            <td class="tl" width="350">运单号</td>
+            <td width="90" class="bdr">操作</td>
+        </tr>
+                        <tr>
+            <td class="bdl"><input type="text" tag='notnull' class="text w300" name="sender" value=""  genre=""></td>
+            <td class="bdl"></td>
+            <td class="tl"><input type="text" tag='notnull' class="text w300" name="sendnum" value=""  genre=""></td>
+            <td class="bdl bdr"><button type="submit" class="btn2" href="javascript:void(0);" values="21"  genre="send">确认</button></td>
+        </tr>
+               
+            </tbody></table>
+    
+    </form>
+    
+    
+    </dd>
+<hr>
+<!--{/if}-->
+    	<dt>订单状态：</dt>
+        <dd>
+            <!--{if $data.status==0}-->等待买家付款
+            
+					
+			<!--{if $a!='changecash'}-->
+			
+
+		<P><A href="<!--{url mod='sells' action='changecash' args="ordernum:{$data.ordernum}"}-->">修改价格</A></P>
+	<!--{/if}-->					
+						
+						
+						
+						
+						<!--{elseif $data.status==2}-->	
+						等待买家确认
+						
+						<p class="countdown">
+                        <i></i>
+                        <em>还剩<!--{set echo residual_time($data.autosuretime-$time)}--></em>
+                    </p>
+						<P><A href="<!--{url  action='suretimeadd' args="ordernum:{$data.ordernum}"}-->">延迟收货时间</A></P>
+							<!--{elseif $data.status==1}-->
+							
+						<A href="<!--{url mod='sells' action='send' args="ordernum:{$data.ordernum}"}-->">发货</A></P>
+						
+							<!--{elseif $data.status==3 && $data.scflag==0}-->
+							交易完成
+						<P><A href="<!--{url mod='sells' action='comment' args="ordernum:{$data.ordernum}"}-->">评价</A></P>
+						<!--{elseif $data.status==3 &&  $data.scflag==1 &&  $data.cflag==1}-->	双方已评
+						<!--{elseif $data.status==3 &&  $data.scflag==1 &&  $data.cflag==0}-->	买家未评论
+							<!--{elseif $data.status==4}-->交易关闭
+							<!--{elseif $data.status==5}-->
+							<P><A href="<!--{url mod='jf' action='detail' args="ordernum:{$data.ordernum}"}-->">纠纷中</A></P>
+						<!--{/if}-->
+		</dd>
+    </dl>
+            <hr>
+            <dl class="clearfix">
+    	<dt>收货地址：</dt>
+        <dd>
+            <!--{$data.realname}--> ,
+            <!--{$data.mobile}--> ,
+                        <!--{$data.address}-->
+		</dd>
+    </dl>
+            <hr>
+    
+        <dl class="dl clearfix">
+    	<dt>买家信息</dt>
+        <dd><a href="#" target="_blank">用户名： <!--{$data.username}--></a></dd>        <dd><a href="#" target="_blank">昵称： <!--{$data.nickname}--></a></dd>   
+        <dd><a href="#" target="_blank">邮箱： <!--{$data.email}--></a></dd>                                 </dl>
+        
+        
+    <hr>
+    <dl class="dl clearfix">
+    	<dt>订单信息</dt>
+        <dd>订单编号：<!--{$data.ordernum}--></dd>
+        <br>
+        <dd>创建时间：<!--{$data.createtime|date_format:"%Y-%m-%d %H:%M:%S"}--></dd>
+        <!--{if $data.paytime}-->        <dd>付款时间：<!--{$data.paytime|date_format:"%Y-%m-%d %H:%M:%S"}--></dd>
+        <!--{/if}--><!--{if $data.sendtime}-->   
+                        <dd>发货时间：<!--{$data.sendtime|date_format:"%Y-%m-%d %H:%M:%S"}--></dd>
+                      
+                      <!--{/if}-->  
+                    </dl>
+    <!--{if $data.status>=2 && $data.sendtime}--><hr>
+    <dl class="dl clearfix">
+            <dt>物流信息</dt>
+            <dd>物流名称：<!--{$data.sender}--></dd>
+             <dd>物流单号：<!--{$data.sendnum}--></dd>
+                    </dl>
+
+    <hr>
+<!--{/if}-->
+    
+    
+    <table width="100%">
+        <tbody><tr>
+            <th class="first">商品</th>
+           
+            <th width="13%">单价(元)</th>
+            <th width="10%">数量</th>
+             <th width="13%">状态</th>
+            <th width="13%" class="last">商品总价(元)</th>
+        </tr>
+        <!--{foreach $data.productlist as $i=>$volist}-->
+                <tr>
+            <td class="item">
+            <div class="pic-info"><img src="<!--{$volist.smallimg}-->" width="70"></div>
+            <div class="txt-info">
+            <a href="<!--{url mod='product' action='detail' group='index' args="productid:{$volist.productid}"}-->" target="_blank"><!--{$volist.productname|tostr}--></a> 【<a href="<!--{url mod='product' action='backdetail' group='index' args="bid:{$volist.bid}"}-->" target="_blank">交易快照</a>】
+            <br />
+            <!--{$volist.spec}-->
+                        </div>
+            </td>
+			<td><!--{$volist.price/100}--></td>
+            
+           
+            <td><!--{$volist.num}--></td>
+           
+            <td > 
+            <!--{if $volist.tkflag==1 || $volist.shflag==1}-->  
+						<a class="org" href="<!--{url mod='server' action='detail' args="ordernum:{$volist.ordernum},id:{$volist.id}"}-->">处理中</a>						<!--{elseif $volist.tkflag==2 || $volist.shflag==2}-->  
+						<a class="org" href="<!--{url mod='server' action='detail' args="ordernum:{$volist.ordernum},id:{$volist.id}"}-->">完成</a>	
+						<!--{elseif $volist.tkflag==4 || $volist.shflag==4}-->  
+						<a class="red" href="<!--{url mod='server' action='detail' args="ordernum:{$volist.ordernum},id:{$volist.id}"}-->">关闭</a>	
+					<!--{/if}-->	
+            	
+            </td>
+ <!--{if $i==0}-->
+            <td class="last" style="color: red" rowspan="<!--{($data.productlist)|sizeof}-->"><!--{$data.totals/100}--></td>
+            <!--{/if}-->
+        </tr>
+        <!--{/foreach}-->
+            </tbody></table>
+  	<div class="money">
+    	 实付款  <b><!--{$data.paytotal/100}--></b> 元
+    </div>
+    </div>
+</div>
+</div></div>
+	<div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

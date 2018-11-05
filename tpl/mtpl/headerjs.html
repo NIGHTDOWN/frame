@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<!--{$page_charset}-->" />
+    <title><!--{$data.title}-->--YBGJ</title>
+
+    <!--ȫ�ֵĊS-->
+    <script type='text/javascript' src='<!--{$static}-->js/jquery.min.js'></script>
+    <script type='text/javascript' src='<!--{$static}-->js/manhuaDate.js'></script>
+    <script type='text/javascript' src='<!--{$static}-->js/user.js'></script>
+    <script type='text/javascript' src='<!--{$static}-->js/kindeditor.js'></script>
+    <script type='text/javascript' src='<!--{$static}-->js/zh_CN.js'></script>
+    <script type='text/javascript' src='<!--{$static}-->js/ajaxfileupload.js'></script>
+    <!--ȫ�ֵĊS-->
+        <!--ҳæ�ĊS-->
+     <script type='text/javascript' src="<!--{$indextpl}-->js/page.js" ></script>
+    <!--ȫ�ֵĊS-->
+        <!--ҳæ�ĊS-->
+    <!--ȫ�ֵăSS-->
+    <link rel="stylesheet" type="text/css" href='<!--{$static}-->css/date.css' />
+    <link rel="stylesheet" type="text/css" href='<!--{$static}-->css/global.css' />
+    <!--ȫ�ֵăSS-->
+    <!--ҳæ�ăSS-->
+    <link rel="stylesheet" type="text/css" href="<!--{$indextpl}-->css/oemain.css" />
+    <link rel="stylesheet" type="text/css" href="<!--{$indextpl}-->css/oeadmin.css" />
+    <link rel="stylesheet" type="text/css" href="<!--{$indextpl}-->css/font_icon.css" />
+    <!--ҳæ�ăSS-->
+
+�Сͼ�굄CSS-->
+    <link type="image/x-icon" href="/favicon.ico" rel="icon">
+
+�Сͼ�굄CSS-->
+    <script>
+//��ʼ��ͼƬɏ��·��
+_ajax_file_url='<!--{url action="run" mod="upimg" group="admin"}-->';
+//��ʼ��ajax�ٗ�·��
+_admin_ajax_url='<!--{url group="admin" mod="ajax" action="run" }-->';
+_ajax_area_url = '<!--{url action="ajax" mod="area" group="index"}-->';
+_ajax_edit_url = '<!--{url action="json_up" mod="upimg" group="admin"}-->';
+// ��ʼ��404ͼƬ
+$(function(){
+	
+		$('img').error(function(){
+								this.src='<!--{$config.404img}-->';
+								});
+		   });
+		 
+  $use_K_item=[ "fullscreen","source", "quickformat", "justifyleft", "justifycenter", "justifyright", "justifyfull", "insertorderedlist", "insertunorderedlist",  "formatblock", "fontname", "fontsize", "|", "forecolor", "hilitecolor", "bold", "italic", "underline", "strikethrough", "removeformat", "|", "image", "multiimage", "emoticons"];
+        //afterBlur: function () { this.sync(); } ���攚,ԲӃjq̡����,��ȡ����΄��ǸӲ�Ė�
+    //   KindEditor.options.items =  $use_K_item;
+ KindEditor.ready(function(K) {
+     window.editor = K.create('#editor_id', { uploadJson: _ajax_edit_url, afterBlur: function () { this.sync(); } });
+     
+ });
+ //KindEditor.sync();
+ var prevshow = null;
+
+
+
+    </script>
+    </head>

@@ -1,0 +1,75 @@
+  <!--{include file={$usertpl}"top.html"}-->
+
+		
+
+		  <!--{include file={$usertpl}"left.html"}-->
+				
+				<div class="right_con"><script>
+$(function(){
+    /* 全选 */
+	 $('.checkall').click(function(){
+        var _self = this;
+        $('.checkitem').each(function(){
+            if (!this.disabled)
+            {
+                $(this).attr('checked', _self.checked);
+            }
+        });
+        $('.checkall').attr('checked', this.checked);
+    });
+	 
+	
+});
+</script>
+<div class="path">
+    <div>
+    	<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span> 
+        收藏商品
+    </div>
+</div>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li <!--{if $a=='product'}-->class="active"<!--{else}-->class="normal"<!--{/if}-->><a href="<!--{url mod='collect' action='product'}-->">收藏商品</a></li>
+                <li <!--{if $a=='shop'}-->class="active"<!--{else}-->class="normal"<!--{/if}-->><a href="<!--{url mod='collect' action='shop'}-->">收藏店铺</a></li>
+              
+            </ul>
+        </div>
+        <table class="table-list-style">
+            <tbody><tr>
+                <td colspan="20" class="pic_model">
+                    <ul>
+                    <!--{foreach $data as $volist}-->
+                                        	<li>
+                        <dl>
+                            <dt>
+                           <input type="checkbox" value="<!--{$volist.cid}-->" class="checkitem" name="cid[]">
+                            <a target="_blank" href="<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></dt>
+                            <dd class="picture">
+                                <div><a target="_blank" href="<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->"><img width="150" height="150" src="<!--{$volist.smallimg1|imgsize:'150,150'}-->"></a></div>
+                                <div class="handle"><a href="<!--{url group='user' mod='collect' action='pdel' args="cid:{$volist.cid}"}-->">删除</a></div>
+                            </dd>
+                            <dd>价格：<em class="price"><!--{$volist.price/100}--></em> 元</dd>
+                        </dl>
+                        </li>
+                             <!--{/foreach}-->           
+                                        </ul>
+                </td>
+            </tr>
+			            </tbody>
+            <tfoot>
+            <tr>
+            	<td width="2"></td>
+            	<td>
+                <input type="checkbox" class="checkall">
+                <a id="del" do="tools_submit({action:'<!--{url action='pdel'}-->',id:'cid'})" title="删除" onclick="boxyn($(this))" confirm="您确定要删除吗?" class="btn2" href="javascript:void(0);">删除</a>
+                <div class="pagination">  <!--{$page}--> </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+     </div>   
+</div></div>
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

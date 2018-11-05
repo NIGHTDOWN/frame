@@ -1,0 +1,64 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+<div class="fn-right">
+
+<div class="block">
+	<div class="i-block">
+    	 <h2>钱包<span><a class="withdraw" href="<!--{url mod='log' action='recharge'}-->">充值记录</a></span></h2>
+    </div>
+	<div class="form">
+    <form method="post"  action="<!--{url mod='pay'}-->">
+    	<fieldset id="bank">
+    	<dl>
+        	<dt>充值方式：</dt>
+             <dd class="pay">
+                 
+             
+                    <ul class="fn-clear">
+                   
+                    <!--{foreach $api as $i=>$volist}-->
+                    <!--{if $i==0}--> <input type="hidden" name="payment_type" value="<!--{$volist.apiid}-->" ><!--{/if}-->
+                     <li <!--{if $i==0}-->class="checked"<!--{/if}-->>
+                    <img title="网银在线" style='width:158px;height:45px' alt="网银在线" data-param="{'id':'<!--{$volist.apiid}-->'}" src="<!--{$volist.logo}-->"><i></i>
+                    </li>
+                    <!--{/foreach}-->
+                  
+                                       
+                      
+                    </ul>
+                </dd>
+        </dl>
+        </fieldset>
+        <fieldset class="d1">
+        <dl>
+        	<dt>付款金额：</dt>
+            <dd><input type="text" class="text w100" name="amount" id="amount" autocomplete="off" datatype="Double" placeholder="充值金额" > 元</dd>
+        </dl>
+		</fieldset>
+      
+        <dl>
+            <dt></dt>
+            <dd>
+            <input type="submit" class="submit" value="确定信息并充值">
+            </dd>
+        </dl>
+    </form>    
+    </div>
+</div>	
+<script>
+$(".pay li").bind("click",function(){
+	$tag=$(this).children('img').attr('tag');
+	if($tag=='not'){
+		alert('余额不足，请使用其他方式支付');return false;
+	}
+	var data = $(this).children('img').attr('data-param');
+	eval("data = "+data);
+		$("[name=payment_type]").val(data.id);
+	$(this).addClass("checked").siblings().removeClass("checked");
+});
+</script>
+
+</div>
+
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

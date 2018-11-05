@@ -1,0 +1,232 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+<style>
+	.gray{    background: #fff;}
+</style>
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	<link href="<!--{$indextpl}-->res/skin.css" rel="stylesheet" type="text/css">
+	
+	<link href="<!--{$indextpl}-->res/pcss.css" rel="stylesheet" type="text/css">
+	<div class="w">
+    
+    
+    	     <!--{if $pcat}-->   
+                <div class="detailnav">
+                <strong><a href="<!--{url mod='index'}-->">首页</a></strong>
+                <!--{foreach $pcat as $k=>$volist}-->
+                <!--{set  $i==$k+1}-->   
+                <!--{if $i==1}-->   
+                <strong>
+                <a href="<!--{url mod=$c action=$a args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                </strong>
+                <!--{else}-->
+                 <span>
+            
+                 &gt; <a href="<!--{url mod=$c action=$a args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                   </span>
+                
+                <!--{/if}-->
+                <!--{/foreach}-->
+               
+    </div>
+                <!--{else}-->
+                <div class="detailnav">
+    
+    	        
+                
+                <strong><a href="<!--{url mod='index'}-->">首页</a></strong><span>
+         &gt; <a href="<!--{url mod=$c action=$a}-->">全部商品</a>
+                
+                
+                
+                
+        </span>
+    </div>
+                <!--{/if}-->
+                
+      
+</div>
+	<div class="w">
+	<!--{set $cnum=sizeof($ccat)}-->
+	<!--{set $anum=sizeof($attribute)}-->
+	 <!--{if $cnum || $anum}-->
+         <div id="select">
+        <!--{if $cnum}-->
+    	        <dl class="first">
+            <dt>分类：</dt>
+            <dd>
+            <!--{foreach $ccat as $volist}-->
+                                                <div>
+                <a href="<!--{url mod=$c action=$a args="word:$where.word,catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                </div>
+<!--{/foreach}-->
+                          
+                            </dd>
+        </dl>
+         <!--{/if}-->
+         <!--{foreach $attribute as $volist}-->
+                <dl>
+            <dt><!--{$volist.sname}-->：</dt>
+            <dd>
+            <!--{set $key='att'.$volist.weight}-->
+                                <div><a <!--{if $attrwhere[$key]==null}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action='category'  args2=$attrwhere args="att{$volist.weight}:null"}-->">不限</a></div>
+                                <!--{set $k=explode(',',$volist.var)}-->
+                              <!--{foreach $k as $value}-->  
+                             
+                                <div>
+ <a <!--{if $attrwhere[$key]==$value}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action=$a args="att{$volist.weight}:$value}"   args2=$attrwhere }-->"><!--{$value}--></a>
+                </div>
+                               <!--{/foreach}-->
+                            </dd>
+        </dl>
+                    <!--{/foreach}-->
+                              
+            </div>
+ <!--{/if}-->
+       <style>
+       .order .up,.order .down{
+       	background: #E4393C;
+    font-weight: bold;
+    color: #FFF;
+    border-color: #E4393C;
+       }
+       	.order .up b{background-position: right -23px;}
+		.order .down b{background-position: right -30px;}
+       	
+       </style> 
+    <div class="filter clearfix">
+        <div class="fore1 clearfix">
+            <div class="order">
+                                <a <!--{if !$orderby.f}-->class="current"<!--{/if}--> href="<!--{url mod=$c action=$a  args=$by:plpjf" args2=$byattr }-->"><span>默认排序</span></a>
+			<a class="<!--{if $orderby.f=='sells'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":sells" args2=$byattr}-->"><span>销量</span><b></b></a>
+                <!--<a class="<!--{if $orderby.f=='hits'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":hits" args2=$byattr}-->"><span>人气</span><b></b></a>
+                 <a class="<!--{if $orderby.f=='plpjf'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":plpjf" args2=$byattr}-->"><span>信用</span><b></b></a>-->
+           <a class="<!--{if $orderby.f=='addtime'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":addtime" args2=$byattr}-->"><span>最新</span><b></b></a>
+               <a class="<!--{if $orderby.f=='price'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{url mod=$c action=$a args=$by":price" args2=$byattr}-->"><span>价格</span><b></b></a>
+            </div>
+            <!--{if $pagesize}--><div class="total">共<strong><!--{$pagesize}--></strong>个商品</div><!--{/if}-->
+        </div>
+       	<div class="fore2 clearfix">
+            <div style="position:relative;">
+                <dl class="type">
+                                                            <dd><a class="current" href="#"><b></b>&nbsp;全新</a></dd>
+                                        <dd style="display: none"><a href=""><b></b>&nbsp;二手</a></dd>
+                                    </dl>
+
+                <div class="district">
+                    <div class="area"><span>所在区</span><b></b></div>
+                    <div style="display:none;" class="i-area">
+                    <form action="" method="post" id='areafrom' >
+                    <input type='hidden' name='provinceid'/>
+                   <script>
+			$(function(){
+				$u='<!--{url mod='index' action='area'}-->';
+				
+				$.get($u,function(data){
+					$('#areafrom').append(data);
+					
+				
+				});
+				
+			});
+		</script>
+                                                    </form>
+                    </div>
+                </div>
+
+                                <script>
+                    $(function(){
+                        $(".area").click(function(){
+                            var obj=$(this);
+                            $(this).next().slideToggle("fast",function(){
+                                if($(obj).next().is(":visible")){
+                                    $(document).one('click',function(){
+                                        $(".area").next().slideUp("fast");
+                                    });
+                                }});
+                        });
+                        $(".i-area li").click(function(){
+                            var str=$(this).html();
+                            $(this).parent().parent().prev().children("span").html(str);
+                            $(this).parent().parent().slideToggle();
+                            var id=$(this).attr("key");
+                            $form=$("#areafrom");
+                                                 
+                           $form.find('[name=provinceid]').val(id);  
+                         /*  d($form.find('[name=provinceid]'));*/
+                           $form.submit();                         
+                        });
+
+                        /*$(".district").left($('.type').width());*/
+                    });
+                </script>
+            </div>
+            <div class="list">
+            	            	<a class="current" href="#"><span class="shop"></span></a>
+                <a href="<!--{url mod='shop'}-->"><span class="product"></span></a>
+            </div>
+		</div>
+    </div>
+    
+    <div class="itemSearchList">
+        <!--{if $data|sizeof}-->
+    	        <div class="itemSearchResult clearfix">
+            <ul class="clearfix">
+            <!--{foreach $data as $k=>$volist}-->
+            <!--{set $i=$k+1}-->
+                                <li <!--{if $i%4==0}-->class="mr0"<!--{/if}-->>
+                    <div class="p-info">
+                        <a class="p-img" href="<!--{url  mod='product' action='detail' args="productid:{$volist.productid}"}-->">  <img height="200" width="200" alt="<!--{$volist.productid}-->" src="<!--{$volist.smallimg1|imgsize:'220,220'}-->"> </a>
+                        <a class="p-name" href="<!--{url  mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a>
+                        <p class="p-price"><strong><!--{$config.currency}--><!--{$volist.price/100}--></strong></p>
+                      <div class="p-shop"><a href="<!--{url  mod='shop' action='show' args="id:{$volist.muid}"}-->"><!--{$volist.merchantname}--></a></div>
+                    </div>
+                </li>
+                        <!--{/foreach}-->      
+                            </ul>
+			<div class="page">   <!--{$page}--></div>
+       
+       
+        </div> <!--{else}-->
+        <div class="itemsNull">
+                <h3>很抱歉，没有找到符合条件的宝贝</h3>
+                <p>
+                    <em>建议您：</em>
+                    <span>1、适当减少筛选条件，可以获得更多结果</span>
+                    <span>2、尝试其他关键字</span>
+                </p>
+            </div>
+<!--{/if}-->
+        <div class="hotProduct">
+        	<div class="m">
+                <div class="mt"><h3>热销产品</h3></div>
+                <div class="mc">
+                  <!--{foreach $hot as $volist}-->
+                 <li class="fore1">
+<div class="p-img ld">
+    <a target="_blank" href="<!--{url  mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+        <img style="width:220px;height:220px" src="<!--{$volist.smallimg1|imgsize:'220,220'}-->">
+    </a>
+</div>
+<div class="p-name"><a target="_blank" href="<!--{url  mod='product' action='detail' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr}--></a></div>
+<div class="p-price"><strong><!--{$config.currency}--><!--{$volist.price/100}--></strong></div>
+</li>
+  <!--{/foreach}-->      
+
+                </div>
+            </div>
+        </div>
+            </div>
+</div>
+	
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

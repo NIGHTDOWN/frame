@@ -1,0 +1,193 @@
+
+<title>选择分类 - 发布产品</title>
+
+<!--{include file={$shoptpl}"menu.html"}-->
+
+   
+<script
+        type='text/javascript' src='<!--{$static}-->js/kindeditor.js'>
+    </script>
+ <script
+        type='text/javascript' src='<!--{$static}-->js/zh_CN.js'>
+    </script>
+  <style>
+  	[id^="viewimg_"]{   
+        left: -8px;
+    margin: 1px;
+    padding: 1px;
+    position: absolute;
+    top: -120px;
+    width: 60px;
+    z-index: 1;
+}
+  </style>   
+     
+
+<style type="text/css">
+.admin_table{border:1px solid #C1DBFF;margin:auto;border-collapse:inherit;border-spacing:1px;}
+.admin_table td{padding:10px;background:#FFF;}
+.admin_table th{padding:10px 15px 10px 10px;text-align:right;vertical-align:top;background:#FFF;}
+.admin_table .hd{background:url(<!--{$shoptpl}-->res/ico/product_edit.png) 15px 16px no-repeat #E1EEFE;}
+.admin_table .hd p{line-height:30px;float:right;}
+.admin_table em{color:#F00;}
+.admin_table h1{font-size:14px;font-weight:bold;padding:5px 5px 5px 30px;color:#004D80;}
+.admin_table h2{font-size:14px;font-weight:bold;padding-left:30px;}
+.admin_table table{border:1px solid #ECECEC;}
+.admin_table .firstvalue td{background-color:#F8F8F8;padding-bottom:0;}
+.admin_table .spec td,.admin_table .spec th{background-color:#F8F8F8;}
+.admin_table table th{width:100px;text-align:right;}
+.admin_table table .hint{padding:10px 0 5px 50px;color:#999999;}
+.admin_table table select{min-width:162px;}
+.admin_table .spec .text{min-width:160px;}
+#brand input,#brand select{float:left;margin-right:10px;}   .goods-image img{width: 100px;height:100px;}
+</style>
+<form method="post" action="<!--{url action='add'}-->">
+<table width="959" bgcolor="#EEE" border="0" cellpadding="0" cellspacing="1" class="admin_table">
+    <tbody><tr>
+        <td colspan="2" class="hd">
+            <p><em>*</em> 表示该项必填</p>
+            <h1>填写团购商品基本信息</h1>
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="2"><h2>1. 基本信息</h2></td>
+    </tr>
+    
+    
+    
+   <tr>
+        <th><font color="red"> *</font>选择商品</th>
+        <td>
+        <div class="product_image">
+        <input type="hidden" name="pid" value="<!--{$data.pid}-->"/>
+        <input type="hidden" name="gpid" value="<!--{$data.gpid}-->"/>
+           
+             <div id="" data-itemid="1" style="height: 190px;">
+             <div class="smallimg1">
+            <!--{if $data}--><div class="smallimg1">
+      <div class="goods-image">
+     <img src="<!--{$data.smallimg1}-->"></div> 
+     <div class="goods-name">
+     <!--{$data.productname|tostr}-->	
+     </div>
+     <div class="goods-price">销售价： <!--{$data.price}-->	</div></div>	<!--{/if}-->
+             </div>
+                 <script>
+		
+		$(function(){
+			$('#listproduct').click(function(){
+			msgbox('选择商品',$("<div><iframe style='height:800px;width:100%' src='<!--{url action='box'}-->'></iframe></div>"),'1000','1000');				
+			});
+
+		});
+		
+		</script>  
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button  class='btn2' id='listproduct' type="button" style="background: none;right: -100px;" >选择</button>
+                     
+                    </div>
+ 
+                        
+                  
+                </div>
+                 
+                           
+        </div>
+        </td>
+    </tr>
+    
+    
+    
+    
+    <tr>
+        <th><font color="red"> *</font>商品标题</th>
+        <td><input max="60" min='10' name="gtitle" tag='notnull in' type="text" id="title" style="width:420px;" value="<!--{$data.gtitle}-->"></td>
+    </tr>
+    
+    
+      
+   
+   
+    
+    <tr>
+        <th><font color="red">*</font>销售价格</th>
+        <td>
+            <input type="text"  name="gprice" id="price" tag='notnull isnum fixnum' maxlength="10" value="<!--{$data.gprice}-->"> 元
+        </td>
+    </tr>
+
+    
+        
+   
+    
+    
+    
+    <tr>
+        <th><font color="red"> *</font>商品图片</th>
+        <td>
+        <div class="product_image">
+            <ul id="list1" data-listidx="0">
+             <li id="p1" data-itemid="1">
+                   
+                    <div class="upload-btn" style="cursor: pointer;">
+                    
+                    <button tag='img_up_one' class='gimg' type="button" style="background: none;" >上传</button>
+                       <!--{if $data.gimg}-->
+				 <span id="viewimg_img"><div style="float:left;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.gimg}-->" width="80px" onclick="window.open('<!--{$data.gimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$data.gimg}-->" name="gimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}--> 
+                    </div>
+ 
+                        
+                  
+                </li>
+                 
+                            </ul>
+        </div>
+        </td>
+    </tr>
+    
+    
+     
+
+    
+    
+    
+       
+   
+    
+
+    
+   
+    
+  
+     <tr>
+     <th>起始时间</th>
+		<td >
+		<LABEL><INPUT class="date2" type=text name=gstime value=<!--{$data.gstime|date_format:"%Y-%m-%d %H:%M:%S"}-->   > </LABEL>
+		--
+		<LABEL><INPUT class="date2" type=text name=getime value=<!--{$data.getime|date_format:"%Y-%m-%d %H:%M:%S"}-->   > </LABEL>
+		</td>	
+		
+		</tr>
+
+
+
+
+     
+    
+	<tr>
+        <td align="center" colspan="2" style="padding-bottom:20px;">
+        <input tag="submit" type="button" value="发布" class="submit" >
+    
+       
+        </td>
+    </tr>
+</tbody></table>
+</form>
+
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

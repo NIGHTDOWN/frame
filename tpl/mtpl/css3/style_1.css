@@ -1,0 +1,63 @@
+/*登录*/
+.loginContainer{width: 100%;height: 100%;}
+.loginBox{max-width: 400px;margin: 1rem auto;padding-top: 10%}
+.loginBox .sLogo{width: 100%;overflow:hidden;}
+.loginBox .sLogo img{      display: block;
+    max-width: 200px;
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 1.5rem;}
+.loginBox form ul li{    margin: 20px auto;overflow: hidden;width: 90%;}
+.loginBox form ul li .w100{width: 100%;height: 50px;font-size: 20px;    border-bottom: 1px solid #e14d51;padding-left: 0.2rem;}
+.loginBox form ul li .w50{width: 50%;height: 50px;font-size: 16px;}
+.loginBox form ul li input.w50{    border-bottom: 1px solid #e14d51;padding-left: 0.2rem;}
+.loginBox form ul li .user{background: url(../images/userIco.png) #fff 12px center no-repeat;}
+.loginBox form ul li .lock{background: url(../images/lockIco.png) #fff 12px center no-repeat;}
+.loginBox form ul li label{float: left;color: #fff;font-size: 16px;}
+.loginBox form ul li label input{vertical-align: middle;position: relative;top: -1px;margin-right: 5px;}
+.loginBox form ul li .forget{float: right;color: #000;font-size: 16px;text-decoration: none;}
+.loginBox form ul li .subBtn {
+    width: 100%;
+    border-radius: 25px;
+    background: #f1191f;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 24px;
+    background: -webkit-linear-gradient(left,#ff230cde,#f1191f) no-repeat;
+    color: #fff;
+    box-shadow: 0 0.08rem 0.16rem #e40007;
+}
+.loginBox form ul li .subBtn:hover{background: #e26f2a;}
+
+
+/*分享注册*/
+.regBox{padding-top: 5%;}
+.regBox form ul li span,.regBox form ul li font{color: #fff;font-size: 16px;}
+.regBox form ul li .w100{padding-left: 10px;}
+@media screen and (min-width: 1360px) and (max-width: 1439px){
+	.regBox{padding-top: 1%;}
+	.loginBox form ul li .w100{height: 40px;}
+}
+
+.loginBox form ul li a.subBtn {
+    
+    background: #fff;
+    display: block;
+   
+    color: #e40007;
+    border: 1px solid #e40007;
+    box-shadow: 0 0.01rem 0.06rem #e40007;    margin-top: 15px;
+}
+.oe_trap_error{
+    float: right;
+    position: absolute;
+    top: 0px;
+    right: 2rem;
+    color: red;
+}
+.oe_trap_ok {
+    display: none;
+}

@@ -1,0 +1,109 @@
+<!--{include file={$indextpl}"top.html"}-->
+<style>
+	.lib-rates {
+    color: #061b28;
+    background-color: #fff;
+    height: 100%;
+    font-family: Helvetica,sans-serif;
+    padding:  .82rem;
+    font-weight: 400;
+    color: #051b28;
+   
+}
+.lib-rates .lib-rates-tags {
+    padding-bottom: .32rem;
+    border-bottom: .013333rem solid #e7e7e7;
+}
+.lib-rates .lib-rates-tags .cur {
+    background: #f50;
+    color: #fff;
+}
+
+.lib-rates .lib-rates-tags li {
+    display: inline-block;
+	margin: .26rem 0 0.36rem .46rem;
+    padding: .053333rem .16rem;
+    background: #ffefef;
+    border-radius: .106667rem;    padding: .1rem 0.8rem;
+}
+.lib-rates .rates_content_box li {
+    padding-bottom: .32rem;
+    border-bottom: .013333rem solid #e7e7e7;
+}
+.lib-rates .lib-rates-header {
+    padding: .32rem 0;
+}
+.lib-rates .lib-rates-header .rates_header_img {
+	width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.lib-rates .lib-rates-header>div {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: .32rem;
+}
+.lib-rates-feedbackDate {
+    padding-top: .16rem;
+    font-size: .266667rem;
+    color: #999;
+}
+.lib-rates .lib-rates-feexPic img {
+    min-width: 3rem;
+    min-height: 3rem;
+    height: 3rem;
+}
+</style>
+<div class="pop-main hide">
+		<div class="lib-rates">
+			<div class="lib-rates-tags">
+				<ul>
+
+					<li class="rates_tag_feedAllCount <!--{if $im==0 && $cm==-1}-->cur<!--{/if}-->"  onclick="_go_url('<!--{url action='list' mod='comment' args="productid:{$get.productid}"}-->')">全部</li>
+					<li class="rates_tag_feedGoodCount <!--{if ($get.cmlevel)==1}-->cur<!--{/if}-->"  onclick="_go_url('<!--{url action='list' mod='comment' args="cmlevel:1,productid:{$get.productid}"}-->')">好评</li>
+					<li class="rates_tag_feedNormalCount <!--{if $im==0 && $cm==0 }-->cur<!--{/if}-->"  onclick="_go_url('<!--{url action='list' mod='comment' args="cmlevel:0,productid:{$get.productid}"}-->')">中评</li>
+					<li class="rates_tag_feedBadCount <!--{if ($get.cmlevel)==2}-->cur<!--{/if}-->"  onclick="_go_url('<!--{url action='list' mod='comment' args="cmlevel:2,productid:{$get.productid}"}-->')">差评</li>
+					<li class="rates_tag_feedBadCount <!--{if ($get.img)==1}-->cur<!--{/if}-->"  onclick="_go_url('<!--{url action='list' mod='comment' args="img:1,productid:{$get.productid}"}-->')">有图</li>
+
+				</ul>
+			</div>
+			<div class="rates_content">
+				<div class="rates_content_box" >
+					<div class="rates_content_list">
+						<ul>
+						<!--{foreach $data as $volist}-->
+							<li>
+								<div class="lib-rates-header" data-spm-anchor-id="a2141.7c.0.i49">
+									<div class="rates_header_img">
+										<img src="<!--{$volist.headimg}-->" style='    width: 100%;'>
+									</div>
+									<div class="rates_header_nick"><!--{$volist.username|incode}--></div>
+									<div class="rates_header_star">
+										<img src="<!--{vo_list("fun={getlevelimg1} type={am} mod={userlevel}  param1={$volist.uid}")}-->">
+									</div>
+								</div>
+
+								<div class="lib-rates-content" ><!--{$volist.cmcontent}--></div>
+
+								<div class="lib-rates-feedbackDate"><!--{$volist.cmtime|date_format:"%Y-%m-%d %H:%M:%S"}--><span style="margin-left: 20px"><!--{$volist.specs}--></span></div>
+							
+								
+								 <!--{if $volist.cmimg}-->	<div class="lib-rates-feexPic" ><span>
+				<!--{foreach ","|explode:{$volist.cmimg} as $value}-->
+            	<img src='<!--{$value|imgsize:'40,40'}-->'  onclick="window.open('<!--{$value}-->')"  class="rates_pic"/>
+            	<!--{/foreach}--></span>
+            	<!--{/if}-->
+								</div>
+							</li>
+						
+							<!--{/foreach}-->
+						</ul>
+					</div>
+					<div class="page" >
+						<!--{$page}-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

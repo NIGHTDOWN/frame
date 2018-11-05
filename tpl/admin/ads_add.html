@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<!--{$page_charset}-->" />
+    <!--{include file={$admintpl}"top/headerjs.html"}-->
+    
+    <style>
+    	h3{
+    		border-top-style: groove;
+    font-size: 18px;
+    padding: 6px 0;margin: 5px 0px;
+    width: auto;
+    	}
+    </style>
+</head>
+<body>
+    <div class="oemarry_layout">
+  <div class="oe_top_nav">
+	 <!--{include file={$admintpl}"a_nav.html"}-->
+<span><a href="javascript:;" url="<!--{url action='run'}-->" tag="back">&lt;&lt;返回列表</a></span>
+  </div>
+  <div class="a_content oe_dlv">
+<form method="post" action="<!--{url action=$a}-->" >
+ <input  type="hidden" name="adsid" value="<!--{$data.adsid}-->"/>
+    <h3>广告位：</h3>
+     <table class="oe_table_warp">
+     <tr>
+	    <th width="15%"><span class="red">*</span>广告位名称：</th>
+		<td width="35%"><input type="text" name="adname" tag="notnull" value="<!--{$data.adname}-->"   class="input-b"/>
+		</td>
+	  </tr>
+  <tr>
+	    <th width="15%"><span class="red">*</span>广告位标示：</th>
+		<td width="35%"><input type="text" name="identify" tag="notnull" value="<!--{$data.identify}-->" <!--{if $a=='show'}-->disabled<!--{/if}-->   class="input-b"/>
+		</td>
+	  </tr>
+	  <tr>
+	    <th width="15%"><span class="red">*</span>广告位类型：</th>
+		<td width="35%">
+		<select name='adtype'>
+                <option value=''>选择类型</option>
+                
+              
+                <option value='0'  
+                    <!--{if $data.adtype==0}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    图片</option>
+                 <option value='1'  
+                    <!--{if $data.adtype==1}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    幻灯片</option>
+                     <option value='2'  
+                    <!--{if $data.adtype==2}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    文字</option>
+            </select>
+		
+            
+		</td>
+       
+	  </tr>
+<tr>
+	    <th width="15%">广告位尺寸：</th>
+		<td width="35%">宽度：<input type="text" name="width" tag="cannull fixnum" value="<!--{$data.width}-->"   class="input-b"/>
+		高度：<input type="text" name="height" tag="cannull fixnum" value="<!--{$data.height}-->"   class="input-b"/>
+		</td>
+	  </tr>
+       <tr>
+	    <th width="15%"><span class="red">*</span>广告位显示级别：</th>
+		<td width="35%">
+		<select name='arealevel'>
+                <option value=''>-选择级别-</option>
+                
+              
+                <option value='0'  
+                    <!--{if $data.arealevel==0}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    无限制</option>
+                 <option value='1'  
+                    <!--{if $data.arealevel==1}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    省级</option>
+                     <option value='2'  
+                    <!--{if $data.arealevel==2}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    市级</option>
+                      <option value='3'  
+                    <!--{if $data.arealevel==3}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    地区</option>
+            </select>
+		
+            
+		</td>
+       
+	  </tr>
+<tr>
+	    <th width="15%"><span class="red">*</span>广告位区域：</th>
+		
+		<td width="35%">
+                   <script>
+           $cityurl='<!--{url action='city' mod='merchant'}-->';
+           $areaurl='<!--{url action='area' mod='merchant'}-->';
+           $(function(){
+           	$("[name='provinceid']").change(function(){
+           		yAjax($cityurl,{provinceid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.cityID+'>'+v.city+'</option>';
+           				});
+           				
+           				if($("[name='cityid']").get(0)){
+           					$("[name='cityid']").html($html);	
+           				}else{
+           					$html="<select name='cityid'>"+$html+'</select>';
+           				$("[name='provinceid']").after($html);	
+           				}
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	$("[name='cityid']").live('change',function(){
+           		yAjax($areaurl,{cityid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.areaID+'>'+v.area+'</option>';
+           				});
+           				
+           				if($("[name='areaid']").get(0)){
+           					$("[name='areaid']").html($html);	
+           				}else{
+           					$html="<select name='areaid'>"+$html+'</select>';
+           				$("[name='cityid']").after($html);	
+           				}
+
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	
+           	
+           	
+           });
+           	
+           </script>
+              <!--{assign var="cat" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+            <select name='provinceid'>
+                 <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+               
+                <option value='<!--{$volist.provinceID}-->'
+                    <!--{if $data.provinceid==$volist.provinceID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.province}--></option>
+                <!--{/foreach}-->
+            </select>
+             
+             <!--{if $data.cityid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={city} field={cityID,city} array={flag:0,fatherID:{$data.provinceid}}")}-->
+            <select name='cityid'>
+                  <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.cityID}-->'
+                    <!--{if $data.cityid==$volist.cityID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    
+                    
+                    <!--{$volist.city}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->
+             <!--{if $data.areaid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={area} field={areaID,area} array={flag:0,fatherID:{$data.cityid}}")}-->
+            <select name='areaid'>
+               <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.areaID}-->'
+                    <!--{if $data.areaid==$volist.areaID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.area}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->  
+            
+		</td>
+            
+	
+       
+	  </tr>
+<tr>
+	    <th width="15%">广告位类目：</th>
+		
+		<td width="35%">
+            <!--{assign var="cat" vo_list("fun={get_all} mod={product_category} field={catid,catname,depth,alias} array={depth:1,flag:0}")}-->
+            <select name='catid'>
+                <option value=''>-选择分类限制-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.catid}-->'
+                    <!--{if $data.catid==$volist.catid}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                     <!--{section name=customer loop=$volist.depth}-->
+                    |
+                    <!--{/section}-->
+                    <!--{section name=customer loop=$volist.depth}-->
+                    --<!--{/section}-->
+                    
+                    <!--{$volist.catname}--></option>
+                <!--{/foreach}-->
+            </select>
+            
+              <span class="oe_trap"><label></label><em>选择分类显示限制；不限制则不选择</em></span>
+              </td>
+            
+	
+       
+	  </tr>
+<tr>
+	    <th width="15%"><span class="red">*</span>广告位价格：</th>
+		<td width="35%">
+		<input type="text" name="price" tag="cannull fixnum" value="<!--{$data.price}-->"   class="input-b"/>
+		
+            
+		</td>
+       
+	  </tr>
+<tr>
+	    <th width="15%"><span class="red">*</span>广告位总数：</th>
+		<td width="35%">
+		<input type="text" name="num" tag="cannull fixnum" value="<!--{$data.num}-->"   class="input-b"/>
+		
+		
+            
+		</td>
+       
+	  </tr>
+<tr>
+	    <th width="15%"><span class="red">*</span>可否购买：</th>
+		<td width="35%">
+		<select name='buy'>
+                <option value=''>-选择-</option>
+                
+              
+                <option value='0'  
+                    <!--{if $data.buy==0}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    否</option>
+                 <option value='1'  
+                    <!--{if $data.buy==1}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    是</option>
+                  
+            </select>
+		
+            
+		</td>
+       
+	  </tr>
+<tr>
+	    <th width="15%"><span class="red">*</span>状态：</th>
+		<td width="35%">
+		<select name='flag'>
+                <option value=''>-选择-</option>
+                
+              
+                <option value='0'  
+                    <!--{if $data.flag==0}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    是</option>
+                 <option value='1'  
+                    <!--{if $data.flag==1}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    否</option>
+                  
+            </select>
+		
+            
+		</td>
+       
+	  </tr>
+         </table>
+    
+  <div class="oe_button_layout">
+	  <input type="button" class="button_2" value="提交保存" tag="submit" /> 
+	  <span id="submit_tips" class="error"></span>
+	</div>
+</form>
+</div>
+</div>
+</body>

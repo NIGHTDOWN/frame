@@ -1,0 +1,57 @@
+<dd class="dd" style="display: <!--{if $c=='index'}-->block<!--{else}-->none<!--{/if}-->">
+<script>
+	$domain='<!--{$config.site_url}-->';
+			$u2='<!--{url mod='index' group='index' action='getad' }-->';
+</script>
+            <div id="J_Category" class="category">
+    <div class="navcatgory">
+    
+        <ul>
+        <!--{foreach $cat as $volist}-->
+      	  	            <li class="j_MenuItem">
+                <p>
+                    <em ><a target="_blank" href="<!--{url mod='product' action='category' args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a></em>
+                </p>
+            </li>
+         
+               <!--{/foreach}-->        
+                    </ul>
+    </div>
+        <div id="J_SubCategory" class="subCategory" style="width: 0px; height: 620px; top: 99px;">
+        <!--{foreach $cat as $volist}-->
+             
+         <div class="j_SubView fn-clear">
+            <div class="catlist">  
+             <!--{foreach $volist.list as $i=>$volist2}-->
+                                <dl class="fore<!--{$i}-->">
+                    <dt><a target="_blank" href="<!--{url mod='product' action='category' args="catid:{$volist2.catid}"}-->"><!--{$volist2.catname}--></a></dt>
+                    <dd>
+                    
+              <!--{foreach $volist2.list as $volist3}-->
+                                        <a target="_blank" href="<!--{url mod='product' action='category' args="catid:{$volist3.catid}"}-->"><!--{$volist3.catname}--></a>
+                                        <!--{/foreach}-->
+                                       
+                                        </dd>
+                    
+                                      
+                                    </dl>
+ <!--{/foreach}-->       
+                             
+                            </div>
+            <div class="advcat " id="menu<!--{$volist.alias}-->">
+            <!--这里用异步加载-->
+             
+          
+            </div>
+            <script>
+            	getad($domain,$u2,'menu<!--{$volist.alias}-->');
+            </script>
+        </div>
+             <!--{/foreach}-->          
+           
+             
+            </div>  
+</div>
+
+            </dd>
+      

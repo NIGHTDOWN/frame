@@ -1,0 +1,357 @@
+<!--{include file={$indextpl}"head.html"}-->
+  <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="<!--{$GTM}-->">
+
+ <META HTTP-EQUIV="expires" CONTENT="0">
+<link href="<!--{$indextpl}-->res/order.css" rel="stylesheet" type="text/css">
+
+<body class="gray">
+	<div class="site-nav">
+    <div class="w fn-clear">
+    	<ul class="fn-left">
+    	<!--{if !$user}-->
+            <li class="nav user">
+				<div class="nav-fore1"><a class="login" href="<!--{url mod='login'}-->">亲，请登录</a><a class="reg" href="<!--{url mod='reg'}-->">免费注册</a></div>
+            </li>
+            <!--{else}-->
+        	
+            <li class="nav drop-down user">
+				<div class="nav-fore1"><a class="name" href="<!--{url mod='index' group='user'}-->"><!--{$user.username}--></a><img align="absmiddle" src="<!--{vo_list("fun={getlevelimg1} type={am} mod={userlevel}  param1={$user.uid}")}-->"><i><em></em></i></div><div class="nav-fore2">
+				<ul><li><a href="<!--{url mod='set' group='user'}-->">账号管理</a></li><li><a href="<!--{url mod='login' action='logout' group='index'}-->">退出</a></li></ul><div></div></div></li>
+			<li class="nav msg"><div class="nav-fore1"><a class="name" href="<!--{url mod='message' group='user'}-->"><span>消息</span></a></div></li>
+   
+        	<!--{/if}-->
+        	<li class="nav drop-down">
+            	<div class="nav-fore1">
+                    <a>手机逛Mallbuilder</a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>   
+                        <li><a href="<!--{$config.mobile_url}-->">直接进入</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    	<ul class="fn-right">
+        	        	<li class="nav drop-down">
+            	<div class="nav-fore1">
+                    <a href="<!--{url group='user' mod='index'}-->">我的商城</a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                                  <li><a href="<!--{url group='user' mod='buy'}-->">已买到的商品</a></li>
+                        <li><a href="<!--{url group='user' mod='history'}-->">我的足迹</a></li>
+                    </ul>
+                </div>
+            </li>
+             <!--{include file={$indextpl}"cart.html"}-->  
+        	<li class="nav collect drop-down">
+            	<div class="nav-fore1">
+                    <a href="<!--{url group='user' mod='collection'}-->">
+                    <span>收藏夹</span>
+                    </a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                        <li><a href="<!--{url group='user' mod='collect' }--> ">收藏的商品</a></li>
+                        <li><a href="<!--{url group='user' mod='collect' action='shop'}-->">收藏的店铺</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav">
+            	<div class="nav-fore1">
+                <a href="<!--{url mod='category'}-->">商品分类</a>
+                </div>
+            </li>
+            <li class="site-nav-pipe">|</li>
+            <li class="nav drop-down">
+            	<div class="nav-fore1">
+                                        <a href="<!--{url group='merchant'}-->">卖家中心</a>
+                                       	<i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                        <li><a href="<!--{url group='merchant'}-->">免费开店</a></li>
+                        <li><a href="<!--{url mod='selloff'  group='merchant'}-->">已卖出的商品</a></li>
+                        <li><a href="<!--{url mod='sellon' group='merchant'}-->">出售中的商品</a></li>
+                    </ul>
+                </div>
+            </li>
+        	<li class="nav">
+            	<div class="nav-fore1"><a href="<!--{url mod='contact'}-->">联系客服</a></div>
+            </li>
+        </ul>
+	</div>
+</div>
+<script type="text/javascript">
+$('.menu-items li').hover(function(){					 
+	$(this).addClass("hover");
+},function(){
+	$(this).removeClass("hover");	
+});
+    $(".code").hover(function(){
+         $(this).find(".showDown").css({"display":"block"})
+    },function(){
+        $(this).find(".showDown").css({"display":"none"})
+    })
+
+    $(".android").hover(function(){
+        $(".androidimg").css({"display":"block"});
+        $(".iosimg").css({"display":"none"});
+
+        $(".andimg2").css({"display":"block"});
+        $(".andimg1").css({"display":"none"});
+
+        $(".iosimg1").css({"display":"block"});
+        $(".iosimg2").css({"display":"none"});
+    });
+
+    $(".ios").hover(function(){
+        $(".androidimg").css({"display":"none"});
+        $(".iosimg").css({"display":"block"});
+        
+        $(".iosimg2").css({"display":"block"});
+        $(".iosimg1").css({"display":"none"});
+
+        $(".andimg1").css({"display":"block"});
+        $(".andimg2").css({"display":"none"});
+    });
+</script>
+<script type="text/javascript">
+$('.drop-down').hover(function(){
+	$(this).addClass("hover");					 
+	if($(this).hasClass("cart"))
+	{
+	
+	}
+},function(){
+	$(this).removeClass("hover");	
+});</script>
+	
+	
+	
+	<div class="header">
+	<div class="w fn-clear">
+        <div class="logo">
+        <a title="<!--{$config.site_name}-->" href="<!--{url mod='index' group='index'}-->"><img src="<!--{$static}-->logo/logo.png"></a>
+        </div>
+		<div class="search">
+            <form action="<!--{url mod='search' group='index'}-->" class="form" method="post" >
+            <div class="i-search">
+                
+                <input type="text" class="text" name="word" id="key" value="" autocomplete="off">
+			</div>
+            <input type="submit" value="搜&nbsp;索" class="button">
+            </form>
+        </div>
+    </div>  
+</div>
+<form action="<!--{url action='sureforcart'}-->" method="post">
+<input name="id" value="<!--{$randid}-->" type="hidden"/>
+
+<div class="w order">
+    <div id="step-1" class="step">
+        <h3>
+            <span >确认收货地址</span>
+            <span style="float: right;width: 100%;display: block;"><a target="_blank" href="<!--{url action='address' mod='set' group='user'}-->">管理收货地址</a></span>
+       
+        </h3>
+        <ul>
+        <!--{if $address|sizeof}-->
+        <!--{foreach $address as $volist}-->
+        <input name="id" value="<!--{$randid}-->" type="hidden"/>
+            	<li class="fn-clear <!--{if $volist.mflag}-->selected<!--{/if}-->">
+                <s></s>
+                <span class="js">寄送至</span>
+                <label>
+                <input <!--{if $volist.mflag}-->checked="checked"<!--{/if}--> type="radio" name="addid" value="<!--{$volist.addid}-->">
+                <!--{$volist.province}--> <!--{$volist.city}--> <!--{$volist.area}--> <!--{$volist.address}-->(<!--{$volist.realname}-->  &nbsp;收)   
+                 <em><!--{$volist.recvmobile}--> <!--{$volist.recvphone}--></em>
+                </label>
+			</li>
+			<!--{/foreach}-->
+<!--{else}-->
+<li class="fn-clear selected">
+                <s></s>
+                
+              
+            <a target="_blank" href="<!--{url mod='address' group='user'}-->">
+                请添加收货地址 </a>
+                 <em></em>
+                
+			</li>
+<!--{/if}-->
+                    </ul>
+   
+    </div>
+    <div id="cart">
+   
+    <div id="step-2" class="step">
+        <h3>确认订单信息</h3>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <th class="first">产品</th>
+                <th width="150">单价(元)</th>
+                <th width="120">数量</th>
+                <th width="190">优惠方式(元)</th>
+                <th width="140">小计(元)</th>
+            </tr> 
+           
+			<!--{foreach $data as $volist}-->
+             
+									<tr class="shop">
+                <td colspan="8">
+                店铺:&nbsp;<a target="_blank" href="<!--{url mod='shop' action='show' group='index' args="id:{$volist.muid}"}-->"><!--{$volist.merchantname}--></a>
+                </td>
+            </tr>
+            <!--{foreach $volist.plist as $volist2}-->
+                                    <tr class="item">
+                <td class="name">
+                    <div class="fl">
+                    <input type="hidden" name='cid[]' value="<!--{$volist2.cid}-->"/>
+                    <a target="_blank" href="<!--{url mod='product' action='detail' group='index' args="productid:{$volist2.productid}"}-->"><img height="60" alt="<!--{$volist2.productname|tostr}-->" src="<!--{$volist2.smallimg1|imgsize:'60,60'}-->"></a>
+                    </div>
+                    <p><a target="_blank" href="<!--{url mod='product' action='detail' group='index' args="productid:{$volist2.productid}"}-->"><!--{$volist2.productname|tostr}--></a></p>
+                     <p><span style="color: #6c6c6c"><!--{$volist2.specs}--></span></p>
+                    				</td>
+                <td><!--{if $volist2.yhtype}--> <span style='    text-decoration: line-through;'><!--{$volist2.price}--></span><br><!--{set echo $volist2.nowprice/100}--><!--{else}--><!--{set echo $volist2.price/100}--><!--{/if}--></td>
+                <td><!--{$volist2.nums}--></td>
+                <td>
+                	                    <!--{if $volist2.yhtype}-->
+                	                    省-<!--{set echo ($volist2.nowprice-$volist2.price)/100}-->元
+                	                    <!--{else}-->无<!--{/if}-->
+                                    </td>
+                <td class="price" ><b><!--{set echo ($volist2.nums*$volist2.nowprice)/100}--></b></td>
+            </tr>         
+            <!--{/foreach}-->
+                        			<tr class="other">
+            	<td colspan="2" rowspan="2" class="msg">
+                <p>补充说明: <input placeholder="选填，可告诉卖家您的特殊要求" name="mark['<!--{$volist.muid}-->']"></p>
+                    
+                </td>
+            	<td>运费方式：</td>
+            	
+            	<script>
+               var  logisfee=new Array();
+               	function count_price($obj){
+               		$feetype=$obj.val();
+               		$fee=$obj.children(':checked').attr('date');
+               		
+               		$id=$obj.attr('date');
+               		$('#show_cem'+$id).text(rmb($fee));
+               		$pfee=$('#totalprice'+$id).attr('date');
+               		
+               		$toatl=(parseInt($fee)+parseInt($pfee));
+               		$('#s_csumprice'+$id).text(rmb($toatl));
+               		$('#s_csumprice'+$id).attr('date',($toatl));
+               	
+               		var sumcash=0;
+               		$('.shop_total_price').each(function($i,$v){
+               			
+               			if($($v).attr('date')){
+               				sumcash+=parseInt($($v).attr('date'));
+               			}
+               		});
+               		$('#s_sumprice').text(rmb(sumcash));
+               		
+               	}
+               </script>
+            	 <!--{if $volist.logisfee}-->
+                <td>
+               
+                普通配送&nbsp;
+                                                <select  name="logis['<!--{$volist.muid}-->']" id="wuliu" date='<!--{$volist.muid}-->' onchange="count_price($(this));">
+                    <!--{foreach $volist.logisfee as $k=>$v}-->
+                   
+                                				<option date='<!--{$v}-->' value="<!--{$k}-->">
+                    <!--{if $k=='py'}-->平邮<!--{elseif $k=='ems'}-->EMS<!--{elseif $k=='kd'}-->快递<!--{/if}-->&nbsp;&nbsp;<!--{$v/100}-->元
+                </option>
+                    <!--{if !($logis[$volist.muid])}-->
+                    <!--{set $logis[$volist.muid]=$v}-->
+                     <!--{set $logistype[$volist.muid]=$k}-->
+                    <!--{/if}-->   
+                              
+                  <!--{/foreach}-->                  
+                                </select>
+                            
+                                </td>
+                <td class="price">  
+                                    <b id="show_cem<!--{$volist.muid}-->">
+                   <!--{$logis[$volist.muid]/100}-->
+                    </b>
+                                </td>
+<!--{else}-->
+<td>
+               
+                卖家包邮&nbsp;
+                                               
+                                </td>
+                <td class="price">  
+                                    <b id="show_cem<!--{$volist.muid}-->">
+                    0.00
+                     <!--{set $logis[$volist.muid]=0}-->
+                    </b>
+                                </td>
+<!--{/if}-->
+            </tr>
+									<tr class="total">
+				<td></td>
+				<td>店铺合计原价（不含运费）</td>
+				<td class="price"><b id='totalprice<!--{$volist.muid}-->' date='<!--{set echo ($volist.sumcash)/100}-->'><!--{set echo ($volist.sumcash)/100}--></b></td>
+			</tr>
+						            <tr class="total">
+            	<td></td>
+            	<td></td>
+            	<td></td>
+                <td valign="top">
+                                店铺合计(含运费)
+                    <input type="hidden"  value="<!--{$logistype[$volist.muid]}-->">
+                </td>
+                <td class="price">
+                                        <b class="shop_total_price" id="s_csumprice<!--{$volist.muid}-->" date='<!--{set echo ($volist.sumcash+$logis[$volist.muid])/100}-->'>
+                    <!--{set echo ($volist.sumcash+$logis[$volist.muid])/100}-->
+                    <!--{set  $total=($total+$logis[$volist.muid])}-->
+                    </b>
+                </td>
+            </tr>
+			        
+<!--{/foreach}-->
+
+
+ <tr class="sum">
+            	<td colspan="4">
+                
+                实付款
+                </td>
+                <td class="price">
+                <b>￥ <span id="s_sumprice">  <!--{$total/100}--></span></b>
+                </td>
+            </tr>
+
+		</tbody></table>      
+   		<input type="submit" value="" class="order_submit">
+   </div>
+ </div>
+ </div>
+</form>
+</div>
+</div>
+	
+	<div class="fn-clear"></div>
+<script>
+
+$("#step-1").find("input[type='radio']").bind("click",function(){
+	var id=$(this).val();
+
+	$(this).parent().parent().addClass('selected').siblings().removeClass("selected");
+	
+});
+</script>
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

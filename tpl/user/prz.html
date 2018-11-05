@@ -1,0 +1,118 @@
+  <!--{include file={$usertpl}"pframe.html"}-->	
+	<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+	<script>
+		_ajax_file_url="<!--{url mod='upimg' group='index'}-->";
+	</script>
+<div class="fn-right">
+
+<div class="block">
+	<div class="i-block">
+    	 <h2>实名认证</h2>
+    </div>
+    <!--{if $data.ckflag==1}-->
+            <div class="tips"><span></span>温馨提示：您的实名认证信息正在审核中。</div>
+    <!--{elseif $data.ckflag==2}-->   
+    <!--{if $data.desc}-->
+     <div class="tips"><span></span>温馨提示：<!--{$data.desc}--></div>
+     <!--{else}-->
+      <div class="tips"><span></span>温馨提示：您的实名认证信息审核失败；请重新修改提交。</div>
+      <!--{/if}--> 
+         <!--{/if}--> 
+                <ol 
+                 <!--{if $data.ckflag==1}-->class="fn-clear step2"
+                   <!--{elseif $data.ckflag==3}--> class="fn-clear step3"  
+                     <!--{else}-->  class="fn-clear step1"  
+                     <!--{/if}-->   
+                >
+        <li class="fore1">
+            <em class="icon">
+                <i></i>
+                <strong></strong>
+                <b>1</b>
+            </em>
+            <span>验证身份</span>
+        </li>
+        <li class="fore2">
+            <em class="icon">
+                <i></i>
+                <strong></strong>
+                <b>2</b>
+            </em>
+            <span>实名认证</span>
+        </li>
+        <li class="fore3">
+            <em class="icon">
+                <i></i>
+                <b>3</b>
+            </em>
+            <span>成功</span>
+        </li>
+    </ol>
+        <div class="form">
+    <form method="post" id="form" >
+   
+        <fieldset>
+        <dl class="email">
+            <dt>账户名：</dt>
+            <dd><!--{$user.username|incode}--></dd>
+        </dl>
+
+        <dl>
+            <dt>真实姓名：</dt>
+            <dd><input type="text" class="text valid" name="realname" id="real_name" value="<!--{$data.realname}-->">
+            <div class="form-error"></div></dd>
+        </dl>
+<!--{if $data.ckflag!=3}-->
+        <dl>
+            <dt>身份证号码：</dt>
+            <dd><input type="text" class="text" name="sfznum" id="identity_card" value="<!--{$data.sfznum}-->" ><div class="form-error"></div></dd>
+        </dl>
+		<dl>
+            <dt>身份证正面照片:</dt>
+            <dd><button type="button" tag='img_up_one' class="sfzimgzm"> 上传</button>
+            <!--{if $data.sfzimgzm}-->
+            <span id="viewimg_sfzimgzm"><div style="float:;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzimgzm}-->" width="80px" onclick="window.open('<!--{$data.sfzimgzm}-->');" style="height: 80px; width: 80px; margin-top: 0px; margin-left: 0px;"> </div><input type="hidden" value="<!--{$data.sfzimgzm}-->" name="sfzimgzm"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+            <!--{/if}-->
+            </dd>
+        </dl>
+		<dl>
+            <dt>身份证反面照片:</dt>
+            <dd><button type="button" tag='img_up_one' class="sfzimgfm"> 上传</button>
+            <!--{if $data.sfzimgfm}-->
+            <span id="viewimg_sfzimgfm"><div style="float:;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzimgfm}-->" width="80px" onclick="window.open('<!--{$data.sfzimgfm}-->');" style="height: 80px; width: 80px; margin-top: 0px; margin-left: 0px;"> </div><input type="hidden" value="<!--{$data.sfzimgfm}-->" name="sfzimgfm"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+            <!--{/if}-->
+            </dd>
+        </dl>
+        <dl>
+            <dt>身份证手持照:</dt>
+            <dd><button type="button" tag='img_up_one' class="sfzsc"> 上传</button>
+            <!--{if $data.sfzsc}-->
+            <span id="viewimg_sfzsc"><div style="float:;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$data.sfzsc}-->" width="80px" onclick="window.open('<!--{$data.sfzsc}-->');" style="height: 80px; width: 80px; margin-top: 0px; margin-left: 0px;"> </div><input type="hidden" value="<!--{$data.sfzsc}-->" name="sfzsc"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+            <!--{/if}-->
+            </dd>
+        </dl>
+<!--{/if}-->
+        </fieldset>
+                <dl>
+            <dt></dt>
+            <dd><input type="submit" class="submit" value="确 定"></dd>
+        </dl>
+            </form>
+    </div>
+
+</div></div>
+<!--{if $data.ckflag==1 ||$data.ckflag==3}-->
+   <script>
+   	$(function(){
+   		$('form input').attr('disabled','disabled');
+   		$('form input').css({'border': 'none',
+    'background': '#fff',});
+   		$('form button').attr('disabled','disabled');
+   		$('form button').hide();
+   		$('form .submit').hide();
+   	});
+   </script>
+<!--{/if}-->
+  <!--{include file={$usertpl}"pfoot.html"}-->	
+
+

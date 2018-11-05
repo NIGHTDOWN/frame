@@ -1,0 +1,32 @@
+
+
+
+            	<div class="nav-fore1">
+                	<a href="<!--{url group='user' mod='cart'}-->">
+                    <span>购物车</span><font><!--{vo_list("fun={getcount} mod={cart} type={im}")}--></font>件
+                    </a>
+                    <i><em></em></i>
+                </div>
+               <div class="nav-fore2">
+               <!--{assign var="cartlist" vo_list("fun={getlist} mod={cart} type={im}")}-->
+               <!--{assign var="sum" vo_list("fun={get_count} mod={cart} args={uid:{$user.uid}}")}-->
+               <ul><!--{if $cartlist}-->
+               <!--{foreach $cartlist as $volist}-->
+               <li class="fn-clear ">
+					<div class="mini-cart-img"><a target="_blank" href="<!--{url mod='product' action='detail' group='index' args="productid:{$volist.productid}"}-->"><img width="40" src="<!--{$volist.smallimg1|imgsize:'60,60'}-->"></a></div>
+					<div class="mini-cart-title"><a target="_blank" href="<!--{url mod='product' action='detail' group='index' args="productid:{$volist.productid}"}-->"> <!--{$volist.productname|tostr|truncate:15}-->...</a></div>
+					<div class="mini-cart-count"><b><!--{$volist.specs}--></b> <span><!--{$volist.nowprice/100}--></span><m>￥</m></div>
+					</li>
+               <!--{/foreach}-->
+               <!--{if ($cartlist|sizeof)<$sum}-->
+              
+                 <li class="first">您的购物车还有<!--{$sum-($cartlist|sizeof)}-->件商品未显示<p></p>
+             <a href="<!--{url group='user' mod='cart'}-->">查看我的购物车</a>   	
+                 </li>
+                 <!--{/if}-->
+               <!--{else}-->
+                 <li class="first">您购物车里还没有任何宝贝。</li>
+               <!--{/if}-->
+             </ul></div>
+           
+  

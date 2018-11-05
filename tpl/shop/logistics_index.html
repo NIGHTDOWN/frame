@@ -1,0 +1,92 @@
+
+
+<!--{include file={$shoptpl}"menu.html"}-->
+<!--{include file={$shoptpl}"menutop.html"}-->
+
+<div class="layout">
+<!--{include file={$shoptpl}"leftmenu.html"}-->
+	
+    <div class="right_content"><script src="script/my_lightbox.js"></script>
+
+
+
+<div class="path">
+  <div> <a href="<!--{url mod='shop' action='run'}-->">卖家中心</a> <span>&gt;</span> <a href="<!--{url mod='logistics' action='run'}-->">物流工具</a> <span>&gt;</span> 物流工具 </div>
+</div>
+
+<div class="main">
+<div class="wrap">
+
+<div class="hd">
+    <ul class="tabs"><li class="active"><a href="#">运费模板</a></li></ul>
+    <a href="<!--{url action='add'}-->" class="btn3">新增运费模板 </a>
+</div>
+<!--{foreach $data as $volist}-->
+<table class="logistics" width="100%">
+<thead>
+<tr>
+    <th colspan="6">
+    <b class="fl"><!--{$volist.logisname}--></b>
+    <span class="fr">
+    <em>最后编辑时间：<!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></em>
+    <a href="<!--{url action='show' args="logistempid:{$volist.logistempid}"}-->">修改</a>
+    <a href="<!--{url action='del' args="logistempid:{$volist.logistempid}"}-->">删除</a>
+    </span>
+    </th>
+</tr>
+</thead>
+<!--{if $volist.pricingmode==0}-->
+<!--{assign var='dw' value='件'}-->
+<!--{elseif $volist.pricingmode==1}-->
+<!--{assign var='dw' value='kg'}-->
+<!--{elseif $volist.pricingmode==2}-->
+<!--{assign var='dw' value='m³'}-->
+<!--{/if}-->
+<!--{if $volist.kd}-->
+	<tbody>
+<tr>
+    <th width="10%" class="fore1">运送方式</th>
+    <th class="fore2">运送到</th>
+    <th width="10%">起始(<!--{$dw}-->)</th>
+    <th width="10%">费用(元)</th>
+    <th width="10%">每增(<!--{$dw}-->)</th>
+    <th width="10%">费用(元)</th>
+</tr>
+    <tr>
+        <td class="fore1">快递</td>
+        <td class="fore2"><div><b>全国</b></div></td>
+        <td><!--{$volist.kdnum}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.kdmoney/100}--><!--{/if}--></td>
+        <td><!--{$volist.kdnummore}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.kdmoneymore/100}--><!--{/if}--></td>
+    </tr>
+</tbody>
+<!--{/if}--><!--{if $volist.ems}-->
+    <tbody><tr>
+        <td class="fore1">EMS</td>
+        <td class="fore2"><div><b>全国</b></div></td>
+        <td><!--{$volist.emsnum}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.emsmoney/100}--><!--{/if}--></td>
+        <td><!--{$volist.emsnummore}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.emsmoneymore/100}--><!--{/if}--></td>
+    </tr>
+</tbody><!--{/if}--><!--{if $volist.py}-->
+    <tbody><tr>
+        <td class="fore1">平邮</td>
+        <td class="fore2"><div><b>全国</b></div></td>
+        <td><!--{$volist.pynum}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.pymoney/100}--><!--{/if}--></td>
+        <td><!--{$volist.pynummore}--></td>
+        <td><!--{if $volist.ltype}-->0<!--{else}--><!--{$volist.pymoneymore/100}--><!--{/if}--></td>
+    </tr>
+</tbody><!--{/if}-->
+
+</table>
+<!--{/foreach}-->
+</div>
+</div></div>
+    <div class="clear"></div>
+</div>
+<!--{include file={$shoptpl}"foot.html"}-->
+
+</body></html>

@@ -1,0 +1,417 @@
+  <!--{include file={$usertpl}"top.html"}-->
+  <script>
+  	_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+  </script>
+<style>
+	.none{display:none}
+</style>
+		
+
+		 <div class="left_con">
+                                                <div class="business_handle" id="my_menu">
+                        <h3 style="text-indent:20px;">个人信息</h3>
+                        <ul>
+                                                                                                                 <li class="<!--{if $a=='run'}-->active<!--{/if}-->"><a href="<!--{url mod='set' }-->">个人资料</a>
+                            </li>
+                                                                                                                                             <li class="<!--{if $a=='address'}-->active<!--{/if}-->"><a href="<!--{url action='address' mod='set' }-->">收货地址</a>
+                            </li>
+                                                                                </ul>
+                    </div>
+                                    </div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="right_con">
+				
+
+
+<div class="path">
+    <div>
+    	    		<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span>
+                <a href="<!--{url mod='set'}-->">个人资料</a> <span>&gt;</span>
+        基本信息    </div>
+</div>
+<script>
+	$(function(){
+		$('.tabs').find('a').on('click',function(){
+		
+			$indexnum=$('.tabs').find('a').index($(this));
+				$('.tabs').find('li').removeClass('active');
+				$('.tabs').find('li').addClass('normal');
+$($('.tabs').find('li').get($indexnum)).removeClass('normal');
+				$($('.tabs').find('li').get($indexnum)).addClass('active');
+				$('#content').find('.form-style').hide();
+				$($('#content').find('.form-style').get($indexnum)).show();
+		});
+		
+	});
+</script>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+                <li class="active"><a href="#" id='jb'>基本信息</a></li>
+                <li class="normal"><a href="#" id='cgpwd'>修改密码</a></li>
+                <li class="normal"><a href="#" id='cgemail'>修改邮箱</a></li>
+                <li class="normal"><a href="#" id='cgmobile'>修改手机</a></li>
+            </ul>
+        </div>
+         <div id="content">
+        	 <div class="form-style">
+            <form action="<!--{url mod=$c action='save'}-->" method="post" name="form" id="form">
+            
+            <h5>亲爱的<!--{$user.username}-->，请填写真实的资料。</h5>
+            <dl>
+                <dt>用户名</dt>
+                <dd><!--{$user.username}--></dd>
+            </dl>
+             <dl>
+                <dt>手机号码</dt>
+                <dd><!--{$user.mobile}--></dd>
+            </dl>
+             <dl>
+                <dt>邮箱</dt>
+                <dd><!--{$user.email}--></dd>
+            </dl>
+                                    <dl>
+                <dt>当前头像：</dt>
+                <dd>
+                	 <button tag='img_up_one' class='headimg' type="button" id="oe_img_button">上传图片</button>
+                 <!--{if $user.headimg}-->
+				 <span id="viewimg_headimg"><div style="float:;width:auto;"><div class="upimg_view" style="height:80px;width:80px;overflow:hidden;cursor:pointer;margin-top:5px;"><img alt="点击查看大图" src="<!--{$user.headimg}-->" width="80px" onclick="window.open('<!--{$user.headimg}-->');" style="height: 80px; width: 79px; margin-top: 0px; margin-left: 0.5px;"></div><input type="hidden" value="<!--{$user.headimg}-->" name="headimg"> <button type="button" style=" background: none repeat scroll 0 0 #fafafa; border: 1px solid #ebebeb;border-radius: 3px; cursor: pointer;display: block;margin-top: 10px;width: 80px;" onclick="javascript:delobj($(this).parent('div'));">删除</button></div></span>
+                 
+              <!--{/if}-->   
+              
+         
+				
+                
+                </dd>
+            </dl>
+            
+            <dl>
+                <dt><em>*</em>昵称：</dt>
+                <dd><input name="nickname" tag='notnull' type="text" id="name" value="<!--{$user.nickname}-->"  class="text w150"><div class="form-error"></div>
+            </dd></dl>
+            <dl>
+                <dt>性别：</dt>
+                <dd>
+                <input name="gender" id="s1" type="radio" <!--{if $user.gender==1}-->checked="checked"<!--{/if}--> value="1">
+                <label for="s1">男</label>
+                <input name="gender" id="s2" type="radio" <!--{if $user.gender==2}-->checked="checked"<!--{/if}--> value="2">
+                <label for="s2">女</label>   
+                </dd>
+            </dl>
+            <dl>
+                <dt>所在地区：</dt>
+                <dd>
+             
+                                <div id="d_2">
+               <td width="35%">
+                   <script>
+           $cityurl='<!--{url action='city' group='index' mod='merchant'}-->';
+           $areaurl='<!--{url action='area'  group='index' mod='merchant'}-->';
+           $(function(){
+           	$("[name='provinceid']").change(function(){
+           		yAjax($cityurl,{provinceid:$(this).val()},function($user){
+           			if($user.flag){
+           				$html='';
+           				$.each($user.data,function(i,v){
+           					$html+='<option value='+v.cityID+'>'+v.city+'</option>';
+           				});
+           				
+           				if($("[name='cityid']").get(0)){
+           					$("[name='cityid']").html($html);	
+           				}else{
+           					$html="<select name='cityid'>"+$html+'</select>';
+           				$("[name='provinceid']").after($html);	
+           				}
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	$("[name='cityid']").live('change',function(){
+           		yAjax($areaurl,{cityid:$(this).val()},function($user){
+           			if($user.flag){
+           				$html='';
+           				$.each($user.data,function(i,v){
+           					$html+='<option value='+v.areaID+'>'+v.area+'</option>';
+           				});
+           				
+           				if($("[name='areaid']").get(0)){
+           					$("[name='areaid']").html($html);	
+           				}else{
+           					$html="<select name='areaid'>"+$html+'</select>';
+           				$("[name='cityid']").after($html);	
+           				}
+
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	
+           	
+           	
+           });
+           	
+           </script>
+              <!--{assign var="cat" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+            <select name='provinceid'>
+                 <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+               
+                <option value='<!--{$volist.provinceID}-->'
+                    <!--{if $user.provinceid==$volist.provinceID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.province}--></option>
+                <!--{/foreach}-->
+            </select>
+             
+             <!--{if $user.cityid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={city} field={cityID,city} array={flag:0,fatherID:{$user.provinceid}}")}-->
+            <select name='cityid'>
+                  <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.cityID}-->'
+                    <!--{if $user.cityid==$volist.cityID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    
+                    
+                    <!--{$volist.city}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->
+             <!--{if $user.areaid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={area} field={areaID,area} array={flag:0,fatherID:{$user.cityid}}")}-->
+            <select name='areaid'>
+               <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.areaID}-->'
+                    <!--{if $user.areaid==$volist.areaID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.area}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->  
+            
+		</td>
+                <div class="form-error"></div>
+                </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>详细地址：</dt>
+                <dd><input name="address" type="text" value="<!--{$user.address}-->" class="text w200"></dd>
+            </dl>
+            <dl>
+                <dt>QQ：</dt>
+                <dd><input name="qq" type="text" value="<!--{$user.qq}-->" class="text w200"></dd>
+            </dl>
+                        <dl>
+                <dt>旺旺：</dt>
+                <dd><input name="ww" type="text" value="<!--{$user.ww}-->" class="text w200"></dd>
+            </dl>
+            <dl class="foot">
+                <dt>&nbsp;</dt>
+                <dd><input tag="submit" type="button" value="提交" class="submit"></dd>
+            </dl>
+            </form>
+        </div> 
+			<div class="form-style none">
+            <form action="<!--{url mod=$c action='cgpwd'}-->" method="post">
+          
+            <dl>
+                <dt><em>*</em>您的密码：</dt>
+                <dd><input name="oldpass" type="password" tag='notnull' id="oldpass" class="text w150"></dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>新密码:</dt>
+                <dd><input name="newpass" type="password" tag='notnull iscomplex' id="newpass" class="password w150"></dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>确认密码:</dt>
+                <dd><input name="cnewpass" type="password" tag='notnull isequal' id="renewpass" class="password w150"></dd>
+            </dl>
+            <dl class="foot">
+                <dt>&nbsp;</dt>
+                <dd><input tag="submit"  type="button" value="提交" class="submit"></dd>
+            </dl>
+            </form>
+        </div>
+        <div class="form-style none">
+            <form tag='jqfrom' action="<!--{url mod=$c  action='cgemail'}-->" method="post">
+            
+           	<dl>
+                <dt><em>*</em>邮箱</dt>
+                <dd><input name="email" id="email" tag='notnull ismail' type="text" class="text w300"></dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>邮件验证码</dt>
+                <dd>
+                <input name="yzm" type="text" tag='notnull' class="text w150">
+               <input type="button" class="send" id='sendmail' value="获取邮件验证码">
+                </dd>
+            </dl>
+            <dl class="foot">
+                <dt>&nbsp;</dt>
+                <dd><input tag="submit" type="button" value="提交" class="submit"></dd>
+            </dl>
+            </form>
+            <script>
+            $("#sendmail").click(function(){
+				var val = $("#email").val();
+				var patrn = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if(!val){
+					alert("请输入邮箱");return false;
+				}
+				else if(!patrn.test(val)){  
+					alert("邮箱格式错误");return false;
+				}
+				else{
+                    var flag = true;
+					var url = '<!--{url mod=$c action='getmailcode'}-->';
+					/*var sj = new Date();
+					var pars = 'shuiji=' + sj+'&verify_type=email&verify_field='+val; */
+					yAjax(url, {'email':val}, function (originalRequest)
+					{
+                        var flag = true;
+						if(originalRequest.flag){
+							
+							msg = "获取邮件验证码";
+							$("#sendmail").attr("disabled", "disabled");
+							/*$("#email").attr("disabled", "disabled");*/
+							$("#email").attr("readonly", "readonly");
+							t=setTimeout(countDown,1000);
+							showd('请查收邮件');
+						
+						}
+						else{				
+							
+							showd(originalRequest.error.errormsg);
+							flag = false;
+						}
+						return flag;
+					});
+					return flag;
+				}
+			})
+			var delayTime = 60;
+			function countDown()
+			{
+				delayTime--;
+				$("#sendmail").val(delayTime + '秒后重新获取');
+				if (delayTime == 0) {
+					delayTime = 60;
+					$("#sendmail").val(msg);
+					$("#sendmail").removeAttr("disabled");
+					$("#email").removeAttr("readonly");
+					clearTimeout(t);
+				}
+				else
+				{
+					t=setTimeout(countDown,1000);
+				}
+			}
+            </script>
+        </div>
+        <div class="form-style none">
+            <form tag='jqfrom' action="<!--{url mod=$c  action='cgmobile'}-->" method="post">
+           
+            <dl>
+                <dt><em>*</em>手机</dt>
+                <dd><input name="mobile"   id="mobile" tag='notnull ismobile' type="text" class="text w300"></dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>短信验证码</dt>
+                <dd>
+                <input name="yzm" type="text"  tag='notnull' class="text w150">
+               <input type="button" class="send" id='sendmobile' value="获取短信验证码">
+                </dd>
+            </dl>
+            <dl class="foot">
+                <dt>&nbsp;</dt>
+                <dd><input tag="submit" type="button" value="提交" class="submit"></dd>
+            </dl>
+            </form>
+            <script>
+            $("#sendmobile").click(function(){
+				var val = $("#mobile").val();
+				var mobile = new RegExp("^0?(13|15|17|18|14)[0-9]{9}$");//手机
+				
+				if(!val){
+					alert("请输入手机");return false;
+				}
+				else if(!mobile.test(val)){  
+					alert("手机格式错误");
+					return false;
+				}
+				else{
+					var url2 = '<!--{url mod=$c action='getmobilecode'}-->';
+					var sj = new Date();
+					
+				yAjax(url2, {'mobile':val}, function (originalRequest)
+					{
+						if(originalRequest.flag){
+							
+							msg = "获取短信验证码";
+							$("#sendmobile").attr("disabled", "disabled");
+							/*$("#mobile").attr("disabled", "disabled");*/
+							$("#mobile").attr("readonly", "readonly");
+							t=setTimeout(countDown,1000);
+							showd('请注意查收短信');
+						}
+						else{				
+							showd(originalRequest.error.errormsg);
+							flag = false;
+						}
+						return flag;
+					});
+					return flag;
+				}
+			})
+			var delayTime = 60;
+			function countDown()
+			{
+				delayTime--;
+				$("#sendmobile").val(delayTime + '秒后重新获取');
+				if (delayTime == 0) {
+					delayTime = 60;
+					$("#sendmobile").val(msg);
+					$("#sendmobile").removeAttr("disabled");
+					$("#mobile").removeAttr("readonly");
+					clearTimeout(t);
+				}
+				else
+				{
+					t=setTimeout(countDown,1000);
+				}
+			}
+            </script>
+        </div>
+        </div>
+               
+            </div>
+</div></div>
+				
+				
+				
+				
+				
+				
+				
+				
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

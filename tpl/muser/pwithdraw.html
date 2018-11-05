@@ -1,0 +1,233 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/user.css" rel="stylesheet" type="text/css" />
+
+
+<body class="bgee">
+
+	<div>
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='index'}-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+
+
+
+								<div class="jd-header-new-title">
+									<div class="header-content">
+										<span class="header-title">提现</span>
+
+									</div>
+								</div>
+
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+					<form method="POST">
+
+							<input name="pay_passwd"  type="password"  class="feile" >
+
+						<section class="order-act">
+
+
+							<div class="label4">
+
+
+							
+<!--{if $card|sizeof>0}-->	<div class="title">
+									<span class="tl"> 选择收款方式</span>
+								</div>
+								<div class="next" style="margin-bottom: 0.1rem">
+									
+									<select name="cardid" tag="notnull" class="wtext w1">
+										<option value="">--请选择--</option>
+										 <!--{foreach $card as $value}-->
+										 <option value="<!--{$value.cardid}-->"><!--{$value.bankname}--> <!--{$value.banknum|hidecard}--></option>
+										 <!--{/foreach}-->
+									</select>
+								</div>
+								<!--{else}-->
+								<div class="next" style="margin-bottom: 0.1rem;color:red">
+									 还未添加收款方式，点击<a href='<!--{url mod='card' action='add'}-->'>添加</a>
+
+								</div>
+							<!--{/if}-->	
+
+
+							</div>
+							<div class="label4">
+
+
+								<div class="title">
+									<span class="tl">提取金额</span>
+								</div>
+								<div class="next" style="margin-bottom: 0.1rem">
+										<input name="amount"  tag='notnull fixnum in' min='0' max='<!--{$user.cash}-->' type="text"  class="wtext w1">
+	
+									</div>
+
+							</div>
+							<div class="label4">
+
+
+									<div class="title">
+										<span class="tl">到账时间</span>
+									</div>
+									<div class="next" style="margin-bottom: 0.1rem">
+											<input type="radio" name="choosetype" value="1" checked="checked" data-param="{'max':'<!--{$config.draw_time_1_max}-->','min':'<!--{$config.draw_time_1_min}-->','rates':'<!--{$config.draw_time_1_fee_rate}-->'}">
+                        <span style="    margin-left: 0.2rem;"><!--{$config.draw_time_1}--></span>
+                        <em><!--{$config.draw_time_1_fee_rate*100}-->%服务费</em>
+		
+										</div>
+										<div class="next" style="margin-bottom: 0.1rem">
+												<input type="radio" name="choosetype" value="2"  data-param="{'max':'<!--{$config.draw_time_2_max}-->','min':'<!--{$config.draw_time_2_min}-->','rates':'<!--{$config.draw_time_2_fee_rate}-->'}">
+												<span style="    margin-left: 0.2rem;"><!--{$config.draw_time_2}--></span>
+												<em><!--{$config.draw_time_2_fee_rate*100}-->%服务费</em>
+			
+											</div>
+											<div class="next" style="margin-bottom: 0.1rem">
+													<input type="radio" name="choosetype" value="3"  data-param="{'max':'<!--{$config.draw_time_3_max}-->','min':'<!--{$config.draw_time_3_min}-->','rates':'<!--{$config.draw_time_3_fee_rate}-->'}">
+													<span style="    margin-left: 0.2rem;"><!--{$config.draw_time_3}--></span>
+													<em><!--{$config.draw_time_3_fee_rate*100}-->%服务费</em>
+				
+												</div>
+
+
+								</div>
+								<div class="label4">
+
+
+										<div class="title">
+											<span class="tl">服务费</span>
+										</div>
+										<div class="next" style="margin-bottom: 0.1rem">
+												<span id="extraFee">0</span> 元（扣款总额<span id="amountTotal" class="org">0</span>元）
+			
+											</div>
+		
+									</div>
+								<div class="label4">
+
+
+										<div class="title">
+											<span class="tl">提取说明</span>
+										</div>
+										<div class="next" style="margin-bottom: 0.1rem">
+												<input name="desc"  tag=' '  type="text"  class="wtext w1" placeholder="可选" autocomplete="off">
+			
+											</div>
+		
+									</div>
+									<div class="label4">
+
+
+											<div class="title">
+												<span class="tl">支付密码</span>
+											</div>
+											<div class="next" style="margin-bottom: 0.1rem">
+													<input name="pay_passwd"  tag='notnull  '  type="password"  class="wtext w1" autocomplete="off">
+				
+												</div>
+			
+										</div>
+						</section>
+
+						<button class='btn ' type="submit">确认充值</button>
+						<div style="clear:both;margin-bottom:1rem"></div>
+					</form>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+		
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>
+	<script type="text/javascript">
+	
+		
+		$("input[type='radio']").click(function(){
+			var val = $("input[name='amount']").val();	
+			calculateFee(val);
+		});
+		$("[name=amount]").blur(function(){
+			var val = $("input[name='amount']").val();	
+			calculateFee(val);
+		});
+		function calculateFee(val){
+			if(!val)
+			{
+				return false;	
+			}
+			var amount = parseFloat(val).toFixed(2);
+			if (amount <= 0) return;
+			var data = $("input[type='radio']:checked").attr('data-param');
+			
+			eval("data = "+data);
+			var i=data.min;
+			var a=data.max;
+			
+			var r=data.rates;
+			var n=0;
+			if(r*amount<=i){ n=i; }
+			else if(r*amount>=a){ n=a; }
+			else{ n=r*amount; }
+			//n=Math.round(n);//小叶写的
+			var pn=new Number(n);//poy改的
+			n=pn.toFixed(2);//poy改的
+			$('#extraFee').html(n);
+			$('#amountTotal').html((parseFloat(n)+parseFloat(amount)).toFixed(2));
+		}
+		</script>
+	<!--{include file={$usertpl}"foot.html"}-->

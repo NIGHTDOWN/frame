@@ -1,0 +1,232 @@
+  <!--{include file={$usertpl}"top.html"}-->
+  <script>
+  	_ajax_file_url='<!--{url  group='user' mod='upimg'}-->';
+  </script>
+<style>
+	.none{display:none}
+</style>
+		
+
+		 <div class="left_con">
+                                                <div class="business_handle" id="my_menu">
+                        <h3 style="text-indent:20px;">个人信息</h3>
+                        <ul>
+                                                                                                                 <li class="<!--{if $a=='run'}-->active<!--{/if}-->"><a href="<!--{url mod='set' }-->">个人资料</a>
+                            </li>
+                                                                                                                                             <li class="<!--{if $a=='address'}-->active<!--{/if}-->"><a href="<!--{url action='address' mod='set' }-->">收货地址</a>
+                            </li>
+                                                                                </ul>
+                    </div>
+                                    </div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="right_con">
+				
+
+
+<div class="path">
+    <div>
+    	    		<a href="<!--{url mod='index'}-->">我的商城</a> <span>&gt;</span>
+              <a href="<!--{url mod='set' action='address'}-->">收货地址</a>  <span>></span>编辑地址
+            </div>
+</div>
+<script>
+	$(function(){
+		$('.tabs').find('a').on('click',function(){
+		
+			$indexnum=$('.tabs').find('a').index($(this));
+				$('.tabs').find('li').removeClass('active');
+				$('.tabs').find('li').addClass('normal');
+$($('.tabs').find('li').get($indexnum)).removeClass('normal');
+				$($('.tabs').find('li').get($indexnum)).addClass('active');
+				$('#content').children().hide();
+				$($('#content').children().get($indexnum)).show();
+		});
+		
+	});
+</script>
+<div class="main">
+	<div class="wrap">
+        <div class="hd">
+            <ul class="tabs">
+             
+                <li class="active"><a href="#" >编辑地址</a></li>
+                
+            </ul>
+        </div>
+         <div id="content">
+        	
+        	 <div class="form-style ">
+            <form id="form" name="form" action="" method="post">
+            <dl>
+                <dt><em>*</em>收货人：</dt>
+                <dd><input maxlength="30" tag='notnull' name="realname" value="<!--{$data.realname}-->" class="text w150"> <div id="form-error" class="form-error"></div></dd>
+            </dl>
+            
+            <dl>
+                <dt><em>*</em>所在区域：</dt>
+                <dd>
+                
+                               
+               
+                                
+                <div id="d_2">
+                   <td width="35%">
+                   <script>
+           $cityurl='<!--{url action='city' group='index' mod='merchant'}-->';
+           $areaurl='<!--{url action='area' group='index' mod='merchant'}-->';
+           $(function(){
+           	$("[name='provinceid']").change(function(){
+           		yAjax($cityurl,{provinceid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.cityID+'>'+v.city+'</option>';
+           				});
+           				
+           				if($("[name='cityid']").get(0)){
+           					$("[name='cityid']").html($html);	
+           				}else{
+           					$html="<select name='cityid'>"+$html+'</select>';
+           				$("[name='provinceid']").after($html);	
+           				}
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	$("[name='cityid']").live('change',function(){
+           		yAjax($areaurl,{cityid:$(this).val()},function($data){
+           			if($data.flag){
+           				$html='';
+           				$.each($data.data,function(i,v){
+           					$html+='<option value='+v.areaID+'>'+v.area+'</option>';
+           				});
+           				
+           				if($("[name='areaid']").get(0)){
+           					$("[name='areaid']").html($html);	
+           				}else{
+           					$html="<select name='areaid'>"+$html+'</select>';
+           				$("[name='cityid']").after($html);	
+           				}
+
+           			}else{
+           				showd('数据获取失败');
+           			}
+           		});
+           	});
+           	
+           	
+           	
+           	
+           });
+           	
+           </script>
+              <!--{assign var="cat" vo_list("fun={get_all} mod={province} field={provinceID,province} array={flag:0}")}-->
+            <select name='provinceid'>
+                 <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+               
+                <option value='<!--{$volist.provinceID}-->'
+                    <!--{if $data.provinceid==$volist.provinceID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.province}--></option>
+                <!--{/foreach}-->
+            </select>
+             
+             <!--{if $data.cityid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={city} field={cityID,city} array={flag:0,fatherID:{$data.provinceid}}")}-->
+            <select name='cityid'>
+                  <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.cityID}-->'
+                    <!--{if $data.cityid==$volist.cityID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    
+                    
+                    <!--{$volist.city}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->
+             <!--{if $data.areaid}-->
+              <!--{assign var="cat" vo_list("fun={get_all} mod={area} field={areaID,area} array={flag:0,fatherID:{$data.cityid}}")}-->
+            <select name='areaid'>
+               <option value='0'>-请选择-</option>
+                <!--{foreach $cat as $volist}-->
+                <option value='<!--{$volist.areaID}-->'
+                    <!--{if $data.areaid==$volist.areaID}-->
+                  selected="selected"
+                                <!--{/if}-->
+                    >
+                    <!--{$volist.area}--></option>
+                <!--{/foreach}-->
+            </select>
+             <!--{/if}-->  
+            
+		</td>
+                   
+                   
+                   
+                   
+                   
+                	<div id="form-error" class="form-error"></div>
+                </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>街道地址：</dt>
+                <dd>
+                	<input type="text" tag='notnull' value="<!--{$data.address}-->" name="address" id="address" class="w300 text"><div id="form-error" class="form-error"></div>
+                    <p class="hint">不必重复填写所在地区</p>
+               	</dd>
+            </dl>
+            <dl>
+                <dt>邮政编码：</dt>
+                <dd><input type="text" name="recvnum" id="zip" maxlength="6" class="w80 text" value="<!--{$data.recvnum}-->"><div id="form-error" class="form-error"></div></dd>
+            </dl>
+            <dl>
+                <dt><em>*</em>手机号码：</dt>
+                <dd><input type="text" tag='notnull ismobile' name="recvmobile" id="mobile" maxlength="18" class="w150 text" value="<!--{$data.recvmobile}-->"><div id="form-error" class="form-error"></div></dd>
+            </dl>
+            <dl>
+                <dt>电话号码：</dt>
+                <dd><input type="text" name="recvphone" id="tel" class="w150 text" value="<!--{$data.recvphone}-->"><div id="form-error" class="form-error"></div></dd>
+            </dl>
+            
+            <dl>
+                <dt>默认地址：</dt>
+                <dd><input type="checkbox" name="mflag" value="1" <!--{if $data.mflag}-->checked="checked"<!--{/if}-->></dd>
+            </dl>
+            <dl class="foot">
+                <dt>&nbsp;</dt>
+                <dd><input tag="submit" type="button" value="提交" class="submit"></dd>
+            </dl>
+            </form>
+        </div>
+        	 
+        	 
+        	 
+        </div>
+               
+            </div>
+</div></div>
+				
+				
+				
+				
+				
+				
+				
+				
+		    
+	  <!--{include file={$usertpl}"foot.html"}-->	

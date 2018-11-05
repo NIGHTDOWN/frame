@@ -1,0 +1,381 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/order.css" rel="stylesheet" type="text/css" />
+<script>
+		_ajax_file_url = "<!--{url mod='upimg'}-->";
+	</script>
+	<script type="text/javascript" src="<!--{$staticjs}-->ajaxfileupload.js"></script>
+
+<body class="bgee">
+
+	<div>
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont mui-page-in-biz mui-global-biz-shop ">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='order' action='run' }-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								<form action="<!--{url mod='search' action='run'}-->" method="POST">
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">售后详情</span>
+
+										</div>
+									</div>
+								</form>
+								<div onclick="_go_url('<!--{url mod='index' action='run' group='index'}-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+
+
+
+					<div class="order-manage detail">
+
+
+						<div class=" order" id="order2">
+							<ul class="order-list">
+								<li>
+
+									<div class="module  logisticsholder">
+										<div class="o-t-contmsg " style='    font-size: 120%;'>
+
+											<div class="cont">
+												<h5>
+													<div>
+															<h2 style='color:red'>状态：
+
+													
+														
+	
+														<!--{if $data.shflag==0}-->
+													申请售后中
+														<!--{elseif $data.shflag==1}-->
+													已申请
+														<!--{elseif $data.shflag==2}-->
+														售后完成
+														<!--{elseif $data.shflag==3}-->
+													已申请
+														<!--{elseif $data.shflag==4}-->
+														售后关闭
+														<!--{/if}-->
+	
+	
+	
+																
+															</h2>	
+													<!--{if $data.cash}-->		<h2  style='color:red'>退款金额：<!--{$data.cash}-->元。</h2> <!--{/if}-->
+														<!--{if $data.orderstatus!=4 && $data.orderstatus!=5 }-->
+														<a class='btn2 ' onclick="return confirm('取消售后申请后，本次售后将关闭，您将不能再次申请。确定继续吗？')" href="<!--{url action='close' args="refundid:{$data.refundid}"}-->">取消售后申请</a>
+														<span>|</span><!--{/if}-->
+													 
+													
+													<!--{if $data.jr==0 && ($data.orderstatus!=4 && $data.orderstatus!=5)}-->
+													 <a  class='btn2 '  href="<!--{url args="refundid:{$data.refundid}" action='platform'}-->">申请平台处理</a>
+													  
+													 <!--{/if}-->
+													<!--{if $data.orderstatus==1}--><span>|</span>  
+													 <a  class='btn2 ' href="<!--{url args="refundid:{$data.refundid}" action='qr'}-->">完成售后确认</a>
+													 
+													 <!--{/if}-->
+													</div>
+													<div></div>
+												</h5>
+												
+											</div>
+
+										</div>
+									</div>
+									
+									<div class="module  address">
+											<div class="o-t-contmsg">
+	
+												<div class="cont">
+													<h5 class="">
+	
+	
+	
+														<div><img width="38" src="<!--{$data.headimg}-->">
+															<!--{$data.username}-->
+														</div>
+														<div>
+															<!--{$data.apptime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+														
+														</div>
+													</h5>
+													<div class="submsg">买家要求：
+															<!--{if $data.servertype==1}-->退款
+																<!--{elseif $data.servertype==2}-->退货退款
+																
+																<!--{elseif $data.servertype==3}-->换货
+																<!--{/if}-->
+														</div>
+													<div class="submsg">具体原因：
+														<!--{$data.remark}-->
+													</div>
+													<div class="submsg">
+															   <!--{if $data.userimg}-->   
+															   <!--{set $f2=explode(',',$data.userimg)}-->       
+																<!--{foreach $f2 as $value}-->
+																<span><a target="_blank" href="<!--{$value}-->"><img width="80" src="<!--{$value}-->"></a></span><!--{/foreach}--><!--{/if}-->
+														</div>
+													
+
+
+
+												</div>
+											</div>
+										</div>
+									<div class="cheatbox">
+ <!--{foreach $data.list as $volist}-->
+ <div class="module  address">
+		<div class="o-t-contmsg">
+
+			<div class="cont">
+				<h5 class="">
+
+
+
+					<div>
+						 <!--{if $volist.issystem}-->
+						 <img width="38" src="<!--{$volist.headimg}-->"><em style='color:red'>【系统】</em>
+						 <!--{else}-->
+						 <img width="38" src="<!--{$data.headimg}-->"><em ><!--{$volist.username}--></em>
+
+					
+						
+						<!--{/if}-->
+					</div>
+					<div>
+						<!--{$volist.apptime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+					
+					</div>
+				</h5>
+				
+				<div class="submsg">具体原因：
+					<!--{$volist.remark}-->
+				</div>
+				<div class="submsg">
+						   <!--{if $volist.userimg}-->          
+							 <!--{set $f=explode(',',$volist.userimg)}-->       
+																<!--{foreach $f as $value}-->
+							<span><a target="_blank" href="<!--{$value}-->"><img width="80" src="<!--{$value}-->"></a></span><!--{/foreach}--><!--{/if}-->
+					</div>
+				
+
+
+
+			</div>
+		</div>
+	</div>
+ <!--{/foreach}-->
+									</div>
+									<div class="module  seller" >
+										<div class="o-t-title-shop">
+											<div class="tcont">
+												<div class="ico">
+													<img src="<!--{$usertpl}-->images/store.png">
+												</div>
+												<div class="contact">
+													<a href="<!--{url mod='shop' action='show' args=" id:{$data.muid}" group='index'}-->">
+														<p class="title">
+															<!--{$data.merchantname}-->
+														</p>
+														<p class="arrow">
+															<span class="icon-right"></span>
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="module  item">
+										<div class="item-list o-t-item">
+											<div class="item-img">
+												<p>
+													<img class="" src="<!--{$data.smallimg|imgsize:'80,80'}-->"> </p>
+											</div>
+											<div class="item-info">
+												<h3 class="title">
+													<a href="<!--{url mod='product' action='detail' group='index' args=" productid:{$data.productid}"}-->" target="_blank">
+														<!--{$data.productname|tostr}-->
+													</a>
+												</h3>
+												<p class="sku">
+													<!--{$data.spec}-->
+												</p>
+												<ul class="order-serviceinfo none" style="">
+													<li></li>
+												</ul>
+											</div>
+											<div class="item-pay">
+												<div class="item-pay-data">
+													<p class="price"> ￥
+														<!--{$data.price/100}-->
+													</p>
+													<!-- <p class="price">
+														<del class=""> </del>
+													</p> -->
+													<p class="nums">x
+														<!--{$data.num}-->
+													</p>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									
+
+
+
+
+
+
+
+								
+									<div class="module  paydetail" id="paydetail21">
+										<div class="order-price-freight">
+												<dl>
+														<dt>本商品总价</dt>
+														<dd style='color:red'>￥
+															<!--{$data.price*$data.num/100}-->
+														</dd>
+													</dl>
+											<dl>
+												<dt>运费</dt>
+												<dd>￥
+													<!--{$data.logisfee/100}-->
+												</dd>
+											</dl>
+											<!-- <dl>
+												<dt></dt>
+												<dd>全国包邮</dd>
+											</dl> -->
+											<dl>
+												<dt>订单总价</dt>
+												<dd>￥
+													<!--{$data.totals/100}-->
+												</dd>
+											</dl>
+											<dl>
+												<dt>实付款（含运费）</dt>
+												<dd class="h">￥
+													<!--{$data.paytotal/100}-->
+												</dd>
+											</dl>
+										</div>
+									</div>
+									
+									<div class="module  orderinfo" id="orderinfo23">
+										<div class="order-box order-message">
+											<p class="">订单编号:
+												<!--{$data.ordernum}-->
+											</p>
+											<p class="none">交易号:</p>
+											<p class="">创建时间:
+												<!--{$data.createtime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+											</p>
+											<!--{if $data.paytime}-->
+											<p class="">付款时间:
+												<!--{$data.paytime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+											</p>
+											<!--{/if}-->
+											<!--{if $data.suretime}-->
+											<p class="">成交时间:
+												<!--{$data.suretime|date_format:"%Y-%m-%d %H:%M:%S"}-->
+											</p>
+											<!--{/if}-->
+										</div>
+									</div><!--{if $data.shflag!=2 &&   $data.shflag!=4}-->
+									<form method="post" action="<!--{url action='tkhd'}-->">
+										<div class="module  bfix">
+											
+														<input  type="hidden" name='refundid' value="<!--{$data.refundid}-->"/>	
+												<textarea name='remark' class="warea" placeholder="填写回复内容"></textarea>
+											<div class="o-t-contmsg memobook">
+												
+												<div class="cont">
+														<div class="view"><img  src='' id='viewimg_userimg'>
+														</div>
+														<div class="fr">
+													<div style="display: inline-block;position: relative;overflow: hidden">
+														<a class="btn2  " href="javascript:void();" tag='img_up' imgname='userimg'>添加图片</a></div>
+													<div style="display: inline-block;position: relative;overflow: hidden">
+														<a class="btn2 " tag='submit' href="javascript:void();">确认回复</a></div>	
+													</div>
+												</div>
+	
+											</div>
+											
+										</div>
+									</form>
+
+<!--{/if}-->
+
+								
+
+								</li>
+							</ul>
+						</div>
+					</div>
+
+
+					<div style="clear:both;margin-bottom:4rem"></div>
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	</div>

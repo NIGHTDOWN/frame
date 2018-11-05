@@ -1,0 +1,97 @@
+<!--{include file={$admintpl}"top/headerjs.html"}-->
+<body>
+<div class="oemarry_layout"> 
+     <div class="oe_top_nav"><!--{include file={$admintpl}"a_nav.html"}--></div>
+  <div class="a_content">
+    <form action="" method="post">
+      <div class="oe_tools_bar clearfix">
+          <a class="icon-checkbox" href="<!--{url args="choosetype:1" action=$a}-->" 
+           data="true"> <!--{$config.draw_time_1}--> </a>
+          <a class="icon-checkbox" href="<!--{url args="choosetype:2" action=$a}-->" 
+           data="true"> <!--{$config.draw_time_2}--> </a>
+          <a class="icon-checkbox" href="<!--{url args="choosetype:3" action=$a}-->" 
+          > <!--{$config.draw_time_3}--> </a>
+         
+       
+        <span class="fr"><a href="javascript:;"  onClick="msgbox('搜索区域',$('#area_serach'))"  id="condition" class="icon-search" style=""> 搜索区域</a>
+        <input id="condition_input" name="condition" value="" type="hidden">
+        </span> </div>
+      <table class="oe_table_list table_cs"  id="paixun">
+        <tbody>
+          <tr>
+          
+            <th >交易号</th>  
+            <th >用户</th> 
+            <th >提款金额</th> 
+            <th >到账类型</th>  
+            <th >提款时间</th> 
+            <th style="width:10%;text-align:center;">状态</th>
+            <th style="text-align:center;">操作</th>
+          </tr>
+          <!--{foreach $<!--{$c}--> as $volist}-->
+          <tr>
+            
+               <td ><!--{$volist.soleid}--></td>
+            <td ><!--{$volist.username}--></td>
+            <td ><!--{$volist.money}--></td>
+            <td ><!--{if $volist.choosetype==1}--><!--{$config.draw_time_1}--> 
+            	<!--{elseif $volist.choosetype==2}--><!--{$config.draw_time_2}--> 
+            	<!--{elseif $volist.choosetype==3}--><!--{$config.draw_time_3}--> 
+            	<!--{/if}-->
+            </td> <td ><!--{$volist.addtime|date_format:"%Y-%m-%d %H:%M:%S"}--></td> 
+            <td ><!--{if $volist.status==0}-->待处理
+            	<!--{elseif $volist.status==1}-->完成
+            	<!--{elseif $volist.status==2}-->关闭
+            	<!--{/if}-->
+            </td>
+           
+             
+           
+            
+           
+   <td style="text-align:center;" class="a_edit_del">
+                <a class="oe_ico_blue"" href="<!--{url action="show" args="soleid=><!--{$volist.soleid}-->"}-->">查看详情</a> 
+                <a class="oe_ico_red" a="<!--{url action="del" args="id=><!--{$volist.id}-->"}-->" onclick="boxyn($(this))">删除</a></td>
+          </tr>
+          <!--{/foreach}-->
+        </tbody>
+      </table>
+      <div class="page_nav"> 
+        <!--{$page}--> 
+      </div>
+    </form>
+  </div>
+</div>
+ <div style="display:none" id="area_serach">
+          <div>
+          	<form method="post" style="width:400px;" action="">
+       <input name="sflag" type="hidden" value="1">
+     <table  align="center" width="473" class="oe_table_warp">
+      <tr>
+        <td height="40"  style="text-align:right;">交易号：</td>
+        <td>
+        <input name="soleid" class="input-b" type="text" value="<!--{$where.soleid}-->" />
+            
+        </td>
+           
+      </tr>
+        <tr>
+        <td height="40"  style="text-align:right;">用户账号：</td>
+        <td>
+        <input name="username" class="input-b" type="text" value="<!--{$where.username}-->" />
+            
+        </td>
+           
+      </tr>
+        
+    </table>
+        <div style="text-align:center">
+           <input name="" value="清空" class="oe_boxbut" tag="reset" type="button">
+        <span style="padding-left:50px;"></span>
+          <input name="" value="提交查询" class="oe_boxbut" tag="submit" type="button">
+    </div>
+  </form>
+          	
+          </div>
+        </div>
+</body>

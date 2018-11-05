@@ -1,0 +1,143 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+<style>
+	.gray{    background: #fff;}
+</style>
+<body class="gray">
+	<!--{include file={$indextpl}"nav.html"}-->
+
+	<script type="text/javascript" src="<!--{$indextpl}-->res/jquery.flexslider-min.js"></script>
+	<link href="<!--{$indextpl}-->res/skin.css" rel="stylesheet" type="text/css">
+	
+	<link href="<!--{$indextpl}-->res/pcss.css" rel="stylesheet" type="text/css">
+	<div class="w">
+    
+    
+    	     <!--{if $pcat}-->   
+                <div class="detailnav">
+                <!--{foreach $pcat as $i=>$volist}-->
+                <!--{if $i==0}-->   
+                <strong>
+                <a href="<!--{url mod=$c action=$a args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                </strong>
+                <!--{else}-->
+                 <span>
+            
+                 &gt; <a href="<!--{url mod=$c action=$a args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                   </span>
+                
+                <!--{/if}-->
+                <!--{/foreach}-->
+               
+    </div>
+                <!--{else}-->
+                <div class="detailnav">
+    
+    	        
+                
+                <strong><a href="<!--{url mod='index'}-->">首页</a></strong><span>
+         &gt; <a href="<!--{url mod=$c action=$a}-->">积分商城</a>&gt;&gt;兑换礼品列表
+                
+                
+                
+                
+        </span>
+    </div>
+                <!--{/if}-->
+                
+      
+</div>
+	<div class="w">
+	 
+        <div id="select">
+        <!--{if $ccat|sizeof}-->
+    	        <dl class="first">
+            <dt>分类：</dt>
+            <dd>
+            <!--{foreach $ccat as $volist}-->
+                                                <div>
+                <a href="<!--{url mod=$c action=$a args="catid:{$volist.catid}"}-->"><!--{$volist.catname}--></a>
+                </div>
+<!--{/foreach}-->
+                          
+                            </dd>
+        </dl>
+         <!--{/if}-->
+         <!--{foreach $attribute as $volist}-->
+                <dl>
+            <dt><!--{$volist.sname}-->：</dt>
+            <dd>
+            
+                                <div><a <!--{if $attrwhere.<!--{$volist.sname}-->==null}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action='category' args1=$wherestring args2="{$orderby.s}:{$orderby.f}" args="attr:{$volist.sname|cat:'_null'}"}-->">不限</a></div>
+                                <!--{set $ex=explode(',',$volist.var)}-->
+                              <!--{foreach $ex as $value}-->  
+                                <div>
+ <a <!--{if $attrwhere.[$volist.sname]==$value}-->class="curr"<!--{/if}--> href="<!--{url mod=$c action=$a args="attr:{$volist.sname|cat:'_'|cat:$value}" args2="{$orderby.s}:{$orderby.f}"  args1=$wherestring}-->"><!--{$value}--></a>
+                </div>
+                               <!--{/foreach}-->
+                            </dd>
+        </dl>
+                    <!--{/foreach}-->
+                              
+            </div>
+
+       <style>
+       .order .up,.order .down{
+       	background: #E4393C;
+    font-weight: bold;
+    color: #FFF;
+    border-color: #E4393C;
+       }
+       	.order .up b{background-position: right -23px;}
+		.order .down b{background-position: right -30px;}
+       	
+       </style> 
+    <div class="filter clearfix">
+        <div class="fore1 clearfix">
+            <div class="order">
+                                <a <!--{if !$orderby.f}-->class="current"<!--{/if}--> href="<!--{url mod=$c action=$a  args="$wherestring"}-->"><span>默认排序</span></a>
+			<a class="<!--{if $orderby.f=='sells'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='sells'}--><!--{url mod=$c action=$a args="{$by}:sells" args1="$wherestring"}--><!--{else}--><!--{url mod=$c action=$a args="up:sells" args1="$wherestring"}--><!--{/if}-->"><span>兑换量</span><b></b></a>
+          
+                
+           <a class="<!--{if $orderby.f=='addtime'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='addtime'}--><!--{url mod=$c action=$a args="{$by}:addtime" args1="$wherestring"}--><!--{else}--><!--{url mod=$c action=$a args="up:addtime" args1="$wherestring"}--><!--{/if}-->"><span>上架时间</span><b></b></a>
+               <a class="<!--{if $orderby.f=='originalprice'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='originalprice'}--><!--{url mod=$c action=$a args="{$by}:originalprice" args1="$wherestring"}--><!--{else}--><!--{url mod=$c action=$a args="up:originalprice" args1="$wherestring"}--><!--{/if}-->"><span>积分值</span><b></b></a>
+            </div>
+            <div class="total">共<strong><!--{$pagearray.total}--></strong>个商品</div>
+        </div>
+       	
+    </div>
+    
+    <div class="itemSearchList">
+    	        
+        <ul class="exchange-list clearfix">
+<!--{foreach $data as $volist}-->
+                                                                        <li class="mod-shadow-card">
+                                <a href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" target="_blank" class="img"><img src="<!--{$volist.smallimg1}-->" alt="" class="lazy" data-original="<!--{$volist.smallimg1}-->" style="display: inline-block;"></a>
+                                <div class="clearfix">
+                                    <div class="score">积分 <!--{$volist.originalprice}--></div>
+                                    <div class="market"><em>¥</em><!--{$volist.price}--></div>
+                                </div>
+                                <a href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" target="_blank" class="name"><!--{$volist.productname|tostr}--></a>
+                                <div class="already">
+                                    <i class="iconfont icon-package"></i>
+                                    <!--{$volist.sells}--> 人兑换                               </div>
+                                <a href="<!--{url args="productid:{$volist.productid}" action='detail'}-->" class="ex-btn" target="_blank">立即兑换</a>
+                            </li>
+                        <!--{/foreach}-->                                                                  
+                                                            </ul>
+<div class="itemSearchResult clearfix">
+
+        </div>
+<div class="page">   <!--{$page}--></div>
+
+            </div>
+</div>
+	
+	
+	
+	<div class="fn-clear"></div>
+
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>

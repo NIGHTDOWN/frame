@@ -1,0 +1,259 @@
+<!--{include file={$usertpl}"top.html"}-->
+<link href="<!--{$usertpl}-->css/collect.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<!--{$usertpl}-->js/timecacl.js"></script>
+<body class="bgee">
+
+	<div style="background: #f5f5f5;">
+		<div id="content">
+
+
+
+
+			<div class="mui-page-cont">
+
+
+
+
+
+				<div class="a-msp-index">
+					<div id="bodyCont" class="fullscreen index">
+
+						<header class="jd-header header-section-search header-banner">
+							<div class="jd-header-new-bar">
+								<div onclick="_go_url('<!--{url mod='index'}-->')" class="jd-header-icon-back ">
+									<span></span>
+								</div>
+								
+
+
+									<div class="jd-header-new-title">
+										<div class="header-content">
+											<span class="header-title">易沟通</span>
+
+										</div>
+									</div>
+								
+								<div onclick="_go_url('<!--{url mod='index' group='index' action='run' }-->')" class="jd-header-icon-new-shortcut ">
+									<span></span>
+								</div>
+							</div>
+						</header>
+
+
+					</div>
+
+
+					<div>
+						<div style="display: block;" class="cheat_list">
+
+<ul class="cheatuserlist">
+			<!--{foreach $data as $k=>$volist}-->
+			<!--{set $id=$volist.uid==$user.uid?1:2}-->
+			<!--{set $uid=$volist.uid==$user.uid?$volist.touid:$volist.uid}-->
+			<!--{set $idnum='u'.$id.'num'}-->
+			<li class="opencheat  " attr_id='<!--{$volist.id}-->'>
+			<div class="u-head">
+				<img src="<!--{$static}-->images/head.png" data="<!--{$uid}-->">
+			</div>
+			<div class="u-body">
+			<div class="u-name ">
+			<span   class="u-name sl">
+					<!--{if $volist.uid==$user.uid}-->
+					<!--{$volist.u2name}-->
+					<!--{else}--><!--{$volist.u1name}-->
+					<!--{/if}-->
+					
+				</span>
+				<span   class="u-chtime" attr-time="<!--{$volist.chtime}-->">
+					
+				</span>
+				
+				</div>
+				<div class="u-msgs">
+					<span class="u-msg "><msg class='sl'></msg><div class="zz"></div></span>
+					<span class="u-msgnum none" data="<!--{$volist[$idnum]}-->"></span>
+				</div>
+				</div>
+			</li>
+			<!--{/foreach}-->
+		</ul>
+
+						</div>
+
+						
+
+					</div>
+				</div>
+				<div class="page">
+					<!--{$page}-->
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+	</div>
+	<box id="box" style="display: none">
+		<li class="opencheat" attr_id=''>
+			<div class="u-head">
+				<img src="<!--{$static}-->images/head.png" >
+			</div>
+			<div class="u-body">
+			<div class="u-name ">
+			<span   class="u-name sl">
+					
+					
+				</span>
+				<span   class="u-chtime" attr-time="<!--{$volist.chtime}-->">
+					
+				</span>
+				
+				</div>
+				<div class="u-msgs">
+					<span class="u-msg "><msg class='sl'></msg><div class="zz"></div></span>
+					<span class="u-msgnum none" data="<!--{$volist[$idnum]}-->"></span>
+				</div>
+				</div>
+			</li>
+			<iframe  class="u-iframe">
+				</iframe>
+	</box>
+<audio  id='recvaudio' src="" >
+ 
+</audio>
+<div class="ucontent">
+	
+</div>
+	</div>
+<script>
+var headurl="<!--{url mod="msg" action="gethead"}-->";
+var lasturl="<!--{url action="getlast"}-->";
+	
+	$(function(){
+		inituser();
+		$readurl='<!--{url action='read' mod='msg'}-->';
+		$showurl='<!--{url action='show' mod='msg'}-->';
+			$('.opencheat').live('click',function()
+				{
+					$id=$(this).attr('attr_id');
+					$findid="#ifr"+$id;
+					$numobj=$(this).find('.u-msgnum');
+					$num=$numobj.attr('data');
+					if($num>0)
+					{
+						yAjax($readurl,{'id':$id},function($daa){
+							$numobj.attr('data',0);
+							$numobj.text();
+							$numobj.hide();
+						});
+						
+					}
+					opencheat($id);
+						/*_go_url_new($opurl);*/
+				});
+
+
+
+	});
+	function hideifr(){
+		
+	$content=$('.ucontent');
+	$content.find('iframe').hide();	
+	/*$content.hide();	*/
+	}
+	function opencheat($id){
+		if(!$id)return false;
+		$sid="#ifr"+$id;
+		$content=$('.ucontent').eq(0);
+		$findobj=$content.find($sid);
+		hideifr();
+		
+		if($findobj.length<=0){
+			/*d('执行s');*/
+			$opurl=$showurl+"&id="+$id;
+			$ifr=$('#box').find('iframe').clone();
+			$ifr.attr('id',"ifr"+$id);
+			$ifr.attr('src',$opurl);
+			$content.eq(0).append($ifr);
+			$findobj=$content.find($sid);
+		
+		}
+		/*$content.show();*/
+		$findobj.show();
+		
+	}
+	
+	ywebsock('<!--{$ip}-->','<!--{$port}-->','cheat',
+		{},function($data)
+		{
+			$info=$data.data.data;
+			if($data.data.action=='cheat' )
+			{
+				$id=$info.id;
+				$fobj=$('.cheatuserlist').find('[attr_id='+$id+']');
+				if($fobj.length)
+				{
+
+					//闪烁
+					gxlast($id,$info);
+				}else
+				{
+					addli($id,$info);
+					gxlast($id,$info);
+					//闪烁
+				}
+			play();
+
+			}
+		});
+		function addli($id,$info){
+		$addli=$('#box').find('li').clone();
+		$addli.attr('attr_id',$info['id']);	
+		
+		$addli.find('span.u-name').text($info.name);
+		$addli.find('msg.zz').html($info.msg);	
+		/*$addli.find('msg.zz').html($info.msg);	*/
+		$addli.find('.u-msgnum').attr('data','0');	
+		/*$addli.find('.u-msgnum').attr('data','1');*/
+		//还没写完
+		$img=$addli.find('.u-head img');
+		
+			gethead($img,$info.fid);
+			$('ul.cheatuserlist').prepend($addli);
+			
+		}
+		function gxlast($id,$data){
+			$fobj=$('.cheatuserlist').find('[attr_id='+$id+']');
+			$string=$data.msg;
+			
+			$string.replace(/<img(.*?)>/g, "[图片]")
+			$fobj.find('.u-msg msg').html($string);
+			$num=$fobj.find('.u-msgnum').attr('data');
+			$fobj.find('.u-msgnum').attr('data', parseInt($num)+1);
+			$fobj.find('.u-chtime').attr('data-time',$data.sendtime);
+			
+			$fobj.find('.u-chtime').text(showtime($data.sendtime));
+			loaduser($fobj[0]);
+			$par=$fobj.parent();
+			$index=$par.find($fobj).index();
+
+			if($index>0){
+				$html=$fobj.html();
+				$fobj.remove();
+				$par.prepend($fobj);
+			}
+			play();
+		}
+	
+		function play(){
+			  $audio="<!--{$static}-->/audio/recv.wav";
+      music_play($audio);
+			return true;
+			
+			
+		}
+	
+</script>
+	<!--{include file={$usertpl}"foot.html"}-->

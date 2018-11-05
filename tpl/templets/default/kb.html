@@ -1,0 +1,21 @@
+<!--{assign var="kb" vo_list("fun={getcomment} mod={index} type={im}")}-->
+<!--{foreach $kb as $volist}-->
+					<li class="fn-clear">
+						<div class="fore1 fn-clear">
+							<b><!--{$volist.merchantname}--></b>
+							<span><!--{$volist.cmtime|date_format:"%Y-%m-%d %H:%M:%S"}--></span>
+						</div>
+						<div class="fore2 fn-clear">
+							<div class="txt"><a target="_blank" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->">【<!--{$volist.productname|tostr}-->】</a><!--{$volist.cmcontent}--></div>
+							<div class="pic fn-clear">
+								<img width="80" src="<!--{$volist.smallimg1|imgsize:'60,60'}-->">
+								<img width="80" src="<!--{$volist.smallimg2|imgsize:'60,60'}-->">
+								<img width="80" src="<!--{$volist.smallimg3|imgsize:'60,60'}-->">
+							</div>
+						</div>
+						<div class="fore3 fn-clear">
+							<!--<span>评论(0)</span>
+							<span>转发(0)</span>-->
+						</div>
+					</li>
+					<!--{/foreach}-->

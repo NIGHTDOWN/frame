@@ -1,0 +1,477 @@
+  <!--{include file={$indextpl}"head.html"}-->
+
+
+
+
+
+<link href="<!--{$indextpl}-->res/cart.css" rel="stylesheet" type="text/css">
+
+<body class="gray">
+	<div class="site-nav">
+    <div class="w fn-clear">
+    	<ul class="fn-left">
+    	<!--{if !$user}-->
+            <li class="nav user">
+				<div class="nav-fore1"><a class="login" href="<!--{url mod='login'}-->">亲，请登录</a><a class="reg" href="<!--{url mod='reg'}-->">免费注册</a></div>
+            </li>
+            <!--{else}-->
+        	
+            <li class="nav drop-down user">
+				<div class="nav-fore1"><a class="name" href="<!--{url mod='index' group='user'}-->"><!--{$user.username}--></a><img align="absmiddle" src="<!--{vo_list("fun={getlevelimg1} type={am} mod={userlevel}  param1={$user.uid}")}-->"><i><em></em></i></div><div class="nav-fore2">
+				<ul><li><a href="<!--{url mod='set' group='user'}-->">账号管理</a></li><li><a href="<!--{url mod='login' action='logout' group='index'}-->">退出</a></li></ul><div></div></div></li>
+			<li class="nav msg"><div class="nav-fore1"><a class="name" href="<!--{url mod='message' group='user'}-->"><span>消息</span></a></div></li>
+   
+        	<!--{/if}-->
+        	<li class="nav drop-down">
+            	<div class="nav-fore1">
+                    <a>手机逛Mallbuilder</a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>   
+                        <li><a href="<!--{$config.mobile_url}-->">直接进入</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    	<ul class="fn-right">
+        	        	<li class="nav drop-down">
+            	<div class="nav-fore1">
+                    <a href="<!--{url group='user' mod='index'}-->">我的商城</a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                                  <li><a href="<!--{url group='user' mod='order'}-->">已买到的商品</a></li>
+                        <li><a href="<!--{url group='user' mod='collect' action='history'}-->">我的足迹</a></li>
+                    </ul>
+                </div>
+            </li>
+             <!--{include file={$indextpl}"cart.html"}-->  
+        	<li class="nav collect drop-down">
+            	<div class="nav-fore1">
+                    <a href="<!--{url group='user' mod='collection'}-->">
+                    <span>收藏夹</span>
+                    </a>
+                    <i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                        <li><a href="<!--{url group='user' mod='collect' }--> ">收藏的商品</a></li>
+                        <li><a href="<!--{url group='user' mod='collect' action='shop'}-->">收藏的店铺</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav">
+            	<div class="nav-fore1">
+                <a href="<!--{url mod='category'}-->">商品分类</a>
+                </div>
+            </li>
+            <li class="site-nav-pipe">|</li>
+            <li class="nav drop-down">
+            	<div class="nav-fore1">
+                                        <a href="<!--{url group='merchant'}-->">卖家中心</a>
+                                       	<i><em></em></i>
+                </div>
+                <div class="nav-fore2">
+                    <ul>
+                        <li><a href="<!--{url group='merchant'}-->">免费开店</a></li>
+                        <li><a href="<!--{url mod='selloff'  group='merchant'}-->">已卖出的商品</a></li>
+                        <li><a href="<!--{url mod='sellon' group='merchant'}-->">出售中的商品</a></li>
+                    </ul>
+                </div>
+            </li>
+        	<li class="nav">
+            	<div class="nav-fore1"><a href="<!--{url mod='contact'}-->">联系客服</a></div>
+            </li>
+        </ul>
+	</div>
+</div>
+<script type="text/javascript">
+$('.menu-items li').hover(function(){					 
+	$(this).addClass("hover");
+},function(){
+	$(this).removeClass("hover");	
+});
+    $(".code").hover(function(){
+         $(this).find(".showDown").css({"display":"block"})
+    },function(){
+        $(this).find(".showDown").css({"display":"none"})
+    })
+
+    $(".android").hover(function(){
+        $(".androidimg").css({"display":"block"});
+        $(".iosimg").css({"display":"none"});
+
+        $(".andimg2").css({"display":"block"});
+        $(".andimg1").css({"display":"none"});
+
+        $(".iosimg1").css({"display":"block"});
+        $(".iosimg2").css({"display":"none"});
+    });
+
+    $(".ios").hover(function(){
+        $(".androidimg").css({"display":"none"});
+        $(".iosimg").css({"display":"block"});
+        
+        $(".iosimg2").css({"display":"block"});
+        $(".iosimg1").css({"display":"none"});
+
+        $(".andimg1").css({"display":"block"});
+        $(".andimg2").css({"display":"none"});
+    });
+</script>
+<script type="text/javascript">
+$('.drop-down').hover(function(){
+	$(this).addClass("hover");					 
+	if($(this).hasClass("cart"))
+	{
+	
+	}
+},function(){
+	$(this).removeClass("hover");	
+});</script>
+	
+	
+	
+	<div class="header">
+	<div class="w fn-clear">
+        <div class="logo">
+        <a title="<!--{$config.site_name}-->" href="<!--{url mod='index' group='index'}-->"><img src="<!--{$static}-->logo/logo.png"></a>
+        </div>
+		<div class="search">
+            <form action="<!--{url mod='search' group='index'}-->" class="form" method="post" >
+            <div class="i-search">
+                
+                <input type="text" class="text" name="word" id="key" value="" autocomplete="off">
+			</div>
+            <input type="submit" value="搜&nbsp;索" class="button">
+            </form>
+        </div>
+    </div>  
+</div>
+
+<!--{if ($data|sizeof)!=0}-->
+<div class="cart w" style="margin-top: 15px;  ">
+    <div class="cart-hd" style="  width: 990px;">
+       <div style="  width: 50%;"> <h2>我的购物车</h2></div>
+               <div style="  width: 50%;"> <span>已选商品(不含运费)：<strong class="Price">￥<em class="subtotal">0.00</em></strong><a class="submit-btn submit-btn-disabled" href="javascript:void(0);">结算</a></span></div>
+            </div>
+      
+        <form id="form" method="post" action="<!--{url mod='buy' action='cartsure'}-->">
+    <input type="hidden" id="act" name="act">
+    <table width="100%" cellpadding="0" cellspacing="0" class="cart-con">
+    	<thead>
+            <tr>
+                <th width="45">
+                <label class="cart-checkbox"><input data-type="all" type="checkbox"><em>全选</em></label>
+                </th>
+                <th>商品信息</th>
+                <th width="128">单价（元）</th>
+                <th width="115">数量</th>
+                <th width="115">金额（元）</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--{assign var='muid' value=''}--> 
+        <!--{foreach $data as $volist}-->
+        <!--{if $muid!=($volist.muid)}-->
+        <!--{set $muid=($volist.muid)}-->
+                <tr>
+            <th colspan="6">
+                <label class="cart-checkbox"><input type="checkbox" data-type="shop" data-value="<!--{$volist.muid}-->" name="checkbox" value=""><em></em></label>
+                店铺:
+                <a target="_blank" href="<!--{url mod='shop' group='index' action='show' args="id:{$volist.muid}"}-->"><!--{$volist.merchantname}--></a>
+              <!-- <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=&amp;site=qq&amp;menu=yes" target="_blank"><img align="absmiddle" src="tpl/static/images/button_11.gif"></a>-->
+                联系方式：<!--{$volist.phone}-->
+            </th>
+        </tr>
+<!--{/if}-->
+
+                <tr <!--{if $volist.old}-->class='disable'<!--{/if}-->>
+                 <td class="first">
+                
+              
+                
+           <!--{if !$volist.old}-->
+                <label class="cart-checkbox">
+                <input type="checkbox" data-value="<!--{$volist.muid}-->" name="product_id[]" class="product" value="<!--{$volist.cid}-->"><em></em></label>
+                <!--{/if}-->
+            </td>
+            <td>
+                <div class="pro-img">
+                    <a target="_blank" href="<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+                        <img height="80" alt="" src="<!--{$volist.smallimg1|imgsize:'60,60'}-->">
+                    </a>
+                </div>
+                <div class="pro-name">
+                    <a target="_blank" href="<!--{url group='index' mod='product' action='detail' args="productid:{$volist.productid}"}-->">
+                                            <!--{$volist.productname|tostr}-->
+                    </a>
+                  <div class="specs">  <!--{$volist.specs}--></div>
+                                    </div>
+            </td>
+            <td>
+            <!--{if $volist.yhtype}-->
+                                <p><s><!--{set echo $volist.price/100}--></s></p>
+                                <p class="price" cash='<!--{$volist.nowprice}-->'><!--{set echo $volist.nowprice/100}--></p>
+                                <div class="promo-content">团购</div>
+                                <!--{else}-->
+                                 <p class="price" cash='<!--{$volist.nowprice}-->'> <!--{set echo $volist.nowprice/100}--></p>
+                                <!--{/if}-->
+                            </td>
+            <td>
+                <div class="computing fn-clear">
+                    <div class="computing_item">
+                        <div class="computing_num">
+                            <input maxlength="4" data-id="<!--{$volist.cid}-->" data-max="<!--{$volist.count}-->" name="nums" id="nums" type="text" value="<!--{$volist.nums}-->">
+                        </div>
+                        <div class="computing_act">
+                            <input type="button" class="add">
+                            <input type="button" class="reduce">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td id="cell<!--{$volist.cid}-->">
+                <span id="price" cash='<!--{set echo ($volist.nums*($volist.nowprice/100))}-->' class="price org"><!--{set echo ($volist.nums*($volist.nowprice/100))}--></span>
+            </td>
+            <td class="last">
+                <a onclick='boxyn($(this))' a="<!--{url mod='cart' action='del' args="product_id:{$volist.cid}"}-->">删除</a>
+            </td>
+        </tr>
+<!--{/foreach}-->
+              
+                                </tbody>
+    </table>
+    
+	<div class="toolbar fn-clear">
+    	<div class="select-all">
+            <label class="cart-checkbox"><input type="checkbox" data-type="all"><em>全选</em></label>
+        </div>
+        <div class="operations">
+            <a class="delete" href="javascript:void(0);" onclick='boxyn($(this))' do="tools_submit({'action':'<!--{url action='del'}-->','id':'product_id',})">删除</a>
+        </div>
+        <a class="submit-btn submit-btn-disabled" href="javascript:void(0);">结算</a>
+        <div class="cart-sum">
+            <span>合计(不含运费)：</span>
+            <strong class="Price">￥<em class="subtotal">0.00</em></strong>
+        </div>
+        <div class="cart-count">
+            <span>已选商品</span>
+            <em>0</em>
+            <span>件</span>
+        </div>
+    </div>
+    </form>
+    </div>
+  
+<!--{else}-->
+<div class="cart w" style="margin-top: 15px;  ">
+   <div class="cart-hd" style="  width: 990px;">
+       <div style="  width: 50%;"> <h2>我的购物车</h2></div>
+               
+            </div>
+   
+   
+            <div class="cart-empty w">
+            <div class="message">
+            购物车内暂时没有产品，您可以<a href="<!--{url mod='index' group='index'}-->">去首页</a>挑选喜欢的
+            </div>
+        </div>
+    </div>
+
+<!--{/if}-->
+  </div>
+</div>
+	
+	<div class="fn-clear"></div>
+<script type="text/javascript">
+/*$(".operations a").bind("click",function(){
+	$("#act").val($(this).attr("class"));
+	$("#form").submit();
+});*/
+$(".submit-btn").bind("click",function(){
+	if(!$(this).hasClass("submit-btn-disabled"))
+	{
+	
+		$("#form").submit();
+	}
+});
+$(".cart-checkbox input[type='checkbox']").click(function(){
+	
+	var flag = $(this).attr("checked");
+	
+	var data_type = $(this).attr("data-type");
+	
+	if(flag)
+	{
+		if(data_type == 'all')
+		{
+			ckeckbox("input[type='checkbox']",true);
+		}
+		else if(data_type == 'shop')
+		{
+			var data_value = $(this).attr("data-value");
+			ckeckbox("input[data-value='"+data_value+"']",true);
+		}
+		
+		$(this).parent().addClass("cart-checkbox-checked");
+	}
+	else
+	{
+		
+		if(data_type == 'all')
+		{
+			ckeckbox("input[type='checkbox']",false);
+		}
+		else if(data_type == 'shop')
+		{
+			var data_value = $(this).attr("data-value");
+			
+			ckeckbox("input[data-value='"+data_value+"']",false);
+		}
+		$(this).parent().removeClass("cart-checkbox-checked");
+		$(this).parent().parent().parent().removeClass("checked");
+	}
+	
+	count();
+});
+function ckeckbox(obj,flag)
+{
+	$num=50;
+	if($(".cart-checkbox").find(obj).filter('.product').length>=$num){
+		showd('购物车最多选择'+$num+'件产品;请分次结算');
+	}
+	$pall=$(".cart-checkbox").find(obj).filter('.product').slice(0,$num);
+	$(".cart-checkbox").find(obj).each(function(){
+		if(flag == true)
+		{
+			/*d($pall.index($(this)));*/
+			if($pall.index($(this))>=0){
+			$(this).parent().addClass("cart-checkbox-checked");
+			$(this).attr("checked","checked");	
+			
+			}
+			
+		}
+		else
+		{
+		
+			$(this).parent().parent().parent().removeClass("checked");
+			$(this).parent().removeClass("cart-checkbox-checked");
+			$(this).attr("checked",false);	
+		}
+	});
+}
+function count()
+{
+	var count = 0;
+	var num = 0;
+	$(".cart-checkbox").find("input[name='product_id[]']:checked").each(function(){
+		var value = $(this).val();
+		/*var price = $(this).parent().parent().parent().find("#cell"+value+" span").html();*/
+		
+		var price = $(this).parent().parent().parent().find("#cell"+value+" span").attr('cash');
+		
+		price = price.replace(/,/g, "")
+		price = Number(price);
+		count = count + price;
+		num ++;
+		$(this).parent().parent().parent().addClass("checked");
+	});
+	$(".subtotal").html(count.toFixed(2));
+	$(".cart-count em").html(num);
+	if(num>0) 
+		$(".submit-btn").removeClass("submit-btn-disabled");
+	else
+		$(".submit-btn").addClass("submit-btn-disabled");	
+}
+var c=$(".computing_item");
+var e=null;
+c.each(function(){
+	var g=$(this).find(".computing_act input");		
+	var h=$(this).find("input#nums");
+	var o=this;
+	var f=h.attr("data-max");
+	var i=1;
+	var id=h.attr("data-id");
+	h.bind("input propertychange",function(){
+		var j=this;
+		var k=$(j).val();
+		e&&clearTimeout(e);
+		e=setTimeout(function(){
+			var l=Math.max(Math.min(f,k.replace(/\D/gi,"").replace(/(^0*)/,"")||1),i);
+			$(j).val(l);
+			edit_num(id,l,o);
+			if(l==f){
+				g.eq(0).attr("class","no_add");
+				if(l==i)
+					g.eq(1).attr("class","no_reduce")
+				else
+					g.eq(1).attr("class","reduce")
+			}else{
+				if(l<=i){
+					g.eq(1).attr("class","no_reduce");
+					g.eq(0).attr("class","add")
+				}else{
+					g.eq(1).attr("class","reduce");
+					g.eq(0).attr("class","add")
+				}
+			}
+		},50)
+	}).trigger("input propertychange").blur(function(){$(this).trigger("input propertychange")}).keydown(function(l){
+		if(l.keyCode==38||l.keyCode==40)
+		{
+			var j=0;
+			l.keyCode==40&&(j=1);g.eq(j).trigger("click")
+		}
+	});
+	g.bind("click",function(l){
+		if(!$(this).hasClass("no_reduce")){
+			var j=parseInt(h.val(),10)||1;
+			if($(this).hasClass("add")&&!$(this).hasClass("no_add")){
+				$(this).next().attr("class","reduce");
+				if(f>i&&j>=f){
+					$(this).attr("class","no_add")
+				}
+				else
+				{
+					j++;
+					edit_num(id,j,o);
+				}
+			}else{
+				if($(this).hasClass("reduce")&&!$(this).hasClass("no_reduce")){
+					j--;
+					edit_num(id,j,o);
+					$(this).prev().attr("class","add");
+					j<=i&&$(this).attr("class","no_reduce")
+				}
+			}
+			h.val(j)
+		}
+	})
+})
+function edit_num(id,num,obj){
+	var url = "<!--{url action='addnum' mod='cart' group='index'}-->";
+	var pars = {'cid':id,'nums':num};
+	yAjax(url, pars,showResponse);
+	function showResponse(originalRequest)
+	{
+		
+		if(originalRequest.flag){
+			$('#cell'+id+' span').attr('cash',(Number(originalRequest.data/100).toFixed(2)));
+			$('#cell'+id+' span').html((rmb(originalRequest.data/100)));}
+			else{
+			showd(originalRequest.error.errormsg);
+		}
+			
+		count();
+	}
+}
+</script>
+
+<!--{include file={$indextpl}"foot.html"}-->
+
+</body></html>
