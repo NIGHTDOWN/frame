@@ -1,6 +1,7 @@
 <?php
 namespace ng169;
 define(INSTALL, true);
+define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
 //弃用
 /*$_init_mictime = explode(' ', microtime());
 $_start_time = $_init_mictime[1] + $_init_mictime[0];*/
@@ -93,35 +94,15 @@ im(LIB.'static.log.php');
 im(CORE.'cache/nosql.php');
 im(CORE.'cache/sql.php');
 im(CORE.'cache/file.php');
-#开启全局缓存对象
 
-switch (CACHE_TYPE)
-{
-	case 'nosql':
-        Y::$cache=new \ng169\cache\Nosql();
-     
-        ;break;
-    case 'mysql':
-        Y::$cache=new \ng169\cache\Mysql();
-               
-        ;break;
-    case 'file':
-        Y::$cache=new \ng169\cache\File();
-              
-        ;break;
-    
-}
 
 Y::__run();	
-#开启安全模式
-if(G_SAFE_FILTER){
-	im(CORE.'safe/safe.php');
-	new safe();
-}
-#伪静态解码
 
+
+#伪静态解码
+/*
 if(Y::$conf['rewrite']){
 	YUrl::back();
-}
+}*/
 
 ?>

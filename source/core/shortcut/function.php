@@ -1,6 +1,9 @@
 <?php
 
-namespace ng169;
+use ng169\Y;
+use ng169\tool\Out as YOut;
+use ng169\tool\Url as YUrl;
+use ng169\lib\Lang;
 @checktop();
 function T($name){
 	return Y::table($name);
@@ -129,7 +132,9 @@ function getactionname($action,$mod,$mod_dir){
 }
 
 
-
+function __($index){
+	return Lang::get($index);
+}
 
 function getrand($length){
 	global $__€;

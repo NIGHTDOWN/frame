@@ -1,5 +1,5 @@
 <?php
-
+use ng169\service\Output;
 //本模板借鉴Template_Lite改版而得;勿修改或者替换
 if (!defined('TEMPLATE_LITE_DIR')) {
 	define('TEMPLATE_LITE_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -580,7 +580,7 @@ function setCaching($bool){
 
 		if ($display)
 		{
-			echo $output;
+			Output::set($output);
 			if($this->debugging && !$this->_templatelite_debug_loop)
 			{
 				$this->debugging = false;
@@ -590,7 +590,8 @@ function setCaching($bool){
 				}
 				$debug_output = template_generate_debug_output($this);
 				$this->debugging = true;
-				echo $debug_output;
+				
+				Output::set($debug_output);
 			}
 		}
 		else

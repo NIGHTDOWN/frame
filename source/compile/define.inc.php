@@ -1,6 +1,7 @@
 <?php 
 define('SOURCE','D:\work2//source/');
 define('TPL','D:\work2//tpl/');
+define('LANG','D:\work2//lang/');
 define('DATA','D:\work2//data/');
 define('CONF','D:\work2//conf/');
 define('CORE','D:\work2//source/core/');
@@ -47,5 +48,7 @@ define('G_BREAK','_');
 define('IMG404','/tpl/static/images/404img.png');
 define('G_DAY','86400');
 define('G_SMARTY_CACHE','1');
+define('G_EXT','.php');
+define('G_LANG','cn');
 
 ?>
