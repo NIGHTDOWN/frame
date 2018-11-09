@@ -1,4 +1,5 @@
 <?php
+namespace ng169;
 
 checktop();
 class Y

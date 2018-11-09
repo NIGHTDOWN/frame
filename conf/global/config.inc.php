@@ -20,8 +20,7 @@ define('CACHE_SQL_KEY','key');#缓存键
 define('CACHE_SQL_VALUE','value');#缓存值
 define('CACHE_TIMEOUT',G_DAY);#缓存超时时长
 define('CACHE_DB_TIMEOUT',3600);#数据库缓存超时时长
-#相对路径
-define('PATH_URL','/');
+
 #默认表前缀
 define('DB_PREFIX','a_');
 define('DB_SOCKPOST','7777');

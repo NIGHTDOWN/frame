@@ -1,6 +1,6 @@
 <?php
 
-
+namespace ng169;
 @checktop();
 function T($name){
 	return Y::table($name);

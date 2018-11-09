@@ -12,8 +12,6 @@ $a=D_FUNC;
 $control_base = ROOT. './source/control/userbase.php';
 $control_path = ROOT. './source/control/pay/'.$c.'.php';
 
-
-
 if (!file_exists($control_path)) {
     
 	error('User Controller file ['.$c.'] is not found!');
