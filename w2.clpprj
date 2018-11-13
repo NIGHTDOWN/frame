@@ -1170,10 +1170,10 @@
 		<file name="D:\work2\source\core\hook\area.php" crc="1460614570"/>
 		<file name="D:\work2\source\core\hook\ads.php" crc="1531401008"/>
 		<file name="D:\work2\source\core\hook\ac.php" crc="1528180212"/>
-		<file name="D:\work2\source\core\db\Dbsql.php" crc="1542006807"/>
-		<file name="D:\work2\source\core\db\daoClass.php" crc="1542006775"/>
+		<file name="D:\work2\source\core\db\Dbsql.php" crc="1542091845"/>
+		<file name="D:\work2\source\core\db\daoClass.php" crc="1542093069"/>
 		<file name="D:\work2\source\core\cache\Nosql.php" crc="1541743875"/>
-		<file name="D:\work2\source\core\cache\Mysql.php" crc="1542006858"/>
+		<file name="D:\work2\source\core\cache\Mysql.php" crc="1542091767"/>
 		<file name="D:\work2\source\core\cache\File.php" crc="1541743879"/>
 		<file name="D:\work2\source\core\api\m3\pagepay\service\AlipayTradeService.php" crc="1528296005"/>
 		<file name="D:\work2\source\core\api\m3\pagepay\buildermodel\AlipayTradeRefundContentBuilder.php" crc="1494316904"/>

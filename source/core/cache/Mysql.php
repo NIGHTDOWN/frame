@@ -113,14 +113,13 @@ class Mysql
          
           
             list($bool,$data)   = $this->_cehck($cache_data);
-           /* d($bool);
-            d($data);*/
+           
             if(!$bool){
             
             	$this->del($name);
 				 return ($false);
 			}else{
-				 d($data);
+				 
 				return array($bool,$data);
 			}
         }

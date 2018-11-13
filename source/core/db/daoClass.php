@@ -17,11 +17,17 @@ class daoClass
   private $pri_key = null;
   private $dbqz = DB_PREFIX;
   private $xh = array();
-  private $cache = '';
+ /* private $cache = '';*/
   private $loop = array();
   private $notgetkey = null;
   private $bs = null;
   private $oldbs = null;
+  /**
+  * 初始化pdo
+  * @param undefined $dbconf
+  * 
+  * @return
+  */
   public function __construct($dbconf = 'main')
   {
     $dbs = Option::get('db');
@@ -30,13 +36,20 @@ class daoClass
       $conf = $dbs[$dbconf];
       $this->dbqz = $conf['dbpre'];
       $this->_db = new Dbsql($conf['dbhost'], $conf['dbuser'], $conf['dbpwd'], $conf['dbname'], $conf['charset']) or error(__('数据库配置不存在'));
-      $this->cache = & Y::$cache;
+    /*  $this->cache = & Y::$cache;//缓存不开启*/
 
     }
     else {
       error(__('数据库配置不存在'));
     }
   }
+/**
+* 初始化表模型
+* @param string $table
+* @param array $filedar字段名称
+* 
+* @return modelobj 返回模型
+*/
   public function tabel($table, $filedar = null)
   {
     $this->t($table, $filedar = null);
@@ -112,6 +125,13 @@ class daoClass
     }
     return $info;
   }
+/**
+* 初始化表模型
+* @param string $table
+* @param array $filedar字段名称
+* 
+* @return modelobj 返回模型
+*/
   public function t($table, $filedar = null)
   {
 
@@ -131,24 +151,14 @@ class daoClass
       $t = "select " . $this->f . " from `" . $this->tablename . "` as v ";
     }
     if ($filedar != null) {
-      $filed = null;
-      foreach ($filedar as $key => $a) {
-        if (is_numeric($key)) {
-          $filed .= ',' . $a;
-        }
-        else {
-          $filed .= ',' . $key . ' as ' . $a;
-        }
-
-      }
-      $filed = trim($filed, ',');
-      $t     = str_replace('*,v.*', $filed, $t);
+      $this->set_field($filedar);
     }
     $this->t = $t;
     $newobj = clone $this;
     /*unset($this);*/
     return $newobj;
   }
+
   public function set_field($field_arr, $check = 1)
   {
     if ($field_arr != null && is_array($field_arr) && $check) {
@@ -366,13 +376,13 @@ class daoClass
   }
   private function fix($str, $ispix = 1)
   {
-
+    $pix = '';
     if ($ispix) {
       $pix = '`v`.';
     }
-    
+
     if ($this->isneedfix($str)) {
-      
+
 
       $tk = $this->getfiled( - 1);
       if (@in_array($str, $tk)) {
@@ -513,12 +523,12 @@ class daoClass
         $operator = "=";
       }
       $operator = " " . $operator . " ";
-      
+
       if (is_array($where) && sizeof($where)) {
         foreach ($where as $key => $w1) {
-          
+
           $key = $this->fix($key);
-          
+
           if (is_array($w1) && $w1) {
 
             switch (sizeof($w1)) {
@@ -689,9 +699,9 @@ class daoClass
           /*$this->cache->set($index, $ar);*/
 
         }
-       
+
         foreach ($ar as $key => $v) {
-        	
+
           if ($p == 0) {
             if ($v['Key'] != 'PRI' && $v['Extra'] != 'auto_increment') {
               array_push($b, $v['Field']);
@@ -972,11 +982,28 @@ class daoClass
       return 0;
     }
 
-    $t     = $this->dbqz . $t;
+    $t    = $this->dbqz . $t;
+    $name = null;
+    $value = null;
+    $douhao = ',';
+    foreach ($ar as $index=>$val) {
+      $name .= "`".$index."`='".$val."'".$douhao;
 
-    $where = $this->_arraytostring($where);
+    }
+    $name = trim($name,$douhao);
 
-    return $this->_db->update($t, $ar, $where, $bool);
+    $sql  = "update  $t set $name ";
+    if ($where) {
+      $where = $this->_arraytostring($where);
+    }
+    if ($where) {
+      $sql = $sql." where ".$where;
+    }
+
+
+
+
+    return $this->_db->exec($sql);
   }
   private function _arraytostring($array)
   {

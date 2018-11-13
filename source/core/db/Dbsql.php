@@ -35,7 +35,9 @@ class Dbsql
       $this->link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 //      $this->link->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, 3);
       $pdostream = $this->link->query($sql);
+    
       $data = $pdostream->fetchAll(PDO::FETCH_ASSOC);
+     
     } catch (\Exception $e) {
 
       error($e);
@@ -80,6 +82,7 @@ class Dbsql
     $this->starttransaction();
     try {
       $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      d($sql);
       $row = $this->link->exec($sql);
       /*if($row)*/
       // 提交事务
