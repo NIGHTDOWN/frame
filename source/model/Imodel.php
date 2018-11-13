@@ -1,11 +1,12 @@
 <?php
 
 
-
-
+namespace ng169\model;
+use ng169\Y;
+use ng169\db\daoClass;
 checktop();
 
-class Model extends Y
+class IModel extends Y
 {
     private $t; 
     public $table; 
@@ -169,7 +170,7 @@ class Model extends Y
     public function get_all($whereArr = null, $debug = null,$auto=1,$sql=null)
     {
     /*    $arr = $this->table->f();*/
-     
+      
         $where=array();
 
        /* if (in_array('orders', $arr) && $this->table->b == null && $auto) {
@@ -179,7 +180,7 @@ class Model extends Y
         if ($whereArr != null) {
             $this->table = $this->table->w($whereArr);
         }
-      
+     
         return $this->table->s('0', $debug,null,$sql);
     }
     public function get_sql()

@@ -50,5 +50,6 @@ define('G_DAY','86400');
 define('G_SMARTY_CACHE','1');
 define('G_EXT','.php');
 define('G_LANG','cn');
+define('G_DB_TYPE','mysql');
 
 ?>

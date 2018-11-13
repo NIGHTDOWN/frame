@@ -62,11 +62,12 @@ function loaddir($F_path,$A_filename = null)
 function loadsysconf()
 {
   $F_compile = ROOT.'source/compile/define.inc.php';
-  $F_config  = ROOT.'conf/conf.php';
+  $F_config  = ROOT.'conf/conf.inc.php';
 
   if (!im($F_compile)) {
 
     $config = include($F_config);
+   
     foreach ($config as $k=>$v) {
       $index = strtoupper($k);
       $S_text .= "define('{$index}','{$v}');\n";
@@ -127,6 +128,7 @@ function d($name = null, $interrupt = false,$format = true)
     echo "<div >";
   }
   $name = $format?var_export($name):$name;
+  /*$name = $format?var_export($name):$name;*/
   echo $name;
   if ($format) {
     echo "{$backinfo}</div>";

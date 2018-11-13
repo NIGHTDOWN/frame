@@ -100,8 +100,10 @@ class Mysql
         $cache_data = null;
         $db    = $this->dbobj;
         $where = array($this->key=>$name);
-        $bool = $db->t($this->table)->w($where)->s(1);
+        $bool = $db->t($this->table);
         
+        $bool=$bool->w($where)->s(1);
+       
         if ($bool && $bool[$this->value]!='') {
             $data       = $bool[$this->value];
         /*    d($data);
@@ -118,6 +120,7 @@ class Mysql
             	$this->del($name);
 				 return ($false);
 			}else{
+				 d($data);
 				return array($bool,$data);
 			}
         }

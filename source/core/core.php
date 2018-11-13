@@ -79,6 +79,7 @@ class Y
 
     Lang::init();
     Option::init();
+
     #载入目录
     self::$urlpath = PATH_URL;
     #载入缓存
@@ -103,10 +104,11 @@ class Y
       ;break;
 
     }
-    Widget::__loading();
+    /*d(2,1);
+    Widget::__loading();*/
     #载入全局缓存
     #载入模板
-
+    Option::LoadSiteCache();
     self::_runView();
     #载入钩子
 
@@ -491,18 +493,16 @@ class Y
   public static
   function table($name)
   {
-    Y::loadTool('request','tool');
-    $file = 'model.php';
-    if (YRequest::getGet('m') == 'admin') {
+    $file = 'model';
+    if (\ng169\tool\Request::getGet('m') == 'admin') {
       $file = 'A' . $file;
     }
     else {
       $file = 'I' . $file;
     }
-
-
-    require_once (MODEL . $file);
-    return new Model($name);
+    /*require_once (MODEL . $file);*/
+    $calss="\\ng169\\model\\".$file;
+    return new $calss($name);
   }
 
   public static

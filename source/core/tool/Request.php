@@ -3,7 +3,7 @@
 namespace ng169\tool;
 
 checktop();
-class YRequest
+class Request
 {
   
 	public static function getPost($name = '') {

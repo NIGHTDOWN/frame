@@ -2,6 +2,7 @@
 namespace ng169\db;
 use ng169\lib\Option;
 use ng169\db\Dbsql;
+use ng169\Y;
 checktop();
 class daoClass
 {
@@ -23,13 +24,13 @@ class daoClass
   private $oldbs = null;
   public function __construct($dbconf = 'main')
   {
-     $dbs=Option::get('db');
-     
+    $dbs = Option::get('db');
+
     if (isset($dbs[$dbconf])) {
       $conf = $dbs[$dbconf];
       $this->dbqz = $conf['dbpre'];
       $this->_db = new Dbsql($conf['dbhost'], $conf['dbuser'], $conf['dbpwd'], $conf['dbname'], $conf['charset']) or error(__('数据库配置不存在'));
-      $this->cache = Y::$cache;
+      $this->cache = & Y::$cache;
 
     }
     else {
@@ -121,7 +122,7 @@ class daoClass
       $this->notgetkey = TRUE;
       $this->t = $t;
       $newobj = clone $this;
-    
+
       /*unset($this);*/
       return $newobj;
     }
@@ -291,7 +292,7 @@ class daoClass
         }
       }
       else {
-        $ret = $this->_db->getall($sql);
+        $ret = $this->_db->query($sql);
         if ($cache) {
           $this->cache->set($index, $ret);
         }
@@ -299,14 +300,15 @@ class daoClass
 
       break;
       case 1:
-      if ($cache) {
+      if ($cache ) {
         $index = md5($sql);
         if ($bool = $this->cache->get($index)) {
           $ret = $bool;
         }
       }
       else {
-        $ret = $this->_db->get_one($sql);
+
+        $ret = $this->_db->getone($sql);
         if ($cache) {
           $this->cache->set($index, $ret);
 
@@ -325,13 +327,13 @@ class daoClass
       }
 
 
-      $ret = $this->_db->fetch_count($sql);
+      $ret = $this->_db->query($sql);
       break;
       case 3:
       $sql = $this->t;
       $sql = preg_replace("/select([\s\S]*?)from/is", "select count(1) from", $sql);
 
-      $ret = $this->_db->fetch_count($sql);
+      $ret = $this->_db->query($sql);
       break;
       case 4:
 
@@ -368,9 +370,9 @@ class daoClass
     if ($ispix) {
       $pix = '`v`.';
     }
-
+    
     if ($this->isneedfix($str)) {
-
+      
 
       $tk = $this->getfiled( - 1);
       if (@in_array($str, $tk)) {
@@ -511,12 +513,12 @@ class daoClass
         $operator = "=";
       }
       $operator = " " . $operator . " ";
-
+      
       if (is_array($where) && sizeof($where)) {
         foreach ($where as $key => $w1) {
-
+          
           $key = $this->fix($key);
-
+          
           if (is_array($w1) && $w1) {
 
             switch (sizeof($w1)) {
@@ -628,7 +630,7 @@ class daoClass
         $ar = $data;
       }
       else {
-        $ar = $this->_db->getall($sql);
+        $ar = $this->_db->query($sql);
         $this->cache->set($index, $ar);
       }
 
@@ -661,7 +663,7 @@ class daoClass
       $b = array();
       if ($p == 1) {
         $sql = "select * from " . $this->tablename . ' as v ' . $this->j . ' limit  1';
-        $ar  = $this->_db->get_one($sql);
+        $ar  = $this->_db->query($sql);
 
       }
       if ($p == 1 && is_array($ar)) {
@@ -672,19 +674,24 @@ class daoClass
         }
       }
       else {
-        $tbname = $this->tablename;
-        $sql    = 'DESCRIBE ' . $tbname;
-        $index  = md5($sql);
 
+        $tbname    = $this->tablename;
+        $sql       = 'DESCRIBE ' . $tbname;
+        $index     = md5($sql);
+        $filecache = new  \ng169\cache\File();
         /*list($bool, $data) = $this->cache->get($index);*/
+        list($bool, $data) = $filecache->get($index);
         if ($bool) {
           $ar = $data;
         }
         else {
-          $ar = $this->_db->getall($sql);
+          $ar = $this->_db->query($sql);
           /*$this->cache->set($index, $ar);*/
+
         }
+       
         foreach ($ar as $key => $v) {
+        	
           if ($p == 0) {
             if ($v['Key'] != 'PRI' && $v['Extra'] != 'auto_increment') {
               array_push($b, $v['Field']);
@@ -934,9 +941,22 @@ class daoClass
   public function i($t, $ar, $auto = 1)
   {
 
-    $t = $this->dbqz . $t;
-    return $this->_db->insert($t, $ar, $auto);
+    $t    = $this->dbqz . $t;
+    $name = null;
+    $value = null;
+    $douhao = ',';
+    foreach ($ar as $index=>$val) {
+      $name .= "`".$index."`".$douhao;
+      $value .= "'".$val."'".$douhao;
+    }
+    $name = trim($name,$douhao);
+    $value= trim($value,$douhao);
+    $sql  = "insert into $t ($name) values ($value)";
+    return $this->_db->insert($sql);
+    /*return $this->_db->exec($t, $ar, $auto);*/
   }
+
+
   public function insert($t, $ar)
   {
     $this->i($t, $ar);

@@ -69,19 +69,19 @@ im(CONF.'global/config.inc.php');
 //im(CONF.'global/db.inc.php');
 
 #载入数据库扩展
-im(DB.'mysql.php');
+im(DB.'Dbsql.php');
 
-im(DB.'dao.php');
+im(DB.'daoClass.php');
 
 #摘入app入口
 im(CORE.'Application.php');
 #载入Util包
 
-im(TOOL.'static.request.php');
-im(TOOL.'static.filter.php');
-im(TOOL.'static.out.php');
-im(TOOL.'static.url.php');
-im(LIB.'static.log.php');
+im(TOOL.'Request.php');
+im(TOOL.'Filter.php');
+im(TOOL.'Out.php');
+im(TOOL.'Url.php');
+im(LIB.'Log.php');
 
 #映入工具包
 #核心载入

@@ -1,12 +1,13 @@
 <?php
 
 
-
-
+namespace ng169\model;
+use ng169\Y;
+use ng169\db\daoClass;
 checktop();
 
 
-class Model extends Y
+class AModel extends Y
 {
     private $t; 
     public $table; 

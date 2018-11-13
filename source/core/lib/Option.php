@@ -24,12 +24,12 @@ class Option extends Y
     $conf    = self::$config;
 
     foreach ($options as  $level=>$index) {
-    	
+
       if (isset($conf[$index])) {
         $conf = $conf[$index];
       }
     }
-    
+
     return $conf;
   }
 
@@ -41,8 +41,8 @@ class Option extends Y
   */
   public static  function init()
   {
-  	Y::$conf=&self::$config;
-    $dir = CONF;
+    Y::$conf =&self::$config;
+    $dir  = CONF;
     if (!is_dir($dir)) {
       error($dir.__('目录不存在'));
     }
@@ -65,9 +65,36 @@ class Option extends Y
 
       }
     }
-	
+    //加载站点设置
+    /* self::loadcache();*/
   }
-
+  /**
+  * 加载配置缓存
+  *
+  * @return
+  */
+  public static function LoadSiteCache()
+  {
+    /* self::$config['site'] = $conf;*/
+    $cache = Y::$cache->get('options');
+    
+    if ($cache[0]) self::$config['site'] = ($cache[1]);
+    self::ReloadCache();
+  }
+  private static function ReloadCache()
+  {
+    $where = ['flag'=>0];
+   
+    $data  = T('options');
+   
+    $data=$data->get_all($where);
+     
+    if (!$data){error(__('系统设置获取失败'));}
+    
+    
+    Y::$cache->set('options',$data);
+    self::$config['site'] = $data;
+  }
 }
 
 ?>
