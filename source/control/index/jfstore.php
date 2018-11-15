@@ -1,13 +1,14 @@
 <?php
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase
+class jfstore extends indexbase
 {
 	private $db_name='jfproduct';
     public function control_run()

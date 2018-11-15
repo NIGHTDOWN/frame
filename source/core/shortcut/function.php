@@ -136,15 +136,6 @@ function __($index){
 	return Lang::get($index);
 }
 
-function getrand($length){
-	global $__€;
-	$output = '';
-	for($a = 0; $a < $length; $a++){
-		$output .= $__€(mt_rand(48, 57)).$__€(mt_rand(65, 90)).$__€(mt_rand(97, 122));
-	}
-	$output = str_shuffle($output);
-	return substr($output,0,$length);
-}
 
 function img($imgstring,$num = null){
 	$imgarr = explode(',',$imgstring);

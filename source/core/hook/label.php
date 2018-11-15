@@ -2,7 +2,9 @@
 
 
 
-namespace ng169\hook;
+namespace  ng169\hook;
+use ng169\Y;
+use ng169\TPL;
 checktop();
 
 function hook_get_label($params) {

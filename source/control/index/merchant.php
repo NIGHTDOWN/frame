@@ -1,9 +1,10 @@
 <?php
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 checktop();
-class control extends indexbase{
+class merchant extends indexbase{
 	
 	
 	public function control_city(){

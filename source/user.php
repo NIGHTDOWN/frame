@@ -23,7 +23,7 @@ else {
  
 	im($control_base);
 	im($control_path);
- 
+ 	
 	$control = new control(); 
   
 	$method = G_ACTION_PRE.$a;

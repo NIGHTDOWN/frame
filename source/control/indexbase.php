@@ -1,9 +1,9 @@
 <?php
 
-
-
-
-
+namespace ng169\control;
+use ng169\control\general;
+use ng169\tool\Cookie as YCookie;
+use ng169\Y;
 checktop();
 im(CONTROL.'public/night.php');
 class indexbase extends general{
@@ -53,7 +53,8 @@ class indexbase extends general{
 	function __construct(){
 	
 		$c = D_MEDTHOD;    $a = D_FUNC; 
-		if($c != 'login'){
+		$login=0;
+		if($this->needlogin()){
 
 			$login = $this->checkLogin();
 		}
@@ -247,15 +248,15 @@ class indexbase extends general{
 	}
 	public
 	function getcookie(){
-		parent::loadTool('cookie');
-		$admininfo = YCookie::get('userinfo');
 		
+		$usercode = YCookie::get('userinfo');
+		d($usercode,1);
 		$Xcode     = Y::import('code', 'tool');
-		$admininfo = $Xcode->authCode($admininfo, 'DECODE');
+		$userinfo = $Xcode->authCode($usercode, 'DECODE');
 
-		$admininfo = unserialize($admininfo);
+		$userinfo = unserialize($userinfo);
 	
-		return $admininfo;
+		return $userinfo;
 
 	}
 
@@ -311,7 +312,7 @@ class indexbase extends general{
 	function checkLogin(){
 
 		$userinfo = $this->getcookie();
-
+d(1,1);
 		if(!empty($userinfo)){
 
 			$user = T('user');

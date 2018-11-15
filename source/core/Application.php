@@ -1,64 +1,11 @@
 <?php
 namespace ng169;
-
+use ng169\tool\Filter;
+use ng169\tool\Request;
 checktop();
 class APP
 {
-  #载入Application白名单
-  public function loadValidApplication()
-  {
-    $apppath = ROOT . './source/roll/app/';
-    $handle  = @opendir($apppath);
-    $da      = array();
-    while ($file = @readdir($handle)) {
-      if (preg_match("/^[\w\.\/]+\.php$/", $file)) {
-        $d = null;
-        $d = require_once ($apppath . $file);
-        if (is_array($d)) {
-          if (is_array($da)) {
-            $da = array_merge($da, $d);
-          }
-          else {
-            $da = $d;
-          }
-        }
-      }
-    }
-    if (!empty($da)) {
-      return array('app'=> $da);
-    }
-    else {
-      return array('app'=> '');
-    }
-  }
-  #载入控制器白名单
-  public static function loadingValidController($type = 'index')
-  {
-    $cpath = ROOT . './source/roll/validc/';
-    if ($type == 'index') {
-      $cpath .= 'index/';
-    }
-    elseif ($type == 'admin') {
-      $cpath .= 'admin/';
-    }
-    $handle = @opendir($cpath);
-    $data   = array();
-    while ($file = @readdir($handle)) {
-      if (preg_match("/^[\w\.\/]+\.php$/", $file)) {
-        $d = null;
-        $d = require_once ($cpath . $file);
-        if (is_array($d)) {
-          if (is_array($data)) {
-            $data = array_merge($data, $d);
-          }
-          else {
-            $data = $d;
-          }
-        }
-      }
-    }
-    return $data;
-  }
+  
   #载入Hook所有文件
   public static function initHook()
   {
@@ -74,40 +21,61 @@ class APP
   public static function run()
   {
 
-    $m = YFilter::filterXSS(YRequest::getGpc('m'));
-    $a = YFilter::filterXSS(YRequest::getGpc('a'));
-    $c = YFilter::filterXSS(YRequest::getGpc('c'));
+    $m = Filter::filterXSS(Request::getGpc('m'));
+    $a = Filter::filterXSS(Request::getGpc('a'));
+    $c = Filter::filterXSS(Request::getGpc('c'));
     $m = $m?$m:'index';$c = $c?$c:'index';$a = $a?$a:'run';
 
-    if (!defined(D_GROUP)) {
+    if (isset(Y::$conf['rewrite'])) {
+      YUrl::back();
+    }
+
+    if (!defined('D_GROUP')) {
       define('D_GROUP',$m);
 
     }
-    if (!defined(D_MEDTHOD)) {
+    if (!defined('D_MEDTHOD')) {
       define('D_MEDTHOD',$c);
     }
-    if (!defined(D_FUNC)) {
+    if (!defined('D_FUNC')) {
       define('D_FUNC',$a);
     }
-    if (Y::$conf['rewrite']) {
-      YUrl::back();
-    }
+
 
     $appfile = ROOT . "./source/".D_GROUP.".php";
 
     if (!file_exists($appfile)) {
-      die("Application ".D_GROUP." is not found!");
+      error("Application ".D_GROUP." is not found!");
     }
     else {
 
-      im ($appfile);
+      self::execControl();
     }
 
 
   }
-  #初始化Application
-  #定义参数常量D_GROUP D_MEDTHOD  D_FUNC
+ 
+  private static function execControl()
+  {
+    $cls = "ng169\\control\\".D_GROUP.'\\'.D_MEDTHOD;
+    $act = G_ACTION_PRE.D_FUNC;
+    try {
+      $control = new $cls;
+    }catch (\Exception $e) {
+      error($e.__('控制器类不存在'));
+    }catch (\Error $e) {
+      error($e.__('控制器类不存在'));
+    }
+    //启动控制器
+   if (method_exists($control, $act) && $act{0} != '_') {
+        $control->$act();
+    } else {
+    	error($act.__('操作动作不存在'));
+       
+    }
 
+
+  }
 
 }
 ?>

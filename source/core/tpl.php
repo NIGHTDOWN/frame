@@ -1,9 +1,10 @@
 <?php
 
 
+namespace ng169;
 
-
-
+use \ng169\Y;
+use \ng169\template\Template_Lite;
 checktop();
 
 #smarty class file
@@ -111,13 +112,13 @@ class TPL extends Y
             'staticjs'=> G_STATIC.'js/',#模板静态库
             'staticimg'=> G_STATIC.'images/',#模板静态库
             'staticcss'=> G_STATIC.'css/',#模板静态库
-            'copyright_header'=> G_COPYRIGHT_HEADER,
-            'copyright_author' => G_COPYRIGHT_AUTHOR,
-            'powerby'          =>G_POWERBY,
-            'copyright_type'   => G_COPYRIGHT_TYPE,
-            'copyright_version'=> G_COPYRIGHT_VERSION,
-            'copyright_release'=> G_COPYRIGHT_RELEASE,
-            'siteurl'          => G_SITEURL,
+          /*  'copyright_header'=> COPYRIGHT_HEADER,
+            'copyright_author' => COPYRIGHT_AUTHOR,*/
+          /*  'powerby'          =>POWERBY,*/
+            /*'copyright_type'   => COPYRIGHT_TYPE,
+            'copyright_version'=> COPYRIGHT_VERSION,
+            'copyright_release'=> COPYRIGHT_RELEASE,*/
+            /*'siteurl'          => G_SITEURL,*/
 			'realpath'=>TPL,
 			'img404'=>IMG404,
 			'GTM'=>gmdate("l d F Y H:i:s"),

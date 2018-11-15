@@ -1,6 +1,7 @@
 <?php
 
-
+namespace ng169\control;
+use ng169\control\general;
 
 
 

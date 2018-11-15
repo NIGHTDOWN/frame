@@ -106,16 +106,10 @@ class Mysql
        
         if ($bool && $bool[$this->value]!='') {
             $data       = $bool[$this->value];
-        /*    d($data);
-             d((base64_decode(gzuncompress($data))));
-             d($this->_unSerialize(base64_decode(gzuncompress($data))));*/
+        
             $cache_data = $this->_unSerialize(base64_decode(($data)));
-         
-          
             list($bool,$data)   = $this->_cehck($cache_data);
-           
             if(!$bool){
-            
             	$this->del($name);
 				 return ($false);
 			}else{

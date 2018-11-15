@@ -15,17 +15,21 @@ class daoClass
   private $table_key = array();
   private $table_all_key = array();
   private $pri_key = null;
-  private $dbqz = DB_PREFIX;
+  private $dbqz = DB_PREFIX;//表前缀
   private $xh = array();
- /* private $cache = '';*/
+  /* private $cache = '';*/
   private $loop = array();
   private $notgetkey = null;
   private $bs = null;
   private $oldbs = null;
+  private $iscache = false;
+  private $cachetime = '';
+  private static $loopcache=0;
+  private const LOOPMAX=3;
   /**
   * 初始化pdo
   * @param undefined $dbconf
-  * 
+  *
   * @return
   */
   public function __construct($dbconf = 'main')
@@ -36,20 +40,20 @@ class daoClass
       $conf = $dbs[$dbconf];
       $this->dbqz = $conf['dbpre'];
       $this->_db = new Dbsql($conf['dbhost'], $conf['dbuser'], $conf['dbpwd'], $conf['dbname'], $conf['charset']) or error(__('数据库配置不存在'));
-    /*  $this->cache = & Y::$cache;//缓存不开启*/
+      /*  $this->cache = & Y::$cache;//缓存不开启*/
 
     }
     else {
       error(__('数据库配置不存在'));
     }
   }
-/**
-* 初始化表模型
-* @param string $table
-* @param array $filedar字段名称
-* 
-* @return modelobj 返回模型
-*/
+  /**
+  * 初始化表模型
+  * @param string $table
+  * @param array $filedar字段名称
+  *
+  * @return modelobj 返回模型
+  */
   public function tabel($table, $filedar = null)
   {
     $this->t($table, $filedar = null);
@@ -125,13 +129,13 @@ class daoClass
     }
     return $info;
   }
-/**
-* 初始化表模型
-* @param string $table
-* @param array $filedar字段名称
-* 
-* @return modelobj 返回模型
-*/
+  /**
+  * 初始化表模型
+  * @param string $table
+  * @param array $filedar字段名称
+  *
+  * @return modelobj 返回模型
+  */
   public function t($table, $filedar = null)
   {
 
@@ -158,7 +162,13 @@ class daoClass
     /*unset($this);*/
     return $newobj;
   }
-
+  /**
+  * 设置取得字段
+  * @param undefined $field_arr
+  * @param undefined $check
+  *
+  * @return obj
+  */
   public function set_field($field_arr, $check = 1)
   {
     if ($field_arr != null && is_array($field_arr) && $check) {
@@ -209,13 +219,20 @@ class daoClass
   }
   private function isneedfix($str)
   {
-    if (!strrpos($str, ".")) {
-      return true;
-    }
-    else {
+    if (strrpos($str, ".") ||strrpos($str, "`")) {
       return false;
     }
+    else {
+      return true;
+    }
   }
+  /**
+  * 连表
+  * @param undefined $join
+  * @param undefined $bool
+  *
+  * @return obj
+  */
   public function j($join, $bool = false)
   {
     $dbqz = $this->dbqz;
@@ -243,8 +260,14 @@ class daoClass
       $this->j = $j1;
     }
 
-    return clone $this;
+    return  $this;
   }
+  /**
+  * 执行查询
+  * @param undefined $type
+  *
+  * @return data
+  */
   public function select($type)
   {
     switch ($type) {
@@ -260,9 +283,31 @@ class daoClass
     }
     $this->s($type);
   }
+  /**
+  * 设置缓存
+  * @param undefined $boolean 开启缓存
+  * @param undefined $time 缓存时效/秒；默认为永久缓存
+  *
+  * @return obj
+  */
+  public function cache($boolean,$time = 0)
+  {
+    if ($boolean) {
+      $this->iscache = true;
+      if ($time == 0) {
+        $this->cachetime = 0;
+      }
+      else {
+        $this->cachetime = $time;
+      }
+
+    }
+    else {
+      $this->cache = false;
+    }
+  }
   public function s($type, $debug = null, $cache = null, $sql = null)
   {
-
     $w = $this->w ? ' where  ' . $this->w : ' ';
     if ($this->Gw != null && trim($this->Gw) != '') {
       if ($w != null && trim($w) != '') {
@@ -271,7 +316,6 @@ class daoClass
       else {
         $w = ' where  ' . $this->Gw;
       }
-
     }
     if ($this->limit_where != null && trim($this->limit_where) != '') {
       if ($w != null && trim($w) != '') {
@@ -282,8 +326,6 @@ class daoClass
       }
 
     }
-
-
     if (!$sql) {
       $sql = $this->t . $this->j . $w . $this->g . ' ' . $this->b . $this->l;
     }
@@ -295,58 +337,24 @@ class daoClass
     }
     switch ($type) {
       case 0:
-      if ($cache) {
-        $index = md5($sql);
-        if ($bool = $this->cache->get($index)) {
-          $ret = $bool;
-        }
-      }
-      else {
-        $ret = $this->_db->query($sql);
-        if ($cache) {
-          $this->cache->set($index, $ret);
-        }
-      }
+      $ret = $this->_db->query($sql);
 
       break;
       case 1:
-      if ($cache ) {
-        $index = md5($sql);
-        if ($bool = $this->cache->get($index)) {
-          $ret = $bool;
-        }
-      }
-      else {
-
-        $ret = $this->_db->getone($sql);
-        if ($cache) {
-          $this->cache->set($index, $ret);
-
-        }
-      }
+      $ret = $this->_db->getone($sql);
 
       break;
       case 2:
       $sql = str_replace($this->f, 'count(*)', $sql);
-
-      if ($this->g) {
-
-      }
-      else {
-        $sql = preg_replace("/select([\s\S]*?)from/is", "select count(*) from", $sql);
-      }
-
-
+      $sql = preg_replace("/select([\s\S]*?)from/is", "select count(*) from", $sql);
       $ret = $this->_db->query($sql);
       break;
       case 3:
       $sql = $this->t;
       $sql = preg_replace("/select([\s\S]*?)from/is", "select count(1) from", $sql);
-
       $ret = $this->_db->query($sql);
       break;
       case 4:
-
       $ret = $sql;
       break;
       default:
@@ -376,27 +384,25 @@ class daoClass
   }
   private function fix($str, $ispix = 1)
   {
+  	if (!$this->isneedfix($str)) {
+  		return $str;
+  	}
     $pix = '';
     if ($ispix) {
       $pix = '`v`.';
     }
 
-    if ($this->isneedfix($str)) {
-
-
-      $tk = $this->getfiled( - 1);
-      if (@in_array($str, $tk)) {
-        $str = '`' . $str . '`';
-        $str = $pix . $str;
-      }
-    }
-    else {
+  
       $str = explode('.', $str);
-      if ($str[1] != '*') {
-        $str[1] = '`' . $str[1] . '`';
-      }
-      $str = '`' . $str[0] . '`.' . $str[1];
-    }
+      
+     if(sizeof($str)!=1){
+	
+      $str = '`' . $str[0] . '`.`' . $str[1].'`' ;
+	 }else{
+	 	$str =  $pix . '`'.$str[0].'`' ;
+	 }
+      
+   /* }*/
     return $str;
 
   }
@@ -588,7 +594,8 @@ class daoClass
                 $w .= ' ' . $andor . " {$key} {$operator} '{$w1}'  ";
               }
               else {
-                $w .= ' ' . $andor . " {$key} like '{$w1}%'  ";
+//                $w .= ' ' . $andor . " {$key} like '{$w1}%'  ";
+                $w .= ' ' . $andor . " {$key} = '{$w1}'  ";
               }
               break;
             }
@@ -629,20 +636,16 @@ class daoClass
 
     return $this;
   }
+  /**
+  * 获取表结构主键（使用缓存 ）
+  *
+  * @return string
+  */
   public function getkey()
   {
+
     if ($this->pri_key == null) {
-      $tbname = $this->tablename;
-      $sql    = 'DESCRIBE ' . $tbname;
-      $index  = md5($sql);
-      list($bool, $data) = $this->cache->get($index);
-      if ($bool) {
-        $ar = $data;
-      }
-      else {
-        $ar = $this->_db->query($sql);
-        $this->cache->set($index, $ar);
-      }
+      $ar = $this->gettableinfo();
 
       foreach ($ar as $key => $v) {
         if ($v['Key'] == 'PRI') {
@@ -657,6 +660,12 @@ class daoClass
   {
     return $this->getkey();
   }
+  /**
+  * 获取表所有健名
+  * @param boolean $p
+  * 1为所有字段取值，包括连表字段，0表示仅仅取主表
+  * @return array
+  */
   public function getfiled($p = 1)
   {
 
@@ -669,68 +678,88 @@ class daoClass
     else {
       $key = & $this->table_key;
     }
-    if (1) {
-      $b = array();
-      if ($p == 1) {
-        $sql = "select * from " . $this->tablename . ' as v ' . $this->j . ' limit  1';
-        $ar  = $this->_db->query($sql);
 
-      }
-      if ($p == 1 && is_array($ar)) {
-        foreach ($ar as $key => $v) {
-          if (!in_array($key, $b)) {
-            array_push($b, $key);
-          }
+    $b = array();
+    if ($p == 1) {
+      $sql = "select * from " . $this->tablename . ' as v ' . $this->j . ' limit  1';
+      $ar  = $this->_db->query($sql);
+
+    }
+    if ($p == 1 && is_array($ar)) {
+      foreach ($ar as $key => $v) {
+        if (!in_array($key, $b)) {
+          array_push($b, $key);
         }
       }
-      else {
+    }
+    else {
 
-        $tbname    = $this->tablename;
-        $sql       = 'DESCRIBE ' . $tbname;
-        $index     = md5($sql);
-        $filecache = new  \ng169\cache\File();
-        /*list($bool, $data) = $this->cache->get($index);*/
-        list($bool, $data) = $filecache->get($index);
-        if ($bool) {
-          $ar = $data;
-        }
-        else {
-          $ar = $this->_db->query($sql);
-          /*$this->cache->set($index, $ar);*/
+      $ar = $this->gettableinfo();
 
-        }
+      foreach ($ar as $key => $v) {
 
-        foreach ($ar as $key => $v) {
-
-          if ($p == 0) {
-            if ($v['Key'] != 'PRI' && $v['Extra'] != 'auto_increment') {
-              array_push($b, $v['Field']);
-            }
-          }
-          else {
+        if ($p == 0) {
+          if ($v['Key'] != 'PRI' && $v['Extra'] != 'auto_increment') {
             array_push($b, $v['Field']);
           }
         }
+        else {
+          array_push($b, $v['Field']);
+        }
       }
-      $key = array_unique($b);
     }
+    $key = array_unique($b);
+
     return $key;
+  }
+  /**
+  * 获取表结构
+  *
+  * @return array
+  */
+  private  function gettableinfo()
+  {
+  	
+    $tbname = $this->tablename;
+    $sql    = 'DESCRIBE ' . $tbname;
+    $index  = md5($sql);
+    
+    if(self::$loopcache>self::LOOPMAX)return false;
+    list($bool, $data) = Y::$cache->get($index);
+    
+    if (!$bool) {
+    	self::$loopcache+=1;
+      $data = $this->_db->query($sql,1);
+    }
+    return $data;
   }
   public function f($p = 1)
   {
     return $this->getfiled($p);
   }
-  public function query($sql)
+  /**
+  * 直接查询sql
+  * @param string $sql
+  *
+  * @return string 查询的数据
+  */
+  public function query($sql,$cache = false)
   {
     $this->q($sql);
   }
-  public function q($sql)
+  public function q($sql,$cache = false)
   {
     $res = $this->_db->query($sql);
 
     return $res;
 
   }
+  /**
+  *排序
+  * @param undefined $order
+  *
+  * @return
+  */
   public function order($order)
   {
     $this->b($order);
@@ -797,32 +826,19 @@ class daoClass
         if ($bb) {
           $this->b = $word . $bb . ' ';
         }
-
       }
       else {
         if (isset($order['f']) && $order['f'] != '') {
           $field = explode('.', $order['f']);
-          /*  if (in_array($field[0], $tablekey) || in_array($field[1], $tablekey)) {
-          $bb = $this->fix($order['f']);
-          if ($bb) {
-
-          $this->b = $word . $bb . ' ' . $bword;
-          }
-          } else {*/
           $b     = $order['f'];
           $this->b = $word . ' ' . $order['f']. ' ' .$bword;
-          /* }*/
-
         }
       }
-
     }
     else {
       if ($order) {
         $this->b = $word . $order;
-
       }
-
     }
     $this->bsword = $b;
     return $this;
@@ -830,8 +846,6 @@ class daoClass
   private $bsword = '';
   public function fixby()
   {
-
-
     $this->b = $this->oldbs;
     return $this;
   }
@@ -933,10 +947,20 @@ class daoClass
     $this->g = $word . $name;
     return $this;
   }
+  /**
+  * 删除
+  *
+  * @return row
+  */
   public function del()
   {
     $this->d();
   }
+  /**
+  * 删除
+  *
+  * @return row
+  */
   public function d()
   {
     $w   = $this->w ? ' where  ' . $this->w : ' ';
@@ -946,8 +970,16 @@ class daoClass
     $sql = str_replace('as v', '', $sql);
     $sql = str_replace('`v`.', '', $sql);
 
-    return $this->_db->query($sql);
+    return $this->_db->exec($sql);
   }
+  /**
+  * 插入
+  * @param undefined $t
+  * @param undefined $ar
+  * @param undefined $auto
+  *
+  * @return
+  */
   public function i($t, $ar, $auto = 1)
   {
 

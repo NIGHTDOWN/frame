@@ -12,7 +12,7 @@ class Filter
     public static function filterXSS($data)
     {
         if($data==null){
-            return $date;
+            return $data;
         }
         $data=self::filterScript($data);
       

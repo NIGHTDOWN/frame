@@ -75,10 +75,10 @@ class Out
         $url = @$_SERVER['HTTP_REFERER'];
       }
       if (YUrl::ismoible()) {
-        require_once ROOT.Y::$path['general_tpl'] . '/mhalt/halt.php';
+        require_once TPL.'general' . '/mhalt/halt.php';
       }
       else {
-        require_once ROOT.Y::$path['general_tpl'] . '/halt/halt.php';
+        require_once TPL.'general'  . '/halt/halt.php';
       }
 
     }

@@ -37,8 +37,10 @@ class Cookie {
 	
 	public static function get($name) {
 		
-        
-        return $_COOKIE[self::$prefix.$name];
+        if(isset($_COOKIE[self::$prefix.$name])){
+			return $_COOKIE[self::$prefix.$name];
+		}
+        return false;
 	}
 	
 	

@@ -1,8 +1,9 @@
 <?php
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 checktop();
 
-class control extends indexbase
+class search extends indexbase
 {
     public function control_getmore()
     {

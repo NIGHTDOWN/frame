@@ -77,12 +77,18 @@ class Option extends Y
   {
     /* self::$config['site'] = $conf;*/
     $cache = Y::$cache->get('options');
+   
+    if ($cache[0]) {
+    	self::$config['site'] = ($cache[1]);
     
-    if ($cache[0]) self::$config['site'] = ($cache[1]);
-    self::ReloadCache();
+    }else{
+		self::ReloadCache();
+	}
+    /*Y::$conf=self::$config['site'];*/
   }
   private static function ReloadCache()
   {
+  
     $where = ['flag'=>0];
    
     $data  = T('options');

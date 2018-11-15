@@ -3,7 +3,7 @@
 
 namespace ng169\db;
 use  \PDO;
-
+use \ng169\Y;
 class Dbsql
 {
   var $querynum = 0;
@@ -28,41 +28,60 @@ class Dbsql
   *
   * @return data
   */
-  public function  query($sql)
+  public function  query($sql,$cache = false,$time = 0)
   {
 
     try {
-      $this->link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-//      $this->link->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, 3);
-      $pdostream = $this->link->query($sql);
-    
-      $data = $pdostream->fetchAll(PDO::FETCH_ASSOC);
-     
-    } catch (\Exception $e) {
+      if ($cache) {
+        $index = md5($sql);
+        $cache =&Y::$cache;
+        list($bool,$data) = $cache->get($index);
+        if ($bool)return $data;
+      }
 
+      $this->link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+      $pdostream = $this->link->query($sql);
+      $data      = $pdostream->fetchAll(PDO::FETCH_ASSOC);
+      if ($cache) {
+        $cache->set($index,$data);
+      }
+
+
+    } catch (\Exception $e) {
       error($e);
     }
 
     return $data;
   }
-   /**
+  /**
   * 执行查询
   * @param string $sql
   *
   * @return data
   */
-  public function  getone($sql)
+  public function  getone($sql,$cache = false,$time = 0)
   {
 
     try {
+      if ($cache) {
+        $index = md5($sql);
+        $cache =&Y::$cache;
+        list($bool,$data) = $cache->get($index);
+        if ($bool)return $data;
+      }
       $this->link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-//      $this->link->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, 3);
-      $pdostream = $this->link->query($sql);
-      $pdostream->setFetchMode(PDO::FETCH_ASSOC);
-      $data = $pdostream->fetch();
+      //      $this->link->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, 3);
       
+      $pdostream = $this->link->query($sql);
+      
+      $pdostream->setFetchMode(PDO::FETCH_ASSOC);
+      $data      = $pdostream->fetch();
+      if ($cache) {
+        //设置缓存
+        $cache->set($index,$data);
+      }
 
-   
+
     } catch (\Exception $e) {
 
       error($e);
@@ -82,7 +101,7 @@ class Dbsql
     $this->starttransaction();
     try {
       $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      d($sql);
+      
       $row = $this->link->exec($sql);
       /*if($row)*/
       // 提交事务
@@ -109,9 +128,9 @@ class Dbsql
     $this->starttransaction();
     try {
       $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      
+
       $row = $this->link->exec($sql);
-      $id=$this->link->lastInsertId();
+      $id  = $this->link->lastInsertId();
       /*if($row)*/
       // 提交事务
       $this->commit();

@@ -1,13 +1,14 @@
 <?php
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 
 checktop();
 
-class control extends indexbase{
+class cat extends indexbase{
 	public function control_run(){
 		$this->vlog($this->get_userid());
 		$uid=$this->get_userid(1);

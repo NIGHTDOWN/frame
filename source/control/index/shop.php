@@ -1,13 +1,14 @@
 <?php
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 
 checktop();
 
-class control extends indexbase{
+class shop extends indexbase{
 	public function control_collect(){
 		
 		if(!$this->get_userid()){

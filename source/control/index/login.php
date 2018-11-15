@@ -2,12 +2,13 @@
 
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 checktop();
 
-class control extends indexbase{
+class login extends indexbase{
 
 	private $mod = null;
 

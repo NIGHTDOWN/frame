@@ -1,12 +1,13 @@
 <?php
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase{
+class upimg extends indexbase{
 	private $dir_base = "data/attachment/";
 	private $config=array('filetype'=>'','upfilepath'=>'','upfilesize'=>'');
   

@@ -51,9 +51,9 @@ return  array(
   'g_uid'=>'uid',
   'g_aid'              =>'adminid',
   #版权
-  'g_powerby'     =>'思铭',
-  'copyright_header'   =>'',
-  'copyright_author'   =>'思铭',
+  'g_powerby'     =>'ng169',
+  'copyright_header'   =>'ng169',
+  'copyright_author'   =>'ng169',
   #版本消息
   'G_copyright_type'=>'@',
   'g_copyright_version'=>'0120151025',
@@ -66,8 +66,10 @@ return  array(
   #模板缓存
   'g_smarty_cache'=>'1',
   'g_ext'=>'.php',
+  'g_tplpre'=>'.html',
   'g_lang'=>'cn',
   'g_db_type'=>'mysql',
+  
 );
 
 ?>

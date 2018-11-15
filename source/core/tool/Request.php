@@ -1,7 +1,7 @@
 <?php
 
 namespace ng169\tool;
-
+use ng169\tool\Filter as YFilter;
 checktop();
 class Request
 {
@@ -143,6 +143,7 @@ class Request
 
 	
 	public static function getGpc($value, $isfliter = true) {
+		$temp='';
 		if (!is_array($value)) {
 			if (isset($_GET[$value])) $temp = trim($_GET[$value]);
 			if (isset($_POST[$value])) $temp = trim($_POST[$value]);

@@ -1,13 +1,14 @@
 <?php
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase{
+class jump extends indexbase{
 	public function control_ad(){
 		$id=get(array('int'=>array('urlid'=>1,'adid'=>1)));
 		$info=M('ad','im')->log($id['adid']);

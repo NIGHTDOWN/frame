@@ -31,21 +31,6 @@ if (!file_exists($control_path)) {
     }
     unset($control);
 }
-#验证是否为有效Controller
-function _check_valid_controller($name)
-{
-    $validc = APP::loadingValidController('index');
-    if (empty($validc)) {
-        YOut::page404();
-        YOut::error('All index Controller is forbiden!');
-        die();
-    } else {
-        if (!in_array($name, $validc)) {
-            YOut::page404();
-            YOut::error('Index Controller [' . $name . '] is forbiden!');
-            die();
-        }
-    }
-}
+
 
 ?>

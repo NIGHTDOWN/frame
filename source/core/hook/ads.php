@@ -1,7 +1,9 @@
 <?php
 
 
-
+namespace  ng169\hook;
+use ng169\Y;
+use ng169\TPL;
 
 checktop();
 

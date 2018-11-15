@@ -1,26 +1,18 @@
 <?php
+namespace ng169\control\index;
+use ng169\control\indexbase;
 checktop();
-class control extends indexbase{
+class index extends indexbase{
 
-	
-	public function control_run(){
-		
+	protected $noNeedLogin=['*'];
+	public function control_run(){	
 		$this->vlog($this->get_userid());
-		
  		if(YUrl::ismoible()){
- 			
 			$this->view();  
 		}else{
-	//	$this->view('index0',$array);
-	/*$this->view('nav',$array);  */
 			$this->view('index0',$array);  
 			$this->view(null,$array);
-		
 		}
-		
-		
-	
-		
 	}
 	public function control_menu(){
 		$name="pc_indexmenu";
@@ -35,30 +27,21 @@ class control extends indexbase{
 		foreach($cat[$k]['list'] as $k2=>$list2){
 			$cat[$k]['list'][$k2]['list']=T('product_category')->set_where('depth=3 and flag=0 and parentid='.$list2['catid'])->set_field('catname,catid,alias')->get_all();
 		}
-		
 		}
 		Y::$cache->set($name,$cat,0);
 		}
-		
-		
-		/*d($cat);*/
-		
+
 		$data=array('cat'=>$cat);
-		
-		
-		
-		
+
 		$this->view('menu',$data);
 	}
 	public function control_cart(){
 		
 		$this->view('cartasyn');
-      
 	}
 	public function control_area(){
 
 		$this->view('area');
-      
 	}
 	public function control_kb(){
 

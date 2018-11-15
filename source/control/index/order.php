@@ -2,12 +2,13 @@
 
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 checktop();
 
-class control extends indexbase{
+class order extends indexbase{
 	public function control_list(){
 		$get=get(array('int'=>array('productid'=>1)));
 		$get['status']=3;

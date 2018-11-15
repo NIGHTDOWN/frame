@@ -1,13 +1,14 @@
 <?php
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase{
+class comment extends indexbase{
 	public function control_list(){
 		$get=get(array('int'=>array('productid'=>1,'cmlevel')));
 		$img=get(array('int'=>array('img')));

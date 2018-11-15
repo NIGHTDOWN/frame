@@ -1,5 +1,7 @@
 <?php
-use ng169\service\Output;
+namespace ng169\template;
+use ng169\template\config;
+use ng169\template\Template_Lite_Compiler;
 //本模板借鉴Template_Lite改版而得;勿修改或者替换
 if (!defined('TEMPLATE_LITE_DIR')) {
 	define('TEMPLATE_LITE_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);

@@ -1,13 +1,14 @@
 <?php
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase{
+class buy extends indexbase{
 	private function summoney($prices,$nums){
 		$money=0;
 		if(is_array($prices) && is_array($nums)){

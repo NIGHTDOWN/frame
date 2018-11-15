@@ -1,13 +1,14 @@
 <?php
 
 
-
+namespace ng169\control\index;
+use ng169\control\indexbase;
 
 
 
 checktop();
 
-class control extends indexbase{
+class single extends indexbase{
 	public function control_show(){
 		$w=get(array('int'=>array('abid'=>1)));
 		$this->vlog($this->get_userid());
