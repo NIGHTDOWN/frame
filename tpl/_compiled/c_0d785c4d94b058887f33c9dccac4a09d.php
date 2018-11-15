@@ -1,4 +1,4 @@
-<?php /* "/tpl/templets/default/cart.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 16:35:47 �й���׼ʱ�� */ ?>
+<?php /* "/tpl/templets/default/cart.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 17:33:41 �й���׼ʱ�� */ ?>
 
  <?php if (! $this->_vars['user']): ?>
         	<li class="nav cart drop-down">

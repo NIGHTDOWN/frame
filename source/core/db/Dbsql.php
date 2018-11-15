@@ -40,17 +40,22 @@ class Dbsql
       }
 
       $this->link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      $pdostream = $this->link->query($sql);
+      try{
+      
+	  	$pdostream = $this->link->query($sql);
+	  } catch (\Error $e) {
+	  	error($e);
+	  }
+      catch (\Exception $e) {	  	
+	  	error($e);
+	  }
       $data      = $pdostream->fetchAll(PDO::FETCH_ASSOC);
       if ($cache) {
         $cache->set($index,$data);
       }
-
-
     } catch (\Exception $e) {
       error($e);
     }
-
     return $data;
   }
   /**

@@ -229,7 +229,7 @@ class Template_Lite_Compiler extends Template_Lite {
 		
 		$tag_modifiers = !empty($_match[2][0]) ? $_match[2][0] : null;
 		$tag_arguments = !empty($_match[3][0]) ? $_match[3][0] : null;
-		$tag_arguments = $tag_arguments ? $tag_arguments : $_match[1][1];
+		$tag_arguments = $tag_arguments ? $tag_arguments : @$_match[1][1];
 		
 		$_result = $this->_parse_function($tag_command, $tag_modifiers, $tag_arguments);
 		

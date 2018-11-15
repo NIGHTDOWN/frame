@@ -28,7 +28,7 @@ class Template_Lite {
 	var $php_extract_vars		=	false;	// Set this to true if you want the $this->_tpl variables to be extracted for use by PHP code inside the template.
 	var $reserved_template_varname = "templatelite";
 	var $default_modifiers		= array();
-	var $debugging	   =  false;
+	var $debugging	   =  G_TEMP_DEBUG;
 
 	var $compiler_file        =    'class.compiler.php';
 	var $compiler_class        =   'ng169\\template\\Template_Lite_Compiler';
@@ -61,7 +61,7 @@ class Template_Lite {
 	var $_sl_md5		= '39fc70570b8b60cbc1b85839bf242aff';
 
 	var $_version		= '//NG框架模板引擎;仅适用本系统框架;';
-	var $_version_date	= "2018-06-05 10:00:00";
+	var $_version_date	= "2018-11-15 10:00:00";
 	var $_config_module_loaded = false;
 	var $_templatelite_debug_info	= array();
 	var $_templatelite_debug_loop	= false;
@@ -762,7 +762,7 @@ function setCaching($bool){
 		
 		$output = ob_get_contents();
 		
-		ob_end_clean();
+		@ob_end_clean();
 		return $output;
 	}
 

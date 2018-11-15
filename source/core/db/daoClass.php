@@ -242,7 +242,7 @@ class daoClass
       if ($this->isneedfix($join[0])) {
         $join[0] = 'v.' . $join[0];
       }
-      if ($join['as'] == null) {
+      if (isset($join['as'])) {
         $j1 = $t . ' as `' . $join['t'] . '`  on ' . $join[0] . " = `" . $join['t'] .
         "`." . $join[1];
       }
@@ -399,7 +399,14 @@ class daoClass
 	
       $str = '`' . $str[0] . '`.`' . $str[1].'`' ;
 	 }else{
-	 	$str =  $pix . '`'.$str[0].'`' ;
+	 	$keys=$this->getfiled(0);
+	 	
+	 	if(in_array($str[0],$keys)){
+			$str =  $pix . '`'.$str[0].'`' ;
+		}else{
+			$str =   '`'.$str[0].'`' ;
+		}
+	 	
 	 }
       
    /* }*/
@@ -682,7 +689,7 @@ class daoClass
     $b = array();
     if ($p == 1) {
       $sql = "select * from " . $this->tablename . ' as v ' . $this->j . ' limit  1';
-      $ar  = $this->_db->query($sql);
+      $ar  = $this->_db->query($sql,1);
 
     }
     if ($p == 1 && is_array($ar)) {
@@ -724,12 +731,14 @@ class daoClass
     $sql    = 'DESCRIBE ' . $tbname;
     $index  = md5($sql);
     
-    if(self::$loopcache>self::LOOPMAX)return false;
-    list($bool, $data) = Y::$cache->get($index);
+    /*if(self::$loopcache>self::LOOPMAX)return false;*/
+    //这里的缓存必须非mysql缓存；否则死循环
+    $cache=new \ng169\cache\File;
+    list($bool, $data) = $cache->get($index);
     
     if (!$bool) {
-    	self::$loopcache+=1;
-      $data = $this->_db->query($sql,1);
+      $data = $this->_db->query($sql);
+      $cache->set($index,$data);
     }
     return $data;
   }
