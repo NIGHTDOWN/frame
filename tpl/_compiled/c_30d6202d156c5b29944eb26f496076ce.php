@@ -1,4 +1,4 @@
-<?php /* "/tpl/templets/default/nav.html" //NG框架模板引擎;仅适用本系统框架; 2018-10-11 22:05:10 �й���׼ʱ�� */ ?>
+<?php /* "/tpl/templets/default/nav.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 16:35:47 �й���׼ʱ�� */ ?>
 
 <div class="site-nav">
 	<div class="w fn-clear">
@@ -6,10 +6,10 @@
 			<?php if (! $this->_vars['user']): ?>
 			<li class="nav user">
 				<div class="nav-fore1">
-					<a class="login" href="<?php echo url(array('mod' => 'login'), $this);?>">
+					<a class="login" href="<?php echo \ng169\hook\url(array('mod' => 'login'), $this);?>">
 						亲，请登录
 					</a>
-					<a class="reg" href="<?php echo url(array('mod' => 'reg'), $this);?>">
+					<a class="reg" href="<?php echo \ng169\hook\url(array('mod' => 'reg'), $this);?>">
 						免费注册
 					</a>
 				</div>
@@ -18,11 +18,11 @@
 
 			<li class="nav drop-down user">
 				<div class="nav-fore1">
-					<a class="name" href="<?php echo url(array('mod' => 'index','group' => 'user'), $this);?>">
+					<a class="name" href="<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'user'), $this);?>">
 						<?php echo $this->_vars['user']['username']; ?>
 
 						
-					</a><img align="absmiddle" src="<?php  echo vo_list("fun=@!getlevelimg1!@ type=@!am!@ mod=@!userlevel!@  param1=@!{$this->_vars['user']['uid']}!@"); ?>">
+					</a><img align="absmiddle" src="<?php  echo ng169\hook\vo_list("fun=@!getlevelimg1!@ type=@!am!@ mod=@!userlevel!@  param1=@!{$this->_vars['user']['uid']}!@"); ?>">
 					<i>
 						<em>
 						</em>
@@ -31,12 +31,12 @@
 				<div class="nav-fore2">
 					<ul>
 						<li>
-							<a href="<?php echo url(array('mod' => 'set','group' => 'user'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('mod' => 'set','group' => 'user'), $this);?>">
 								账号管理
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo url(array('mod' => 'login','action' => 'logout','group' => 'index'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('mod' => 'login','action' => 'logout','group' => 'index'), $this);?>">
 								退出
 							</a>
 						</li>
@@ -47,7 +47,7 @@
 			</li>
 			<li class="nav msg">
 				<div class="nav-fore1">
-					<a class="name" href="<?php echo url(array('mod' => 'message','group' => 'user'), $this);?>">
+					<a class="name" href="<?php echo \ng169\hook\url(array('mod' => 'message','group' => 'user'), $this);?>">
 						<span>
 							消息
 						</span>
@@ -81,7 +81,7 @@
 		<ul class="fn-right">
 			<li class="nav drop-down">
 				<div class="nav-fore1">
-					<a href="<?php echo url(array('group' => 'user','mod' => 'index'), $this);?>">
+					<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'index'), $this);?>">
 						我的商城
 					</a>
 					<i>
@@ -92,12 +92,12 @@
 				<div class="nav-fore2">
 					<ul>
 						<li>
-							<a href="<?php echo url(array('group' => 'user','mod' => 'order'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'order'), $this);?>">
 								已买到的商品
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo url(array('group' => 'user','mod' => 'collect','action' => 'history'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'collect','action' => 'history'), $this);?>">
 								我的足迹
 							</a>
 						</li>
@@ -112,7 +112,7 @@ unset($_templatelite_tpl_vars);
  ?>
 			<li class="nav collect drop-down">
 				<div class="nav-fore1">
-					<a href="<?php echo url(array('group' => 'user','mod' => 'collection'), $this);?>">
+					<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'collection'), $this);?>">
 						<span>
 							收藏夹
 						</span>
@@ -125,12 +125,12 @@ unset($_templatelite_tpl_vars);
 				<div class="nav-fore2">
 					<ul>
 						<li>
-							<a href="<?php echo url(array('group' => 'user','mod' => 'collect'), $this);?> ">
+							<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'collect'), $this);?> ">
 								收藏的商品
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo url(array('group' => 'user','mod' => 'collect','action' => 'shop'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'collect','action' => 'shop'), $this);?>">
 								收藏的店铺
 							</a>
 						</li>
@@ -143,7 +143,7 @@ unset($_templatelite_tpl_vars);
 			</li>
 			<li class="nav drop-down">
 				<div class="nav-fore1">
-					<a href="<?php echo url(array('group' => 'shop','mod' => 'shop'), $this);?>">
+					<a href="<?php echo \ng169\hook\url(array('group' => 'shop','mod' => 'shop'), $this);?>">
 						卖家中心
 					</a>
 					<i>
@@ -154,17 +154,17 @@ unset($_templatelite_tpl_vars);
 				<div class="nav-fore2">
 					<ul>
 						<li>
-							<a href="<?php echo url(array('mod' => 'shop','group' => 'user'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('mod' => 'shop','group' => 'user'), $this);?>">
 								免费开店
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo url(array('mod' => 'sells','group' => 'shop'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('mod' => 'sells','group' => 'shop'), $this);?>">
 								已卖出的商品
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo url(array('mod' => 'product','action' => 'sell','group' => 'shop'), $this);?>">
+							<a href="<?php echo \ng169\hook\url(array('mod' => 'product','action' => 'sell','group' => 'shop'), $this);?>">
 								出售中的商品
 							</a>
 						</li>
@@ -173,7 +173,7 @@ unset($_templatelite_tpl_vars);
 			</li>
 			<li class="nav">
 				<div class="nav-fore1">
-					<a href="<?php echo url(array('mod' => 'category'), $this);?>">
+					<a href="<?php echo \ng169\hook\url(array('mod' => 'category'), $this);?>">
 						商品分类
 					</a>
 				</div>
@@ -186,7 +186,7 @@ unset($_templatelite_tpl_vars);
 <div class="" style="padding: 10px 0 0px;background: #FFF;">
 	<div class="w fn-clear" >
 		<div class="logo">
-			<a title="NG" href="<?php echo url(array('mod' => 'index','action' => 'run'), $this);?>">
+			<a title="NG" href="<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'run'), $this);?>">
 				<img src="<?php echo $this->_vars['static']; ?>
 logo/logo.png">
 			</a>
@@ -198,8 +198,8 @@ res/down.png">
 			</dd>
 			<div class="hidden showDown" style="width:232px;height:124px;padding:5px;border:1px solid #AAAAAA;background:#fff;position: absolute;z-index: 9999;">
 				<div style="float:left;">
-					<img class=" andimg1" src="<?php echo url(array('mod' => 'login','action' => 'qr','args' => "url:" . $this->_vars['config']['android_down'] . ""), $this);?>" width="124" height="124">
-					<img class="hidden iosimg1" src="<?php echo url(array('mod' => 'login','action' => 'qr','args' => "url:" . $this->_vars['config']['mac_down'] . ""), $this);?>" width="124" height="124">
+					<img class=" andimg1" src="<?php echo \ng169\hook\url(array('mod' => 'login','action' => 'qr','args' => "url:" . $this->_vars['config']['android_down'] . ""), $this);?>" width="124" height="124">
+					<img class="hidden iosimg1" src="<?php echo \ng169\hook\url(array('mod' => 'login','action' => 'qr','args' => "url:" . $this->_vars['config']['mac_down'] . ""), $this);?>" width="124" height="124">
 				</div>
 				<div style="text-align: center; float: right; width: 107px;">
 					<p style="color:#DB3407;font-weight: 600; font-family: &#39;微软雅黑&#39;; font-size: 16px;line-height:30px;">
@@ -224,7 +224,7 @@ res/iOS-3-2.png" width="95">
 			</div>
 		</dl>
 		<div class="search" style="margin-right: 35px">
-			<form action="<?php echo url(array('mod' => 'search'), $this);?>" class="form" method="post">
+			<form action="<?php echo \ng169\hook\url(array('mod' => 'search'), $this);?>" class="form" method="post">
 				<div class="i-search">
 
 					<input autocomplete="off" onkeyup="get_search_word(this.value);" value="" type="text" class="text" id="key" name="word">
@@ -237,17 +237,17 @@ res/iOS-3-2.png" width="95">
 				<strong>
 					热门搜索：
 				</strong>
-				<?php $this->assign('hot', vo_list("fun=@!get!@ mod=@!hotword!@ type=@!im!@")); ?>
+				<?php $this->assign('hot', \ng169\hook\vo_list("fun=@!get!@ mod=@!hotword!@ type=@!im!@")); ?>
 				
 				<?php if (count((array)$this->_vars['hot'])): foreach ((array)$this->_vars['hot'] as $this->_vars['k'] => $this->_vars['volist']): ?>
 				<?php if ($this->_vars['k'] == 0): ?>
 				<a
-					class="first" target="_blank" href="<?php echo url(array('mod' => 'search','args' => "word:" . $this->_vars['volist']['word'] . ""), $this);?>"><?php echo $this->_vars['volist']['word']; ?>
+					class="first" target="_blank" href="<?php echo \ng169\hook\url(array('mod' => 'search','args' => "word:" . $this->_vars['volist']['word'] . ""), $this);?>"><?php echo $this->_vars['volist']['word']; ?>
 
 				</a>
 				<?php else: ?>
 				<a
-					target="_blank" href="<?php echo url(array('mod' => 'search','args' => "word:" . $this->_vars['volist']['word'] . ""), $this);?>"><?php echo $this->_vars['volist']['word']; ?>
+					target="_blank" href="<?php echo \ng169\hook\url(array('mod' => 'search','args' => "word:" . $this->_vars['volist']['word'] . ""), $this);?>"><?php echo $this->_vars['volist']['word']; ?>
 
 				</a>
 				<?php endif; ?>
@@ -260,7 +260,7 @@ res/iOS-3-2.png" width="95">
 				{
 					if(k!='')
 					{
-						var url = '<?php echo url(array('mod' => 'search','group' => 'index','action' => 'getmore'), $this);?>';
+						var url = '<?php echo \ng169\hook\url(array('mod' => 'search','group' => 'index','action' => 'getmore'), $this);?>';
 						var sj = Math.random();
 						var pars = 'shuiji=' + sj+'&key='+k;
 						$.post(url, pars,showResponse);
@@ -352,7 +352,7 @@ document.body.addEventListener("DOMMouseScroll", function(event) {
 /*
 window.addEventListener("mousewheel", (e) => {if (e.deltaY === 1) {e.preventDefault();}})*/
 						
-						$u='<?php echo url(array('mod' => 'index','action' => 'menu'), $this);?>';
+						$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'menu'), $this);?>';
 						$jsurl='<?php echo $this->_vars['indextpl']; ?>
 res/kissy.menu.js';
 						$.get($u,function(data)
@@ -384,41 +384,41 @@ res/kissy.menu.js';
 		</dl>
 		<ul class="menu-items">
 			<li class="">
-				<a href="<?php echo url(array('mod' => 'index','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'run'), $this);?>">
 					首页
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo url(array('mod' => 'product','action' => 'category'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'product','action' => 'category'), $this);?>">
 					商品
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo url(array('mod' => 'shop','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'shop','action' => 'run'), $this);?>">
 					店铺
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo url(array('mod' => 'jfstore','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'jfstore','action' => 'run'), $this);?>">
 					积分商城
 				</a>
 			</li>
 
 			<li>
-				<a href="<?php echo url(array('mod' => 'purchase','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'purchase','action' => 'run'), $this);?>">
 					团购
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo url(array('mod' => 'article','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'article','action' => 'run'), $this);?>">
 					资讯
 				</a>
 			</li>
 
 			<li class="cart">
-				<a href="<?php echo url(array('mod' => 'cart','group' => 'user','action' => 'run'), $this);?>">
+				<a href="<?php echo \ng169\hook\url(array('mod' => 'cart','group' => 'user','action' => 'run'), $this);?>">
 					<b>
-						<?php  echo vo_list("fun=@!getcount!@ mod=@!cart!@ type=@!im!@ "); ?>
+						<?php  echo ng169\hook\vo_list("fun=@!getcount!@ mod=@!cart!@ type=@!im!@ "); ?>
 					</b>
 					我的购物车
 				</a>

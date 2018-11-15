@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ng169\service\Output;
+namespace ng169\service;
 
 checktop();
 class Output 

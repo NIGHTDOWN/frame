@@ -1,10 +1,10 @@
 <?php
 
+namespace ng169\service;
 
-
-
+use ng169\Y;
 checktop();
-class service extends Y
+class Input extends Y
 {
 	private $arr;
 	private $attr = array();

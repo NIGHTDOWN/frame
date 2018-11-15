@@ -91,7 +91,7 @@ class Y
     if (is_array($packs)) {
       foreach ($packs as $key => $value) {
         $packname   = $value;
-        $class_path = self::_getStaticPath($packname, 'tool');
+        $class_path = TOOL.FG.$value.G_EXT;
 
         if (file_exists($class_path)) {
           require_once ($class_path);
@@ -99,7 +99,7 @@ class Y
       }
     }
     else {
-      $class_path = self::_getStaticPath($packs, 'tool');
+      $class_path =TOOL.FG.$packs.G_EXT;
       if (file_exists($class_path)) {
         require_once ($class_path);
       }
@@ -124,14 +124,16 @@ class Y
     if (is_array($packs)) {
       foreach ($packs as $key => $value) {
         $packname   = $value;
-        $class_path = self::_getStaticPath($packname, 'lib');
+        $class_path = LIB.FG.$value.G_EXT;
         if (file_exists($class_path)) {
           require_once ($class_path);
         }
       }
     }
     else {
-      $class_path = self::_getStaticPath($packs, 'lib');
+     /* $class_path = self::_getStaticPath($packs, 'lib');*/
+   
+     $class_path = LIB.FG.$packs.G_EXT;
       if (file_exists($class_path)) {
         require_once ($class_path);
       }
@@ -139,73 +141,40 @@ class Y
   }
 
 
-  public static
-  function loadFunc($packs, $type)
-  {
-    if (is_array($packs)) {
-      foreach ($packs as $key => $value) {
-        $packname      = $value;
-        $function_path = self::_getFuncPath($packname, $type);
-        if (file_exists($function_path)) {
-          require_once ($function_path);
-        }
-      }
-    }
-    else {
-      $function_path = self::_getFuncPath($packs, $type);
-      if (file_exists($function_path)) {
-        require_once ($function_path);
-      }
-    }
-  }
 
-
-  private static
-  function _getStaticPath($class_name, $type)
-  {
-    if (isset(Y::$conf['conf'][$type])) {
-      return Y::$conf['conf'][$type].'/'.$class_name . '.php';
-    }
-    return false;
-  }
 
 
 
   public static
   function import($name, $type)
   {
-    $class_path = self::_getClassPath($name, $type);
-    $class_name = self::_getClassName($name);
-    if (!file_exists($class_path)) {
-      echo ('file class.' . $name . '.php is not exist!');
-      die();
-    }
-    if (!isset(self::$instance['class'][$class_name])) {
-      require_once ($class_path);
-      if (!class_exists($class_name)) {
-        echo ('class' . $class_name . ' is not exist!');
-        die();
+  	
+	$index=$name.$type;
+	$filedir=['tool'=>TOOL,'lib'=>LIB];
+	
+	if(isset($filedir[$type])){
+		$file=$filedir[$type].$name.G_EXT;
+		if(file_exists($file)){
+			im($file);
+		}else{
+		error($file.__('导入类不存在'));	
+		}
+		
+	}else{
+		error($type.__('导入目录不存在'));
+	}
+	
+  	$cls="ng169\\$type\\$name"; 
+    if (!isset(self::$instance['class'][$index])) {
+      
+      if (!class_exists($cls)) {
+      	error($cls.__('导入类不存在'));
+     
       }
-      $my_class = new $class_name;
-      self::$instance['class'][$class_name] = $my_class;
+      $my_class = new $cls;
+      self::$instance['class'][$index] = $my_class;
     }
-    return self::$instance['class'][$class_name];
-  }
-
-
-  private static
-  function _getClassPath($class_name, $type)
-  {
-    $class_path = dirname(dirname(__FILE__)).'/'.self::$source_path[$type] . 'class.' . $class_name . '.php';
-    $class_path = $class_path;
-    return $class_path;
-  }
-
-
-  private static
-  function _getClassName($class_name)
-  {
-    return $class_name ;
+    return self::$instance['class'][$index];
   }
 
 //加载模型
@@ -232,83 +201,6 @@ class Y
     }
     return self::$instance['model'][$index];
   }
-
-
-
-
-  public static
-  function getparm($arr,$data = null)
-  {
-
-    im(SERVICE.'service.php');
-    $get = new service($arr,$data);
-    return $get;
-  }
-
-
-
-  private static
-  function _getServicePath($service_name, $type)
-  {
-    $service_path = dirname(dirname(__FILE__)).'/'.self::$source_path[$type] . 'service.' . $service_name . '.php';
-    $service_path = $service_path;
-    return $service_path;
-  }
-
-
-
-
-  public static
-  function action($control_name, $type)
-  {
-    $control_path = self::_getActionPath($control_name, $type);
-    $control_name = self::_getActionName($control_name, $type);
-    if (!file_exists($control_path)) {
-      echo ('Action file ' . $control_name . '.php is not exist!');
-      die();
-    }
-    if (!isset(self::$instance['action'][$control_name])) {
-      require_once ($control_path);
-      if (!class_exists($control_name)) {
-        echo ('Action class ' . $control_name . ' is not exist!');
-        die();
-      }
-      $my_action = new $control_name;
-      self::$instance['action'][$control_name] = $my_action;
-    }
-    return self::$instance['action'][$control_name];
-  }
-
-  private static
-  function _getActionPath($control_name, $type)
-  {
-    $control_path = dirname(dirname(__FILE__)).'/'.self::$source_path[$type] . 'action.' . $control_name . '.php';
-    $control_path = $control_path;
-    return $control_path;
-  }
-
-
-  private static
-  function _getActionName($control_name, $type)
-  {
-
-    if ($type == 'ia') {
-      return $control_name . 'IAction';
-    }
-
-    elseif ($type == 'ua') {
-      return $control_name . 'UAction';
-    }
-
-    elseif ($type == 'aa') {
-      return $control_name . 'AAction';
-    }
-
-    elseif ($type == 'wa') {
-      return $control_name . 'WAction';
-    }
-  }
-
 
   public static
   function importPlugin()

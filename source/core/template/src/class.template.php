@@ -2,6 +2,7 @@
 namespace ng169\template;
 use ng169\template\config;
 use ng169\template\Template_Lite_Compiler;
+use ng169\service\Output;
 //本模板借鉴Template_Lite改版而得;勿修改或者替换
 if (!defined('TEMPLATE_LITE_DIR')) {
 	define('TEMPLATE_LITE_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -30,7 +31,7 @@ class Template_Lite {
 	var $debugging	   =  false;
 
 	var $compiler_file        =    'class.compiler.php';
-	var $compiler_class        =   'Template_Lite_Compiler';
+	var $compiler_class        =   'ng169\\template\\Template_Lite_Compiler';
 	var $config_class          =   'config';
 
 	// gzip output configuration
@@ -586,6 +587,7 @@ function setCaching($bool){
 			if($this->debugging && !$this->_templatelite_debug_loop)
 			{
 				$this->debugging = false;
+				
 				if(!function_exists("template_generate_debug_output"))
 				{
 					require_once(TEMPLATE_LITE_DIR . "internal/template.generate_debug_output.php");
@@ -729,6 +731,8 @@ function setCaching($bool){
 			} else {
 				require_once($this->compiler_file);
 			}
+			
+			im(dirname(__FILE__).FG.'class.compiler.php');
 			$this->_compile_obj = new $this->compiler_class;
 		}
 		$this->_compile_obj->left_delimiter = $this->left_delimiter;
@@ -749,9 +753,12 @@ function setCaching($bool){
 		$f = fopen($this->compile_dir.'c_'.$name, "w");
 		fwrite($f, $output);
 		fclose($f);
-
+/*try{*/
+	eval(' ?>' . $output . '<?php ');
+/*} catch (Error $e) {
+	error($e);
+}*/
 		
-		eval(' ?>' . $output . '<?php ');
 		
 		$output = ob_get_contents();
 		

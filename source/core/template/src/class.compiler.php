@@ -344,13 +344,13 @@ function _parse_variables2($variables, $modifiers) {
 				break;
 				case 'vo_list':
 				
-				if (!function_exists('vo_list')) {
+				/*if (!function_exists('vo_list')) {
 					require_once(CORE . "hook/hook.volist.php");
-				}
+				}*/
 				
 				$_args = $this->_parse_volist_arguments($arguments);
 				
-				return "<?php  echo vo_list({$_args}); ?>";
+				return "<?php  echo ng169\\hook\\vo_list({$_args}); ?>";
 				
 				
 				
@@ -588,6 +588,7 @@ function _parse_variables2($variables, $modifiers) {
 				break;
 			default:
 				$_result = "";
+				
 				if ($this->_compile_compiler_function($function, $arguments, $_result)) {
 					return $_result;
 				}
@@ -616,8 +617,10 @@ function _matchforeach($str){
 	return $ret;
 }
 	function _compile_compiler_function($function, $arguments, &$_result) {
+		
 		if ($function = $this->_plugin_exists($function, "compiler")) {
 			$_args = $this->_parse_arguments($arguments);
+			/*$function='ng169\\hook\\'.$function;*/
 			$_result = '<?php ' . $function($_args, $this) . ' ?>';
 			return true;
 		} else {
@@ -703,7 +706,7 @@ function _matchforeach($str){
 			
 			if(sizeof($_match[1])){
 				$str=$this->_parse_volist_arguments($_match[1][0]);
-				$_result['value']="vo_list($str)";
+				$_result['value']="\\ng169\hook\\vo_list($str)";
 			}
 		}
 	
@@ -1064,6 +1067,8 @@ function _matchforeach($str){
 	function _plugin_exists($function, $type) {
 		// check for object functions
 		//if (isset($this->_plugins[$type][$function]) && is_array($this->_plugins[$type][$function]) && is_object($this->_plugins[$type][$function][0]) && method_exists($this->_plugins[$type][$function][0], $this->_plugins[$type][$function][1]))
+		
+		
 		if (isset($this->_plugins[$type][$function])
 			&& is_array($this->_plugins[$type][$function])
 			&& (

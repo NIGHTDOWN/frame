@@ -2,7 +2,7 @@
 
 
 namespace ng169\tool;
-
+use ng169\Y;
 class Url{
 	private static $debar = array('admin');
 	private static $ssl="http://";

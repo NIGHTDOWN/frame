@@ -5,13 +5,14 @@
 namespace  ng169\hook;
 use ng169\Y;
 use ng169\TPL;
+use ng169\tool\Handle as YHandle;
 
 checktop();
 
 function vo_list($extracts)
 {
 	
-    Y::loadTool('handle');
+   
     
      $params = YHandle::buildTagArray(YHandle::fixTag($extracts));
   
@@ -135,5 +136,5 @@ function vo_list($extracts)
         }
     }
 }
-
+/*TPL::regFunction('vo_list', 'vo_list');*/
 ?>

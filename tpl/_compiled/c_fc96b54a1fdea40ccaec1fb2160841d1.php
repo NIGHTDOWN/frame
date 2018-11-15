@@ -1,4 +1,4 @@
-<?php /* "tpl/templets/default/index_index.html" //NG框架模板引擎;仅适用本系统框架; 2018-10-11 22:04:40 �й���׼ʱ�� */ ?>
+<?php /* "tpl/templets/default/index_index.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 16:35:47 �й���׼ʱ�� */ ?>
 
 
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>
@@ -43,7 +43,7 @@ res/product.css" rel="stylesheet" type="text/css">
 		
 			$(function(){
 				
-				$u='<?php echo url(array('mod' => 'index','action' => 'gg'), $this);?>';
+				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'gg'), $this);?>';
 				$.get($u,function(data){
 					$('#ggid').append(data);
 				});
@@ -54,8 +54,8 @@ res/product.css" rel="stylesheet" type="text/css">
 			
 		</script>
 				<dd class="fore2">
-					<a class="login" href="<?php echo url(array('mod' => 'login'), $this);?>"></a>
-					<a class="register" href="<?php echo url(array('mod' => 'reg'), $this);?>"></a>
+					<a class="login" href="<?php echo \ng169\hook\url(array('mod' => 'login'), $this);?>"></a>
+					<a class="register" href="<?php echo \ng169\hook\url(array('mod' => 'reg'), $this);?>"></a>
 				</dd>
 			</dl>
 			<dl class="buying">
@@ -72,32 +72,32 @@ res/product.css" rel="stylesheet" type="text/css">
 					<UL sizcache="2" sizset="30">
 						<LI class=cur>公告 </LI></UL></DIV>
 				<UL class="notice-bd fn-clear" sizcache="5" sizset="55">
-					<?php $this->assign('gg', vo_list("mod=@!notice!@ type=@!im!@ fun=@!getlist!@ ")); ?>
+					<?php $this->assign('gg', \ng169\hook\vo_list("mod=@!notice!@ type=@!im!@ fun=@!getlist!@ ")); ?>
 				
 					<?php if (count((array)$this->_vars['gg'])): foreach ((array)$this->_vars['gg'] as $this->_vars['volist']): ?>
-					<LI sizcache="4" sizset="55"><a href="<?php echo url(array('mod' => 'article','action' => 'show','agrs' => "articleid:" . $this->_vars['volist']['articleid'] . ""), $this);?>" target="_blank" title="<?php echo $this->_run_modifier($this->_vars['volist']['title'], 'tostr', 'PHP', 1); ?>
+					<LI sizcache="4" sizset="55"><a href="<?php echo \ng169\hook\url(array('mod' => 'article','action' => 'show','agrs' => "articleid:" . $this->_vars['volist']['articleid'] . ""), $this);?>" target="_blank" title="<?php echo $this->_run_modifier($this->_vars['volist']['title'], 'tostr', 'PHP', 1); ?>
 "><?php echo $this->_run_modifier($this->_vars['volist']['title'], 'tostr', 'PHP', 1); ?>
 </a>
 					</li>
 					<?php endforeach; endif; ?></UL></DIV>
 			<DL class=member sizcache="4" sizset="59">
-				<DT sizcache="4" sizset="59"><A href="<?php echo url(array('group' => 'user','mod' => 'index'), $this);?>" target=_blank>
+				<DT sizcache="4" sizset="59"><A href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'index'), $this);?>" target=_blank>
 				<IMG src="<?php if ($this->_vars['user']['headimg']):  echo $this->_vars['user']['headimg'];  else:  echo $this->_vars['static']; ?>
 images/head.png<?php endif; ?>" width=60 height=60> 
 				Hi! <STRONG><?php echo $this->_vars['user']['username']; ?>
-</STRONG> </A><IMG align=absMiddle src="<?php  echo vo_list("fun=@!getlevelimg1!@ mod=@!userlevel!@ type=@!am!@ param1=@!{$this->_vars['user']['uid']}!@"); ?>"> 
-					<P class=fn-clear sizcache="4" sizset="60"> <A class=last href="<?php echo url(array('group' => 'user','mod' => 'index'), $this);?>" target=_blank>会员中心</A> </P></DT>
-				<?php $this->assign('gg', vo_list("mod=@!notice!@ type=@!im!@ fun=@!getlist!@ ")); ?>	
+</STRONG> </A><IMG align=absMiddle src="<?php  echo ng169\hook\vo_list("fun=@!getlevelimg1!@ mod=@!userlevel!@ type=@!am!@ param1=@!{$this->_vars['user']['uid']}!@"); ?>"> 
+					<P class=fn-clear sizcache="4" sizset="60"> <A class=last href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'index'), $this);?>" target=_blank>会员中心</A> </P></DT>
+				<?php $this->assign('gg', \ng169\hook\vo_list("mod=@!notice!@ type=@!im!@ fun=@!getlist!@ ")); ?>	
 				<DD class=fn-clear sizcache="4" sizset="62">
-				<?php $this->assign('vv', vo_list("fun=@!getwaitsure!@ mod=@!order!@ type=@!im!@")); ?>
-					<A href="<?php echo url(array('group' => 'user','mod' => 'product','action' => 'waitsure'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
-</STRONG>待收货</A> <?php $this->assign('vv', vo_list("fun=@!getwaitpay!@ mod=@!order!@ type=@!im!@")); ?>
+				<?php $this->assign('vv', \ng169\hook\vo_list("fun=@!getwaitsure!@ mod=@!order!@ type=@!im!@")); ?>
+					<A href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'product','action' => 'waitsure'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
+</STRONG>待收货</A> <?php $this->assign('vv', \ng169\hook\vo_list("fun=@!getwaitpay!@ mod=@!order!@ type=@!im!@")); ?>
 									
 									
-					<A class=pay href="<?php echo url(array('group' => 'user','mod' => 'product','action' => 'waitpay'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
+					<A class=pay href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'product','action' => 'waitpay'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
 </STRONG>待付款</A>
-					<?php $this->assign('vv', vo_list("fun=@!getwaitcomment!@ mod=@!order!@ type=@!im!@")); ?>
-					<A href="<?php echo url(array('group' => 'user','mod' => 'product','action' => 'waitevaluate'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
+					<?php $this->assign('vv', \ng169\hook\vo_list("fun=@!getwaitcomment!@ mod=@!order!@ type=@!im!@")); ?>
+					<A href="<?php echo \ng169\hook\url(array('group' => 'user','mod' => 'product','action' => 'waitevaluate'), $this);?>" target=_blank><STRONG><?php echo $this->_vars['vv']; ?>
 </STRONG>待评价</A> </DD></DL>
 
 			<dl class="buying">
@@ -181,17 +181,17 @@ unset($_templatelite_tpl_vars);
 <script>
 		
 			$(function(){
-				$u='<?php echo url(array('mod' => 'index','action' => 'gethot'), $this);?>';
+				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'gethot'), $this);?>';
 			
 				$.get($u,function(data){
 					$('#ajaxhot').append(data);
 				});
-				$u='<?php echo url(array('mod' => 'index','action' => 'hotsell'), $this);?>';
+				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'hotsell'), $this);?>';
 				$.get($u,function(data){
 					
 					$('#hotsell').append(data);
 				});
-				$u='<?php echo url(array('mod' => 'index','action' => 'kb'), $this);?>';
+				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'kb'), $this);?>';
 				$.get($u,function(data){
 					$('#kbid').append(data);
 				});
@@ -199,7 +199,7 @@ unset($_templatelite_tpl_vars);
 			});
 			$domain='<?php echo $this->_vars['config']['site_url']; ?>
 ';
-			$u2='<?php echo url(array('mod' => 'index','group' => 'index','action' => 'getad'), $this);?>';
+			$u2='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getad'), $this);?>';
 			
 			getad($domain,$u2,'indexrightad1');
 			getad($domain,$u2,'indexproducttop');

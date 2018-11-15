@@ -1,6 +1,9 @@
 <?php
 namespace ng169\control;
 use ng169\Y;
+use ng169\TPL;
+use ng169\tool\Request as YRequest;
+
 checktop();
 
 class general extends Y
@@ -53,41 +56,37 @@ class general extends Y
   }
   public function seoinit()
   {
-    if (!$title) {
-      $this->seo['title'] = Y::$conf['site_name'];
-    }
-    if (!$keyword) {
-      $this->seo['keyword'] = Y::$conf['site_keywords'];
-    }
-    if (!$desc) {
-      $this->seo['desc'] = Y::$conf['site_description'];
-    }
+  
+      $this->seo['title'] = @Y::$conf['site']['site_name'];
+    
+   
+      $this->seo['keyword'] = @Y::$conf['site']['site_keywords'];
+    
+   
+      $this->seo['desc'] = @Y::$conf['site']['site_description'];
+    
     TPL::assign(array('seo'=> $this->seo));
   }
   public function seoset($title = null, $keyword = null, $desc = null)
   {
-    if ($title != null) {
+    
       $this->seo['title'] = $title;
-    }
-    if ($keyword != null) {
+  
       $this->seo['keyword'] = $keyword;
-    }
-    if ($desc != null) {
+   
       $this->seo['desc'] = $desc;
-    }
+   
     TPL::assign(array('seo'=> $this->seo));
   }
   public function seoadd($title = null, $keyword = null, $desc = null)
   {
-    if ($title != null) {
+   
       $this->seo['title'] = $title . ' - ' . $this->seo['title'];
-    }
-    if ($keyword != null) {
+  
       $this->seo['keyword'] = $keyword . ' - ' . $this->seo['keyword'];
-    }
-    if ($desc != null) {
+   
       $this->seo['desc'] = $desc . ' - ' . $this->seo['desc'];
-    }
+   
     TPL::assign(array('seo'=> $this->seo));
   }
   public function fix_db_field($data_in_arr = null, $fix_arr = null)
@@ -150,8 +149,7 @@ class general extends Y
   }
   public function view($tplfile = null, $var_array = null, $after_call = null, $cache = null)
   {
-    /*$this->globaldoing();*/
-
+  
     if ($tplfile == null) {
       $c = D_MEDTHOD;
       $a = D_FUNC;
@@ -161,8 +159,8 @@ class general extends Y
       }
       $tplfile = "{$c}_{$a}";
     }
-
     $this->_tplfile = $this->_getTPLFile($tplfile);
+    	
     if ($var_array) {
       TPL::assign($var_array);
     }
@@ -188,7 +186,7 @@ class general extends Y
 
   public function get_userid($type = 0)
   {
-    $userid = parent::$wrap_user['uid'];
+    $userid = @parent::$wrap_user['uid'];
     if ($userid == null && $type) {
       error('请登入在操作', geturl(null, null, 'login', 'index'), 1);
     }
@@ -302,52 +300,15 @@ class general extends Y
         if ($w['alias'] && $w['catid'] == null) {
 
         }
-        /* d($w);*/
+       
         if ($w['catid']) {
 
-          /* unset($w['catid']);
-          unset($w['alias']);*/
+       
         }
         $mian = $table->get_field(0);
         $sw   = G(array('string' => array('word')))->get();
 
-        /*
-        if($sw['word'] != null && $sw['word'] != '请输入关键词' && $mapping==null){
-        $searchfider = array(
-        'merchantname',
-        'name',
-        'metakeyword',
-        'metadesc',
-        'title',
-        'content');
-        $word = array_intersect($searchfider, $mian);
-        foreach($word as $v){
-        $w['v.' . $v] = $sw['word'];
-        }
-        $table->set_where($w, null, 0, 'or');
-        }
-        elseif($mapping!=null ){
-        $mian = $table->get_field(1);
-        $paichu=$mapping[0];
-        unset($mapping[0]);
-        if(is_array($mapping)){
-        foreach($mapping as $k=>$v){
-        if(isset($sw[$k]) && $sw[$k]!=$paichu){
-
-        $word = array_intersect($v, $mian);
-        }
-
-        if(is_array($word)){
-        foreach($word as $v2){
-        $w[ $v2] = $sw[$k];
-        }
-        }
-        }
-
-        $table->set_where($w, null, 0, 'or');
-        }
-        }else{
-        }*/
+     
 
         $table->set_where($w);
 
@@ -644,7 +605,7 @@ class general extends Y
   }
   private function _seo()
   {
-    seo();
+    \ng169\hook\seo();
 
   }
   public function _thispage()

@@ -1,6 +1,7 @@
 <?php
 namespace ng169\control\index;
 use ng169\control\indexbase;
+use ng169\tool\Url as YUrl;
 checktop();
 class index extends indexbase{
 
@@ -10,8 +11,8 @@ class index extends indexbase{
  		if(YUrl::ismoible()){
 			$this->view();  
 		}else{
-			$this->view('index0',$array);  
-			$this->view(null,$array);
+			$this->view('index0');  
+			$this->view(null);
 		}
 	}
 	public function control_menu(){
@@ -59,10 +60,6 @@ class index extends indexbase{
 		
 		Y::$cache->set($name,$cat,0);
 		}
-
-
-
-
 		$this->view('hot',array('data'=>$cat));
       
 	}

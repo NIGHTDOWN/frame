@@ -4,6 +4,8 @@ namespace ng169\control;
 use ng169\control\general;
 use ng169\tool\Cookie as YCookie;
 use ng169\Y;
+use ng169\tool\Url as YUrl;
+use ng169\TPL;
 checktop();
 im(CONTROL.'public/night.php');
 class indexbase extends general{

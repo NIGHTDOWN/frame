@@ -4,9 +4,9 @@
 namespace  ng169\hook;
 use ng169\Y;
 use ng169\TPL;
-
+use ng169\tool\Url as YUrl;
 checktop();
-use ng169\tool\Yurl;
+
 function url($params)
 {
 	

@@ -140,8 +140,7 @@ class TPL extends Y
     public static
     function display($tplfile, $iscache = false)
     {
-		/*self::$tpl->display($tplfile, $cacheid);
-		return true;*/
+
         if ($iscache) {
         	self::setCache(true);
             $cacheid = self::_getURI($tplfile);
@@ -219,8 +218,8 @@ class TPL extends Y
     public static
     function regFunction($hook, $function)
     {
-    	
-        self::$tpl->register_function(  $function,$hook);
+    	$namespace="\\ng169\\hook\\";
+        self::$tpl->register_function( $function,$namespace.$hook);
     }
 
     public static
