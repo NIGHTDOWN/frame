@@ -1,7 +1,8 @@
 <dd class="dd" style="display: <!--{if $c=='index'}-->block<!--{else}-->none<!--{/if}-->">
 <script>
+var $ad='';
 	$domain='<!--{$config.site_url}-->';
-			$u2='<!--{url mod='index' group='index' action='getad' }-->';
+			$u2='<!--{url mod='index' group='index' action='getads' }-->';
 </script>
             <div id="J_Category" class="category">
     <div class="navcatgory">
@@ -44,12 +45,16 @@
           
             </div>
             <script>
-            	getad($domain,$u2,'menu<!--{$volist.alias}-->');
+            	$ad=$ad+',menu<!--{$volist.alias}-->';
             </script>
         </div>
              <!--{/foreach}-->          
            
+             <script>
+             $ad=trim($ad,',');
              
+            	ads($domain,$u2,$ad);
+            </script>  
             </div>  
 </div>
 

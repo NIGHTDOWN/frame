@@ -17,7 +17,7 @@ class Mysql
     private
     function _unSerialize($string)
     {
-    	return unserialize($string);
+    	return @unserialize($string);
        
     }
    

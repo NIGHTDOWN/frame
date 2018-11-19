@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/gg.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 14:59:27 */ ?>
 
 <?php $this->assign('gg', \ng169\hook\vo_list("mod=@!notice!@ type=@!im!@ fun=@!getlist!@")); ?>
 					<?php if (count((array)$this->_vars['gg'])): foreach ((array)$this->_vars['gg'] as $this->_vars['volist']): ?>

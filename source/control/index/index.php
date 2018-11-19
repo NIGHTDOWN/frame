@@ -143,6 +143,21 @@ class index extends indexbase
    Output::out('');
    
   }
+    public function control_getads()
+  {
+  	
+    $id = get(array('string'=>array('id'=>1)),array('广告标识'));
+   $outs=array();
+    if ($id['id']) {
+    	$ids=explode(',',$id['id']);
+    	foreach($ids as $id){
+			$outs[$id]=\ng169\hook\get_ads($id);
+		}
+    }
+     
+   Output::out(json_encode($outs));
+   
+  }
   public function control_cate_getad()
   {
     $id = get(array('string'=>array('id'   =>1,'catid'=>1)),array('id'   =>'广告标识','catid'=>'分类'));

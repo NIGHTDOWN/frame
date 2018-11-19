@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/index_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 14:59:06 */ ?>
 
 
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>
@@ -163,28 +163,24 @@ unset($_templatelite_tpl_vars);
 		
 			$(function(){
 				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'gethot'), $this);?>';
-			
 				$.get($u,function(data){
 					$('#ajaxhot').append(data);
 				});
 				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'hotsell'), $this);?>';
 				$.get($u,function(data){
-					
 					$('#hotsell').append(data);
 				});
 				$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'kb'), $this);?>';
 				$.get($u,function(data){
 					$('#kbid').append(data);
 				});
-				
 			});
 			$domain='<?php echo $this->_vars['config']['site_url']; ?>
 ';
 			$u2='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getad'), $this);?>';
-			getad($domain,$u2,'indexrightad1');
-			getad($domain,$u2,'indexproducttop');
-			getad($domain,$u2,'indexbannerbottom');
-			getad($domain,$u2,'indexqianggou');
+			$u3='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getads'), $this);?>';
+			
+			ads($domain,$u3,'indexqianggou,indexbannerbottom,indexproducttop,indexrightad1');
 			getadfunction($domain,$u2,'indexbanner',function($html){
 				$(".slide").flexslider({
 		slideshowSpeed: 4000, //展示时间间隔ms

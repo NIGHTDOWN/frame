@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:/tpl/templets/default/head.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 14:59:06 */ ?>
 
 <!DOCTYPE html>
 

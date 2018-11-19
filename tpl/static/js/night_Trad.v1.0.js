@@ -62,7 +62,7 @@ var __area_box_head = {
     'l4': '街道'
 };
 var area_level = null;
-var ajaxnum=0;
+
 /*----------------------------------------内部函数,类----------------------------------------*/
 //ImgD:要放图片的img元素，onload时传参可用this
 //h:img元素的高度，像素
@@ -1824,11 +1824,8 @@ function yAjax(ur, ar, $fun, $obj,$lock)
     $async=$lock?false:_ajax_asyn;
     
    
-   	while(ajaxnum>5){
-		//等待
-	}
+
   
-   ajaxnum=ajaxnum+1;
     $.ajax({
             url: ur,
             type: "POST",
@@ -1837,7 +1834,7 @@ function yAjax(ur, ar, $fun, $obj,$lock)
             async: $async,
             success: function (data, status)
             {
-            	ajaxnum=ajaxnum-1;
+            
                 _load_view_hide();
                 if ($fun == null)
                 {
@@ -1850,7 +1847,7 @@ function yAjax(ur, ar, $fun, $obj,$lock)
             },
             error: function (data)
             {
-            	ajaxnum=ajaxnum-1;
+            	
                 _load_view_hide();
                  $info=jta(data.responseText);
                  if($info){

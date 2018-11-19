@@ -1,12 +1,13 @@
 <?php /* "ngtpl[start]:tpl/templets/default/menu.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:31 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 14:59:06 */ ?>
 
 <dd class="dd" style="display: <?php if ($this->_vars['c'] == 'index'): ?>block<?php else: ?>none<?php endif; ?>">
 <script>
+var $ad='';
 	$domain='<?php echo $this->_vars['config']['site_url']; ?>
 ';
-			$u2='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getad'), $this);?>';
+			$u2='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getads'), $this);?>';
 </script>
             <div id="J_Category" class="category">
     <div class="navcatgory">
@@ -54,13 +55,17 @@
           
             </div>
             <script>
-            	getad($domain,$u2,'menu<?php echo $this->_vars['volist']['alias']; ?>
-');
+            	$ad=$ad+',menu<?php echo $this->_vars['volist']['alias']; ?>
+';
             </script>
         </div>
              <?php endforeach; endif; ?>          
            
+             <script>
+             $ad=trim($ad,',');
              
+            	ads($domain,$u2,$ad);
+            </script>  
             </div>  
 </div>
 

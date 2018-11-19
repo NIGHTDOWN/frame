@@ -185,3 +185,30 @@ function getadmobilead(domain,$adurl,$class){
 
     });
 }
+function ads(domain,$adurl,$ids){
+
+  yAjax($adurl,{
+      'id':$ids
+    },
+    function(data){
+      $.each(data,function($index,$val){
+          $obj=$('#'+$index);
+          $html='';
+          var b = $.isEmptyObject($obj);
+          if(!b){
+            for (var i=0;i<$val.length;i++)
+            {
+              $url=domain+'/index.php?c=jump&a=ad'+'&urlid='+$val[i]['urlid']+'&adid='+$val[i]['adid'];
+              $html+='<a href="'+$url+'" target="_blank"><img style="height:'+$val[i]['height']+'px;width:'+$val[i]['width']+'px;" src="'+$val[i]['pic']+'" border="0"></a>';
+            }
+            if($html){
+            	
+              $obj.append($html);
+            
+            }
+          }
+
+        });
+
+    });
+}
