@@ -1,10 +1,12 @@
 <?php
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 
 checktop();
-class control extends adminbase{
+class mcomment extends adminbase{
 	private $db= 'comment_user';
 	private $key='commid';
 	public function control_good(){

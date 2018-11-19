@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/product_category.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 10:49:12 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 15:24:39 */ ?>
 
   <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['indextpl']."head.html", array());

@@ -14,7 +14,7 @@ class comment extends indexbase{
 		$img=get(array('int'=>array('img')));
 		$get['cmflag']=0;
 		$model=T('product_comment')->join_table(array('t'=>'user','uid','uid'))->set_where($get,'=');
-		if($img['img']){
+		if(isset($img['img'])){
 			$model=$model->set_global_where(array('cmimg'=>''),'!=');
 			$im=1;
 		}else{
@@ -22,7 +22,7 @@ class comment extends indexbase{
 		}
 		$page      = $this->make_page($model);
 		$data      = $model->set_limit($this->get_page_limit())->get_all();
-		$get['img']=$img['img'];
+		$get['img']=@$img['img'];
 		
 		$cm=isset($get['cmlevel'])?($get['cmlevel']):-1;
 		$var_array = array('data'  =>$data,'page'=>$page,'get'=>$get,'cm'=>$cm,'im'=>$im);

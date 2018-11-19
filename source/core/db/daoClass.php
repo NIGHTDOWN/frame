@@ -24,8 +24,8 @@ class daoClass
   private $oldbs = null;
   private $iscache = false;
   private $cachetime = '';
-  private static $loopcache=0;
-  private const LOOPMAX=3;
+  private static $loopcache = 0;
+  private const LOOPMAX = 3;
   /**
   * 初始化pdo
   * @param undefined $dbconf
@@ -219,7 +219,7 @@ class daoClass
   }
   private function isneedfix($str)
   {
-    if (strrpos($str, ".") ||strrpos($str, "`")) {
+    if (strrpos($str, ".") || strrpos($str, "`")) {
       return false;
     }
     else {
@@ -247,7 +247,7 @@ class daoClass
         "`." . $join[1];
       }
       else {
-      	
+
         $t = $word . " ( " . $join['t'] . " ) ";
         $j1= $t . ' as `' . $join['as'] . '`  on ' . $join[0] . " = `" . $join['as'] .
         "`." . $join[1];
@@ -385,32 +385,34 @@ class daoClass
   }
   private function fix($str, $ispix = 1)
   {
-  	if (!$this->isneedfix($str)) {
-  		return $str;
-  	}
+    if (!$this->isneedfix($str)) {
+      return $str;
+    }
     $pix = '';
     if ($ispix) {
       $pix = '`v`.';
     }
 
-  
-      $str = explode('.', $str);
-      
-     if(sizeof($str)!=1){
-	
+
+    $str = explode('.', $str);
+
+    if (sizeof($str) != 1) {
+
       $str = '`' . $str[0] . '`.`' . $str[1].'`' ;
-	 }else{
-	 	$keys=$this->getfiled(0);
-	 	
-	 	if(in_array($str[0],$keys)){
-			$str =  $pix . '`'.$str[0].'`' ;
-		}else{
-			$str =   '`'.$str[0].'`' ;
-		}
-	 	
-	 }
-      
-   /* }*/
+    }
+    else {
+      $keys = $this->getfiled(0);
+
+      if (in_array($str[0],$keys)) {
+        $str = $pix . '`'.$str[0].'`' ;
+      }
+      else {
+        $str = '`'.$str[0].'`' ;
+      }
+
+    }
+
+    /* }*/
     return $str;
 
   }
@@ -602,7 +604,7 @@ class daoClass
                 $w .= ' ' . $andor . " {$key} {$operator} '{$w1}'  ";
               }
               else {
-//                $w .= ' ' . $andor . " {$key} like '{$w1}%'  ";
+                //                $w .= ' ' . $andor . " {$key} like '{$w1} % '  ";
                 $w .= ' ' . $andor . " {$key} = '{$w1}'  ";
               }
               break;
@@ -727,16 +729,16 @@ class daoClass
   */
   private  function gettableinfo()
   {
-  	
+
     $tbname = $this->tablename;
     $sql    = 'DESCRIBE ' . $tbname;
     $index  = md5($sql);
-    
+
     /*if(self::$loopcache>self::LOOPMAX)return false;*/
     //这里的缓存必须非mysql缓存；否则死循环
-    $cache=new \ng169\cache\File;
+    $cache  = new \ng169\cache\File;
     list($bool, $data) = $cache->get($index);
-    
+
     if (!$bool) {
       $data = $this->_db->query($sql);
       $cache->set($index,$data);
@@ -799,7 +801,7 @@ class daoClass
 
       $tablekey = $this->getfiled(1);
       $b        = null;
-
+      $bb = '';
       if (is_array($order['f'])) {
 
         foreach ($order['f'] as $key => $b1) {

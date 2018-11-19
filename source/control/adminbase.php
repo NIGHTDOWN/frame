@@ -5,6 +5,7 @@
 
 namespace ng169\control;
 use ng169\control\general;
+use ng169\TPL;
 checktop();
 
 im(CONTROL.'public/night.php');
@@ -26,26 +27,27 @@ class adminbase extends general{
 	}
 	#Initialization
 	public function __construct(){
-		$this->init($this->tpl_path,$this->pagesize,$this->log_dbname);
+		@$this->init($this->tpl_path,$this->pagesize,$this->log_dbname);
 
 		$c = D_MEDTHOD;    $a = D_FUNC;
 
 		if($c != 'login' && !(D_MEDTHOD == 'cj' ) && (D_MEDTHOD != 'aysn') ){
 			$this->checkLogin();
 		}
-
-		unset($m_login);
-		unset($login['password']);
+	if(isset($m_login))unset($m_login);
+	if(isset($login['password']))unset($login['password']);	
+		
 		$var_array = array(
 			'admintpl'    => PATH_URL.$this->tpl_path,
 			'realadmintpl'=> ROOT.$this->tpl_path,
-			'login'       => $login,
+			'login'       => @$login,
 			'time'        => $_SERVER['REQUEST_TIME'],
 			'c'           => $c,
 			'a'           => $a,
 			'admin'       =>parent::$wrap_admin,
 			'level'=>$this->initlevel(),
-			'city'        => $city,'jbtype'=>explode(',',parent::$conf['jb_type']),);
+			'city'        => @$city,
+			'jbtype'=>explode(',',@parent::$conf['jb_type']),);
 		TPL::assign($var_array);
 	}
 	public function get_admin_cookie(){

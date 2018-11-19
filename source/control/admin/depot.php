@@ -1,10 +1,12 @@
 <?php
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 checktop();
-class control extends adminbase{
+class depot extends adminbase{
 	private $db= 'order_refund';
 	private $key='refundid';
 	public function control_tk(){

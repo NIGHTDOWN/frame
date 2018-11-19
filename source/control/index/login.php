@@ -4,7 +4,8 @@
 
 namespace ng169\control\index;
 use ng169\control\indexbase;
-
+use ng169\Y;
+use ng169\tool\Image as YImage;
 
 checktop();
 

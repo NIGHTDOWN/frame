@@ -1,12 +1,14 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 checktop();
 
-class control extends adminbase
+class level extends adminbase
 {
   private $all=array('string'=>array('slogo','blogo','name'=>1),'int'=>array('level'=>1));
     public function control_run()

@@ -1,12 +1,14 @@
 <?php
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 
 checktop();
 
-class control extends adminbase
+class upimg extends adminbase
 {
 	private $dir_base = "data/attachment/";
     private $config=array('filetype'=>'','upfilepath'=>'','upfilesize'=>'');

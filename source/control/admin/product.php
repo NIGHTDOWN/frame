@@ -1,11 +1,13 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 checktop();
 
-class control extends adminbase{
+class product extends adminbase{
 	private $db_name = 'product';
 	private $key = 'productid';
 	private $allkey = array('int'      =>array('phone',

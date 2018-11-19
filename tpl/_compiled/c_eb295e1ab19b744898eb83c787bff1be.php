@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/area.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 10:49:12 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 15:24:39 */ ?>
 
  <?php $this->assign('province', \ng169\hook\vo_list("fun=@!get_all!@ mod=@!province!@ field=@!provinceID,province!@ array=@!flag:0!@")); ?>
                         <ul>

@@ -5,7 +5,7 @@ namespace ng169\tool;
 
 
 checktop();
-class YImage 
+class Image 
 {
 
 	//保持图片到本地

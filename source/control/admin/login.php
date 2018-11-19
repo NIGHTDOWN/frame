@@ -2,10 +2,12 @@
 
 
 
+namespace ng169\control\admin;
 
-
+use ng169\control\adminbase;
+use ng169\Y;
 checktop();
-class control extends adminbase
+class login extends adminbase
 {
 	
     private $db_name='admins';

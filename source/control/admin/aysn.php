@@ -1,11 +1,13 @@
 <?php
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 checktop();
 
 Y::loadTool('log');
-class control extends adminbase{
+class aysn extends adminbase{
 	public function control_opensock(){
 	
 		if(YAsyn::issign()){

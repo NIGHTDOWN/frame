@@ -318,7 +318,7 @@ class product extends indexbase
 		}
 		elseif($group)
 		{
-			T('groupon')->update(array('ghits'=>$info['ghits'] + 1),array('gpid'=>$info['gpid']));
+			T('groupon')->update(array('ghits'=>@$info['ghits'] + 1),array('gpid'=>@$info['gpid']));
 			$info = array_merge($info,$group);
 			$groupflag=true;
 

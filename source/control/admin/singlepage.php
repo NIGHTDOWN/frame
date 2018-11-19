@@ -1,8 +1,10 @@
 <?php
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
-class control extends adminbase
+class singlepage extends adminbase
 {
 	private $mod = null;
 	private $tablename = 'singlepage';

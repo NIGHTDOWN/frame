@@ -105,7 +105,7 @@ class general extends Y
   }
   public function initlevel()
   {
-    $level = explode(',', Y::$conf['pt_level_name']);
+    $level = explode(',', @Y::$conf['pt_level_name']);
     return $level;
   }
   public function globaldoing()
@@ -198,11 +198,11 @@ class general extends Y
   }
   public function get_muid($type = 0)
   {
-    $userid = parent::$wrap_user['muid'];
-    if ($userid == null && $type) {
+    $muid = @parent::$wrap_user['muid'];
+    if ($muid == null && $type) {
       error('请登入在操作', geturl(null, null, 'login', 'index'), 1);
     }
-    return $userid;
+    return $muid;
   }
   public function get_name($uid)
   {
@@ -504,7 +504,12 @@ class general extends Y
       $this->pagestartid = intval($nums[0][$prikey] - 1);
     }
     else {
-      $this->pagestartid = intval($nums[0][$prikey] + 1);
+    	if(isset($nums[0]) && isset($nums[0][$prikey])){
+			$this->pagestartid = intval($nums[0][$prikey] + 1);
+		}else{
+			$this->pagestartid = 0;
+		}
+      
     }
 
     $this->pagearray = $nums;

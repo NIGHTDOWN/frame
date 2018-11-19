@@ -1,12 +1,14 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 checktop();
 
-class control extends adminbase
+class adminlog extends adminbase
 {
     private $db_name = 'admins_log';
     private $key='logid';

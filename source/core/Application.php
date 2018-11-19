@@ -59,6 +59,7 @@ class APP
   {
     $cls = "ng169\\control\\".D_GROUP.'\\'.D_MEDTHOD;
     $act = G_ACTION_PRE.D_FUNC;
+    
     try {
       $control = new $cls;
     }catch (\Exception $e) {

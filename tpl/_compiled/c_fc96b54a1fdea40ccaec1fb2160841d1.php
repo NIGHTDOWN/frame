@@ -1,13 +1,12 @@
 <?php /* "ngtpl[start]:tpl/templets/default/index_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 14:59:06 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 15:14:13 */ ?>
 
 
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>
 res/jquery.flexslider-min.js"></script>
 	
-	<link href="<?php echo $this->_vars['indextpl']; ?>
-res/skin.css" rel="stylesheet" type="text/css">
+
 	<link href="<?php echo $this->_vars['indextpl']; ?>
 res/product.css" rel="stylesheet" type="text/css">
 	<div class="w fn-clear">

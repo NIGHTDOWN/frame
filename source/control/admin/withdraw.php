@@ -1,9 +1,8 @@
 <?php
 
-
-
+namespace ng169\control\admin;
 checktop();
-class control extends adminbase{
+class withdraw extends adminbase{
 	private $db_name = 'withdraw';
 	private $key='id';
 	

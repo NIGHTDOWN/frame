@@ -4,6 +4,7 @@
 
 namespace ng169\model\index;
 use ng169\Y;
+use ng169\tool\Request as YRequest;
 
 checktop();
 
@@ -14,7 +15,7 @@ class plog extends Y
     {
      if(!$pid)return false;
      $m=T('product_log');
-     $w['uid']=Y::$wrap_user['uid'];
+     $w['uid']=@Y::$wrap_user['uid'];
      $w['ip']=YRequest::getip();
      $w['theday']=date('ymd');
      $w['productid']=$pid;

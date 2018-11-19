@@ -1,10 +1,12 @@
 <?php
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 checktop();
-class control extends adminbase
+class spec extends adminbase
 {
     private $db_name = 'product_category_attribute';
     private $key='id';

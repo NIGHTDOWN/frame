@@ -122,19 +122,7 @@ class shop extends indexbase{
 		$this->view(null,array('data'=>$info,'plist'=>$data,'page'=>$page,'where'=>$where2,'by'=>$by));
 	}
 public function control_comment(){
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 		$get=get(array('int'=>array('id'=>1)));
 		$where['muid']=$get['id'];
 		$this->vlog($this->get_userid(),$get['id']);
@@ -201,12 +189,14 @@ public function control_intro(){
 		$get=get(array('string'=>array('word')));
 		$w=get(array('int'=>array('catid')));
 		$this->vlog($this->get_userid());
+		if(!isset($w['catid'])){$w['catid']='';}
+		if(!isset($get['word'])){$get['word']='';}
 		$wstring='catid:'.$w['catid'].',word:'.$get['word'];
 		$where['rzflag']=array(1,2);
 		$where['catid']=$w['catid'];
 		$province=get(array('int'=>array('provinceid')));
 
-		if($province['provinceid'] && $province['provinceid']!='0'){
+		if(isset($province['provinceid']) && $province['provinceid']!='0'){
 		$where['provinceid']=$province['provinceid'];
 		$wstring=$wstring.',provinceid:'.$province['provinceid'];
 		}
@@ -225,7 +215,7 @@ public function control_intro(){
 			$this->seoadd($catinfo['catname'],$catinfo['metakeyword'],$catinfo['metadesc']);
 		}
 		$data      = $model->set_limit($this->get_page_limit())->get_all();
-		if(is_array($this->orderby) && $this->orderby['s']=='down'){
+		if(is_array($this->orderby) && @$this->orderby['s']=='down'){
 			$by='up';
 		}else{
 			$by='down';
@@ -234,7 +224,7 @@ public function control_intro(){
 		$cat=T('merchant_category')->order_by(array('s'=>'down','f'=>'orders'))->set_field('catid,catname')->get_all(array('flag'=>0));
 		
 	/*	$this->view('shop_cat',array('cat'=>$cat),null,1);*/
-		$this->view('',array('cat'=>$cat,'data'=>$data,'page'=>$page,'where'=>$where2,'by'=>$by,'wherestring'=>$wstring,'hot'=>$hot,'word'=>$get['word']));
+		$this->view('',array('cat'=>$cat,'data'=>$data,'page'=>$page,'where'=>@$where2,'by'=>$by,'wherestring'=>$wstring,'hot'=>$hot,'word'=>$get['word']));
 		
 		
 	}

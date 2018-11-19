@@ -1,10 +1,12 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 checktop();
-class control extends adminbase
+class ajax extends adminbase
 {
     private $a = null;
     private $c = null;

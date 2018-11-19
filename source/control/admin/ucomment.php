@@ -1,7 +1,9 @@
 <?php
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 checktop();
-class control extends adminbase
+class ucomment extends adminbase
 {
     private $db = 'product_comment';
     private $key = 'commid';

@@ -1,9 +1,11 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 checktop();
-class control extends adminbase
+class article extends adminbase
 {
     private $db_name = 'article';
     private $key='articleid';

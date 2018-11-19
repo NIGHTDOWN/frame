@@ -1,12 +1,14 @@
 <?php
 
 
+namespace ng169\control\admin;
 
+use ng169\control\adminbase;
 
 
 checktop();
 
-class control extends adminbase
+class payapi extends adminbase
 {
  public function control_run()
   {
