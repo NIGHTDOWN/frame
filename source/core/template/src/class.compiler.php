@@ -118,7 +118,8 @@ class Template_Lite_Compiler extends Template_Lite {
 		$_match		= array();		// a temp variable for the current regex match
 		$tags		= array();		// all original tags
 		$text		= array();		// all original text
-		$compiled_text	= '<?php /* "' . $this->_file . '" '.$this->_version.' '.strftime("%Y-%m-%d %H:%M:%S %Z").' */ ?>'."\n\n"; // stores the compiled result
+		$compiled_text	= '<?php /* "ngtpl[start]:' . $this->_file . ':[end]" '."\n\n\t\r".$this->_version.' '.strftime("%Y-%m-%d %H:%M:%S ").'*/ ?>'."\n\n"; // stores the compiled result
+		
 		$compiled_tags	= array();		// all tags and stuff
 
 		$this->_require_stack = array();
@@ -494,7 +495,7 @@ function _parse_variables2($variables, $modifiers) {
 				case 'set':
 
 				$value=$this->_parse_argument_to($arguments);
-				
+		
 				return "<?php  {$value}; ?>";
 				
 					
@@ -789,11 +790,10 @@ function _matchforeach($str){
 		$bool=preg_match_all('/(?:(' . $this->_var_regexp . '|' . $this->_svar_regexp . ')(' . $this->_mod_regexp . '*))(?:\s+(.*))?/xs', $arguments, $_match);
 		//$_match2=preg_split('/(?:(' . $this->_var_regexp . '|' . $this->_svar_regexp . ')(' . $this->_mod_regexp . '*))(?:\s+(.*))?/xs', $arguments);
 		if($bool){
-			$k2='';
-			foreach($_match[0] as $k=>$volist){
+			$k2=[];
+			foreach($_match[0] as $k=>$volist){	
 				$k2[$k]=$this->_parse_variable($volist);
 			}
-			
 			//替换有误
 			$arguments=	str_replace($_match[0],$k2,$arguments);
 		}
@@ -847,6 +847,7 @@ function _matchforeach($str){
 		// replace variable with value
 		if ($variable{0} == "\$") {
 			// replace the variable
+			
 			return $this->_compile_variable($variable);
 		}
 		elseif ($variable{0} == '#') {
@@ -915,6 +916,7 @@ function _matchforeach($str){
 		// get [foo] and .foo and (...) pieces
 		preg_match_all('!(?:^\w+)|(?:' . $this->_var_bracket_regexp . ')|(?:\.|\->)\$?\w+|\S+!', $variable, $_match);
 		$variable = $_match[0];
+		
 		$var_name = array_shift($variable);
 
 		if ($var_name == $this->reserved_template_varname) {
@@ -975,10 +977,15 @@ function _matchforeach($str){
 				$this->trigger_error('$' . $var_name.implode('', $variable) . ' is an invalid $templatelite reference', E_USER_ERROR, __FILE__, __LINE__);
 			}
 		} else {
+	
 			$_result = "\$this->_vars['$var_name']";
 		}
-
-		foreach ($variable as $var) {
+		
+		
+		
+			
+			foreach ($variable as $var) {
+				
 			if ($var{0} == '[') {
 				$var = substr($var, 1, -1);
 				if (is_numeric($var) || $var{0} == "'" || $var{0} == '"') {
@@ -1012,11 +1019,14 @@ function _matchforeach($str){
 				else if (substr($var, 2, 1) == '$') {
 					$_output .= '->{(($var=$this->_TPL[\''.substr($var,3).'\']) && substr($var,0,2)!=\'__\') ? $_var : $this->trigger_error("cannot access property \\"$var\\"")}';
 				}
+				
 				$_result .= $var;
 			} else {
 				$this->trigger_error('$' . $var_name.implode('', $variable) . ' is an invalid reference', E_USER_ERROR, __FILE__, __LINE__);
 			}
 		}
+		
+		
 
 		return $_result;
 	}

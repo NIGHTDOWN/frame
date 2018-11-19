@@ -1,4 +1,6 @@
-<?php /* "tpl/templets/default/hotsell.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 17:27:10 �й���׼ʱ�� */ ?>
+<?php /* "ngtpl[start]:tpl/templets/default/hotsell.html:[end]" 
+
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
 
 <?php $this->assign('a1', \ng169\hook\vo_list("type=@!im!@ mod=@!index!@ fun=@!get1!@")); ?>
  <?php $this->assign('a2', \ng169\hook\vo_list("type=@!im!@ mod=@!index!@ fun=@!get2!@")); ?>

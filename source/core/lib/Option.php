@@ -41,7 +41,7 @@ class Option extends Y
   */
   public static  function init()
   {
-    Y::$conf =&self::$config;
+    /*Y::$conf =&self::$config;*/
     $dir  = CONF;
     if (!is_dir($dir)) {
       error($dir.__('目录不存在'));
@@ -84,7 +84,8 @@ class Option extends Y
     }else{
 		self::ReloadCache();
 	}
-    /*Y::$conf=self::$config['site'];*/
+    Y::$conf=self::$config['site'];
+   
   }
   private static function ReloadCache()
   {
@@ -96,10 +97,12 @@ class Option extends Y
     $data=$data->get_all($where);
      
     if (!$data){error(__('系统设置获取失败'));}
+    foreach($data as $list){
+	self::$config['site'][$list['optionname']] = $list['optionvalue'];	
+	}
     
+    Y::$cache->set('options',self::$config['site']);
     
-    Y::$cache->set('options',$data);
-    self::$config['site'] = $data;
   }
 }
 

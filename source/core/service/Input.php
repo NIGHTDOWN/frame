@@ -3,6 +3,8 @@
 namespace ng169\service;
 
 use ng169\Y;
+use ng169\tool\Request as YRequest;
+use ng169\tool\Filter as YFilter;
 checktop();
 class Input extends Y
 {

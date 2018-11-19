@@ -3,7 +3,7 @@
 
 namespace ng169\control\index;
 use ng169\control\indexbase;
-
+use ng169\Y;
 
 
 checktop();
@@ -96,7 +96,7 @@ class product extends indexbase
 		$w = get(array('int'=>array('catid')));
 		$this->vlog($this->get_userid());
 		$pcat = null;
-		if($w['catid'])
+		if(isset($w['catid']))
 		{
 
 			$p = M('tree','am')->getptree('product_category_tree',$w['catid']);
@@ -131,6 +131,7 @@ class product extends indexbase
 		$thisnum = sizeof($pcat) - 1;
 		if($thisnum <= 0)
 		{
+			
 			$this->seoadd('所有商品 - ' .Y::$conf['site_name']);
 		}
 		else
@@ -145,19 +146,20 @@ class product extends indexbase
 		/*$where['storeflag']=0;*/
 		$get    = get(array('string'=>array('word'),'int'   =>array('price1','price2')));
 		
-		if($get['price1'])
+		if(isset($get['price1']))
 		{
 			$where['price'] = array($get['price1']);
 		}
-		if($get['price2'])
+		if(isset($get['price2']))
 		{
 			$where['price'] = array('1'=>$get['price2']);
 		}
 		/*$where['avalue']=$searchattr;*/
-		$insert['address'] = $address['province'].$address['city'].$address['area'].$address['address'];
+		$insert['address']='';
+//		$insert['address'] = $address['province'].$address['city'].$address['area'].$address['address'];
 
 
-		if($province['provinceid'] && $province['provinceid'] != '0')
+		if(isset($province['provinceid']) && $province['provinceid'] != '0')
 		{
 			$where['merchant.provinceid'] = $province['provinceid'];
 			$wstring = $wstring.',provinceid:'.$province['provinceid'];
@@ -171,12 +173,12 @@ class product extends indexbase
 			}
 		}
 		$model = $model->set_where($attr,'=');
-		if($c)
+		if(isset($c))
 		{
 
 			$model = $model->set_where('v.catid in('.implode(',',$c).')');
 		}
-		if($get['word'])
+		if(isset($get['word']))
 		{
 			$word = tohex($get['word']);
 			$model = $model->set_where("match(productname) against ('*{$word}*' IN BOOLEAN MODE)");
@@ -194,12 +196,12 @@ class product extends indexbase
 
 		$data = $model->set_limit($this->get_page_limit())->get_all();
 
-		$where2['id'] = $w['catid'];
-		$where2['word'] = $get['word'];
-		$where2['price1'] = $get['price1'];
-		$where2['price2'] = $get['price2'];
+		$where2['id'] = isset($w['catid'])?$w['catid']:'';
+		$where2['word'] = isset($get['word'])?$get['word']:'';
+		$where2['price1'] = isset($get['price1'])?$get['price1']:'';
+		$where2['price2'] = isset($get['price2'])?$get['price2']:'';
 
-		if(is_array($this->orderby) && $this->orderby['s'] == 'down')
+		if(is_array($this->orderby) && isset($this->orderby['s'])&&  $this->orderby['s'] == 'down')
 		{
 			$by = 'up';
 			$attrwhere['by']=$by;
@@ -210,14 +212,16 @@ class product extends indexbase
 			$attrwhere['by']=$by;
 		}
 		$attrwhere=$attr;
-		$attrwhere['catid']=$w['catid'];
+		$attrwhere['catid']=isset($w['catid'])?$w['catid']:'';
 		
+		if(isset($this->orderby['s']) && isset($this->orderby['f'])){
+			$attrwhere[$this->orderby['s']]=$this->orderby['f'];
+		}
 		
-		$attrwhere[$this->orderby['s']]=$this->orderby['f'];
 		$byattr=$attrwhere;
 		unset($byattr['up']);
 		unset($byattr['down']);
-		$data = array('pcat'       =>$pcat,'ccat'       =>$ccat,'data'       =>$data,'page'       =>$page,'where'      =>$where2,'by'         =>$by,'attribute'  =>$attribute,'attrwhere'  =>$attrwhere,'byattr'=>$byattr,'hot'        =>$hot);
+		$data = array('pcat'       =>$pcat,'ccat'       =>$ccat,'data'       =>$data,'page'       =>$page,'where'      =>$where2,'by'         =>$by,'attribute'  =>@$attribute,'attrwhere'  =>$attrwhere,'byattr'=>$byattr,'hot'        =>$hot);
 
 		$this->view(null,$data);
 	}

@@ -242,11 +242,12 @@ class daoClass
       if ($this->isneedfix($join[0])) {
         $join[0] = 'v.' . $join[0];
       }
-      if (isset($join['as'])) {
+      if (!isset($join['as'])) {
         $j1 = $t . ' as `' . $join['t'] . '`  on ' . $join[0] . " = `" . $join['t'] .
         "`." . $join[1];
       }
       else {
+      	
         $t = $word . " ( " . $join['t'] . " ) ";
         $j1= $t . ' as `' . $join['as'] . '`  on ' . $join[0] . " = `" . $join['as'] .
         "`." . $join[1];

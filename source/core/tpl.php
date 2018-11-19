@@ -5,6 +5,7 @@ namespace ng169;
 
 use \ng169\Y;
 use \ng169\template\Template_Lite;
+use \ng169\service\Output;
 checktop();
 
 #smarty class file
@@ -132,6 +133,7 @@ class TPL extends Y
         if (is_array($array)) {
             foreach ($array as $key => $value) {
                 self::$tpl->assign($key, $value);
+                Output::set($key,$value);
             }
         }
     }
@@ -145,13 +147,15 @@ class TPL extends Y
         	self::setCache(true);
             $cacheid = self::_getURI($tplfile);
           	$cacheid.=$iscache;
-         	self::$tpl->display($tplfile, $cacheid);
+         	$html= self::$tpl->display($tplfile, $cacheid);
        
         }else{
         	
         	/*self::$tpl->setCaching(false);*/
-            self::$tpl->display($tplfile,null);
+           $html= self::$tpl->display($tplfile,null);
         }
+        
+        Output::show($html);
     }
 
 

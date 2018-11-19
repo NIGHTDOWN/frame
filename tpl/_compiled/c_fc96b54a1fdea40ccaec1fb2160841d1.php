@@ -1,4 +1,6 @@
-<?php /* "tpl/templets/default/index_index.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 17:33:41 �й���׼ʱ�� */ ?>
+<?php /* "ngtpl[start]:tpl/templets/default/index_index.html:[end]" 
+
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
 
 
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>
@@ -111,13 +113,6 @@ images/head.png<?php endif; ?>" width=60 height=60>
 		</DIV><?php endif; ?>
 	</div>
 
-
-						
-					
-
-
-
-
 	<div class="w mt20 fn-clear">
 		<dl class="hot">
 			<dt class="dt">
@@ -126,38 +121,24 @@ images/head.png<?php endif; ?>" width=60 height=60>
 				<span>新品上架<b></b></span>
 			</dt>    
 			<dd id='hotsell'>
-			
-			
 			</dd>
 		</dl>
 		<div class="right_side ">
-		
 			<div class="" id='indexrightad1'>	
 			</div>
 		</div>
 	</div>
-
 	<div class="w " id='indexproducttop'>
-		
-			
-	
 	</div>
-
 	<div class="w mt20 fn-clear">
-		<div class="left fn-clear" id='ajaxhot'>
-		
-			
+		<div class="left fn-clear" id='ajaxhot'>	
 		</div>
 		<div class="right">
 			<dl class="sns">
-				<dt class="fn-clear">
-					
+				<dt class="fn-clear">	
 					<h2>口碑广场</h2>
 				</dt>
 				<dd id='kbid'>
-			
-					
-					
 				</dd>
 			</dl>
 		</div>
@@ -200,7 +181,6 @@ unset($_templatelite_tpl_vars);
 			$domain='<?php echo $this->_vars['config']['site_url']; ?>
 ';
 			$u2='<?php echo \ng169\hook\url(array('mod' => 'index','group' => 'index','action' => 'getad'), $this);?>';
-			
 			getad($domain,$u2,'indexrightad1');
 			getad($domain,$u2,'indexproducttop');
 			getad($domain,$u2,'indexbannerbottom');

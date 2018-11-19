@@ -152,6 +152,8 @@ class Url{
 		$group = $group?$group:D_GROUP;
 		if($group != 'index' && $group != ''){
 			$m = 'm='. $group. $fh;
+		}else{
+			$m='';
 		}
 		$mod    = $mod?$mod:$c;
 
@@ -160,7 +162,7 @@ class Url{
 			$ip=$_SERVER["SERVER_NAME"];
 		}
 		
-	
+		
 		$url    = self::gethttp().$ip.'/'.$file .$m. 'c='.$mod. $fh.'a=' . $action . $param;
 		return $url;
 	}

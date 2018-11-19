@@ -252,7 +252,7 @@ class indexbase extends general{
 	function getcookie(){
 		
 		$usercode = YCookie::get('userinfo');
-		d($usercode,1);
+		
 		$Xcode     = Y::import('code', 'tool');
 		$userinfo = $Xcode->authCode($usercode, 'DECODE');
 
@@ -314,7 +314,7 @@ class indexbase extends general{
 	function checkLogin(){
 
 		$userinfo = $this->getcookie();
-d(1,1);
+
 		if(!empty($userinfo)){
 
 			$user = T('user');

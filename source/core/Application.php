@@ -26,8 +26,8 @@ class APP
     $c = Filter::filterXSS(Request::getGpc('c'));
     $m = $m?$m:'index';$c = $c?$c:'index';$a = $a?$a:'run';
 
-    if (isset(Y::$conf['rewrite'])) {
-      YUrl::back();
+    if (isset(Y::$conf['rewrite']) && Y::$conf['rewrite']) {
+      \ng169\tool\Url::back();
     }
 
     if (!defined('D_GROUP')) {

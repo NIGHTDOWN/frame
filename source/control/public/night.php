@@ -2,7 +2,9 @@
 namespace ng169\control;
 use ng169\Y;
 use ng169\TPL;
+use ng169\service\Output;
 use ng169\tool\Request as YRequest;
+use ng169\tool\Page as YPage;
 
 checktop();
 
@@ -180,7 +182,8 @@ class general extends Y
     else {
     }
 
-    TPL::display($this->_tplfile, $cache);
+    $html=TPL::display($this->_tplfile, $cache);
+    
     return;
   }
 
@@ -378,11 +381,11 @@ class general extends Y
 
 
 
-    if ($this->pagearray[$index]) {
+    if (isset($this->pagearray[$index])) {
 
       $start = $this->pagearray[$index][$this->pagekey];
 
-      if ($this->pagearray[$index2]) {
+      if (isset($this->pagearray[$index2])) {
 
         $array = array_column($this->pagearray,$this->pagekey);
         $start2= array_slice($array,$index,$this->page_size);
@@ -406,7 +409,7 @@ class general extends Y
 
     $end = $thispage * $this->page_size;
 
-    if (!$start2) {
+    if (!isset($start2)) {
       $in = $start;
     }
     else {
@@ -524,10 +527,10 @@ class general extends Y
     $url = geturl($agrs, $a);
     Y::loadTool('page');
     $pagearray['total'] = $num;
-    $pagearray['szie'] = $pagearray['szie'] ? $pagearray['szie'] : $this->page_size;
+    $pagearray['szie'] = isset($pagearray['szie']) ? $pagearray['szie'] : $this->page_size;
     $pagearray['pagenum'] = $this->_thispage();
     TPL::assign(array('pagearray'=> $pagearray,'pagesize' =>$sums));
-    $pages = $start;
+//    $pages = $start;
 
     $page  = YPage::admin($num, $pagearray['szie'], $pagearray['pagenum'], $url, $maxpage);
 

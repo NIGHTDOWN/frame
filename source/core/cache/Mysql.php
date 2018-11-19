@@ -18,37 +18,9 @@ class Mysql
     function _unSerialize($string)
     {
     	return unserialize($string);
-        /*if (!empty($string)) {
-            if (strtolower($this->charset) == 'utf-8') {
-                return $this->_utf_unserialize($string);
-
-            }else {
-                return $this->_gbk_unserialize($string);
-            }
-        }else {
-            return '';
-        }*/
+       
     }
-    private
-    function _utf_unserialize($serial_str)
-    {
-        /*$serial_str = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'",
-            $serial_str);*/
-             $serial_str = preg_replace_callback('!s:(\d+):"(.*?)";!s', function($s){return "s:".strlen($s[2]).":\"".$s[2]."\";";},
-            $serial_str);
-        $serial_str = str_replace("\r", "", $serial_str);
-        return @unserialize($serial_str);
-    }
-    private
-    function _gbk_unserialize($serial_str)
-    {
-        /*$serial_str = preg_replace('!s:(\d+):"(.*?)";!se', '"s:".strlen("$2").":\"$2\";"',
-            $serial_str);*/
-            $serial_str = preg_replace_callback('!s:(\d+):"(.*?)";!s', function($s){return "s:".strlen($s[2]).":\"".$s[2]."\";";},
-            $serial_str);
-        $serial_str = str_replace("\r", "", $serial_str);
-        return @unserialize($serial_str);
-    }
+   
     public
     function __construct($table=null,$key=null,$value=null,$timeout = null,$charset='utf-8')
     {
@@ -103,11 +75,13 @@ class Mysql
         $bool = $db->t($this->table);
         
         $bool=$bool->w($where)->s(1);
-       
+      
         if ($bool && $bool[$this->value]!='') {
             $data       = $bool[$this->value];
         
-            $cache_data = $this->_unSerialize(base64_decode(($data)));
+            $cache_data = $this->_unSerialize(base64_decode($data));
+           
+      
             list($bool,$data)   = $this->_cehck($cache_data);
             if(!$bool){
             	$this->del($name);

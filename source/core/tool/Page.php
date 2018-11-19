@@ -2,7 +2,7 @@
 
 
 namespace ng169\tool;
-
+use ng169\tool\Filter as YFilter;
 checktop();
 class Page{
     
@@ -88,7 +88,9 @@ class Page{
         else {
           //  $show_page = "<span>记录：{$num}&nbsp;&nbsp;</span>";
         }
+        if(isset($show_page))
         return $show_page;
+        return false;
     }
 
 

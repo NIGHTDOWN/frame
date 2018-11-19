@@ -1,4 +1,6 @@
-<?php /* "/tpl/templets/default/foot.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 17:33:41 �й���׼ʱ�� */ ?>
+<?php /* "ngtpl[start]:/tpl/templets/default/foot.html:[end]" 
+
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
 
 <div class="footer fn-clear">
     <div class="footer_1">

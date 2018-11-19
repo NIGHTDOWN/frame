@@ -4,6 +4,7 @@ use ng169\Y;
 use ng169\tool\Out as YOut;
 use ng169\tool\Url as YUrl;
 use ng169\lib\Lang;
+
 @checktop();
 function T($name){
 	return Y::table($name);
@@ -23,8 +24,10 @@ function S($name, $type){
 	return Y::service($name, $type);
 }
 function G($arr,$data=null){
-	return Y::getparm($arr,$data);
-
+	/*return Input($arr$arr,$data)->get();*/
+	/*return ng169\Y::getparm($arr,$data);*/
+	$input=new ng169\service\Input($arr,$data);
+return $input;
 }
 function pay($orderid,$model,$api){
 	$apiob = Y::loadapi('payapi');

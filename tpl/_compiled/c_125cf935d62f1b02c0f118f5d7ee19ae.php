@@ -1,4 +1,6 @@
-<?php require_once('D:\work2\source\core\template\src\plugins\modifier.date_format.php'); $this->register_modifier("date_format", "tpl_modifier_date_format");  /* "tpl/templets/default/kb.html" //NG框架模板引擎;仅适用本系统框架; 2018-11-15 17:27:10 �й���׼ʱ�� */ ?>
+<?php require_once('D:\work2\source\core\template\src\plugins\modifier.date_format.php'); $this->register_modifier("date_format", "tpl_modifier_date_format");  /* "ngtpl[start]:tpl/templets/default/kb.html:[end]" 
+
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 11:38:30 */ ?>
 
 <?php $this->assign('kb', \ng169\hook\vo_list("fun=@!getcomment!@ mod=@!index!@ type=@!im!@"));  if (count((array)$this->_vars['kb'])): foreach ((array)$this->_vars['kb'] as $this->_vars['volist']): ?>
 					<li class="fn-clear">

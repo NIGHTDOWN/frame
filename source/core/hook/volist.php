@@ -54,7 +54,7 @@ function vo_list($extracts)
         $field = empty($params['field']) ? null : $params['field'];
         $value = null;
         
-
+	
         if ($mod != null && $type == null) {
 
             $table = T($mod);
@@ -63,7 +63,7 @@ function vo_list($extracts)
             $table = M($mod, $type);
         }
 
-        if (gettype($table) != object) {
+        if ( 'object'!= gettype($table)) {
             error("{$mod}模型调用错误");
         }
         
