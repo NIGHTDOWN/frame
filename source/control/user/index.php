@@ -1,6 +1,8 @@
 <?php
 
+namespace ng169\control\user;
 
+use ng169\control\userbase;
 
 namespace ng169\control\user;
 use ng169\control\userbase;

@@ -6,7 +6,7 @@ define('G_DEBUG',1);#全局调试
 define('G_TEMP_DEBUG',false);#模板调试
 /*define('G_CLEAR_CACHE',1);#强制重新写模版缓存*/
 define('G_DEBUG_PAY_LOG',1);#支付调试日志开关
-define('G_COMPILE_TPL',1);#强制重新更新编译模板,测试环境开启
+define('G_COMPILE_TPL',0);#强制重新更新编译模板,测试环境开启
 
 define('GET_SERVER_DEBUG',0);#显示接收参数name或则映射名
 

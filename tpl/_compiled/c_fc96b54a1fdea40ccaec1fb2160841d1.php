@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/index_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 16:26:18 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 17:01:45 */ ?>
 
 
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>

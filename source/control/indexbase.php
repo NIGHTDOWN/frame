@@ -19,7 +19,7 @@ class indexbase extends general{
 	public $uid = null;
 	public $cpfile = null;
 	public static $city = null;
-   
+   	protected $noNeedLogin = ['*'];//默认全部无须登入
 	private $byword = array(
 		'hits',
 		'addtime',
@@ -267,22 +267,6 @@ class indexbase extends general{
 	public
 	function log($status, $up = null,$where = null){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		M('log','im')->log($status,$up,$where);
 	}
 
@@ -312,7 +296,7 @@ class indexbase extends general{
 
 	public
 	function checkLogin(){
-
+d('check');
 		$userinfo = $this->getcookie();
 
 		if(!empty($userinfo)){
@@ -325,9 +309,10 @@ class indexbase extends general{
 				
 			$userdbinfo = $user->join_table(array('t'=>'merchant','uid','uid'))->set_where($w,'=')->get_one();
 
-d($userdbinfo,1);
 
-			if($userdbinfo[$type[1]] == 0){
+
+
+			/*if($userdbinfo[$type[1]] == 0){
 
 				if(is_array($type[2])){
 					$userdbinfo[$type[0]] = Y::$conf[($type[2][($userdbinfo['gender'] - 1)])];
@@ -336,7 +321,7 @@ d($userdbinfo,1);
 				}
 			}else{
 
-			}
+			}*/
 			if($userdbinfo == null){
 				YOut::redirect(geturl(null,null,'login','index'), 0);
 			}else{

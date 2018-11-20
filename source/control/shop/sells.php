@@ -1,11 +1,13 @@
 <?php
 
 
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 
 
 checktop();
-class control extends shopbase{
+class sells extends shopbase{
 	public
 	function control_comment(){
 		$get=get(array('string'=>array('ordernum'=>1)));

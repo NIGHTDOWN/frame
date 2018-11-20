@@ -1,7 +1,9 @@
 <?php
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 checktop();
-class control extends shopbase
+class shop extends shopbase
 {
     private function get7day_visit()
     {

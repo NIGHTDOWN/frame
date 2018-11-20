@@ -1,11 +1,13 @@
 <?php
 
 
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 
 
 checktop();
-class control extends shopbase{
+class product extends shopbase{
 	private $db_name = 'product';
 	private $key = 'productid';
 	 public function control_del()

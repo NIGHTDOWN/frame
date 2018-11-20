@@ -1,7 +1,9 @@
 <?php
+namespace ng169\control\user;
 
+use ng169\control\userbase;
 checktop();
-class control extends userbase
+class message extends userbase
 {
 
     public function control_run()

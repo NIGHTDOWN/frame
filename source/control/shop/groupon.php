@@ -2,10 +2,12 @@
 
 
 
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 
 checktop();
-class control extends shopbase
+class groupon extends shopbase
 {
 	private $db_name = 'groupon';
 	public function control_box()

@@ -123,20 +123,16 @@ class product extends indexbase
 		else
 		{
 			$ccat = T('product_category')->set_field('catid,catname')->set_where(array('parentid'=>0),'=')->get_all();
-
 		}
-
-
-
 		$thisnum = sizeof($pcat) - 1;
 		if($thisnum <= 0)
-		{
-			
+		{	
 			$this->seoadd('所有商品 - ' .Y::$conf['site_name']);
 		}
 		else
 		{
-			$this->seoadd($pcat[$thisnum]['catname'] ,$pcat[$thisnum]['metakeyword'],$ccat[$thisnum]['metadesc']);
+		
+			$this->seoadd(@$pcat[$thisnum]['catname'] ,@$pcat[$thisnum]['metakeyword'],@$ccat[$thisnum]['metadesc']);
 		}
 
 		$where['shelves'] = 1;

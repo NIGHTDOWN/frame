@@ -12,12 +12,11 @@ function url($params)
 	
     if (!empty($params)) {
         @extract($params);
-        $source=$params['source'];
-        $args = $params['args']?$params['args']:$params['agrs'];
-       
-         $args1 = $params['args1']?$params['args1']:$params['agrs1'];
-          $args2 = $params['args2']?$params['args2']:$params['agrs2'];
-        $filter=$params['filter'];
+        $source=@$params['source'];
+        $args = isset($params['args'])?$params['args']:''; 
+        $args1 = isset($params['args1'])?$params['args1']:'';
+        $args2 = isset($params['args2'])?$params['args2']:'';
+        $filter=@$params['filter'];
         $filter=tplarray($filter);
         $args=tplarray($args);
         $args=$args?$args:array();
@@ -48,10 +47,10 @@ function url($params)
          	
             $args=array_merge($args2,$args);
         }
-        $action = (trim($params['action']));
-        $mod = (trim($params['mod']));
-        $type = (trim($params['group']));
-        $ip = (trim($params['ip']));
+        $action = (trim(@$params['action']));
+        $mod = (trim(@$params['mod']));
+        $type = (trim(@$params['group']));
+        $ip = (trim(@$params['ip']));
         
         return YUrl::url($args, $action, $mod, $type,$ip);
     }

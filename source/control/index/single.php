@@ -9,6 +9,7 @@ use ng169\control\indexbase;
 checktop();
 
 class single extends indexbase{
+	protected $noNeedLogin = ['*'];
 	public function control_show(){
 		$w=get(array('int'=>array('abid'=>1)));
 		$this->vlog($this->get_userid());

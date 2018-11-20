@@ -1,12 +1,12 @@
 <?php
 
+namespace ng169\control\user;
 
-
-
+use ng169\control\userbase;
 
 checktop();
 
-class control extends userbase{
+class upimg extends userbase{
 	private $dir_base = "data/attachment/";
 	private $config=array('filetype'=>'','upfilepath'=>'','upfilesize'=>'');
     

@@ -2,10 +2,12 @@
 
 
 
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 
 checktop();
-class control extends shopbase{
+class category extends shopbase{
 	public
 	function control_product(){
 		

@@ -2,10 +2,12 @@
 
 
 
+namespace ng169\control\user;
 
+use ng169\control\userbase;
 
 checktop();
-class control extends userbase{
+class comment extends userbase{
 
 	public
 	function control_run(){

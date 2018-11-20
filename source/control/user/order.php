@@ -1,5 +1,9 @@
-<?php checktop();
-class control extends userbase
+<?php 
+namespace ng169\control\user;
+
+use ng169\control\userbase;
+checktop();
+class order extends userbase
 {
     public function control_applytk()
     {}

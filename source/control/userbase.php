@@ -16,6 +16,7 @@ class userbase extends general
 {
     private $pagesize = 15;
     public $tpl_path = 'tpl/user';
+    	protected $noNeedLogin = [];//默认全部要登入
     public function _getuserid()
     {
         $userid = parent::$wrap_user['uid'];

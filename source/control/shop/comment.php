@@ -1,11 +1,13 @@
 <?php
 
 
+namespace ng169\control\shop;
 
+use ng169\control\shopbase;
 
 
 checktop();
-class control extends shopbase{
+class comment extends shopbase{
 
 	public
 	function control_run(){

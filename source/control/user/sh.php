@@ -1,11 +1,13 @@
 <?php
 
 
+namespace ng169\control\user;
 
+use ng169\control\userbase;
 
 
 checktop();
-class control extends userbase{
+class sh extends userbase{
 
 	public
 	function control_apply(){
