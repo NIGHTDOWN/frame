@@ -23,7 +23,7 @@ class login extends Y {
 			$status = 0;
 			$mark = '密码错误!';
 			
-		} elseif ($admin_db_data['adminstatus'] == 1)
+		} elseif (1 == @$admin_db_data['adminstatus'])
 		{
 			$status = 0;
 			$mark = '帐号已经被锁定!';
@@ -36,7 +36,7 @@ class login extends Y {
             
 			parent::$wrap_admin = $admin_db_data;
 		}
-    
+    if(!isset($mark))$mark='';
         M('log','am')->log($status,$where,null,null,$mark);
         return array('flag'=>$status,'mark'=>$mark);
     }

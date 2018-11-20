@@ -4,7 +4,12 @@
 
 namespace ng169\control;
 use ng169\control\general;
-
+use ng169\Y;
+use ng169\TPL;
+use ng169\tool\Out as YOut;
+use ng169\tool\Request as YRequest;
+use ng169\tool\Cookie as YCookie;
+use ng169\tool\Url as YUrl;
 checktop();
 im(CONTROL.'public/night.php');
 class userbase extends general
@@ -204,7 +209,7 @@ class userbase extends general
     }
     public function checkLogin()
     {
-        if(Y::$conf['closesite']){
+        if(isset(Y::$conf['closesite'])){
             YOut::redirect(geturl(null,null,'login','index'), 0);
         }
         

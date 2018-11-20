@@ -26,16 +26,12 @@ class user extends adminbase
 			'address',
 			'headimg',
 		),        );
-	public
-	function control_clearmp()
-	{
-		T('user')->update(array('mp'=>0),array());
-		msg('清空完毕');
-	}
+	
 
 	public
 	function control_run()
 	{
+		
 		$c     = D_MEDTHOD;    $a     = D_FUNC;
 		$model = T($this->db_name)->order_by(array('f'=>'uid','s'=>'down'));
 		$model     = $this->init_where($model);
@@ -295,24 +291,17 @@ class user extends adminbase
 
 		$w = array($this->key=> 1);
 		$where = G(array('array'=> $w))->get();
-		$where1 = array_merge($where,array('status'=>0));
+		/*$where1 = array_merge($where,array('status'=>0));*/
 
-		$in = T('in')->get_one($where1);
-		if($in)
-		{
-			error('用户还有未完成的提款订单');
-		}
-		$in = T('out')->get_one($where1);
-		if($in)
-		{
-			error('用户还有未完成的付款款订单');
-		}
+		$in = T($this->db_name)->get_one($where);
+		
+		
 
-		if(sizeof($where) == 0)
+		if(sizeof($in) == 0)
 		{
-			$where = G(array('int'=> $w))->get();
+			error('用户不存在');
 		}
-		T($this->db_name)->delfile($where,array('headimg'));
+		/*T($this->db_name)->delfile($where,array('headimg'));*/
 		$model = T($this->db_name)->del($where);
 		M('log','am')->log($model, $where);
 		out('删除成功',null,$model);

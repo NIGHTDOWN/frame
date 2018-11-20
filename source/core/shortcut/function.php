@@ -3,6 +3,8 @@
 use ng169\Y;
 use ng169\tool\Out as YOut;
 use ng169\tool\Url as YUrl;
+use ng169\tool\Init as YInit;
+use ng169\tool\Session as YSession;
 use ng169\lib\Lang;
 
 @checktop();
@@ -89,14 +91,14 @@ function gourl($url){
 
 
 function load_mod($mod_dir){
-	Y::loadTool('init');
+/*	Y::loadTool('init');*/
  
 	return  YInit::make_conf_file($mod_dir);
 }
 
 function get_mod($mod_dir){
     
-	Y::loadTool('init');
+	/*Y::loadTool('init');*/
 	$b=YInit::load($mod_dir);
 	if(!$b){
 		return  load_mod($mod_dir);

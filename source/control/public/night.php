@@ -5,7 +5,8 @@ use ng169\TPL;
 use ng169\service\Output;
 use ng169\tool\Request as YRequest;
 use ng169\tool\Page as YPage;
-
+use ng169\tool\Cookie as YCookie;
+use ng169\tool\Out as YOut;
 checktop();
 
 class general extends Y
@@ -246,7 +247,7 @@ class general extends Y
   public function init_where($table, $mapping = null)
   {
 
-    if ($_POST['sflag'] || $_GET['sflag']) {
+    if (isset($_POST['sflag']) || isset($_GET['sflag'])) {
       unset($_POST['sflag']);
       unset($_GET['sflag']);
 
@@ -300,14 +301,11 @@ class general extends Y
           }
         }
 
-        if ($w['alias'] && $w['catid'] == null) {
+        if (isset($w['alias']) && @$w['catid'] == null) {
 
         }
        
-        if ($w['catid']) {
-
        
-        }
         $mian = $table->get_field(0);
         $sw   = G(array('string' => array('word')))->get();
 
@@ -317,7 +315,7 @@ class general extends Y
 
         parent::$wrap_where = $w;
 
-        $var_array  = array('where'=> $w,'word' => $sw['word']);
+        $var_array  = array('where'=> $w,'word' => @$sw['word']);
         TPL::assign($var_array);
       }
       return $table;

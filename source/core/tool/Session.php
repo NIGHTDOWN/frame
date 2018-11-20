@@ -3,7 +3,7 @@
 
 
 namespace ng169\tool;
-
+use ng169\tool\Filter as YFilter;
 checktop();
 class Session
 {

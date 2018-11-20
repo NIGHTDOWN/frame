@@ -3,6 +3,7 @@
 
 namespace ng169\control\index;
 use ng169\control\indexbase;
+use ng169\tool\Request as YRequest;
 
 
 

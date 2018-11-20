@@ -72,11 +72,12 @@ class Page{
                         "<a href='{$mpurl}page{$fh}{$pages}' class='p_last' />&nbsp;</a>&nbsp;";
                 }
             }
-           
+           $block_sl='';
             if($pages>$maxpage*2 && $curr_page<90){
 				 $block_sl = "<a href='###' class='p_slh' />...</a>&nbsp;".
                         "<a href='{$mpurl}page{$fh}100' class='p_100' />100</a>&nbsp;";
 			}
+			$show_page='';
             #showpage
 //            $show_page = "<span>记录：{$num}&nbsp;&nbsp;页次：{$curr_page}/{$pages}&nbsp;&nbsp;&nbsp;</span>";
             //$show_page = "<span>记录：{$num}&nbsp;&nbsp;页次：{$curr_page}/{$pages}&nbsp;&nbsp;&nbsp;</span>";

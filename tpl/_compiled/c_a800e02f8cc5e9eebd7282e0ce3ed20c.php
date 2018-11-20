@@ -1,6 +1,6 @@
-<?php require_once('D:\work2\source\core\template\src\plugins\modifier.date_format.php'); $this->register_modifier("date_format", "tpl_modifier_date_format");  /* "ngtpl[start]:tpl/templets/default/purchase_detail.html:[end]" 
+<?php /* "ngtpl[start]:tpl/templets/default/product_detail.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 15:30:02 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 10:22:43 */ ?>
 
   <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['indextpl']."phead.html", array());
@@ -72,21 +72,12 @@ unset($_templatelite_tpl_vars);
 									
 										<li>
 											<span>价格</span>
-											<strong class="del">
-												<em class="rmb"><?php echo $this->_vars['config']['currency']; ?>
-</em>
-												<em class="rmb-num"><?php  echo$this->_vars['data']['price']/100; ?></em>
-											</strong>
-										</li>
-										<li>
-											<span>价格</span>
 											<strong class="promo-price">
 												<em class="rmb"><?php echo $this->_vars['config']['currency']; ?>
 </em>
-												<em id="price" class="rmb-num"><?php  echo $this->_vars['data']['gprice']/100; ?></em>
+												<em id="price" class="rmb-num"><?php  echo $this->_vars['data']['price']/100; ?></em>
 											</strong>
 										</li>
-										
 										<li>
 											<span>配送</span>
 											<p>
@@ -115,22 +106,7 @@ unset($_templatelite_tpl_vars);
 											</div>
 										</li>
 									</ul>
-									<?php if ($this->_vars['data']['gcheck'] == 1): ?>
-									<ul class="promo-meta clearfix">
-										<li><span>开始时间：</span></li>
-										<li>
-											<strong style="font-size:16px;"><?php echo $this->_run_modifier($this->_vars['data']['gstime'], 'date_format', 'plugin', 1, "%Y-%m-%d %H:%M:%S"); ?>
- </strong>
-										</li>
-<li><span>结束时间：</span></li>
-										<li>
-											
-											
-											<strong style="font-size:16px;"> <?php echo $this->_run_modifier($this->_vars['data']['getime'], 'date_format', 'plugin', 1, "%Y-%m-%d %H:%M:%S"); ?>
-</strong>
-										</li>
-									</ul>
-									<?php endif; ?>			
+												
 									<div class="buy_box clearfix">
 										<form id="form" onsubmit="return buy()" action="<?php echo \ng169\hook\url(array('mod' => 'buy'), $this);?>" method="post">
 											<input name="spec" type="hidden" value="">
@@ -285,8 +261,7 @@ res/ico/rz.png"/></b>
 										<?php endif; ?>
 											<?php if ($this->_vars['data']['bzjcash'] > 0): ?>
 											<span title="已缴纳<?php echo $this->_vars['data']['bzjcash']; ?>
-元保证金"><?php echo $this->_vars['data']['bzjcash']; ?>
- 元</span>
+元保证金"><?php  echo $this->_vars['data']['bzjcash']/100; ?> 元</span>
 											<?php endif; ?>
 										</dd>
 									</dl>
@@ -377,7 +352,7 @@ res/ico/rz.png"/></b>
 								</div>
 								<div class="p-name"><a target="_blank" href="<?php echo \ng169\hook\url(array('mod' => 'product','action' => 'detail','args' => "productid:" . $this->_vars['volist']['productid'] . ""), $this);?>"> <?php echo $this->_run_modifier($this->_vars['volist']['productname'], 'tostr', 'PHP', 1); ?>
 </a></div>
-								<div class="p-price"><strong><?php echo $this->_vars['volist']['currency'];   echo $this->_vars['volist']['price']/100; ?></strong></div>
+								<div class="p-price"><strong><?php echo $this->_vars['volist']['currency'];   echo  $this->_vars['volist']['price']/100; ?></strong></div>
 							</li>
 <?php endforeach; endif; ?>
 							

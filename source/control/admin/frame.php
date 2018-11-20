@@ -26,7 +26,8 @@ class frame extends adminbase
 		$model = parent::model('index', 'am');
 		$data = $model->doGetSysData();
 		unset($model);
-		$var_array = array('count' => $count, 'sysdata' => $data,'sockport'=>DB_SOCKPOST);
+		$var_array = array('count' => @$count, 'sysdata' => $data,'sockport'=>DB_SOCKPOST);
+		
         $this->view('',$var_array);
 	}
 }

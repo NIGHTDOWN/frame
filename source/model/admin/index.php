@@ -3,6 +3,7 @@
 
 namespace ng169\model\admin;
 use ng169\Y;
+use ng169\tool\Request as YRequest;
 
 
 checktop();

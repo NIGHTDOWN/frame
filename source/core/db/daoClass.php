@@ -346,9 +346,10 @@ class daoClass
 
       break;
       case 2:
-      $sql = str_replace($this->f, 'count(*)', $sql);
-      $sql = preg_replace("/select([\s\S]*?)from/is", "select count(*) from", $sql);
-      $ret = $this->_db->query($sql);
+      $sql = str_replace($this->f, 'count(*) as num', $sql);
+      $sql = preg_replace("/select([\s\S]*?)from/is", "select count(*) as num from", $sql);
+      $ret = $this->_db->getone($sql);
+      $ret=$ret['num'];
       break;
       case 3:
       $sql = $this->t;
@@ -678,7 +679,7 @@ class daoClass
   */
   public function getfiled($p = 1)
   {
-
+	
     if ($this->notgetkey) {
       return false;
     }
@@ -692,9 +693,10 @@ class daoClass
     $b = array();
     if ($p == 1) {
       $sql = "select * from " . $this->tablename . ' as v ' . $this->j . ' limit  1';
-      $ar  = $this->_db->query($sql,1);
+      $ar  = $this->_db->getone($sql);
 
     }
+    
     if ($p == 1 && is_array($ar)) {
       foreach ($ar as $key => $v) {
         if (!in_array($key, $b)) {
@@ -743,10 +745,12 @@ class daoClass
       $data = $this->_db->query($sql);
       $cache->set($index,$data);
     }
+   /* d($data);*/
     return $data;
   }
   public function f($p = 1)
   {
+  
     return $this->getfiled($p);
   }
   /**

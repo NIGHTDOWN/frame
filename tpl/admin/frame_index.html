@@ -88,14 +88,15 @@
           
         <ul class="oe_leftmenu" style="margin-top:15px;">
             <!--{foreach $tpldata as $yy=>$volist2}-->
-            
-             <!--{if vo_list("mod={power} type={am} fun={checkuser} param1={$volist2.mod+$volist2.action}")}-->
+            <!--{assign var="bool" vo_list("mod={power} type={am} fun={checkuser} param1={$volist2.mod+$volist2.action}")}-->
+             <!--{if $bool}-->
                 <li class="oe_submenu">
                 <ul>
                     <li class="sub_index"><i class="oe_mico_<!--{$sy+1}-->_<!--{$yy+1}-->"></i><a target="main" href="javascript:;"><!--{$volist2.catname}--></a><span></span></li>
                     <!--{assign var="tpldata2" vo_list("mod={backstage_menu} fun={get_all} orderby={s:up,f:orders} array={depth:3,flag:0,parentid:{$volist2.catid}}")}-->
                     <!--{foreach $tpldata2 as $i=>$volist3}-->
-                  <!--{if vo_list("mod={power} type={am} fun={checkuser} param1={{$volist3.mod}+{$volist3.action}}")}-->
+                    <!--{assign var="bool" vo_list("mod={power} type={am} fun={checkuser} param1={{$volist3.mod}+{$volist3.action}}")}-->
+                  <!--{if $bool}-->
                     <li onclick="acls('oe_mon',$(this));" class="oe_nextli <!--{if $i==0}-->oe_mon<!--{/if}-->   "><label></label><a target="main" href='<!--{url group={admin} mod={$volist3.mod} action={$volist3.action} }-->'>        <!--{$volist3.catname}--></a></li>
                <!--{/if}-->
                     <!--{/foreach}-->

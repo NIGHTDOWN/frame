@@ -6,6 +6,7 @@ namespace ng169\control\admin;
 
 use ng169\control\adminbase;
 use ng169\Y;
+use ng169\tool\Request as YRequest;
 checktop();
 class login extends adminbase
 {

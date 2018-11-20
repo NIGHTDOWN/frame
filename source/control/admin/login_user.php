@@ -4,7 +4,9 @@
 namespace ng169\control\admin;
 
 use ng169\control\adminbase;
-
+use ng169\Y;
+use ng169\tool\Cookie as YCookie;
+use ng169\tool\Out as YOut;
 checktop();
 
 class login_user extends adminbase

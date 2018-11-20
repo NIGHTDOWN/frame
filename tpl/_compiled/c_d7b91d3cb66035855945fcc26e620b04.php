@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/admin/login_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-19 17:18:59 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 09:15:52 */ ?>
 
 <!DOCTYPE html>
 <html>

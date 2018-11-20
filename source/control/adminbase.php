@@ -6,6 +6,7 @@
 namespace ng169\control;
 use ng169\control\general;
 use ng169\TPL;
+use ng169\tool\Cookie as YCookie;
 checktop();
 
 im(CONTROL.'public/night.php');
@@ -72,7 +73,7 @@ class adminbase extends general{
 			if($db_data == null){
 				YOut::redirect(geturl(null,'run','login','admin'));
 			}
-			if($admin_cookie['password'] != $db_data['password'] || $db_data['adminstatus'] ==
+			if($admin_cookie['password'] != $db_data['password'] || @$db_data['adminstatus'] ==
 				'1'){
 				YOut::redirect(geturl(null,'run','login','admin'));
 			} else{

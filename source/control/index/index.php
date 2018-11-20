@@ -84,8 +84,9 @@ class index extends indexbase
   {
     if (YUrl::ismoible()) {
       $data = M('index','im')->get3();
-      echo json_encode($data);
-      die();
+      /* echo json_encode($data);
+      die();*/
+      Output::out($data);
     }
     else {
       $this->view('hotsell');
@@ -102,8 +103,7 @@ class index extends indexbase
       $where = array('shelves'=>1,'status' =>0,'pflag'  =>1);
       $s = array($get['s'] * $page,$get['s'] * $page + $page);
       $data = T('product')->set_where($where)->set_limit($s)->order_by(array('s'=>'down','f'=>'productid'))->get_all();
-      echo json_encode($data);
-      die();
+      Output::out($data);
     }
     else {
       echo 0;
@@ -117,7 +117,7 @@ class index extends indexbase
 
 
     if (YUrl::isAjax()) {
-      $get = get(array('int'=>array('logid'=>1,'type' )));
+      $get = get(array('int'=>array('logid'=>1,'type'   )));
       M('vlog','im')->settime($get['logid'],$get['type']);
     }
     else {
@@ -127,36 +127,36 @@ class index extends indexbase
   }
   public function control_getad()
   {
-  	
+
     $id = get(array('string'=>array('id'=>1)),array('广告标识'));
-   
+
     if ($id['id']) {
       $ad = \ng169\hook\get_ads($id['id']);
 
       if ($ad) {
-       
-        Output::out(json_encode($ad));
+
+        Output::out(($ad));
       }
- 
+
     }
-     
-   Output::out('');
-   
+
+    Output::out('');
+
   }
-    public function control_getads()
+  public function control_getads()
   {
-  	
+
     $id = get(array('string'=>array('id'=>1)),array('广告标识'));
-   $outs=array();
+    $outs = array();
     if ($id['id']) {
-    	$ids=explode(',',$id['id']);
-    	foreach($ids as $id){
-			$outs[$id]=\ng169\hook\get_ads($id);
-		}
+      $ids = explode(',',$id['id']);
+      foreach ($ids as $id) {
+        $outs[$id] = \ng169\hook\get_ads($id);
+      }
     }
-     
-   Output::out(json_encode($outs));
-   
+
+    Output::out(($outs));
+
   }
   public function control_cate_getad()
   {
@@ -167,18 +167,13 @@ class index extends indexbase
       $ad = \ng169\hook\get_ads($id['id']);
 
       if ($ad) {
-        echo json_encode($ad);
-      }
-      else {
-
-        return false;
+        Output::out($ad);
       }
 
-      return true;
+      Output::out('');
+
     }
-    else {
-      return false;
-    }
+
   }
 }
 ?>
