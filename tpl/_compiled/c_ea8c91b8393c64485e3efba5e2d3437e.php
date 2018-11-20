@@ -1,6 +1,6 @@
 <?php require_once('D:\work2\source\core\template\src\plugins\modifier.date_format.php'); $this->register_modifier("date_format", "tpl_modifier_date_format");  /* "ngtpl[start]:/tpl/templets/default/pmenu.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 10:22:43 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 10:29:48 */ ?>
 
 		
 	<script type="text/javascript">

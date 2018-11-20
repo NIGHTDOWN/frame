@@ -325,7 +325,7 @@ class indexbase extends general{
 				
 			$userdbinfo = $user->join_table(array('t'=>'merchant','uid','uid'))->set_where($w,'=')->get_one();
 
-
+d($userdbinfo,1);
 
 			if($userdbinfo[$type[1]] == 0){
 

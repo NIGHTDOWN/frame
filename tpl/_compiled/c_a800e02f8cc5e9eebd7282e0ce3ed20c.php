@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/product_detail.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 10:22:43 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 10:29:48 */ ?>
 
   <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['indextpl']."phead.html", array());

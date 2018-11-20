@@ -1,6 +1,6 @@
 <?php require_once('D:\work2\source\core\template\src\plugins\modifier.date_format.php'); $this->register_modifier("date_format", "tpl_modifier_date_format");  /* "ngtpl[start]:tpl/templets/default/article_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 09:58:29 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 11:08:18 */ ?>
 
   <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['indextpl']."head.html", array());
