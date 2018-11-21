@@ -41,17 +41,13 @@ class index extends Y
 		
 		Y::$cache->set($name,$c,0);
 		}
- 	
-
+ 
  	if(!$c)return false;
- 	$where=array('shelves'=>1,'status'=>0,'pflag'=>1);
- 	
+ 	$where=array('shelves'=>1,'status'=>0,'pflag'=>1);	
  	$hot= T('product')->order_by(array('f'=>'sells','s'=>'down'))->set_limit(3)->set_global_where('catid in('.implode(',',$c).')')->set_field('productname,productid,smallimg1')->get_all($where);
- 	 
  	$data['hot']=$hot;
  	$cat=T('product_category')->set_field('catid,catname')->set_limit(6)->get_all(array('catid'=>$c));
- 	$data['cat']=$cat;
- 	
+ 	$data['cat']=$cat;	
  	return $data;
  }
  public function getcateproduct($catid){

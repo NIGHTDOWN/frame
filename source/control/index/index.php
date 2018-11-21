@@ -61,16 +61,16 @@ class index extends indexbase
   }
   public function control_gethot()
   {
-    $name = "pc_hot_category";
+   /* $name = "pc_hot_category";
     list($bool,$data) = Y::$cache->get($name);
     if ($bool) {
       $cat = $data;
       //先读缓存
     }
-    else {
+    else {*/
       $cat = T('product_category')->set_where('depth=1 and flag=0 and elite=1')->order_by(array('f'=>'orders','s'=>'down'))->set_field('catid,catname,depth,alias')->get_all();
-      Y::$cache->set($name,$cat,0);
-    }
+    /*  Y::$cache->set($name,$cat,0);*/
+   /* }*/
     $this->view('hot',array('data'=>$cat));
 
   }

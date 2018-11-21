@@ -91,7 +91,7 @@ class Dbsql
 
     } catch (\Exception $e) {
 
-      error($e);
+      error($e->getMessage().'【'.$sql.'】');
     }
 
     return $data;

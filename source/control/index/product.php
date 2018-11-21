@@ -12,8 +12,7 @@ class product extends indexbase
 {
 	public function control_run()
 	{
-		// $this->vlog($this->get_userid());
-		// $this->view(null,$array);
+
 		gourl(geturl(null,'category','product'));
 	}
 
@@ -150,6 +149,7 @@ class product extends indexbase
 		{
 			$where['price'] = array('1'=>$get['price2']);
 		}
+		
 		/*$where['avalue']=$searchattr;*/
 		$insert['address']='';
 //		$insert['address'] = $address['province'].$address['city'].$address['area'].$address['address'];
@@ -163,16 +163,19 @@ class product extends indexbase
 
 		$attr = get(array('string'=>array('att1','att2','att3','att4','att5')));
 		$model = T('product')->set_field('v.*,merchantname')->order_by(array('f'=>'productid','s'=>'down'))->set_global_where($where)->join_table(array('t'=>'merchant','muid','muid'),1)->join_table(array('t'=>'product_attr','productid','productid'),1);
+		
 		foreach($attr as $v=>$list){
 			if($list=='null'){
 				unset($attr[$v]);
 			}
 		}
 		$model = $model->set_where($attr,'=');
+		
 		if(isset($c))
 		{
 
-			$model = $model->set_where('v.catid in('.implode(',',$c).')');
+//			$model = $model->set_where('v.catid in('.implode(',',$c).')');
+			$model = $model->set_where(['catid'=>$c],'in');
 		}
 		if(isset($get['word']))
 		{

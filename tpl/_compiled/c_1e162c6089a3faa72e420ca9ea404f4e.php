@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/admin/frame_index.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-21 13:42:52 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-21 15:47:49 */ ?>
 
 <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['admintpl']."top/headerjs.html", array());
@@ -86,7 +86,7 @@ unset($_templatelite_tpl_vars);
                         <a class="oe_la_ico3" href="<?php echo \ng169\hook\url(array('action' => " updatecache",'mod' => "siteset",'group' => "admin"), $this);?>">更新数据缓存</a>
                     </div>
                 </li>
-                <li class="oe_top_con4"> <a href="<?php echo $this->_vars['siteurl']; ?>
+                <li class="oe_top_con4"> <a href="<?php echo $this->_vars['config']['site_url']; ?>
 " target="_blank">网站首页</a> </li>
                 <div class="clear"></div>
             </ul>

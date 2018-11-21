@@ -67,7 +67,6 @@ class daoClass
     else {
       array_push($this->loop, $val);
     }
-
     if ($parent == null) {
       $parent = 'parentid';
     }
@@ -93,15 +92,12 @@ class daoClass
       }
     }
     else {
-
       return $info;
     }
-
     return $info_back;
   }
   public function get_child($index, $val = 0, $parent = null, $cachebool = 1)
   {
-
     if ($index) {
       $val       = intval($val);
       $cachename = $this->tablename . "_tree" . $val;
@@ -349,7 +345,7 @@ class daoClass
       $sql = str_replace($this->f, 'count(*) as num', $sql);
       $sql = preg_replace("/select([\s\S]*?)from/is", "select count(*) as num from", $sql);
       $ret = $this->_db->getone($sql);
-      $ret=$ret['num'];
+      $ret = $ret['num'];
       break;
       case 3:
       $sql = $this->t;
@@ -425,86 +421,7 @@ class daoClass
   public function Gw($where, $operator = null, $type = 1, $andor = 'and', $break =
     0)
   {
-
-    $word = ' ';
-    $w    = null;
-    $z = null;
-
-    $op = $operator;
-    if ($andor == null) {
-      $andor = 'and';
-    }
-    if ($operator == null) {
-      $operator = "=";
-    }
-    $operator = " " . $operator . " ";
-
-    if (is_array($where) && sizeof($where)) {
-      foreach ($where as $key => $w1) {
-
-        $key = $this->fix($key);
-        if (is_array($w1)) {
-
-          switch (sizeof($w1)) {
-            case '0':
-
-            break;
-            case '1':
-            if (isset($w1[0])) {
-              $w .= ' ' . $andor . " {$key}{$operator}'{$w1[0]}'  ";
-            }
-            else {
-              $w .= ' ' . $andor . " {$key}<={$w1[1]}  ";
-            }
-            break;
-            case '2':
-            if ((is_numeric($w1[0]) && is_numeric($w1[1])) && !$break) {
-              $w .= ' ' . $andor . " {$key} " . ' BETWEEN ' . " {$w1['0']} and {$w1['1']} ";
-              break;
-            }
-            default:
-            $andor = 'or';
-            foreach ($w1 as $v) {
-              $z .= " $andor {$key}{$operator}'{$v}'  ";
-            }
-            $z     = trim($z);
-            $z     = trim($z, $andor);
-            $andor = 'and';
-            $z     = " (" . $z . ")";
-            $w .= ' ' . $andor . $z;
-            break;
-          }
-        }
-        else {
-
-          switch (is_numeric($w1)) {
-            case true:
-            $w .= ' ' . $andor . " {$key}{$operator}{$w1}  ";
-            break;
-            case false:
-            if ($op != null) {
-              $w .= ' ' . $andor . " {$key} {$operator} '{$w1}'  ";
-            }
-            else {
-              $w .= ' ' . $andor . " {$key} like '{$w1}%'  ";
-            }
-            break;
-          }
-        }
-
-        $w = trim($w);
-        $w = trim($w, ($andor));
-        $w = " (" . $w . ")";
-      }
-    }
-    else {
-      $w = $where;
-
-    }
-    $w = trim($w);
-    $w = trim($w, $andor);
-    $w = "" . $w . "";
-
+    $w = $this->wherearray($where,$operator);
     if ($type) {
       $this->Gw = $w;
     }
@@ -513,129 +430,137 @@ class daoClass
         $this->Gw .= $w;
       }
       else {
-        $this->Gw .= ' and (' . $w . ') ';
+        $this->Gw .= $andor.'  (' . $w . ') ';
       }
     }
 
     return $this;
   }
+  /**
+  * 设置where
+  * @param undefined $name
+  * @param undefined $val
+  * @param undefined $op
+  *
+  * @return string
+  */
+  private function setstr($name,$val,$op='=')
+  {
 
+    if ($val === '')return false;
+   
+    if (!$name)return false;
+    $name=$this->fix($name);
+    $string = '';
+   
+    switch ($op) {
+      case '':
+      $string = "{$name} = '{$val}'";
+      
+      break;
+      case 'like':
+      $string = "{$name} like \"{$val}%\"";
+      break;
+      case 'in':
+      if (is_array($val)) {
+        $in = implode(',',$val);
+      }
+      $in = trim($val,',');
+     
+      if (!$in)return false;
+      $string = "{$name} in ({$in})";
+      break;
+      case '>=':
+      $string = "{$name} >= '{$val}'";
+      break;
+      case '>':
+      $string = "{$name} > '{$val}'";
+      break;
+      case '<':
+      $string = "{$name} < '{$val}'";
+      break;
+      case '<=':
+      $string = "{$name} <= '{$val}'";
+      break;
+      case 'between':
+      if (is_array($val) && sizeof($val) == 2) {
+        $string = "{$name} between '{$val[0]}' and '{$val[1]}'";
+      }
+      else {
+        $string = "{$name} between ({$val})";
+      }
+
+
+      break;
+      case 'notin':
+      if (is_array($val)) {
+        $in = implode(',',$val);
+      }
+      $in = trim($val,',');
+      if (!$in)return false;
+      $string = "{$name} not in ({$in})";
+      break;
+      case '!=':
+      $string = "{$name} != '{$val}'";
+      break;
+      case '=':
+      $string = "{$name} = '{$val}'";
+      break;
+
+    }
+    
+    return $string;
+  }
+  /**
+  * 查询条件识别
+  * @param undefined $where
+  * @param undefined $type
+  *
+  * @return
+  */
+  private function wherearray($where,$type = '=')
+  {
+  	
+    $wherestr = ' ';
+    $and      = 'and ';
+    if (is_array($where)) {
+      foreach ($where as $index=>$val) {
+      	
+        if ($val !== '') {
+        	
+        	if(is_array($type) && isset($type[$index])){
+				 $str = $this->setstr($index,$val,$type[$index]);
+			}else{
+				if(is_string($type)){
+					$str = $this->setstr($index,$val,$type);
+				}else{
+				$str = $this->setstr($index,$val);	
+				}
+				 
+			}
+			
+        /* $str = $this->setstr($index,$val,$type[$index]);*/
+          if ($str != '') {
+
+            $wherestr .= $and."($str)";
+          }
+
+        }
+      }
+      $wherestr = trim($wherestr,$and);
+
+    }
+    else {
+      $wherestr = $where;
+    }
+    return $wherestr;
+  }
   public function w($where, $operator = null, $type = 1, $andor = 'and', $break =
     0)
   {
 
-    if (is_array($where)) {
-    	/*$where=array_filter($where);*/
-    	foreach($where as $index=>$val){
-			if($val===''){
-				
-				unset($where[$index]);
-			}
-		}
-      if (!sizeof($where)) {
-        return $this;
-      }
-
-      $word = ' ';
-      $w    = null;
-      $z = null;
-      $op = $operator;
-      if ($andor == null) {
-        $andor = 'and';
-      }
-      if ($operator == null) {
-        $operator = "=";
-      }
-      $operator = " " . $operator . " ";
-
-      if (is_array($where) && sizeof($where)) {
-        foreach ($where as $key => $w1) {
-
-          $key = $this->fix($key);
-
-          if (is_array($w1) && $w1) {
-
-            switch (sizeof($w1)) {
-
-              case '1':
-              if (!$break) {
-
-                if (isset($w1[0])) {
-
-                  if ($operator == ' = ') {
-                    $w .= ' ' . $andor . " {$key}>='{$w1[0]}'  ";
-                  }
-                  else {
-                    $w .= ' ' . $andor . " {$key}{$operator}'{$w1[0]}'  ";
-                  }
-                }
-                else {
-                  $w .= ' ' . $andor . " {$key}<={$w1[1]}  ";
-                }
-                break;
-              }
-              case '2':
-              if ((is_numeric($w1[0]) && is_numeric($w1[1])) && !$break) {
-                $w .= ' ' . $andor . " {$key} " . ' BETWEEN ' . " {$w1['0']} and {$w1['1']} ";
-                break;
-              }
-              default:
-
-              foreach ($w1 as $v) {
-                $z .= " or {$key}{$operator}'{$v}'  ";
-
-              }
-              $z = trim($z);
-              $z = trim($z, 'or');
-              $z = " (" . $z . ")";
-
-              if (sizeof($w1) == 1) {
-                $w .= ' ' . $z;
-              }
-              else {
-                $w .= ' ' . $andor . $z;
-              }
-              break;
-            }
-
-          }
-          else {
-
-            switch (is_numeric($w1)) {
-              case true:
-              $w .= ' ' . $andor . " {$key}{$operator}'{$w1}'  ";
-
-              break;
-              case false:
-
-              if ($op != null) {
-                $w .= ' ' . $andor . " {$key} {$operator} '{$w1}'  ";
-              }
-              else {
-                //                $w .= ' ' . $andor . " {$key} like '{$w1} % '  ";
-                $w .= ' ' . $andor . " {$key} = '{$w1}'  ";
-              }
-              break;
-            }
-          }
-
-          if ($w) {
-            $w = trim($w);
-            $w = trim($w, ($andor));
-            $w = " (" . $w . ")";
-          }
-        }
-      }
-
-      $w = trim($w);
-      $w = trim($w, $andor);
-      $w = "" . $w . "";
-
-    }
-    else {
-      $w = $where;
-    }
-
+    $w = $this->wherearray($where,$operator);
+    
     if ($type) {
       $this->w = $w;
     }
@@ -646,7 +571,7 @@ class daoClass
       else {
 
         if ($w) {
-          $this->w .= ' and (' . $w . ') ';
+          $this->w .= $andor.'  (' . $w . ') ';
         }
 
       }
@@ -686,7 +611,7 @@ class daoClass
   */
   public function getfiled($p = 1)
   {
-	
+
     if ($this->notgetkey) {
       return false;
     }
@@ -703,7 +628,7 @@ class daoClass
       $ar  = $this->_db->getone($sql);
 
     }
-    
+
     if ($p == 1 && is_array($ar)) {
       foreach ($ar as $key => $v) {
         if (!in_array($key, $b)) {
@@ -752,12 +677,12 @@ class daoClass
       $data = $this->_db->query($sql);
       $cache->set($index,$data);
     }
-   /* d($data);*/
+    /* d($data);*/
     return $data;
   }
   public function f($p = 1)
   {
-  
+
     return $this->getfiled($p);
   }
   /**
@@ -898,23 +823,16 @@ class daoClass
 
     if (is_array($limit[0])) {
 
-      /*if($limit[0][0]>=$limit[0][1]){
-      $w="($key between {$limit[0][1]} and {$limit[0][0]})";
-      }else{
-      $w="($key between {$limit[0][0]} and {$limit[0][1]})";
-      }*/
+   
       $w = '';
-      /*d($limit);*/
-      /*foreach($limit[0] as $l){
-      $w=$w.",".$l;
-      }*/
+    
       $w = implode(',',$limit[0]);
       $w = trim($w,',');
       $w = trim($w,' ');
 
       $w = "$key in ($w)";
       $this->set_limit_where($w);
-      /*$this->l = '';*/
+
       return $this;
     }
 

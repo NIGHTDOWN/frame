@@ -21,7 +21,7 @@ return  array(
   'tool'               =>ROOT."/source/core/tool/",
   'shortcut'           =>ROOT."/source/core/shortcut/",
   'log'                =>ROOT."/data/log/",
-  'G_siteurl'          =>'http://'.$_SERVER['SERVER_NAME'],
+  'g_siteurl'          =>'http://'.$_SERVER['SERVER_NAME'],
 
   'install'            =>'NG',
 
