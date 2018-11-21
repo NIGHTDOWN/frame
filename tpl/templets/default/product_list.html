@@ -1,87 +1,144 @@
   <!--{include file={$indextpl}"phead.html"}-->
 
 
-  <!--{include file={$indextpl}"pmenu.html"}-->
+<!--{include file={$indextpl}"pmenu.html"}-->
 
 
-		<div class="w">
-          
-        <!--{include file={$indextpl}"pleft.html"}-->  
-	<div id="right"><div class="module_special">
-    <div class="con">
-        <form method="post" action="<!--{url mod='product' args="id:{$data.muid}" action='list'}-->">
-        <div class="search">
-        	<h4><span>所有宝贝</span><s></s></h4>
+<div class="w">
+
+  <!--{include file={$indextpl}"pleft.html"}-->
+  <div id="right">
+    <div class="module_special">
+      <div class="con">
+        <form
+          method="post" action="<!--{url mod='product' args="id:{$data.muid}" action='list'}-->">
+          <div class="search">
+            <h4>
+              <span>
+                所有宝贝
+              </span>
+              <s>
+              </s>
+            </h4>
             <div class="i-con clearfix">
-                <div class="search_form">
-                    <ul class="clearfix"> 
-                        <li class="keyword"><label for="word">关键字：</label><input type="text" value="<!--{$where.word}-->" name="word" id="keyword"></li>
-                        <li class="price"><label for="price">价格：</label> <input type="text" value="<!--{$where.price1}-->" name="price1" id="price1" onkeyup="value=value.replace(/[^\d.]/g,'')"> 到 <input type="text" value="<!--{$where.price2}-->" name="price2" id="price2" onkeyup="value=value.replace(/[^\d.]/g,'')"></li>
-                        <li><button type="submit" class="button">搜索</button></li>
-                    </ul> 
-                </div>
-              <!--{if $pagesize}-->  <div class="search_result">共搜索到<span> <!--{$pagesize}--> </span>个符合条件的商品。</div><!--{/if}-->
+              <div class="search_form">
+                <ul class="clearfix">
+                  <li class="keyword">
+                    <label for="word">
+                      关键字：
+                    </label><input type="text" value="<!--{$where.word}-->" name="word" id="keyword">
+                  </li>
+                  <li class="price">
+                    <label for="price">
+                      价格：
+                    </label><input type="text" value="<!--{$where.price1}-->" name="price1" id="price1" onkeyup="value=value.replace(/[^\d.]/g,'')"> 到 <input type="text" value="<!--{$where.price2}-->" name="price2" id="price2" onkeyup="value=value.replace(/[^\d.]/g,'')">
+                  </li>
+                  <li>
+                    <button type="submit" class="button">
+                      搜索
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <!--{if $pagesize}-->
+              <div class="search_result">
+                共搜索到
+                <span>
+                  <!--{$pagesize}-->
+                </span>个符合条件的商品。
+              </div><!--{/if}-->
             </div>
-    	</div>
-      
+          </div>
+
         </form>
         <div class="filter">
-            <div class="sort">
-                <span>排序:</span>
-                
-                <a class="<!--{if $orderby.f=='sells'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='sells'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:sells"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:sells"}--><!--{/if}-->">销量<em class="icon"></em></a>
-                <a class="<!--{if $orderby.f=='addtime'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='addtime'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:addtime"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:addtime"}--><!--{/if}-->">新品<em class="icon"></em></a>
-                <a class="<!--{if $orderby.f=='price'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='price'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:price"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:price"}--><!--{/if}-->">价格<em class="icon"></em></a>
-                <a class="<!--{if $orderby.f=='collects'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='collects'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:collects"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:collects"}--><!--{/if}-->">人气<em class="icon"></em></a>
-              
-            </div> 
+          <div class="sort">
+            <span>
+              排序:
+            </span>
+
+            <a
+              class="<!--{if $orderby.f=='sells'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='sells'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:sells"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:sells"}--><!--{/if}-->">销量
+              <em class="icon">
+              </em>
+            </a>
+            <a
+              class="<!--{if $orderby.f=='addtime'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='addtime'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:addtime"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:addtime"}--><!--{/if}-->">新品
+              <em class="icon">
+              </em>
+            </a>
+            <a
+              class="<!--{if $orderby.f=='price'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='price'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:price"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:price"}--><!--{/if}-->">价格
+              <em class="icon">
+              </em>
+            </a>
+            <a
+              class="<!--{if $orderby.f=='collects'}--><!--{$orderby.s}--><!--{/if}-->" href="<!--{if $orderby.f=='collects'}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},{$by}:collects"}--><!--{else}--><!--{url mod='product' action='list' args="id:{$where.id},word:{$where.word},price1:{$where.price1},price2:{$where.price2},up:collects"}--><!--{/if}-->">人气
+              <em class="icon">
+              </em>
+            </a>
+
+          </div>
         </div>
-        
+
         <ul class="list product">
-                        <!--{foreach $plist as $volist}-->
-                        <li>
-                <div class="pic">
-                <a target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><img src="<!--{$volist.smallimg1|imgsize:'220,220'}-->" width="220" height="220" alt="<!--{$volist.productname|tostr}-->"></a></div>
-                <h3><a target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}--></a></h3>
-                <p><!--{$config.currency}--><!--{$volist.price/100}--></p>
-            </li>
-<!--{/foreach}-->
-                    </ul>
-    	<div class="page">   <!--{$page}--></div>    
+          <!--{foreach $plist as $volist}-->
+          <li>
+            <div class="pic">
+              <a
+                target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><img src="<!--{$volist.smallimg1|imgsize:'220,220'}-->" width="220" height="220" alt="<!--{$volist.productname|tostr}-->">
+              </a>
+            </div>
+            <h3>
+              <a
+                target="_blank" title="<!--{$volist.productname|tostr}-->" href="<!--{url mod='product' action='detail' args="productid:{$volist.productid}"}-->"><!--{$volist.productname|tostr}-->
+              </a>
+            </h3>
+            <p>
+              <!--{$config.currency}--><!--{$volist.price/100}-->
+            </p>
+          </li>
+          <!--{/foreach}-->
+        </ul>
+        <div class="page">
+          <!--{$page}-->
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="clear">
+  </div>
 </div>
-</div>
-    <div class="clear"></div>
-	</div>
 
-        <script>
-        $(".block_ico,.none_ico").click(function(e){
-        var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
-        var lo = $(this).offset().left
+<script>
+  $(".block_ico,.none_ico").click(function(e){
+      var xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+      var lo = $(this).offset().left
 
-        if($(this).parents("li").find("ul").length > 0)
+      if($(this).parents("li").find("ul").length > 0)
+      {
+        if($(this).parents("li").find("ul").is(":visible"))
         {
-            if($(this).parents("li").find("ul").is(":visible"))
-            {
 
-                $(this).parents("li").find("ul").slideUp()
-                $(this).removeClass("none_ico").addClass("block_ico")
-            }
-            else
-            {
-                $(this).parents("li").find("ul").slideDown()
-                 $(this).removeClass("block_ico").addClass("none_ico")
-            }
+          $(this).parents("li").find("ul").slideUp()
+          $(this).removeClass("none_ico").addClass("block_ico")
         }
-        
-        if(xx*1 - lo*1 < 22)
+        else
         {
-            return false
+          $(this).parents("li").find("ul").slideDown()
+          $(this).removeClass("block_ico").addClass("none_ico")
         }
-    })</script>
+      }
+
+      if(xx*1 - lo*1 < 22)
+      {
+        return false
+      }
+    })
+</script>
 
 
-		  <!--{include file={$indextpl}"pfoot.html"}-->
+<!--{include file={$indextpl}"pfoot.html"}-->
 
 
 </body></html>

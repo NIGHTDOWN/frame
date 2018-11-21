@@ -45,11 +45,15 @@ class Url
     * 在分割后缀
     * 在分割斜杠
     */
-
     $URL = urldecode($_SERVER["REQUEST_URI"]);
     $data= explode('?',$URL);//?后面的已经php识别；
     if (isset($data[0])) {
       $data1 = explode('.',$data[0]);
+     
+      if(isset($data1[1]) && $data1[1]=='php'){
+      	//php脚本模式；不执行url解码
+	  	return false;
+	  }
       if (isset($data1[0])) {
         //反向解析
         $data = explode('/',$data1[0]);

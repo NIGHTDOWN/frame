@@ -8,7 +8,7 @@ use ng169\control\indexbase;
 
 checktop();
 
-class cat extends indexbase
+class cart extends indexbase
 {
   public function control_run()
   {
@@ -24,9 +24,6 @@ class cat extends indexbase
     $get = get(array('int'=>array('cid'=>1)));
     $get['uid'] = $this->get_userid(1);
     $get2 = get(array('int'=>array('nums'=>1)));
-    /*$get['shelves']=1;
-    $get['status']=0;
-    $get['pflag']=1;*/
     if ($get2['nums'] <= 0)error('数量不正确');
     $model = T('cart')->join_table(array('t'=>'product','v.productid','productid'),1)->get_one($get);
     if (!$model)error('记录不存在');
@@ -39,13 +36,10 @@ class cat extends indexbase
     }
     T('cart')->update($get2,$get);
     out($get2['nums'] * $model['nowprice']);
-
-
     $this->view(null,$var_array);
   }
   public function control_del()
   {
-
     $w = array('product_id'=> 1);
     $where = G(array('array'=> $w))->get();
     if (sizeof($where) == 0) {
@@ -53,7 +47,6 @@ class cat extends indexbase
     }
     $where2['cid'] = $where['product_id'];
     $where2['uid'] = $this->get_userid(1);
-
     $model = T('cart')->del($where2);
     M('ucount','im')->delcart($this->get_userid(1),sizeof($where2['cid']));
     out('删除成功');

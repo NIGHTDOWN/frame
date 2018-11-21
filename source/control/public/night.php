@@ -22,14 +22,13 @@ class general extends Y
   */
   public function needlogin()
   {
-    $action=D_FUNC;
-  
-    if (in_array(strtolower($action), $this->noNeedLogin) || in_array('*', $this->noNeedLogin))
-        {
-        	
-            return false;
-        }
-        return true;;
+    $action = D_FUNC;
+
+    if (in_array(strtolower($action), $this->noNeedLogin) || in_array('*', $this->noNeedLogin)) {
+
+      return false;
+    }
+    return true;;
   }
   /**
   * 检查是否需要权限
@@ -38,12 +37,11 @@ class general extends Y
   */
   public function needpower()
   {
- 	$action=D_FUNC;
-    if (in_array(strtolower($action), $this->noNeedPower) || in_array('*', $this->noNeedPower))
-        {
-            return false;
-        }
-        return true;;
+    $action = D_FUNC;
+    if (in_array(strtolower($action), $this->noNeedPower) || in_array('*', $this->noNeedPower)) {
+      return false;
+    }
+    return true;;
   }
   public function vlog($uid = null, $muid = null, $pid = null)
   {
@@ -59,37 +57,37 @@ class general extends Y
   }
   public function seoinit()
   {
-  
-      $this->seo['title'] = @Y::$conf['site']['site_name'];
-    
-   
-      $this->seo['keyword'] = @Y::$conf['site']['site_keywords'];
-    
-   
-      $this->seo['desc'] = @Y::$conf['site']['site_description'];
-    
+
+    $this->seo['title'] = @Y::$conf['site']['site_name'];
+
+
+    $this->seo['keyword'] = @Y::$conf['site']['site_keywords'];
+
+
+    $this->seo['desc'] = @Y::$conf['site']['site_description'];
+
     TPL::assign(array('seo'=> $this->seo));
   }
   public function seoset($title = null, $keyword = null, $desc = null)
   {
-    
-      $this->seo['title'] = $title;
-  
-      $this->seo['keyword'] = $keyword;
-   
-      $this->seo['desc'] = $desc;
-   
+
+    $this->seo['title'] = $title;
+
+    $this->seo['keyword'] = $keyword;
+
+    $this->seo['desc'] = $desc;
+
     TPL::assign(array('seo'=> $this->seo));
   }
   public function seoadd($title = null, $keyword = null, $desc = null)
   {
-   
-      $this->seo['title'] = $title . ' - ' . $this->seo['title'];
-  
-      $this->seo['keyword'] = $keyword . ' - ' . $this->seo['keyword'];
-   
-      $this->seo['desc'] = $desc . ' - ' . $this->seo['desc'];
-   
+
+    $this->seo['title'] = $title . ' - ' . $this->seo['title'];
+
+    $this->seo['keyword'] = $keyword . ' - ' . $this->seo['keyword'];
+
+    $this->seo['desc'] = $desc . ' - ' . $this->seo['desc'];
+
     TPL::assign(array('seo'=> $this->seo));
   }
   public function fix_db_field($data_in_arr = null, $fix_arr = null)
@@ -152,7 +150,7 @@ class general extends Y
   }
   public function view($tplfile = null, $var_array = null, $after_call = null, $cache = null)
   {
-  
+
     if ($tplfile == null) {
       $c = D_MEDTHOD;
       $a = D_FUNC;
@@ -163,7 +161,7 @@ class general extends Y
       $tplfile = "{$c}_{$a}";
     }
     $this->_tplfile = $this->_getTPLFile($tplfile);
-    	
+
     if ($var_array) {
       TPL::assign($var_array);
     }
@@ -183,8 +181,8 @@ class general extends Y
     else {
     }
 
-    $html=TPL::display($this->_tplfile, $cache);
-    
+    $html = TPL::display($this->_tplfile, $cache);
+
     return;
   }
 
@@ -304,12 +302,12 @@ class general extends Y
         if (isset($w['alias']) && @$w['catid'] == null) {
 
         }
-       
-       
+
+
         $mian = $table->get_field(0);
         $sw   = G(array('string' => array('word')))->get();
 
-     
+
 
         $table->set_where($w);
 
@@ -321,34 +319,57 @@ class general extends Y
       return $table;
     }
   }
-
-  public function init_order($table)
+  /**
+  * 排序
+  * @param modelobject $table 模型实例
+  * @param array $filder 排序字段
+  *
+  * @return object 排序模型对象
+  */
+  public function init_order($table,$filder = null)
   {
-    $by = G(array('string' => array('up','down')))->get();
-
-    if ($_POST) {
-      YOut::redirect(geturl(array_merge($_GET, $_POST), D_FUNC, D_MEDTHOD));
+    $by = get(array('string' => array('up','down')));
+    $keyarr=[];
+    /**
+    * 加入可排序字段
+    * 排序字段前缀识别
+    */
+    $bool=($filder != null && is_array($filder));
+    if ($bool) {
+    	foreach($filder as $index=>$string){
+    		$string=explode('.',$string);
+			if(sizeof($string)>1){
+				$keyarr[$index]=$string[1];
+			}else{
+				$keyarr[$index]=$string[0];
+			}
+		}
     }
-    if (sizeof($by) == 1) {
+    else {
+      $keyarr = $table->get_field();
+    }
+	//存在就排序
+    if (sizeof($by) >= 1) {
       foreach ($by as $key => $v) {
-        $keyarr = $table->get_field();
-
-        if (in_array($v, $keyarr)) {
-
-        }
-        else {
+        if (!in_array($v, $keyarr)) {
           return $table;
         }
-
+        if($bool){
+			$index=array_search($v,$keyarr);
+			$orderkey=$filder[$index];
+		}else{
+			$orderkey=$v;
+		}
+		
         switch ($key) {
           case 'up':
-          $word = array('f'=> $v,'s'=> 'up');
+          $word = array('f'=> $orderkey,'s'=> 'up');
           $table = $table->order_by($word);
 
           break;
 
           case 'down':
-          $word = array('f'=> $v,'s'=> 'down');
+          $word = array('f'=> $orderkey,'s'=> 'down');
 
           $table = $table->order_by($word);
           break;
@@ -502,12 +523,13 @@ class general extends Y
       $this->pagestartid = intval($nums[0][$prikey] - 1);
     }
     else {
-    	if(isset($nums[0]) && isset($nums[0][$prikey])){
-			$this->pagestartid = intval($nums[0][$prikey] + 1);
-		}else{
-			$this->pagestartid = 0;
-		}
-      
+      if (isset($nums[0]) && isset($nums[0][$prikey])) {
+        $this->pagestartid = intval($nums[0][$prikey] + 1);
+      }
+      else {
+        $this->pagestartid = 0;
+      }
+
     }
 
     $this->pagearray = $nums;
@@ -533,9 +555,9 @@ class general extends Y
     $pagearray['szie'] = isset($pagearray['szie']) ? $pagearray['szie'] : $this->page_size;
     $pagearray['pagenum'] = $this->_thispage();
     TPL::assign(array('pagearray'=> $pagearray,'pagesize' =>$sums));
-//    $pages = $start;
+    //    $pages = $start;
 
-    $page  = YPage::admin($num, $pagearray['szie'], $pagearray['pagenum'], $url, $maxpage);
+    $page = YPage::admin($num, $pagearray['szie'], $pagearray['pagenum'], $url, $maxpage);
 
     return $page;
   }

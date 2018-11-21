@@ -10,7 +10,7 @@ checktop();
 class cart extends Y
 {
 private function getuid(){
-	$uid=parent::$wrap_user['uid'];
+	$uid=@parent::$wrap_user['uid'];
 	if($uid)return $uid;
 	return false;
 }

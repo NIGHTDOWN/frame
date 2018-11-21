@@ -140,8 +140,6 @@ function getactionname($action,$mod,$mod_dir){
 function __($index){
 	return Lang::get($index);
 }
-
-
 function img($imgstring,$num = null){
 	$imgarr = explode(',',$imgstring);
 	$num    = $num?$num:0;

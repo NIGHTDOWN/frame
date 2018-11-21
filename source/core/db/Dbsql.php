@@ -44,10 +44,12 @@ class Dbsql
       
 	  	$pdostream = $this->link->query($sql);
 	  } catch (\Error $e) {
-	  	error($e);
+	  	error($e->getMessage().'【'.$sql.'】');
+	  	/*error($e);*/
 	  }
-      catch (\Exception $e) {	  	
-	  	error($e);
+      catch (\Exception $e) {
+      	 	error($e->getMessage().'【'.$sql.'】');	  	
+	  	/*error($e);*/
 	  }
       $data      = $pdostream->fetchAll(PDO::FETCH_ASSOC);
       if ($cache) {

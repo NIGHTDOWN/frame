@@ -2,6 +2,7 @@
 namespace ng169;
 use ng169\tool\Filter;
 use ng169\tool\Request;
+use ng169\lib\LANG;
 checktop();
 class APP
 {
@@ -26,22 +27,21 @@ class APP
     $c = Filter::filterXSS(Request::getGpc('c'));
     $m = $m?$m:'index';$c = $c?$c:'index';$a = $a?$a:'run';
 
-/* if (isset(Y::$conf['rewrite']) && Y::$conf['rewrite']) {
-      \ng169\tool\Url::back();
-    }*/
+
 
     if (!defined('D_GROUP')) {
       define('D_GROUP',$m);
 
     }
+
     if (!defined('D_MEDTHOD')) {
       define('D_MEDTHOD',$c);
     }
     if (!defined('D_FUNC')) {
       define('D_FUNC',$a);
     }
-
-
+    //加载对应语言包
+    Lang::load();
     $appfile = ROOT . "./source/".D_GROUP.".php";
 
     if (!file_exists($appfile)) {

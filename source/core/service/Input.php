@@ -11,7 +11,7 @@ class Input extends Y
 	private $arr;
 	private $attr = array();
 	private $return;
-
+    private $outempty=1;
 	private $err = array();
 	private $cnname = null;
 	public function get()
@@ -144,8 +144,11 @@ class Input extends Y
 				break;
 				case 'int':
 				$int = $this->_getPOST($value);
+				
 				$int = $this->_checkType($int, $name);
+				
 				$ar  = $this->array_hb($ar, $int);
+				
 				break;
 				case 'float':
 				$float = $this->_getPOST($value);
@@ -183,6 +186,7 @@ class Input extends Y
 			}
 			$this->return = $ar;
 		}
+
 		return clone $this;
 	}
 	private function _checkfile($file)
@@ -600,7 +604,7 @@ class Input extends Y
 					$val = trim($val);
 				}
 
-				if($val != '')
+				if($val != '' || $this->outempty)
 				{
 					$ar = $this->array_hb($ar, array($value=> $val));
 				}
@@ -681,15 +685,15 @@ class Input extends Y
 				$val[$name] = strval($value);
 				break;
 				case 'int':
-				if(!preg_match('/^[0-9\.\-]+$/', $value))
+				if(!preg_match('/^[0-9\.\-]+$/', $value) && $value!='')
 				{
 					error(($this->cnname[$name]?$this->cnname[$name]:$name) . '数据类型错误', '', 0);
 				}
-				$val[$name] = (double)($value);
+				$val[$name] = /*(double)*/($value);
 				break;
 				case 'float':
 
-				if(!preg_match('/^[0-9\.]+$/', $value))
+				if(!preg_match('/^[0-9\.]+$/', $value)&& $value!='')
 				{
 					out(($this->err[$name]?$this->err[$name]:$name) . '数据类型错误', '',false);
 				}
@@ -697,6 +701,7 @@ class Input extends Y
 				break;
 			}
 		}
+		
 		return $val;
 	}
 
