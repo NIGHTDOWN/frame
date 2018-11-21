@@ -525,6 +525,13 @@ class daoClass
   {
 
     if (is_array($where)) {
+    	/*$where=array_filter($where);*/
+    	foreach($where as $index=>$val){
+			if($val===''){
+				
+				unset($where[$index]);
+			}
+		}
       if (!sizeof($where)) {
         return $this;
       }

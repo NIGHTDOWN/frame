@@ -12,6 +12,7 @@ class keyword extends Y
 
 
  public function search($word){
+ 	
  	if(!$word)return false;
 
  	$info=T('keyword')->get_one(array('word'=>$word));

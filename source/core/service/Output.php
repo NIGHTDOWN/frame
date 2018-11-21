@@ -10,9 +10,10 @@ class Output
   private static $outtype;
   private static $body;
   private static $data = [];
-  private static function sethead()
+  public static function start()
   {
-	
+  	
+	error_reporting(E_ALL || ~E_NOTICE);
   }
   /**
   * 输出内容

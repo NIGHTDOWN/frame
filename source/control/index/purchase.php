@@ -17,35 +17,29 @@ class purchase extends indexbase
     $get = get(array('string' => array('word'),'int'    => array('price1','price2')),
     ['word'=>__('团购名称'),'price1'=>__('最低价'),'price2'=>__('最高价')]);  
     $ccat = M('keyword', 'im')->search(@$get['word']);
-    $w    = get(array('int' => array('catid')));
+     
+    $w    = get(array('int' => array('catid')),['catid'=>__('分类名称')]);
     $this->vlog($this->get_userid());
     $pcat = null;
-
-    if (@$w['catid']) {
-
+    if ($w['catid']) {
+    	
       $p = M('tree', 'am')->getptree('product_category_tree', $w['catid']);
-
       $c = M('tree', 'am')->getctree('product_category_tree', $w['catid']);
-
       if (is_array($c)) {
         array_push($c, $w['catid']);
-
       }
       else {
         $c = array($w['catid']);
       }
-
       $pcat = T('product_category')->set_field('catid,catname')->set_where('catid in(' . implode(',', $p) . ')')->get_all();
       $ccat = T('product_category')->set_field('catid,catname')->set_where(array('parentid'=> $w['catid']), '=')->get_all();
-
       $attribute = T('product_category_attribute')->order_by(array('f'=> 'orders','s'=> 'up'))->set_where(array('catid'   => $w['catid'],'type'    => 0,'htmltype'=> 1), '=')->order_by(array('s'=> 'up','f'=> 'weight'))->set_limit(5)->get_all();
-
     }
     else {
       $ccat = T('product_category')->set_field('catid,catname')->set_where(array('parentid'=> 0), '=')->get_all();
-
+     
     }
-
+   
     $thisnum = sizeof($pcat) - 1;
     if ($thisnum <= 0) {
       $this->seoadd('所有商品 - ' . Y::$conf['site_name']);
@@ -59,9 +53,7 @@ class purchase extends indexbase
     $where['pflag'] = 1;
     $where['gcheck'] = 1;
     $where['gflag'] = 0;
-    /* $where2 = $where;*/
-    /*$where['storeflag']=0;*/
-    /*$get    = get(array('string'=>array('word'),'int'   =>array('price1','price2')));*/
+  
 
     if (@$get['price1']) {
       $where['price'] = array($get['price1']);
@@ -69,7 +61,7 @@ class purchase extends indexbase
     if (@$get['price2']) {
       $where['price'] = array('1'=> $get['price2']);
     }
-    /*$where['avalue']=$searchattr;*/
+   
     $insert['address'] = @$address['province'] . @$address['city'] . @$address['area'] . @$address['address'];
 
     if (isset($province['provinceid']) && $province['provinceid'] != '0') {
@@ -86,7 +78,6 @@ class purchase extends indexbase
       }
     }
     $model = $model->set_where($attr, '=');
-
     if (isset($c)) {
 
       $model = $model->set_where('product.catid in(' . implode(',', $c) . ')');
@@ -95,19 +86,13 @@ class purchase extends indexbase
       $word = tohex($get['word']);
       $model= $model->set_where("match(gtitle) against ('*{$word}*' IN BOOLEAN MODE)");
     }
-
     $hot = T($this->db_name)
     ->join_table(array('t'=> 'product','pid','productid'),1)
     ->join_table(array('t'=> 'merchant','gmuid','muid'),1)->set_where($where)->order_by(array('f'=> 'sells','s'=> 'down'))->set_limit(6)->get_all();
-
     $page = $this->make_page($model);
-
     $model->order_by(array('s'=> 'down','f'=> 'collects'));
-
     $model = $this->init_order($model,['product.productid','gsells','gstime','gprice']);
-
     $data  = $model->set_limit($this->get_page_limit())->get_all();
-
     $where2['id'] = @$w['catid'];
     $where2['word'] = @$get['word'];
     $where2['price1'] = @$get['price1'];

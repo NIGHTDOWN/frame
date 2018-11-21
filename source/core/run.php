@@ -1,5 +1,6 @@
 <?php
 namespace ng169;
+
 define(INSTALL, true);
 define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
 //弃用

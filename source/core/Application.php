@@ -3,6 +3,7 @@ namespace ng169;
 use ng169\tool\Filter;
 use ng169\tool\Request;
 use ng169\lib\LANG;
+use ng169\service\Output;
 checktop();
 class APP
 {
@@ -22,6 +23,7 @@ class APP
   public static function run()
   {
     \ng169\tool\Url::resolve();//路由
+    Output::start();//header头部；错误信息级别等初始化设置
     $m = Filter::filterXSS(Request::getGpc('m'));
     $a = Filter::filterXSS(Request::getGpc('a'));
     $c = Filter::filterXSS(Request::getGpc('c'));
