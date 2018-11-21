@@ -4,7 +4,8 @@
 namespace ng169\control\admin;
 
 use ng169\control\adminbase;
-
+use ng169\Y;
+use ng169\tool\Url as  YUrl;;
 checktop();
 
 class siteset extends adminbase{
@@ -160,12 +161,10 @@ public
 	function control_save(){
 		
 		$model   = M('options','am');
-		$bool    = $model->save();
-        
+		$bool    = $model->save();        
 		$rewrite = intval(getGET('rewrite'));
 		if($rewrite != Y::$conf['rewrite'] && isset($_POST['rewrite'])){
 			if($rewrite){
-
 				YUrl::load_static();
 			}else{
 				YUrl::unload_static();

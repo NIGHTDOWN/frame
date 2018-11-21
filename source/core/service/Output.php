@@ -12,7 +12,14 @@ class Output
   private static $data = [];
   public static function start()
   {
-  	
+	//允许跨域 
+	header("Content-type: text/html; charset=".G_CHARSET);
+	if(G_ALLOW_ORIGIN){
+			Header("Access-Control-Allow-Origin:*");
+  	Header("Access-Control-Allow-Method:POST,GET");
+	}
+  
+
 	error_reporting(E_ALL || ~E_NOTICE);
   }
   /**

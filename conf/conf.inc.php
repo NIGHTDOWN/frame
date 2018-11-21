@@ -67,8 +67,12 @@ return  array(
   'g_smarty_cache'=>'1',
   'g_ext'=>'.php',
   'g_tplpre'=>'.html',
+  'g_urlpre'=>'.html',
   'g_lang'=>'cn',
   'g_db_type'=>'mysql',
+  //允许跨域
+  'g_allow_origin'=>'1',
+  
   
 );
 

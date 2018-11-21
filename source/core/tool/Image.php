@@ -519,17 +519,21 @@ $ext=$matches[2];
 	public static
 	function verify($name = 'verifycode',$width = '62',$height = 20,$bgr = 255,$bgg = 255,$bgb = 255)
 	{
-		session_start();
+		
+		session_start();	
+		/*ob_start();*/
+    
+     
 		Header("Content-type: image/PNG");
 		srand((double)microtime() * 1000000);
-		#ɫ���Ί�
 		// $width = 60;
 		// $height = 23;
-		$im      = imagecreate($width,$height);
+		
+		$im      = imagecreate(intval($width),intval($height));
 		$black   = ImageColorAllocate($im, 0,0,0);
 		$white   = ImageColorAllocate($im, 255,255,255);
 		$gray    = ImageColorAllocate($im, 200,200,200);
-		#ֆ׷ͼЎ
+		
 		$bgcolor = ImageColorAllocate($im, $bgr,$bgg,$bgb);
 		// $bgcolor = imagecolorallocatealpha($im,  0 , 0 , 0 , 127); //透明背景
 		imagefill($im,0,0,$bgcolor);
@@ -539,7 +543,7 @@ $ext=$matches[2];
 			//  imagestring($im, 5, 10, 3, $randval, $white);
 			imagestring($im, 5, 10, 3, $randval, $black);
 		}
-		#�ӈ븉ȅԪ˘
+		
 		for($i = 0;$i < 200;$i++)
 		{
 			// $randcolor = ImageColorallocate($im,rand(0,255),rand(0,255),rand(0,255));
@@ -547,11 +551,13 @@ $ext=$matches[2];
 			$randcolor = ImageColorallocate($im,rand(0,255),rand(0,255),rand(0,255));
 			imagesetpixel($im, rand() % 100 , rand() % 50 , $randcolor);
 		}
-		#ʤ��ͼƬ�ꊶ
+		
 		ImagePNG($im);
-		#Ϻ�ٍ�Ƭ�ꊶ
+		
 		ImageDestroy($im);
+ 		/*$output = ob_get_contents();*/
 
+    /*  ob_end_clean();	*/
 
 	}
 	public  static

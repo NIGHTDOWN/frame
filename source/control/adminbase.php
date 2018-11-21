@@ -7,6 +7,7 @@ namespace ng169\control;
 use ng169\control\general;
 use ng169\TPL;
 use ng169\tool\Cookie as YCookie;
+use ng169\tool\Out as YOut;
 checktop();
 
 im(CONTROL.'public/night.php');

@@ -49,11 +49,11 @@ class Url
     $data= explode('?',$URL);//?后面的已经php识别；
     if (isset($data[0])) {
       $data1 = explode('.',$data[0]);
-     
-      if(isset($data1[1]) && $data1[1]=='php'){
-      	//php脚本模式；不执行url解码
-	  	return false;
-	  }
+
+      if (isset($data1[1]) && $data1[1] == 'php') {
+        //php脚本模式；不执行url解码
+        return false;
+      }
       if (isset($data1[0])) {
         //反向解析
         $data = explode('/',$data1[0]);
@@ -77,7 +77,7 @@ class Url
             }
           }
         }
-      
+
         switch (sizeof($route)) {
           case 0:return true;
           break;
@@ -92,21 +92,21 @@ class Url
           $_GET['m'] = $route[0];
           $_GET['c'] = $route[1];
           $_GET['a'] = $route[2];
-          
+
           break;
         }
         //路由定义
       }
     }
-    
+
 
     return true;
   }
-  
- 
 
- 
- 
+
+
+
+
   public static
   function url($args = null, $action = null, $mod = null, $group = null,$ip = null)
   {
@@ -150,7 +150,7 @@ class Url
   * @param undefined $group 模块
   * @param undefined $ip  域名
   * @param undefined $preflag
-  * 
+  *
   * @return string
   */
   private static
@@ -192,7 +192,7 @@ class Url
   * @param undefined $group 模块
   * @param undefined $ip  域名
   * @param undefined $preflag
-  * 
+  *
   * @return string
   */
   private static
@@ -208,27 +208,23 @@ class Url
     $action = $action?$action:'run';
     $alias  = null;
     $city = null;
-
     if ($mod == 'index') {
       $mod = '';
     }
-
     if ($mod != null) {
       $mod = $mod.'/';
     }
-	if ($action != null) {
+    if ($action != null) {
       $action = $action.'/';
     }
     if ($group != null ) {
-    	if($group=='index'){
-			$group = $group.'/';
-		}else{
-			$group='';
-		}
-      
+      if ($group == 'index') {
+        $group = $group.'/';
+      }
+      else {
+        $group = '';
+      }
     }
-   
-
     $url = self::gethttp().$_SERVER["SERVER_NAME"].'/';
 
     if (is_array($args)) {
@@ -238,27 +234,29 @@ class Url
         }
       }
     }
-  
+
     $param = urlencode(trim($param,'-'));
 
     if ($param != null && Y::$conf['rewritepre'] != null && $preflag) {
+    
       $pre = '.'.Y::$conf['rewritepre'];
-    }
-    $url = self::gethttp().$_SERVER["SERVER_NAME"].'/'.$group.$mod.$action.$param.$pre;
+    }else{
+		$pre=G_URLPRE;
+	}
+    $url = trim(self::gethttp().$_SERVER["SERVER_NAME"].'/'.$group.$mod.$action.$param,'/').$pre;
     return $url;
   }
 
   public static
   function load_static()
   {
-
     $file = '/.htaccess';
-    
     $msg  = '<IfModule mod_rewrite.c>
+    Options +FollowSymlinks -Multiviews
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+    RewriteRule ^(.*)$ index.php [L,E=PATH_INFO:$1]
     </IfModule>';
     \ng169\tool\File::writeFile($file,$msg);
   }
@@ -267,7 +265,7 @@ class Url
   function unload_static()
   {
     $file = '/.htaccess';
-   
+
     \ng169\tool\File::delFile($file);
   }
   public static

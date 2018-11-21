@@ -68,9 +68,9 @@ function M($name, $type){
 }
 function upcache($name = null){
 	Y::$cache->del();
-	$cache = Y::import('cache', 'lib');
-	$cache->updateCache($name);
-	TPL::clearAllCache();
+	/*$cache = Y::import('cache', 'lib');
+	$cache->updateCache($name);*/
+	ng169\TPL::clearAllCache();
 }
 function out($message, $url = null, $flag = 1, $auto_go_url = 1){
 	YOut::out($message, $url, $flag, $auto_go_url);

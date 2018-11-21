@@ -153,7 +153,8 @@ class login extends indexbase{
 
 		$get=get(array('int'=>array('w','h')));
 		Y::loadTool('image');
-		if(isset($get['w'])&&isset($get['h'] )){
+		
+		if(($get['w'])&&($get['h'] )){
 			YImage::verify(null,$get['w'],$get['h']);
 		}else{
 			YImage::verify();
