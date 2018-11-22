@@ -3,11 +3,13 @@
 
 
 
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 checktop();
 
-class control extends userbase{
+class payset extends userbase{
 	public function control_pwd(){
 if(!parent::$wrap_user['safepwd'])gourl(geturl(null,'pwd2','payset'));
 if($_POST){

@@ -1,13 +1,13 @@
 <?php
 
 
-
-
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 checktop();
 
-class control extends userbase{
+class withdraw extends userbase{
 	private function get_soleid(){
 		$insert['soleid']=date('ymdHis').rand(9999,99999);
 		if(T('withdraw')->get_one($insert)){

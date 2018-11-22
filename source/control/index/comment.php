@@ -21,6 +21,7 @@ class comment extends indexbase{
 			$im=0;
 		}
 		$page      = $this->make_page($model);
+		
 		$data      = $model->set_limit($this->get_page_limit())->get_all();
 		$get['img']=@$img['img'];
 		

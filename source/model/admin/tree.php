@@ -37,7 +37,7 @@ class tree extends Y{
 	//获取所有子节点
 	public function getctree($db,$catid){
 		$thisid=T($db)->get_one(array('cid'=>$catid));
-		$data=T($db)->set_field(array('cid'))->set_limit(5000)->set_where('tree like "%'.$thisid['tree'].G_BREAK.'%"')->get_all();
+		$data=T($db)->set_field(array('cid'))->set_limit(5000)->set_where('tree like "'.$thisid['tree'].G_BREAK.'%"')->get_all();
 		
 		$data2=array_column($data,'cid');
 		

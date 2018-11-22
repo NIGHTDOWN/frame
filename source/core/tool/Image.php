@@ -568,7 +568,7 @@ $ext=$matches[2];
 
 		$errorCorrectionLevel = "L";
 		$matrixPointSize      = "4";
-		QRcode::png($url, false, $errorCorrectionLevel, $matrixPointSize);
+		\QRcode::png($url, false, $errorCorrectionLevel, $matrixPointSize);
 		exit;
 	}
 

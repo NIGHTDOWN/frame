@@ -84,8 +84,7 @@ class index extends indexbase
   {
     if (YUrl::ismoible()) {
       $data = M('index','im')->get3();
-      /* echo json_encode($data);
-      die();*/
+     
       Output::out($data);
     }
     else {
@@ -102,11 +101,12 @@ class index extends indexbase
       $get  = get(array('int'=>array('s')));
       $where = array('shelves'=>1,'status' =>0,'pflag'  =>1);
       $s = array($get['s'] * $page,$get['s'] * $page + $page);
-      $data = T('product')->set_where($where)->set_limit($s)->order_by(array('s'=>'down','f'=>'productid'))->get_all();
+      $data = T('product')->set_field('smallimg1,muid,productid,price,originalprice,catid,productname')->set_where($where)->set_limit($s)->order_by(array('s'=>'down','f'=>'productid'))->get_all();
+      
       Output::out($data);
     }
     else {
-      echo 0;
+      error('错误访问');
       die();
     }
 

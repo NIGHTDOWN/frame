@@ -2,12 +2,14 @@
 
 
 
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 
 checktop();
 
-class control extends userbase{
+class log extends userbase{
 	public function control_order(){
 		$model=T('order')->set_global_where(array('uid'=>$this->get_userid(1)))->order_by(array('s'=>'down','f'=>'orderid')); 
 		$model=$model;

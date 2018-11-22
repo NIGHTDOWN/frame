@@ -271,7 +271,14 @@ class AModel extends Y
 
         return $this->dbdao->u($this->t, $inArr['v'], $inArr['w'], $bool);
     }
-    
+    /**
+	* 
+	* @param undefined $insert 更新数据
+	* @param undefined $where 条件
+	* @param undefined $bool
+	* 
+	* @return boolean
+	*/
     public function update($insert, $where,$bool=1)
     {
     	

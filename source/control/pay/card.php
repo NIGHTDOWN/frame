@@ -2,10 +2,12 @@
 
 
 
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 checktop();
-class control extends userbase{
+class card extends userbase{
 	
 	public
 	function control_run(){

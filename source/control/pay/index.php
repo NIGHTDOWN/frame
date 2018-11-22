@@ -3,11 +3,13 @@
 
 
 
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 checktop();
 
-class control extends userbase{
+class index extends userbase{
 	public function control_run(){
 		$where=array('uid'=>$this->get_userid(1));
 	$loginlog=T('loginlog')->group_by('ip')->order_by(array('s'=>'down','f'=>'addtime'))->set_limit(3)->get_all($where);

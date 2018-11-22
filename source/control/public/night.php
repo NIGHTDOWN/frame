@@ -189,6 +189,7 @@ class general extends Y
   public function get_userid($type = 0)
   {
     $userid = @parent::$wrap_user['uid'];
+    
     if ($userid == null && $type) {
       error('请登入在操作', geturl(null, null, 'login', 'index'), 1);
     }
@@ -242,10 +243,10 @@ class general extends Y
     return $m->_getarea();
   }
 
-  public function init_where($table, $mapping = null)
+  public function init_where($table, $mapping = null,$op='')
   {
 
-    if (isset($_POST['sflag']) || isset($_GET['sflag'])) {
+    /*if (isset($_POST['sflag']) || isset($_GET['sflag'])) {
       unset($_POST['sflag']);
       unset($_GET['sflag']);
 
@@ -281,10 +282,28 @@ class general extends Y
 
       YOut::redirect($url);
     }
+    else {*/
+$keyarr=[];
+    /**
+    * 加入可排序字段
+    * 排序字段前缀识别
+    */
+    $bool=($filder != null && is_array($filder));
+    if ($bool) {
+    	foreach($filder as $index=>$string){
+    		$string=explode('.',$string);
+			if(sizeof($string)>1){
+				$keyarr[$index]=$string[1];
+			}else{
+				$keyarr[$index]=$string[0];
+			}
+		}
+    }
     else {
-
+      $keyarr = $table->get_field();
+    }
       if (gettype($table) == 'object') {
-        $filed_arr = $table->get_field(1);
+        $filed_arr =$keyarr;
 
         $w         = get(array('string'=> $filed_arr));
 
@@ -299,17 +318,11 @@ class general extends Y
           }
         }
 
-        if (isset($w['alias']) && @$w['catid'] == null) {
-
-        }
-
-
-        $mian = $table->get_field(0);
         $sw   = G(array('string' => array('word')))->get();
 
 
 
-        $table->set_where($w);
+        $table->set_where($w,$op);
 
         parent::$wrap_where = $w;
 
@@ -317,7 +330,7 @@ class general extends Y
         TPL::assign($var_array);
       }
       return $table;
-    }
+  /*  }*/
   }
   /**
   * 排序
@@ -442,7 +455,7 @@ class general extends Y
       d($in);*/
     }
 
-    $limit = array($in,intval($this->page_size));
+    $limit = array(intval($in),intval($this->page_size));
     return $limit;
   }
   public function set_pagesize($size)

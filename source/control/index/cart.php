@@ -10,8 +10,10 @@ checktop();
 
 class cart extends indexbase
 {
+	protected $noNeedLogin=[];
   public function control_run()
   {
+  	
     $this->vlog($this->get_userid());
     $uid    = $this->get_userid(1);
     M('cart','im')->check($uid);

@@ -6,6 +6,8 @@ namespace ng169\control\index;
 use ng169\control\indexbase;
 use ng169\Y;
 use ng169\tool\Image as YImage;
+use ng169\tool\Out as YOut;
+use ng169\tool\Request as YRequest;
 
 checktop();
 
@@ -16,6 +18,7 @@ class login extends indexbase{
 	public function control_run(){
 		$this->vlog();
 		$this->view();
+		
 	}
 	
 	public function control_login(){

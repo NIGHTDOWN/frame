@@ -20,7 +20,7 @@ class daoClass
   /* private $cache = '';*/
   private $loop = array();
   private $notgetkey = null;
-  private $bs = null;
+  private $bs = 'ASC';
   private $oldbs = null;
   private $iscache = false;
   private $cachetime = '';
@@ -35,13 +35,10 @@ class daoClass
   public function __construct($dbconf = 'main')
   {
     $dbs = Option::get('db');
-
     if (isset($dbs[$dbconf])) {
       $conf = $dbs[$dbconf];
       $this->dbqz = $conf['dbpre'];
       $this->_db = new Dbsql($conf['dbhost'], $conf['dbuser'], $conf['dbpwd'], $conf['dbname'], $conf['charset']) or error(__('数据库配置不存在'));
-      /*  $this->cache = & Y::$cache;//缓存不开启*/
-
     }
     else {
       error(__('数据库配置不存在'));
@@ -103,10 +100,8 @@ class daoClass
       $cachename = $this->tablename . "_tree" . $val;
 
       $cache     = $this->cache;
-
       list($bool, $info) = $cache->get($cachename);
       if (($bool) && $cachebool) {
-
       }
       else {
         $info = $this->_get_child($index, $val, $parent);
@@ -134,7 +129,6 @@ class daoClass
   */
   public function t($table, $filedar = null)
   {
-
     if (is_array($table)) {
       $this->tablename = "(".($table[0]).")";
       $this->f = '*';
@@ -142,8 +136,6 @@ class daoClass
       $this->notgetkey = TRUE;
       $this->t = $t;
       $newobj = clone $this;
-
-      /*unset($this);*/
       return $newobj;
     }
     else {
@@ -155,7 +147,6 @@ class daoClass
     }
     $this->t = $t;
     $newobj = clone $this;
-    /*unset($this);*/
     return $newobj;
   }
   /**
@@ -430,7 +421,7 @@ class daoClass
         $this->Gw .= $w;
       }
       else {
-        $this->Gw .= $andor.'  (' . $w . ') ';
+        $this->Gw .= " ". $andor.'  (' . $w . ') ';
       }
     }
 
@@ -444,19 +435,19 @@ class daoClass
   *
   * @return string
   */
-  private function setstr($name,$val,$op='=')
+  private function setstr($name,$val,$op = '=')
   {
 
     if ($val === '')return false;
-   
+
     if (!$name)return false;
-    $name=$this->fix($name);
+    $name   = $this->fix($name);
     $string = '';
-   
+
     switch ($op) {
       case '':
       $string = "{$name} = '{$val}'";
-      
+
       break;
       case 'like':
       $string = "{$name} like \"{$val}%\"";
@@ -466,7 +457,7 @@ class daoClass
         $in = implode(',',$val);
       }
       $in = trim($val,',');
-     
+
       if (!$in)return false;
       $string = "{$name} in ({$in})";
       break;
@@ -508,7 +499,7 @@ class daoClass
       break;
 
     }
-    
+
     return $string;
   }
   /**
@@ -520,26 +511,29 @@ class daoClass
   */
   private function wherearray($where,$type = '=')
   {
-  	
+
     $wherestr = ' ';
     $and      = 'and ';
     if (is_array($where)) {
       foreach ($where as $index=>$val) {
-      	
+	
         if ($val !== '') {
-        	
-        	if(is_array($type) && isset($type[$index])){
-				 $str = $this->setstr($index,$val,$type[$index]);
-			}else{
-				if(is_string($type)){
-					$str = $this->setstr($index,$val,$type);
-				}else{
-				$str = $this->setstr($index,$val);	
-				}
-				 
-			}
-			
-        /* $str = $this->setstr($index,$val,$type[$index]);*/
+
+          if (is_array($type) && isset($type[$index])) {
+            $str = $this->setstr($index,$val,$type[$index]);
+          }
+          else {
+            if (is_string($type)) {
+            	
+              $str = $this->setstr($index,$val,$type);
+            }
+            else {
+              $str = $this->setstr($index,$val);
+            }
+
+          }
+
+          /* $str = $this->setstr($index,$val,$type[$index]);*/
           if ($str != '') {
 
             $wherestr .= $and."($str)";
@@ -560,7 +554,7 @@ class daoClass
   {
 
     $w = $this->wherearray($where,$operator);
-    
+
     if ($type) {
       $this->w = $w;
     }
@@ -571,7 +565,7 @@ class daoClass
       else {
 
         if ($w) {
-          $this->w .= $andor.'  (' . $w . ') ';
+          $this->w .= " ". $andor.'  (' . $w . ') ';
         }
 
       }
@@ -814,34 +808,25 @@ class daoClass
     }
     $word = ' limit ';
     $this->l = $word.intval($limit[1]);
-    if ($key) {
-
-    }
-    else {
+    if (!$key) {
       $key = 'v.'.$this->getkey();
     }
-
     if (is_array($limit[0])) {
-
-   
       $w = '';
-    
       $w = implode(',',$limit[0]);
       $w = trim($w,',');
       $w = trim($w,' ');
-
       $w = "$key in ($w)";
       $this->set_limit_where($w);
-
       return $this;
     }
 
     if ($fh == null) {
-      if ($this->getbs() == 'ASC') {
-        $fh = ">=";
+      if ($this->getbs() != 'ASC') {
+        $fh = "<=";
       }
       else {
-        $fh = "<=";
+        $fh = ">=";
       }
 
     }
@@ -1010,11 +995,7 @@ class daoClass
               $w .= ' ' . $andor . " {$key}<={$w1[1]}  ";
             }
             break;
-            /* case '2':
-            if ((is_numeric($w1[0]) && is_numeric($w1[1])) && !$break) {
-            $w .= ' ' . $andor . " {$key} " . ' BETWEEN ' . " {$w1['0']} and {$w1['1']} ";
-            break;
-            }*/
+          
             default:
             foreach ($w1 as $v) {
               $z .= " or {$key}{$operator}'{$v}'  ";

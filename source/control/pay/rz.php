@@ -2,12 +2,14 @@
 
 
 
+namespace ng169\control\pay;
+use ng169\control\userbase;
 
 
 
 checktop();
 
-class control extends userbase{
+class cz extends userbase{
 	public function control_run(){
 		$data=T('user_rz')->get_one(array('uid'=>$this->get_userid(1)));
 		if($_POST){

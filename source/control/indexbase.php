@@ -3,6 +3,7 @@
 namespace ng169\control;
 use ng169\control\general;
 use ng169\tool\Cookie as YCookie;
+use ng169\tool\Request as YRequest;
 use ng169\Y;
 use ng169\tool\Url as YUrl;
 use ng169\TPL;
@@ -296,45 +297,30 @@ class indexbase extends general{
 
 	public
 	function checkLogin(){
-d('check');
+
 		$userinfo = $this->getcookie();
 
 		if(!empty($userinfo)){
-
 			$user = T('user');
-
 			$w    = array_filter(array(
 					'username'=> $userinfo['username'],
 					'password'=> $userinfo['password']));
 				
 			$userdbinfo = $user->join_table(array('t'=>'merchant','uid','uid'))->set_where($w,'=')->get_one();
-
-
-
-
-			/*if($userdbinfo[$type[1]] == 0){
-
-				if(is_array($type[2])){
-					$userdbinfo[$type[0]] = Y::$conf[($type[2][($userdbinfo['gender'] - 1)])];
-				}else{
-					$userdbinfo[$type[0]] = Y::$conf[($type[2])];
-				}
-			}else{
-
-			}*/
+			
+	
 			if($userdbinfo == null){
 				YOut::redirect(geturl(null,null,'login','index'), 0);
-			}else{
+			}
+			else{
 				parent::$wrap_user = $userdbinfo;
 
 				return 1;
 			}
-		}else{
-
-		}
+		
 		return 0;
 	}
-
+	}
 
 	public
 	function getusertype($string){
@@ -347,25 +333,12 @@ d('check');
 		}else{
 			error('帐号类型错误');
 		}
-
 	}
 
 	public
 	function _view($tplfile = null, $var_array = null){
 
 		$this->view($tplfile,$var_array);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

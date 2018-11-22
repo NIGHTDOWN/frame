@@ -338,19 +338,15 @@ window.addEventListener("mousewheel", (e) => {if (e.deltaY === 1) {e.preventDefa
 						$u='<!--{url mod='index' action='menu'}-->';
 						$jsurl='<!--{$indextpl}-->res/kissy.menu.js';
 						$.get($u,function(data)
-							{
-								
+							{								
 								$dom=$(data);
 								
 								if($('.menumove').get(0))
 								{
-									/*$('.menu dl').find('dd').hide();*/
 									$dom.hide();
-								}
-								/*$('.menu dl').append(data);*/
+								}								
 								$('.menu dl ').append($dom);
-								$.getScript($jsurl,null) ;
-								
+								$.getScript($jsurl,null) ;								
 							});
 
 					});

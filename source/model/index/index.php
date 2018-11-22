@@ -11,22 +11,25 @@ class index extends Y
 
  public function get1(){
  	$w=array('gcheck'=>1,'shelves'=>1,'status'=>0,'pflag'=>1);
- 	$w['gstime']=array('1'=>time());
-	$w['getime']=array('0'=>time());
-   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'sells'))->set_limit(3)->get_all($w);
+ 	/*$w['gstime']=array('1'=>time());
+	$w['getime']=array('0'=>time());*/
+	$time=time();
+   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'sells'))->set_limit(3)->set_where("'gstime'<={$time} and 'getime'>={$time}")->set_where($w)->get_all();
  }
  public function get2(){
      $w=array('gcheck'=>1,'shelves'=>1,'status'=>0,'pflag'=>1);
- 	$w['gstime']=array('1'=>time());
-	$w['getime']=array('0'=>time());
-   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'likes'))->set_limit(3)->get_all($w);
+ 	/*$w['gstime']=array('1'=>time());
+	$w['getime']=array('0'=>time());*/
+	$time=time();
+   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'likes'))->set_limit(3)->set_where("'gstime'<={$time} and 'getime'>={$time}")->set_where($w)->get_all();
  }
  public function get3(){
     $w=array('gcheck'=>1,'shelves'=>1,'status'=>0,'pflag'=>1);
- 	$w['gstime']=array('1'=>time());
-	$w['getime']=array('0'=>time());
+ 	/*$w['gstime']=array('1'=>time());
+	$w['getime']=array('0'=>time());*/
+	$time=time();
 	
-   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'gaddtime'))->set_limit(3)->get_all($w);
+   return  T('groupon')->join_table(array('t'=>'product','pid','productid'),1)->order_by(array('s'=>'down','f'=>'gaddtime'))->set_limit(3)->set_where("'gstime'<={$time} and 'getime'>={$time}")->set_where($w)->get_all();
  }
  
  public function getcategoryproduct($catid){
@@ -41,12 +44,14 @@ class index extends Y
 		
 		Y::$cache->set($name,$c,0);
 		}
- 
+
  	if(!$c)return false;
  	$where=array('shelves'=>1,'status'=>0,'pflag'=>1);	
  	$hot= T('product')->order_by(array('f'=>'sells','s'=>'down'))->set_limit(3)->set_global_where('catid in('.implode(',',$c).')')->set_field('productname,productid,smallimg1')->get_all($where);
+ 	
  	$data['hot']=$hot;
- 	$cat=T('product_category')->set_field('catid,catname')->set_limit(6)->get_all(array('catid'=>$c));
+ 	$cat=T('product_category')->set_field('catid,catname')->set_limit(6)->set_where(array('catid'=>$c),'in')->get_all();
+ 	
  	$data['cat']=$cat;	
  	return $data;
  }

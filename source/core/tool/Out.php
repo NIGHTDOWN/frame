@@ -4,6 +4,7 @@
 namespace ng169\tool;
 use ng169\Y;
 use ng169\tool\Url as YUrl;
+use ng169\service\Output;
 
 checktop();
 class Out
@@ -69,7 +70,7 @@ class Out
   public static function out($message, $url = null, $flag = true, $auto_go_url = true)
   {
     /* M('log','am')->logtxt($message,$flag);*/
-
+ 	ob_start();
     if (!YUrl::isAjax()) {
       if ($url == null) {
         $url = @$_SERVER['HTTP_REFERER'];
@@ -95,6 +96,9 @@ class Out
       }
       echo json_encode($ret);
     }
+    $out=ob_get_contents();
+    ob_end_clean();
+    Output::out($out);
     die();
   }
 
