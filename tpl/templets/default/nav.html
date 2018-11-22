@@ -295,7 +295,6 @@
 				
 			$('.menumove').mousemove(function()
 				{
-
 					$(this).find('dd').show();
 					$(this).bind('mouseleave',function()
 						{
@@ -303,12 +302,10 @@
 						});
 				});
 }
-
 		});
-
 </script>
-<script
-	src="<!--{$indextpl}-->res/kissy.js" type="text/javascript">
+<script src="<!--{$indextpl}-->res/kissy.js" type="text/javascript"></script>
+	<script src="<!--{$indextpl}-->res/kissy.menu.js" type="text/javascript">
 </script>
 
 <div class="menu">
@@ -325,28 +322,18 @@
 
 				$(function()
 					{
-					/*	document.body.onmousewheel = function(event) {
-    event = event || window.event;
-    console.dir(event);	
-};
-document.body.addEventListener("DOMMouseScroll", function(event) {
-    console.dir(event);	
-});*/
-/*
-window.addEventListener("mousewheel", (e) => {if (e.deltaY === 1) {e.preventDefault();}})*/
-						
 						$u='<!--{url mod='index' action='menu'}-->';
-						$jsurl='<!--{$indextpl}-->res/kissy.menu.js';
+						
 						$.get($u,function(data)
 							{								
-								$dom=$(data);
-								
+								$dom=$(data);								
 								if($('.menumove').get(0))
 								{
 									$dom.hide();
 								}								
 								$('.menu dl ').append($dom);
-								$.getScript($jsurl,null) ;								
+								startmenu();
+								/*$.getScript($jsurl,null) ;*/								
 							});
 
 					});

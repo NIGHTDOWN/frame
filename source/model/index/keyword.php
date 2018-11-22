@@ -4,24 +4,15 @@
 
 namespace ng169\model\index;
 use ng169\Y;
-
+use ng169\tool\Request as YRequest;
 checktop();
 
 class keyword extends Y
 {
-
-
- public function search($word){
- 	
+ public function search($word){	
  	if(!$word)return false;
-
  	$info=T('keyword')->get_one(array('word'=>$word));
  	if($info){
-		/*if($info['flag']){
-			
-		}else{
-			
-		}*/
 		if($this->log($info['sid'])){
 			T('keyword')->update(array('hits'=>$info['hits']+1),array('sid'=>$info['sid']));
 		}
@@ -32,8 +23,7 @@ class keyword extends Y
 		$insert['hits']=1;
 		$sid=T('keyword')->add($insert);
 		$this->log($sid);
-	}
-	
+	}	
 	return $this->wordofcate($word);
  }
  private function log($sid){
@@ -44,12 +34,10 @@ class keyword extends Y
  	if($isexist)return false;
  	return T('keyword_log')->add($insert);
  }
- 
  private function wordofcate($word){
  	if(!$word)return false;
  	$info=T('product_category')->set_where(array('catname'=>$word,'metakeyword'=>$word),null,null,'or')->get_all();
- 	return $info;
- 	
+ 	return $info;	
  }
 }
 

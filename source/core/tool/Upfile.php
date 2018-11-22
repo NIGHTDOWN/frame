@@ -2,7 +2,7 @@
 
 
 namespace ng169\tool;
-
+use ng169\tool\File;
 
 checktop();
 class Upfile
@@ -162,8 +162,8 @@ class Upfile
     
     private function save($tmpName, $filename, $path)
     {
-        Y::loadTool('file');
-        YFile::createDir($path);
+        /*Y::loadTool('file');
+        YFile::createDir($path);*/
         if (function_exists("move_uploaded_file") && @move_uploaded_file($tmpName, $filename)) {
             @chmod($filename, 0777);
             return true;

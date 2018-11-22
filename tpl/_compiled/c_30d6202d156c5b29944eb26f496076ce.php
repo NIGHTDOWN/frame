@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:/tpl/templets/default/nav.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 17:01:45 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-22 17:57:57 */ ?>
 
 <div class="site-nav">
 	<div class="w fn-clear">
@@ -313,7 +313,6 @@ res/iOS-3-2.png" width="95">
 				
 			$('.menumove').mousemove(function()
 				{
-
 					$(this).find('dd').show();
 					$(this).bind('mouseleave',function()
 						{
@@ -321,13 +320,12 @@ res/iOS-3-2.png" width="95">
 						});
 				});
 }
-
 		});
-
 </script>
-<script
-	src="<?php echo $this->_vars['indextpl']; ?>
-res/kissy.js" type="text/javascript">
+<script src="<?php echo $this->_vars['indextpl']; ?>
+res/kissy.js" type="text/javascript"></script>
+	<script src="<?php echo $this->_vars['indextpl']; ?>
+res/kissy.menu.js" type="text/javascript">
 </script>
 
 <div class="menu">
@@ -344,33 +342,18 @@ res/kissy.js" type="text/javascript">
 
 				$(function()
 					{
-					/*	document.body.onmousewheel = function(event) {
-    event = event || window.event;
-    console.dir(event);	
-};
-document.body.addEventListener("DOMMouseScroll", function(event) {
-    console.dir(event);	
-});*/
-/*
-window.addEventListener("mousewheel", (e) => {if (e.deltaY === 1) {e.preventDefault();}})*/
-						
 						$u='<?php echo \ng169\hook\url(array('mod' => 'index','action' => 'menu'), $this);?>';
-						$jsurl='<?php echo $this->_vars['indextpl']; ?>
-res/kissy.menu.js';
+						
 						$.get($u,function(data)
-							{
-								
-								$dom=$(data);
-								
+							{								
+								$dom=$(data);								
 								if($('.menumove').get(0))
 								{
-									/*$('.menu dl').find('dd').hide();*/
 									$dom.hide();
-								}
-								/*$('.menu dl').append(data);*/
+								}								
 								$('.menu dl ').append($dom);
-								$.getScript($jsurl,null) ;
-								
+								startmenu();
+								/*$.getScript($jsurl,null) ;*/								
 							});
 
 					});

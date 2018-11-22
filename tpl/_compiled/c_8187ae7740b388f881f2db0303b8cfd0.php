@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:/tpl/templets/default/head.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 17:01:45 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-22 17:54:03 */ ?>
 
 <!DOCTYPE html>
 
@@ -27,5 +27,6 @@ getad.js" type="text/javascript"></script>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link href="<?php echo $this->_vars['indextpl']; ?>
 res/page.css" rel="stylesheet" type="text/css">
+
 
 

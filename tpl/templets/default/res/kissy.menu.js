@@ -1,4 +1,4 @@
-/*pub-1|2013-03-12 17:06:52*/
+
 KISSY.add("category/category",
 function (C) {
     var C = KISSY,
@@ -241,7 +241,8 @@ function (C) {
     KISSY.Category = J;
     return J
 });
-(function (A) {
+//这里执行菜单生效
+function startmenu() {
     var A = KISSY,
     F = A.DOM,
     C = A.Event,
@@ -255,4 +256,4 @@ function (C) {
             triggers: ".j_MenuItem"
         })
     });
-})(KISSY);
+};

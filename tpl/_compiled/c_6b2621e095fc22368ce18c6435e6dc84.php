@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/hot.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-22 09:02:53 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-22 17:46:36 */ ?>
 
 <?php if (count((array)$this->_vars['data'])): foreach ((array)$this->_vars['data'] as $this->_vars['list']): ?>
 			<dl>
@@ -36,3 +36,4 @@
 				</div>
 			</dl>
 			<?php endforeach; endif; ?>
+			

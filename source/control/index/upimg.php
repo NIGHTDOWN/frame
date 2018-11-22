@@ -3,7 +3,9 @@
 namespace ng169\control\index;
 use ng169\control\indexbase;
 
-
+use ng169\Y;
+use ng169\tool\Upfile;
+use ng169\tool\Image;
 
 checktop();
 
@@ -13,14 +15,14 @@ class upimg extends indexbase{
   
 	public function control_run(){
 
-		Y::import('upfile', 'tool');
-		Y::loadTool('image');
+		/*Y::import('upfile', 'tool');
+		Y::loadTool('image');*/
 			
 		$conf = $this->config;
 		$conf['filetype']=Y::$conf['filetype'];
 		$conf['upfilepath']=Y::$conf['upfilepath'].'/'.D_GROUP.'/upfile/';
-		$conf['upfilesize']=Y::$conf['upfilesize'];
-		$upobj = new upfileClass($conf);
+		$conf['upfilesize']=Y::$conf['upfilesize'];		
+		$upobj = new Upfile($conf);
 	
 		if($_FILES){
 			$out = null;
@@ -51,13 +53,13 @@ class upimg extends indexbase{
 	}
 	public function control_file(){
 		
-		Y::import('upfile', 'tool');
-		Y::loadTool('image');
+		/*Y::import('upfile', 'tool');
+		Y::loadTool('image');*/
 		$conf = $this->config;
 		$conf['filetype']=Y::$conf['filetype'];
 		$conf['upfilepath']=Y::$conf['upfilepath'].'/tmp/';
 		$conf['upfilesize']=Y::$conf['upfilesize'];
-		$upobj = new upfileClass($conf);
+		$upobj = new Upfile($conf);
 		if($_FILES){
 			$out = null;
 			foreach($_FILES as $key => $name){
@@ -76,8 +78,8 @@ class upimg extends indexbase{
 	}
 	public function control_json_up(){
 
-		Y::import('upfile', 'tool');
-		Y::loadTool('image');
+		/*Y::import('upfile', 'tool');
+		Y::loadTool('image');*/
 		$conf = $this->config;
 		$conf['upfilepath']=Y::$conf['upfilepath'].'/kfile/';
 		if(YRequest::getGet('dir')=='image'){
@@ -88,7 +90,7 @@ class upimg extends indexbase{
 			$conf['upfilesize']=Y::$conf['upfilesize'];
 		}
         
-		$upobj = new upfileClass($conf);
+		$upobj = new Upfile($conf);
 		if($_FILES){
 			$out = null;
 			foreach($_FILES as $key => $name){
