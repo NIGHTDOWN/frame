@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="D:\work2\w2.clpprj">
 	<settings><PM_URL><![CDATA[http://localhost/phpMyAdmin/]]></PM_URL><PM_HOME_URL><![CDATA[http://localhost/phpMyAdmin/]]></PM_HOME_URL><PM_LIBS><![CDATA[]]></PM_LIBS><PM_FTP_CONNECTION><![CDATA[]]></PM_FTP_CONNECTION><PM_FTP_DIR><![CDATA[]]></PM_FTP_DIR><PM_FTP_UPLOAD_ON_SAVE><![CDATA[INT:0]]></PM_FTP_UPLOAD_ON_SAVE></settings><removed value=";"/><added value=""/><lastopfiles>
-		<file name="D:\work2\source\control\admin\frame.php"/>
-		<file name="D:\work2\source\control\adminbase.php"/>
-		<file name="D:\work2\conf\conf.inc.php"/>
-		<file name="D:\work2\conf\config.php"/>
-		<file name="D:\work2\tpl\admin\frame_index.html"/>
-		<file name="D:\work2\source\control\index\product.php"/>
-		<file name="D:\work2\source\model\Amodel.php"/>
-		<file name="D:\work2\source\core\db\daoClass.php"/>
-		<file name="D:\work2\source\core\db\Dbsql.php"/>
-		<file name="D:\work2\source\control\index\index.php"/>
-		<file name="D:\work2\source\core\hook\ads.php"/>
-		<file name="D:\work2\source\model\Imodel.php"/>
-		<file name="D:\work2\tpl\templets\default\hot.html"/>
-		<file name="D:\work2\source\model\index\index.php"/>
+		<file name="D:\work2\source\model\admin\power.php"/>
+		<file name="D:\work2\source\core\shortcut\function.php"/>
+		<file name="D:\work2\source\core\tool\Init.php"/>
+		<file name="D:\work2\conf\admin.inc.php"/>
 	</lastopfiles>
 	<errors version="5.11">
+		<errfile name="D:\work2\tpl\templets\default\product_category.html">
+			<error val="63;24;115;24;2002;1;"/>
+			<error val="57;19;109;19;2002;1;"/>
+			<error val="74;59;126;59;2002;1;"/>
+			<error val="63;59;74;59;2002;1;"/>
+			<error val="57;59;63;59;2002;1;"/>
+			<error val="118;100;125;100;2002;1;"/>
+			<error val="125;100;142;100;2002;1;"/>
+			<error val="132;102;139;102;2002;1;"/>
+			<error val="139;102;156;102;2002;1;"/>
+			<error val="128;103;137;103;2002;1;"/>
+			<error val="137;103;154;103;2002;1;"/>
+			<error val="130;104;137;104;2002;1;"/>
+			<error val="137;104;154;104;2002;1;"/>
+			<error val="93;178;131;178;2002;1;"/>
+			<error val="94;179;164;179;2002;1;"/>
+			<error val="92;181;145;181;2002;1;"/>
+			<error val="75;206;8;207;2002;1;"/>
+			<error val="91;210;162;210;2002;1;"/>
+		</errfile>
+		<errfile name="D:\work2\tpl\templets\default\nav.html">
+			<error val="51;21;55;21;2002;1;"/>
+			<error val="79;21;84;21;2002;1;"/>
+			<error val="95;21;120;21;2002;1;"/>
+			<error val="69;21;75;21;2002;1;"/>
+			<error val="69;230;4;231;2002;1;"/>
+			<error val="55;234;4;235;2002;1;"/>
+			<error val="71;190;5;191;2002;1;"/>
+			<error val="77;191;4;192;2002;1;"/>
+		</errfile>
+		<errfile name="D:\work2\tpl\templets\default\menu.html">
+			<error val="97;13;149;13;2002;1;"/>
+			<error val="112;31;166;31;2002;1;"/>
+			<error val="96;27;150;27;2002;1;"/>
+		</errfile>
 		<errfile name="D:\work2\tpl\templets\default\index_index.html">
 			<error val="23;64;36;64;2002;1;"/>
 			<error val="36;64;48;64;2002;1;"/>
@@ -44,6 +69,17 @@
 			<error val="22;79;35;79;2002;1;"/>
 			<error val="35;79;47;79;2002;1;"/>
 		</errfile>
+		<errfile name="D:\work2\tpl\templets\default\hotsell.html">
+			<error val="88;18;118;18;2002;1;"/>
+			<error val="77;9;8;10;2002;1;"/>
+			<error val="96;13;161;13;2002;1;"/>
+			<error val="88;37;118;37;2002;1;"/>
+			<error val="77;28;8;29;2002;1;"/>
+			<error val="96;32;161;32;2002;1;"/>
+			<error val="88;55;118;55;2002;1;"/>
+			<error val="77;46;8;47;2002;1;"/>
+			<error val="96;50;161;50;2002;1;"/>
+		</errfile>
 		<errfile name="D:\work2\tpl\templets\default\hot.html">
 			<error val="79;11;10;12;2002;1;"/>
 			<error val="78;16;148;16;2002;1;"/>
@@ -56,6 +92,36 @@
 			<error val="71;27;147;27;2002;1;"/>
 			<error val="71;36;147;36;2002;1;"/>
 			<error val="59;57;135;57;2002;1;"/>
+		</errfile>
+		<errfile name="D:\work2\tpl\admin\product_category_index.html">
+			<error val="136;7;148;7;2002;1;"/>
+			<error val="99;8;103;8;2002;1;"/>
+			<error val="54;8;99;8;2002;1;"/>
+			<error val="103;8;117;8;2002;1;"/>
+			<error val="42;9;60;9;2002;1;"/>
+			<error val="36;9;42;9;2002;1;"/>
+			<error val="61;34;90;34;2002;1;"/>
+			<error val="90;34;105;34;2002;1;"/>
+			<error val="105;34;120;34;2002;1;"/>
+			<error val="38;34;61;34;2002;1;"/>
+			<error val="17;44;19;44;2002;1;"/>
+			<error val="38;51;67;51;2002;1;"/>
+			<error val="67;51;81;51;2002;1;"/>
+			<error val="81;51;96;51;2002;1;"/>
+			<error val="15;51;38;51;2002;1;"/>
+			<error val="38;52;67;52;2002;1;"/>
+			<error val="67;52;80;52;2002;1;"/>
+			<error val="80;52;97;52;2002;1;"/>
+			<error val="15;52;38;52;2002;1;"/>
+			<error val="38;59;67;59;2002;1;"/>
+			<error val="67;59;79;59;2002;1;"/>
+			<error val="79;59;96;59;2002;1;"/>
+			<error val="15;59;38;59;2002;1;"/>
+			<error val="109;64;118;64;2002;1;"/>
+			<error val="118;64;147;64;2002;1;"/>
+			<error val="37;70;58;70;2002;1;"/>
+			<error val="62;70;91;70;2002;1;"/>
+			<error val="58;70;62;70;2002;1;"/>
 		</errfile>
 		<errfile name="D:\work2\tpl\admin\frame_index.html">
 			<error val="64;47;77;47;2002;1;"/>
@@ -88,6 +154,8 @@
 			<error val="115;39;136;39;303;2;"/>
 			<error val="86;8;107;8;303;2;"/>
 			<error val="115;39;136;39;303;2;"/>
+			<error val="86;5;107;5;303;2;"/>
+			<error val="115;30;136;30;303;2;"/>
 		</errfile>
 		<errfile name="D:\work2\tpl\_compiled\c_30d6202d156c5b29944eb26f496076ce.php">
 			<error val="8;289;9;289;101;1;"/>
@@ -111,8 +179,6 @@
 			<error val="30;1001;31;1001;901;2;"/>
 		</errfile>
 		<errfile name="D:\work2\source\core\tool\Image.php">
-			<error val="45;535;46;535;901;2;"/>
-			<error val="45;535;46;535;901;2;"/>
 			<error val="45;539;46;539;901;2;"/>
 		</errfile>
 		<errfile name="D:\work2\source\core\tool\Exesql.php">
@@ -318,7 +384,7 @@
 		<file name="D:\work2\tpl\templets\default\res\pcss.css" crc="1479296846"/>
 		<file name="D:\work2\tpl\templets\default\res\page.css" crc="1531292233"/>
 		<file name="D:\work2\tpl\templets\default\res\order.css" crc="1480151010"/>
-		<file name="D:\work2\tpl\templets\default\res\kissy.menu.js" crc="1477579244"/>
+		<file name="D:\work2\tpl\templets\default\res\kissy.menu.js" crc="1542880194"/>
 		<file name="D:\work2\tpl\templets\default\res\kissy.js" crc="1477181908"/>
 		<file name="D:\work2\tpl\templets\default\res\jquery.Sonline.js" crc="1529565271"/>
 		<file name="D:\work2\tpl\templets\default\res\jquery.imagezoom.min.js" crc="1478513960"/>
@@ -347,14 +413,14 @@
 		<file name="D:\work2\tpl\templets\default\purchase_detail.html" crc="1528958320"/>
 		<file name="D:\work2\tpl\templets\default\product_list.html" crc="1542766832"/>
 		<file name="D:\work2\tpl\templets\default\product_detail.html" crc="1530359945"/>
-		<file name="D:\work2\tpl\templets\default\product_category.html" crc="1528981354"/>
+		<file name="D:\work2\tpl\templets\default\product_category.html" crc="1542955878"/>
 		<file name="D:\work2\tpl\templets\default\product_backdetail.html" crc="1528978572"/>
 		<file name="D:\work2\tpl\templets\default\pmenu.html" crc="1531497014"/>
 		<file name="D:\work2\tpl\templets\default\pleft.html" crc="1528982750"/>
 		<file name="D:\work2\tpl\templets\default\phead.html" crc="1530359850"/>
 		<file name="D:\work2\tpl\templets\default\pfoot.html" crc="1528969154"/>
 		<file name="D:\work2\tpl\templets\default\order_list.html" crc="1528980853"/>
-		<file name="D:\work2\tpl\templets\default\nav.html" crc="1531322208"/>
+		<file name="D:\work2\tpl\templets\default\nav.html" crc="1542880574"/>
 		<file name="D:\work2\tpl\templets\default\menu.html" crc="1542610577"/>
 		<file name="D:\work2\tpl\templets\default\login_index.html" crc="1477581242"/>
 		<file name="D:\work2\tpl\templets\default\login_forget.html" crc="1479230560"/>
@@ -364,9 +430,9 @@
 		<file name="D:\work2\tpl\templets\default\jfstore_detail.html" crc="1528816583"/>
 		<file name="D:\work2\tpl\templets\default\index0.html" crc="1527933089"/>
 		<file name="D:\work2\tpl\templets\default\index_index.html" crc="1542611549"/>
-		<file name="D:\work2\tpl\templets\default\hotsell.html" crc="1528982999"/>
-		<file name="D:\work2\tpl\templets\default\hot.html" crc="1542796424"/>
-		<file name="D:\work2\tpl\templets\default\head.html" crc="1529424681"/>
+		<file name="D:\work2\tpl\templets\default\hotsell.html" crc="1542870531"/>
+		<file name="D:\work2\tpl\templets\default\hot.html" crc="1542879995"/>
+		<file name="D:\work2\tpl\templets\default\head.html" crc="1542880280"/>
 		<file name="D:\work2\tpl\templets\default\gg.html" crc="1528969142"/>
 		<file name="D:\work2\tpl\templets\default\foot.html" crc="1528969359"/>
 		<file name="D:\work2\tpl\templets\default\comment_user.html" crc="1528118615"/>
@@ -818,34 +884,79 @@
 		<file name="D:\work2\tpl\admin\ad_index.html" crc="1528285188"/>
 		<file name="D:\work2\tpl\admin\ad_add.html" crc="1528172508"/>
 		<file name="D:\work2\tpl\admin\a_nav.html" crc="1528180300"/>
+		<file name="D:\work2\tpl\_compiled\c_ff4045070496680febe27bd225c88cbf.php" crc="1542857837"/>
 		<file name="D:\work2\tpl\_compiled\c_fe5926391a61973dbbc3bb68aa4df3d9.php" crc="1542784486"/>
 		<file name="D:\work2\tpl\_compiled\c_fc96b54a1fdea40ccaec1fb2160841d1.php" crc="1542704505"/>
+		<file name="D:\work2\tpl\_compiled\c_fbd1ee131172d35fe5b4c105a0005607.php" crc="1542855565"/>
 		<file name="D:\work2\tpl\_compiled\c_fa550cf3203e305c1b0b18e90170a992.php" crc="1542708498"/>
+		<file name="D:\work2\tpl\_compiled\c_f96b1eb8edb26f1581c0ebe09d9fa142.php" crc="1542858379"/>
+		<file name="D:\work2\tpl\_compiled\c_f69bb74934aabe295637df1a94bd0993.php" crc="1542881184"/>
 		<file name="D:\work2\tpl\_compiled\c_f483b41bb937862e26f09e828e99da90.php" crc="1542704505"/>
+		<file name="D:\work2\tpl\_compiled\c_f0b349f0aa029e07c4ed33761ba6b9cd.php" crc="1542857821"/>
 		<file name="D:\work2\tpl\_compiled\c_eb295e1ab19b744898eb83c787bff1be.php" crc="1542708694"/>
+		<file name="D:\work2\tpl\_compiled\c_ea8c91b8393c64485e3efba5e2d3437e.php" crc="1542857821"/>
 		<file name="D:\work2\tpl\_compiled\c_ea8c6fa30bd4490d20ef47546a69673a.php" crc="1542784483"/>
 		<file name="D:\work2\tpl\_compiled\c_e7e86b7e5ad5b8d2c1637c3660995776.php" crc="1542782438"/>
+		<file name="D:\work2\tpl\_compiled\c_e10f3e0451f974a939bf05dd7ade653b.php" crc="1542854740"/>
+		<file name="D:\work2\tpl\_compiled\c_dfc60a697166c5955fee2b7884032b0e.php" crc="1542881170"/>
 		<file name="D:\work2\tpl\_compiled\c_dd89261200b89cb8ce4d998536bb0e76.php" crc="1542772164"/>
 		<file name="D:\work2\tpl\_compiled\c_d7b91d3cb66035855945fcc26e620b04.php" crc="1542772183"/>
 		<file name="D:\work2\tpl\_compiled\c_c80c983efbcda6e7702a650a735ad4ba.php" crc="1542704505"/>
-		<file name="D:\work2\tpl\_compiled\c_c693c080e7ab3d16c2dc600909a2f97d.php" crc="1542708691"/>
+		<file name="D:\work2\tpl\_compiled\c_c7a8e1b9589e4da67fa7b87c7eb27cb4.php" crc="1542858369"/>
+		<file name="D:\work2\tpl\_compiled\c_c693c080e7ab3d16c2dc600909a2f97d.php" crc="1542955933"/>
+		<file name="D:\work2\tpl\_compiled\c_c4d4065fc1a8e36d311fc40744451787.php" crc="1542858679"/>
 		<file name="D:\work2\tpl\_compiled\c_c4ace32bc488f4d4657156839862731e.php" crc="1542779020"/>
+		<file name="D:\work2\tpl\_compiled\c_c1127d14660a312481d0c55cd8744812.php" crc="1542857837"/>
 		<file name="D:\work2\tpl\_compiled\c_c009c874a8e2aa6bcfa6f48675aff466.php" crc="1542778972"/>
+		<file name="D:\work2\tpl\_compiled\c_bfe596fbfdafed9118422f074cae729c.php" crc="1542857822"/>
+		<file name="D:\work2\tpl\_compiled\c_bd87f13c0df5adc6a33fb60f70db8bc6.php" crc="1542796162"/>
+		<file name="D:\work2\tpl\_compiled\c_b228c692fc9c7c487ba2c5ab88558774.php" crc="1542858622"/>
+		<file name="D:\work2\tpl\_compiled\c_b040b927a0fe6a48f93775ed39cacc73.php" crc="1542857822"/>
+		<file name="D:\work2\tpl\_compiled\c_a8361cb72a3963e2775d9981ddb94722.php" crc="1542881226"/>
+		<file name="D:\work2\tpl\_compiled\c_a800e02f8cc5e9eebd7282e0ce3ed20c.php" crc="1542857821"/>
 		<file name="D:\work2\tpl\_compiled\c_a1eb3502fd6b3548fad2ee52049e034e.php" crc="1542782394"/>
-		<file name="D:\work2\tpl\_compiled\c_8187ae7740b388f881f2db0303b8cfd0.php" crc="1542704505"/>
-		<file name="D:\work2\tpl\_compiled\c_6b2621e095fc22368ce18c6435e6dc84.php" crc="1542704506"/>
-		<file name="D:\work2\tpl\_compiled\c_5bff21b68017bb5ae2c9c93877cb6356.php" crc="1542704506"/>
+		<file name="D:\work2\tpl\_compiled\c_9f6e77d7e4073755ef625a95ba7092c3.php" crc="1542856132"/>
+		<file name="D:\work2\tpl\_compiled\c_9da877d55820625ec482bb71f94e7cfd.php" crc="1542857837"/>
+		<file name="D:\work2\tpl\_compiled\c_97a994a40aa6f8f7ac1be241709c313d.php" crc="1542850728"/>
+		<file name="D:\work2\tpl\_compiled\c_954f867164e4549bec79a3059a7f5fe1.php" crc="1542857837"/>
+		<file name="D:\work2\tpl\_compiled\c_9194e39b7372c5b274ae636e0a113b84.php" crc="1542881179"/>
+		<file name="D:\work2\tpl\_compiled\c_8f6fd7a1fb5c66cfa424a0d00add6066.php" crc="1542858664"/>
+		<file name="D:\work2\tpl\_compiled\c_88e19fd05a93430f25857622b62a60f0.php" crc="1542854740"/>
+		<file name="D:\work2\tpl\_compiled\c_81c6db2cb30acc4eb5482a02ec9bdf3e.php" crc="1542854748"/>
+		<file name="D:\work2\tpl\_compiled\c_8187ae7740b388f881f2db0303b8cfd0.php" crc="1542880443"/>
+		<file name="D:\work2\tpl\_compiled\c_81098f78e53a485643676f2ee0b3d78e.php" crc="1542855565"/>
+		<file name="D:\work2\tpl\_compiled\c_7d89a5dac9149832dc411576ce4390c6.php" crc="1542856134"/>
+		<file name="D:\work2\tpl\_compiled\c_796484a8fd1330c089d48e5b8877eca3.php" crc="1542855565"/>
+		<file name="D:\work2\tpl\_compiled\c_75c76f88c897abfd79df7c5e8fab9afb.php" crc="1542858537"/>
+		<file name="D:\work2\tpl\_compiled\c_7467123d3c7f88440d1bfd57324b1a0d.php" crc="1542858545"/>
+		<file name="D:\work2\tpl\_compiled\c_6b2621e095fc22368ce18c6435e6dc84.php" crc="1542879996"/>
+		<file name="D:\work2\tpl\_compiled\c_6afc2bd0bf6adbdfd1ed68b3e0a9a7d2.php" crc="1542856920"/>
+		<file name="D:\work2\tpl\_compiled\c_6adb8ef02d651365c4b06bc707cf6d9b.php" crc="1542796160"/>
+		<file name="D:\work2\tpl\_compiled\c_5bff21b68017bb5ae2c9c93877cb6356.php" crc="1542870547"/>
+		<file name="D:\work2\tpl\_compiled\c_58e2a8211cfa7f019fbe7cda00e5b713.php" crc="1542881178"/>
+		<file name="D:\work2\tpl\_compiled\c_567edc0f0195922c6fd8301c88ad9b6d.php" crc="1542881171"/>
+		<file name="D:\work2\tpl\_compiled\c_5458c03ce9cf085ce3aa16328ecac621.php" crc="1542855936"/>
+		<file name="D:\work2\tpl\_compiled\c_542393c576284bacefaeef9860312306.php" crc="1542859354"/>
+		<file name="D:\work2\tpl\_compiled\c_5307d69672929d5a6e6b579d63738a36.php" crc="1542856682"/>
 		<file name="D:\work2\tpl\_compiled\c_51707506963f51f96affa214038cd441.php" crc="1542704505"/>
 		<file name="D:\work2\tpl\_compiled\c_4fd0aed2ea64e2e96fe059030758e9d0.php" crc="1542782440"/>
+		<file name="D:\work2\tpl\_compiled\c_3a278ebbb00bcc091fc4287f0c21184c.php" crc="1542869102"/>
 		<file name="D:\work2\tpl\_compiled\c_34a6a139156c036e1e84c836b8076265.php" crc="1542778972"/>
-		<file name="D:\work2\tpl\_compiled\c_30d6202d156c5b29944eb26f496076ce.php" crc="1542704505"/>
+		<file name="D:\work2\tpl\_compiled\c_331a7ce9c500a1417aadcbd34284d7cb.php" crc="1542858622"/>
+		<file name="D:\work2\tpl\_compiled\c_30d6202d156c5b29944eb26f496076ce.php" crc="1542880677"/>
+		<file name="D:\work2\tpl\_compiled\c_2cfb3f62292ed6074bb802d9998438ca.php" crc="1542857821"/>
+		<file name="D:\work2\tpl\_compiled\c_2bfac0c46d85f966a0e85e5894d76349.php" crc="1542856682"/>
+		<file name="D:\work2\tpl\_compiled\c_2555bc50f719930278ab8b8f7f08c942.php" crc="1542854740"/>
 		<file name="D:\work2\tpl\_compiled\c_24eeb2201c25081b5cd7de1e12732e9e.php" crc="1542778972"/>
+		<file name="D:\work2\tpl\_compiled\c_1f393aecc806eedbd51c7b832fc9960e.php" crc="1542856682"/>
 		<file name="D:\work2\tpl\_compiled\c_1e162c6089a3faa72e420ca9ea404f4e.php" crc="1542786469"/>
 		<file name="D:\work2\tpl\_compiled\c_1bc398c3089013cfccf969cead87b0d9.php" crc="1542782438"/>
 		<file name="D:\work2\tpl\_compiled\c_1b5d3289fec56742fd7cbf7dc1e562f9.php" crc="1542764695"/>
+		<file name="D:\work2\tpl\_compiled\c_1933ea0a73b1f96eed49fd1334b8a3d4.php" crc="1542854752"/>
 		<file name="D:\work2\tpl\_compiled\c_125cf935d62f1b02c0f118f5d7ee19ae.php" crc="1542704505"/>
 		<file name="D:\work2\tpl\_compiled\c_0d785c4d94b058887f33c9dccac4a09d.php" crc="1542704505"/>
 		<file name="D:\work2\tpl\_compiled\c_059668193a00d6d9a8a19b1afcfca36d.php" crc="1542704505"/>
+		<file name="D:\work2\tpl\_compiled\c_01d9ca93b69286300e314f041638b4a4.php" crc="1542854758"/>
 		<file name="D:\work2\source\sock\user\wxpay.php" crc="1524323385"/>
 		<file name="D:\work2\source\sock\user\mobilezfbpay.php" crc="1528356815"/>
 		<file name="D:\work2\source\sock\user\mobilewxpay.php" crc="1528354026"/>
@@ -890,7 +1001,7 @@
 		<file name="D:\work2\source\model\index\sendinfo.php" crc="1542253469"/>
 		<file name="D:\work2\source\model\index\send.php" crc="1542253475"/>
 		<file name="D:\work2\source\model\index\scategory.php" crc="1542253481"/>
-		<file name="D:\work2\source\model\index\qr.php" crc="1542253486"/>
+		<file name="D:\work2\source\model\index\qr.php" crc="1542856839"/>
 		<file name="D:\work2\source\model\index\power.php" crc="1542253495"/>
 		<file name="D:\work2\source\model\index\plog.php" crc="1542612535"/>
 		<file name="D:\work2\source\model\index\pcate.php" crc="1542253527"/>
@@ -907,8 +1018,8 @@
 		<file name="D:\work2\source\model\index\log.php" crc="1542253254"/>
 		<file name="D:\work2\source\model\index\level.php" crc="1542253263"/>
 		<file name="D:\work2\source\model\index\kf.php" crc="1542253271"/>
-		<file name="D:\work2\source\model\index\keyword.php" crc="1542769215"/>
-		<file name="D:\work2\source\model\index\index.php" crc="1542796130"/>
+		<file name="D:\work2\source\model\index\keyword.php" crc="1542881102"/>
+		<file name="D:\work2\source\model\index\index.php" crc="1542876157"/>
 		<file name="D:\work2\source\model\index\hotword.php" crc="1542253293"/>
 		<file name="D:\work2\source\model\index\history.php" crc="1542253309"/>
 		<file name="D:\work2\source\model\index\friend.php" crc="1542253367"/>
@@ -919,7 +1030,7 @@
 		<file name="D:\work2\source\model\index\ad.php" crc="1542253399"/>
 		<file name="D:\work2\source\model\admin\userlevel.php" crc="1542260243"/>
 		<file name="D:\work2\source\model\admin\user.php" crc="1542260249"/>
-		<file name="D:\work2\source\model\admin\tree.php" crc="1542260260"/>
+		<file name="D:\work2\source\model\admin\tree.php" crc="1542871979"/>
 		<file name="D:\work2\source\model\admin\tmpcode.php" crc="1542260268"/>
 		<file name="D:\work2\source\model\admin\sjb.php" crc="1542260679"/>
 		<file name="D:\work2\source\model\admin\shoplevel.php" crc="1542260685"/>
@@ -948,7 +1059,7 @@
 		<file name="D:\work2\source\model\admin\index.php" crc="1542620972"/>
 		<file name="D:\work2\source\model\admin\backstage_menu.php" crc="1542260233"/>
 		<file name="D:\work2\source\model\Imodel.php" crc="1542005745"/>
-		<file name="D:\work2\source\model\Amodel.php" crc="1542005751"/>
+		<file name="D:\work2\source\model\Amodel.php" crc="1542952299"/>
 		<file name="D:\work2\source\core\tool\simplehtmldom\testcase\reader\selector_testcase.php" crc="1282018434"/>
 		<file name="D:\work2\source\core\tool\simplehtmldom\testcase\reader\performance_test.php" crc="1282018434"/>
 		<file name="D:\work2\source\core\tool\simplehtmldom\testcase\reader\memory_test.php" crc="1282018434"/>
@@ -995,8 +1106,7 @@
 		<file name="D:\work2\source\core\tool\simplehtmldom\change_log.txt" crc="1347264952"/>
 		<file name="D:\work2\source\core\tool\Valid.php" crc="1541746428"/>
 		<file name="D:\work2\source\core\tool\Url.php" crc="1542784593"/>
-		<file name="D:\work2\source\core\tool\Upload.php" crc="1541745475"/>
-		<file name="D:\work2\source\core\tool\Upfile.php" crc="1541747738"/>
+		<file name="D:\work2\source\core\tool\Upfile.php" crc="1542954193"/>
 		<file name="D:\work2\source\core\tool\Smtp.php" crc="1541745632"/>
 		<file name="D:\work2\source\core\tool\Sms.php" crc="1541747223"/>
 		<file name="D:\work2\source\core\tool\simple_html_dom.php" crc="1460614582"/>
@@ -1008,15 +1118,15 @@
 		<file name="D:\work2\source\core\tool\Pop3.php" crc="1541746052"/>
 		<file name="D:\work2\source\core\tool\Phpmailer.php" crc="1541746139"/>
 		<file name="D:\work2\source\core\tool\Page.php" crc="1542679108"/>
-		<file name="D:\work2\source\core\tool\Out.php" crc="1542247243"/>
+		<file name="D:\work2\source\core\tool\Out.php" crc="1542855239"/>
 		<file name="D:\work2\source\core\tool\Mail.php" crc="1541747084"/>
 		<file name="D:\work2\source\core\tool\Json.php" crc="1541745672"/>
-		<file name="D:\work2\source\core\tool\Init.php" crc="1541746789"/>
-		<file name="D:\work2\source\core\tool\Image.php" crc="1542778604"/>
+		<file name="D:\work2\source\core\tool\Init.php" crc="1542960065"/>
+		<file name="D:\work2\source\core\tool\Image.php" crc="1542856865"/>
 		<file name="D:\work2\source\core\tool\Http.php" crc="1541746836"/>
 		<file name="D:\work2\source\core\tool\Handle.php" crc="1542269976"/>
 		<file name="D:\work2\source\core\tool\Filter.php" crc="1542168144"/>
-		<file name="D:\work2\source\core\tool\File.php" crc="1541747809"/>
+		<file name="D:\work2\source\core\tool\File.php" crc="1542937018"/>
 		<file name="D:\work2\source\core\tool\Exesql.php" crc="1541746248"/>
 		<file name="D:\work2\source\core\tool\Domain.php" crc="1541746400"/>
 		<file name="D:\work2\source\core\tool\Curl.php" crc="1541747391"/>
@@ -1098,7 +1208,7 @@
 		<file name="D:\work2\source\core\template\src\class.template.php" crc="1542353455"/>
 		<file name="D:\work2\source\core\template\src\class.config.php" crc="1542166723"/>
 		<file name="D:\work2\source\core\template\src\class.compiler.php" crc="1542354924"/>
-		<file name="D:\work2\source\core\shortcut\function.php" crc="1542779280"/>
+		<file name="D:\work2\source\core\shortcut\function.php" crc="1542959992"/>
 		<file name="D:\work2\source\core\service\Output.php" crc="1542784099"/>
 		<file name="D:\work2\source\core\service\Input.php" crc="1542766321"/>
 		<file name="D:\work2\source\core\safe\safe.php" crc="1460614576"/>
@@ -1150,7 +1260,7 @@
 		<file name="D:\work2\source\core\lib\Socket.php" crc="1541748449"/>
 		<file name="D:\work2\source\core\lib\Route.php" crc="1541748465"/>
 		<file name="D:\work2\source\core\lib\Option.php" crc="1542591015"/>
-		<file name="D:\work2\source\core\lib\Log.php" crc="1541748755"/>
+		<file name="D:\work2\source\core\lib\Log.php" crc="1542951325"/>
 		<file name="D:\work2\source\core\lib\loader.php" crc="1541748777"/>
 		<file name="D:\work2\source\core\lib\Lang.php" crc="1542768775"/>
 		<file name="D:\work2\source\core\lib\Hook.php" crc="1541748806"/>
@@ -1166,7 +1276,7 @@
 		<file name="D:\work2\source\core\hook\ads.php" crc="1542795219"/>
 		<file name="D:\work2\source\core\hook\ac.php" crc="1542167512"/>
 		<file name="D:\work2\source\core\db\Dbsql.php" crc="1542791915"/>
-		<file name="D:\work2\source\core\db\daoClass.php" crc="1542796027"/>
+		<file name="D:\work2\source\core\db\daoClass.php" crc="1542953194"/>
 		<file name="D:\work2\source\core\cache\Nosql.php" crc="1541743875"/>
 		<file name="D:\work2\source\core\cache\Mysql.php" crc="1542600026"/>
 		<file name="D:\work2\source\core\cache\File.php" crc="1541743879"/>
@@ -2396,12 +2506,12 @@
 		<file name="D:\work2\source\core\api\2\lib\WxPay.Config .php" crc="1528350737"/>
 		<file name="D:\work2\source\core\api\2\lib\WxPay.Api.php" crc="1524219380"/>
 		<file name="D:\work2\source\core\api\2\lib\log.php" crc="1427189114"/>
-		<file name="D:\work2\source\core\api\2\api.php" crc="1530770533"/>
+		<file name="D:\work2\source\core\api\2\api.php" crc="1542856406"/>
 		<file name="D:\work2\source\core\tpl.php" crc="1542352183"/>
 		<file name="D:\work2\source\core\run.php" crc="1542771894"/>
 		<file name="D:\work2\source\core\enter.php" crc="1542002627"/>
-		<file name="D:\work2\source\core\core.php" crc="1542262386"/>
-		<file name="D:\work2\source\core\Application.php" crc="1542772009"/>
+		<file name="D:\work2\source\core\core.php" crc="1542856563"/>
+		<file name="D:\work2\source\core\Application.php" crc="1542943635"/>
 		<file name="D:\work2\source\control\user\upimg.php" crc="1542703366"/>
 		<file name="D:\work2\source\control\user\tk.php" crc="1542703374"/>
 		<file name="D:\work2\source\control\user\shop.php" crc="1542703397"/>
@@ -2411,7 +2521,7 @@
 		<file name="D:\work2\source\control\user\msg.php" crc="1542703434"/>
 		<file name="D:\work2\source\control\user\message.php" crc="1542703442"/>
 		<file name="D:\work2\source\control\user\jf.php" crc="1542703448"/>
-		<file name="D:\work2\source\control\user\index.php" crc="1542703451"/>
+		<file name="D:\work2\source\control\user\index.php" crc="1542856115"/>
 		<file name="D:\work2\source\control\user\comment.php" crc="1542703457"/>
 		<file name="D:\work2\source\control\user\collect.php" crc="1542703475"/>
 		<file name="D:\work2\source\control\user\cart.php" crc="1542703483"/>
@@ -2426,33 +2536,33 @@
 		<file name="D:\work2\source\control\shop\groupon.php" crc="1542703621"/>
 		<file name="D:\work2\source\control\shop\comment.php" crc="1542703628"/>
 		<file name="D:\work2\source\control\shop\category.php" crc="1542703635"/>
-		<file name="D:\work2\source\control\public\night.php" crc="1542764256"/>
-		<file name="D:\work2\source\control\pay\withdraw.php" crc="1530370116"/>
-		<file name="D:\work2\source\control\pay\rz.php" crc="1481539570"/>
-		<file name="D:\work2\source\control\pay\recharge.php" crc="1481201684"/>
-		<file name="D:\work2\source\control\pay\payset.php" crc="1528292885"/>
-		<file name="D:\work2\source\control\pay\pay.php" crc="1531191454"/>
-		<file name="D:\work2\source\control\pay\log.php" crc="1530368864"/>
-		<file name="D:\work2\source\control\pay\index.php" crc="1531579110"/>
-		<file name="D:\work2\source\control\pay\card.php" crc="1527324138"/>
-		<file name="D:\work2\source\control\index\upimg.php" crc="1542247630"/>
+		<file name="D:\work2\source\control\public\night.php" crc="1542952678"/>
+		<file name="D:\work2\source\control\pay\withdraw.php" crc="1542856044"/>
+		<file name="D:\work2\source\control\pay\rz.php" crc="1542856053"/>
+		<file name="D:\work2\source\control\pay\recharge.php" crc="1542856061"/>
+		<file name="D:\work2\source\control\pay\payset.php" crc="1542856067"/>
+		<file name="D:\work2\source\control\pay\pay.php" crc="1542858359"/>
+		<file name="D:\work2\source\control\pay\log.php" crc="1542856082"/>
+		<file name="D:\work2\source\control\pay\index.php" crc="1542856087"/>
+		<file name="D:\work2\source\control\pay\card.php" crc="1542856093"/>
+		<file name="D:\work2\source\control\index\upimg.php" crc="1542942846"/>
 		<file name="D:\work2\source\control\index\single.php" crc="1542703072"/>
 		<file name="D:\work2\source\control\index\shop.php" crc="1542612220"/>
-		<file name="D:\work2\source\control\index\search.php" crc="1542247664"/>
+		<file name="D:\work2\source\control\index\search.php" crc="1542858615"/>
 		<file name="D:\work2\source\control\index\reg.php" crc="1542247668"/>
 		<file name="D:\work2\source\control\index\purchase.php" crc="1542771665"/>
-		<file name="D:\work2\source\control\index\product.php" crc="1542792918"/>
+		<file name="D:\work2\source\control\index\product.php" crc="1542955653"/>
 		<file name="D:\work2\source\control\index\order.php" crc="1542247685"/>
 		<file name="D:\work2\source\control\index\merchant.php" crc="1542247693"/>
-		<file name="D:\work2\source\control\index\login.php" crc="1542778526"/>
+		<file name="D:\work2\source\control\index\login.php" crc="1542855002"/>
 		<file name="D:\work2\source\control\index\jump.php" crc="1542247702"/>
-		<file name="D:\work2\source\control\index\jfstore.php" crc="1542247711"/>
-		<file name="D:\work2\source\control\index\index.php" crc="1542795658"/>
-		<file name="D:\work2\source\control\index\comment.php" crc="1542612601"/>
-		<file name="D:\work2\source\control\index\category.php" crc="1542247728"/>
-		<file name="D:\work2\source\control\index\cart.php" crc="1542708741"/>
-		<file name="D:\work2\source\control\index\buy.php" crc="1542679195"/>
-		<file name="D:\work2\source\control\index\article.php" crc="1542678956"/>
+		<file name="D:\work2\source\control\index\jfstore.php" crc="1542854489"/>
+		<file name="D:\work2\source\control\index\index.php" crc="1542869241"/>
+		<file name="D:\work2\source\control\index\comment.php" crc="1542868637"/>
+		<file name="D:\work2\source\control\index\category.php" crc="1542858534"/>
+		<file name="D:\work2\source\control\index\cart.php" crc="1542869091"/>
+		<file name="D:\work2\source\control\index\buy.php" crc="1542859055"/>
+		<file name="D:\work2\source\control\index\article.php" crc="1542852805"/>
 		<file name="D:\work2\source\control\admin\withdraw.php" crc="1542612821"/>
 		<file name="D:\work2\source\control\admin\userlog.php" crc="1542612879"/>
 		<file name="D:\work2\source\control\admin\user.php" crc="1542678292"/>
@@ -2490,8 +2600,8 @@
 		<file name="D:\work2\source\control\admin\backstagemenu.php" crc="1542613339"/>
 		<file name="D:\work2\source\control\admin\aysn.php" crc="1542613348"/>
 		<file name="D:\work2\source\control\admin\attribute.php" crc="1542613356"/>
-		<file name="D:\work2\source\control\admin\articlecategory.php" crc="1542613369"/>
-		<file name="D:\work2\source\control\admin\article.php" crc="1542613379"/>
+		<file name="D:\work2\source\control\admin\articlecategory.php" crc="1542952187"/>
+		<file name="D:\work2\source\control\admin\article.php" crc="1542953333"/>
 		<file name="D:\work2\source\control\admin\area.php" crc="1542613386"/>
 		<file name="D:\work2\source\control\admin\ajax.php" crc="1542613391"/>
 		<file name="D:\work2\source\control\admin\ads.php" crc="1542613410"/>
@@ -2501,19 +2611,19 @@
 		<file name="D:\work2\source\control\admin\ad.php" crc="1542613434"/>
 		<file name="D:\work2\source\control\userbase.php" crc="1542703214"/>
 		<file name="D:\work2\source\control\shopbase.php" crc="1542180068"/>
-		<file name="D:\work2\source\control\indexbase.php" crc="1542703122"/>
+		<file name="D:\work2\source\control\indexbase.php" crc="1542865554"/>
 		<file name="D:\work2\source\control\adminbase.php" crc="1542785845"/>
-		<file name="D:\work2\source\compile\define.inc.php" crc="1542784479"/>
+		<file name="D:\work2\source\compile\define.inc.php" crc="1542945470"/>
 		<file name="D:\work2\source\user.php" crc="1542190228"/>
 		<file name="D:\work2\source\shop.php" crc="1478081150"/>
 		<file name="D:\work2\source\pay.php" crc="1541679015"/>
 		<file name="D:\work2\source\index.php" crc="1542188421"/>
 		<file name="D:\work2\source\admin.php" crc="1460614564"/>
-		<file name="D:\work2\lang\cn\index\index_index.php" crc="1542769292"/>
+		<file name="D:\work2\lang\cn\index\index_index.php" crc="1542852836"/>
 		<file name="D:\work2\lang\cn\index.php" crc="1542262205"/>
 		<file name="D:\work2\conf\db.inc.php" crc="1541766424"/>
 		<file name="D:\work2\conf\config.php" crc="1542703976"/>
-		<file name="D:\work2\conf\conf.inc.php" crc="1542786197"/>
+		<file name="D:\work2\conf\conf.inc.php" crc="1542951821"/>
 		<file name="D:\work2\conf\admin.inc.php" crc="1467193322"/>
 		<file name="D:\work2\callback\syncpayback.4.php" crc="1481204398"/>
 		<file name="D:\work2\callback\syncpayback.3.php" crc="1528357950"/>
@@ -2525,7 +2635,7 @@
 		<file name="D:\work2\update.php" crc="1460734839"/>
 		<file name="D:\work2\opsock.php" crc="1530003625"/>
 		<file name="D:\work2\install.php" crc="1460614563"/>
-		<file name="D:\work2\index.php" crc="1541734412"/>
+		<file name="D:\work2\index.php" crc="1542939954"/>
 		<file name="D:\work2\httpd.ini" crc="1460614563"/>
 		<file name="D:\work2\bom.php" crc="1479230536"/>
 		<file name="D:\work2\admin.php" crc="1542616514"/>

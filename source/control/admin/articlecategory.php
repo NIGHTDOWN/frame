@@ -20,11 +20,9 @@ class articlecategory extends adminbase
         $c=D_MEDTHOD;	$a=D_FUNC;
         
         $model=T($this->db_name);
-    
+     	
         $data= $model->get_child($this->key);
-        
-
-        
+          
 	    $var_array=array($c=>$data,'page'=>$page);
         $this->view(null,$var_array);
     }

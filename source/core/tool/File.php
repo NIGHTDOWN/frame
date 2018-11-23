@@ -168,10 +168,10 @@ class  File
         for ($ii = 1;$ii <= $i;$ii++) {
           $edirm = $edirm.'/'.$edir[$ii];
         }
-        if (file_exists(ROOT.$edirm) && is_dir(ROOT.$edirm)) {
+        if (file_exists($edirm) && is_dir($edirm)) {
         }
         else {
-          @mkdir (ROOT.$edirm,0777);
+          @mkdir ($edirm,0777);
         }
       }
     }

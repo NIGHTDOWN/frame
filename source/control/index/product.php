@@ -95,7 +95,7 @@ class product extends indexbase
 		$w = get(array('int'=>array('catid')));
 		$this->vlog($this->get_userid());
 		$pcat = null;
-		if(isset($w['catid']))
+		if(($w['catid']))
 		{
 
 			$p = M('tree','am')->getptree('product_category_tree',$w['catid']);
@@ -141,14 +141,7 @@ class product extends indexbase
 		/*$where['storeflag']=0;*/
 		$get    = get(array('string'=>array('word'),'int'   =>array('price1','price2')));
 		
-		if(isset($get['price1']))
-		{
-			$where['price'] = array($get['price1']);
-		}
-		if(isset($get['price2']))
-		{
-			$where['price'] = array('1'=>$get['price2']);
-		}
+		
 		
 		/*$where['avalue']=$searchattr;*/
 		$insert['address']='';
@@ -163,6 +156,17 @@ class product extends indexbase
 
 		$attr = get(array('string'=>array('att1','att2','att3','att4','att5')));
 		$model = T('product')->set_field('v.*,merchantname')->order_by(array('f'=>'productid','s'=>'down'))->set_global_where($where)->join_table(array('t'=>'merchant','muid','muid'),1)->join_table(array('t'=>'product_attr','productid','productid'),1);
+		if(isset($get['price1']) && $get['price1']!=='')
+		{
+			/*$price['price'] = array($get['price1']);*/
+			$model=$model->set_where(['price'=>$get['price1']],'>=');
+		}
+		if(isset($get['price2'])&& $get['price2']!=='')
+		{
+			/*$price['price'] = array('1'=>$get['price2']);*/
+			$model=$model->set_where(['price'=>$get['price2']],'<=');
+		}
+		
 		
 		foreach($attr as $v=>$list){
 			if($list=='null'){
@@ -177,7 +181,7 @@ class product extends indexbase
 //			$model = $model->set_where('v.catid in('.implode(',',$c).')');
 			$model = $model->set_where(['catid'=>$c],'in');
 		}
-		if(isset($get['word']))
+		if(($get['word']))
 		{
 			$word = tohex($get['word']);
 			$model = $model->set_where("match(productname) against ('*{$word}*' IN BOOLEAN MODE)");
@@ -220,8 +224,8 @@ class product extends indexbase
 		$byattr=$attrwhere;
 		unset($byattr['up']);
 		unset($byattr['down']);
+		
 		$data = array('pcat'       =>$pcat,'ccat'       =>$ccat,'data'       =>$data,'page'       =>$page,'where'      =>$where2,'by'         =>$by,'attribute'  =>@$attribute,'attrwhere'  =>$attrwhere,'byattr'=>$byattr,'hot'        =>$hot);
-
 		$this->view(null,$data);
 	}
 	public function control_collect()

@@ -98,8 +98,8 @@ class daoClass
     if ($index) {
       $val       = intval($val);
       $cachename = $this->tablename . "_tree" . $val;
-
-      $cache     = $this->cache;
+		
+      $cache     = Y::$cache;
       list($bool, $info) = $cache->get($cachename);
       if (($bool) && $cachebool) {
       }
@@ -820,20 +820,19 @@ class daoClass
       $this->set_limit_where($w);
       return $this;
     }
-
+    
     if ($fh == null) {
       if ($this->getbs() != 'ASC') {
-        $fh = "<=";
+        $fh = ">=";
       }
       else {
-        $fh = ">=";
+        $fh = "<=";
       }
 
     }
     else {
-      $fh = $fh;
+      $fh = '>=';
     }
-
     $ha = explode('.',$key);
     if ($ha[1]) {
       $w = "$key $fh {$limit[0]}";
@@ -841,12 +840,7 @@ class daoClass
     else {
       $w = "v.$key $fh {$limit[0]}";
     }
-
-
     $this->set_limit_where($w);
-
-
-
     return $this;
     //以下是旧版limit 不适用大数据读取
     /*$l = null;

@@ -28,14 +28,9 @@ class APP
     $a = Filter::filterXSS(Request::getGpc('a'));
     $c = Filter::filterXSS(Request::getGpc('c'));
     $m = $m?$m:'index';$c = $c?$c:'index';$a = $a?$a:'run';
-
-
-
     if (!defined('D_GROUP')) {
       define('D_GROUP',$m);
-
     }
-
     if (!defined('D_MEDTHOD')) {
       define('D_MEDTHOD',$c);
     }
@@ -45,16 +40,12 @@ class APP
     //加载对应语言包
     Lang::load();
     $appfile = ROOT . "./source/".D_GROUP.".php";
-
     if (!file_exists($appfile)) {
       error("Application ".D_GROUP." is not found!");
     }
     else {
-
       self::execControl();
     }
-
-
   }
 
   private static function execControl()

@@ -4,6 +4,7 @@
 namespace ng169\control\admin;
 
 use ng169\control\adminbase;
+use ng169\tool\Out as YOut;
 checktop();
 class article extends adminbase
 {
@@ -21,7 +22,7 @@ class article extends adminbase
         
         $model=T($this->db_name)->join_table(array('t'=>'article_category','catid','catid'),1)->join_table(array('t'=>'area','cityid','areaid'),1)->order_by(array('f'=>'articleid','s'=>'down'));
         
-        $model=$this->init_where($model);
+        $model=$this->init_where($model,['title','articleid','catid']);
         
         
         $model=$this->init_order($model);
@@ -30,7 +31,7 @@ class article extends adminbase
         
         $data= $model->set_limit($this->get_page_limit())->get_all();
         
-        $model = M('log','am')->log(1);
+        /*$model = M('log','am')->log(1);*/
         
 	    $var_array=array($c=>$data,'page'=>$page);
         $this->view(null,$var_array);

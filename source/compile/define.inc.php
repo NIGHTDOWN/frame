@@ -54,5 +54,7 @@ define('G_URLPRE','.html');
 define('G_LANG','cn');
 define('G_DB_TYPE','mysql');
 define('G_ALLOW_ORIGIN','1');
+define('G_UPFILE_CHECK','0');
+define('G_UPFILE_CHECK_DEAL','1');
 
 ?>

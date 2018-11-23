@@ -345,7 +345,7 @@ class AModel extends Y
             
             return $this->table->get_child($index[0], $index[1], $index[2],$cache);
         }
-        
+       
         return $this->table->get_child($index, $id, $parent,$cache);
 
     }

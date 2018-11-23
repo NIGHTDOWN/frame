@@ -93,7 +93,7 @@ function gourl($url){
 function load_mod($mod_dir){
 /*	Y::loadTool('init');*/
  
-	return  YInit::make_conf_file($mod_dir);
+	return  YInit::get($mod_dir);
 }
 
 function get_mod($mod_dir){

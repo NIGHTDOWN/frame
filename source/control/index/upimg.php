@@ -22,32 +22,24 @@ class upimg extends indexbase{
 		$conf['filetype']=Y::$conf['filetype'];
 		$conf['upfilepath']=Y::$conf['upfilepath'].'/'.D_GROUP.'/upfile/';
 		$conf['upfilesize']=Y::$conf['upfilesize'];		
-		$upobj = new Upfile($conf);
-	
+		$upobj = new Upfile($conf);	
+		
 		if($_FILES){
 			$out = null;
 			foreach($_FILES as $key => $name){
+				
 				$a = $upobj->upload($key);
-                
+               
 				if(!$a['flag']){
 					/*M('log','am')->log(false,null,null,null,$a.error);*/
 					out($a['error'],null,$a['flag']);
 				}
 				if( $a['data']['source']){
-                    
-                    
-					/*if(YImage::isimg($a['data']['source'])){
-						$sizes=explode(',',Y::$conf['max_img_size']);
-						$size['width']=$sizes[0];
-						$size['height']=$sizes[1];
-						YImage::makeThumb($a['data']['source'],$size,$a['data']['source']);
-                    
-					}*/
+                  
 					$f .= $a['data']['source'].',';
 				}
 			}
 			$f=trim($f,',');
-			/*M('log','am')->log(true,null,null,null,$f);*/
 			out($f,null,1);
 		}
 	}

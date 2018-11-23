@@ -1,6 +1,6 @@
 <?php /* "ngtpl[start]:tpl/templets/default/product_category.html:[end]" 
 
-	//NG框架模板引擎;仅适用本系统框架; 2018-11-20 18:11:31 */ ?>
+	//NG框架模板引擎;仅适用本系统框架; 2018-11-23 14:52:13 */ ?>
 
   <?php $_templatelite_tpl_vars = $this->_vars;
 echo $this->_fetch_compile_include($this->_vars['indextpl']."head.html", array());
@@ -21,13 +21,10 @@ unset($_templatelite_tpl_vars);
 	<script type="text/javascript" src="<?php echo $this->_vars['indextpl']; ?>
 res/jquery.flexslider-min.js"></script>
 	<link href="<?php echo $this->_vars['indextpl']; ?>
-res/skin.css" rel="stylesheet" type="text/css">
-	
+res/skin.css" rel="stylesheet" type="text/css">	
 	<link href="<?php echo $this->_vars['indextpl']; ?>
 res/pcss.css" rel="stylesheet" type="text/css">
-	<div class="w">
-    
-    
+	<div class="w">   
     	     <?php if ($this->_vars['pcat']): ?>   
                 <div class="detailnav">
                 <strong><a href="<?php echo \ng169\hook\url(array('mod' => 'index'), $this);?>">首页</a></strong>

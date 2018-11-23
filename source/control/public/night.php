@@ -8,7 +8,6 @@ use ng169\tool\Page as YPage;
 use ng169\tool\Cookie as YCookie;
 use ng169\tool\Out as YOut;
 checktop();
-
 class general extends Y
 {
   public $tpl_path, $page_size   = 28,$pagestartid = 0, $log,$pagearray   = array(),$pagekey = null,$fh = null;
@@ -17,22 +16,18 @@ class general extends Y
   public $orderby = array();
   /**
   * 检查是否需要登入
-  *
   * @return boolean
   */
   public function needlogin()
   {
     $action = D_FUNC;
-
     if (in_array(strtolower($action), $this->noNeedLogin) || in_array('*', $this->noNeedLogin)) {
-
       return false;
     }
     return true;;
   }
   /**
   * 检查是否需要权限
-  *
   * @return boolean
   */
   public function needpower()
@@ -59,11 +54,7 @@ class general extends Y
   {
 
     $this->seo['title'] = @Y::$conf['site']['site_name'];
-
-
     $this->seo['keyword'] = @Y::$conf['site']['site_keywords'];
-
-
     $this->seo['desc'] = @Y::$conf['site']['site_description'];
 
     TPL::assign(array('seo'=> $this->seo));
@@ -189,7 +180,7 @@ class general extends Y
   public function get_userid($type = 0)
   {
     $userid = @parent::$wrap_user['uid'];
-    
+
     if ($userid == null && $type) {
       error('请登入在操作', geturl(null, null, 'login', 'index'), 1);
     }
@@ -243,94 +234,95 @@ class general extends Y
     return $m->_getarea();
   }
 
-  public function init_where($table, $mapping = null,$op='')
+  public function init_where($table, $filder = null,$op = '')
   {
 
     /*if (isset($_POST['sflag']) || isset($_GET['sflag'])) {
-      unset($_POST['sflag']);
-      unset($_GET['sflag']);
+    unset($_POST['sflag']);
+    unset($_GET['sflag']);
 
-      $get = $_GET;
-      $post= $_POST;
-      foreach ($post as $key => $val) {
-        if (is_array($val) && sizeof($post) > 1) {
-          if ((sizeof(array_filter($val))) != 0) {
-            foreach ($val as $k2 => $v) {
+    $get = $_GET;
+    $post= $_POST;
+    foreach ($post as $key => $val) {
+    if (is_array($val) && sizeof($post) > 1) {
+    if ((sizeof(array_filter($val))) != 0) {
+    foreach ($val as $k2 => $v) {
 
-              if (strtotime($v)) {
-                $val[$k2] = strtotime($v);
-              }
-              if ($val[$k2] == null) {
-                $val[$k2] = intval($val[$k2]);
-              }
-            }
-            if (sizeof($val) != 0) {
-              $post[$key] = '[' . implode(',', $val) . ']';
-            }
-            else {
-              unset($post[$key]);
-            }
-          }
-          else {
-            unset($post[$key]);
-          }
-        }
-      }
-      $args = array_merge($get, $post);
-      $args = array_filter($args, 'strlen');
-      $url  = geturl($args, $args['a'], $args['c'], $args['m']);
+    if (strtotime($v)) {
+    $val[$k2] = strtotime($v);
+    }
+    if ($val[$k2] == null) {
+    $val[$k2] = intval($val[$k2]);
+    }
+    }
+    if (sizeof($val) != 0) {
+    $post[$key] = '[' . implode(',', $val) . ']';
+    }
+    else {
+    unset($post[$key]);
+    }
+    }
+    else {
+    unset($post[$key]);
+    }
+    }
+    }
+    $args = array_merge($get, $post);
+    $args = array_filter($args, 'strlen');
+    $url  = geturl($args, $args['a'], $args['c'], $args['m']);
 
-      YOut::redirect($url);
+    YOut::redirect($url);
     }
     else {*/
-$keyarr=[];
+    $keyarr = [];
     /**
     * 加入可排序字段
     * 排序字段前缀识别
     */
-    $bool=($filder != null && is_array($filder));
+    $bool   = ($filder != null && is_array($filder));
     if ($bool) {
-    	foreach($filder as $index=>$string){
-    		$string=explode('.',$string);
-			if(sizeof($string)>1){
-				$keyarr[$index]=$string[1];
-			}else{
-				$keyarr[$index]=$string[0];
-			}
-		}
+      foreach ($filder as $index=>$string) {
+        $string = explode('.',$string);
+        if (sizeof($string) > 1) {
+          $keyarr[$index] = $string[1];
+        }
+        else {
+          $keyarr[$index] = $string[0];
+        }
+      }
     }
     else {
       $keyarr = $table->get_field();
     }
-      if (gettype($table) == 'object') {
-        $filed_arr =$keyarr;
+    if (gettype($table) == 'object') {
+      $filed_arr = $keyarr;
 
-        $w         = get(array('string'=> $filed_arr));
+      $w         = get(array('string'=> $filed_arr));
 
-        foreach ($w as $key => $val) {
+      foreach ($w as $key => $val) {
 
-          if (isset($w[$key])) {
+        if (isset($w[$key])) {
 
-            if (!is_array($val) && preg_match('/^\[(\d*,\d*)\]$/', $val, $info)) {
-              $w[$key] = explode(',', $info[1]);
-              $w[$key] = array_filter($w[$key]);
-            }
+          if (!is_array($val) && preg_match('/^\[(\d*,\d*)\]$/', $val, $info)) {
+            $w[$key] = explode(',', $info[1]);
+            $w[$key] = array_filter($w[$key]);
           }
         }
-
-        $sw   = G(array('string' => array('word')))->get();
-
-
-
-        $table->set_where($w,$op);
-
-        parent::$wrap_where = $w;
-
-        $var_array  = array('where'=> $w,'word' => @$sw['word']);
-        TPL::assign($var_array);
       }
-      return $table;
-  /*  }*/
+
+      $sw = G(array('string' => array('word')))->get();
+
+
+
+      $table->set_where($w,$op);
+
+      parent::$wrap_where = $w;
+
+      $var_array  = array('where'=> $w,'word' => @$sw['word']);
+      TPL::assign($var_array);
+    }
+    return $table;
+    /*  }*/
   }
   /**
   * 排序
@@ -342,38 +334,40 @@ $keyarr=[];
   public function init_order($table,$filder = null)
   {
     $by = get(array('string' => array('up','down')));
-    $keyarr=[];
+    $keyarr = [];
     /**
     * 加入可排序字段
     * 排序字段前缀识别
     */
-    $bool=($filder != null && is_array($filder));
+    $bool   = ($filder != null && is_array($filder));
     if ($bool) {
-    	foreach($filder as $index=>$string){
-    		$string=explode('.',$string);
-			if(sizeof($string)>1){
-				$keyarr[$index]=$string[1];
-			}else{
-				$keyarr[$index]=$string[0];
-			}
-		}
+      foreach ($filder as $index=>$string) {
+        $string = explode('.',$string);
+        if (sizeof($string) > 1) {
+          $keyarr[$index] = $string[1];
+        }
+        else {
+          $keyarr[$index] = $string[0];
+        }
+      }
     }
     else {
       $keyarr = $table->get_field();
     }
-	//存在就排序
+    //存在就排序
     if (sizeof($by) >= 1) {
       foreach ($by as $key => $v) {
         if (!in_array($v, $keyarr)) {
           return $table;
         }
-        if($bool){
-			$index=array_search($v,$keyarr);
-			$orderkey=$filder[$index];
-		}else{
-			$orderkey=$v;
-		}
-		
+        if ($bool) {
+          $index    = array_search($v,$keyarr);
+          $orderkey = $filder[$index];
+        }
+        else {
+          $orderkey = $v;
+        }
+
         switch ($key) {
           case 'up':
           $word = array('f'=> $orderkey,'s'=> 'up');

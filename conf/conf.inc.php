@@ -22,11 +22,8 @@ return  array(
   'shortcut'           =>ROOT."/source/core/shortcut/",
   'log'                =>ROOT."/data/log/",
   'g_siteurl'          =>'http://'.$_SERVER['SERVER_NAME'],
-
   'install'            =>'NG',
-
   'checktop'           =>false,
-
   'g_charset'          =>'utf-8',
   'source_encode'      =>1,
   'g_error_reporting'  =>1,
@@ -65,13 +62,15 @@ return  array(
   'g_day'       =>'86400',
   #模板缓存
   'g_smarty_cache'=>'1',
-  'g_ext'=>'.php',
-  'g_tplpre'=>'.html',
-  'g_urlpre'=>'.html',
-  'g_lang'=>'cn',
-  'g_db_type'=>'mysql',
+  'g_ext'=>'.php',			
+  'g_tplpre'=>'.html',	 //模板后缀	
+  'g_urlpre'=>'.html',   //伪静态后缀
+  'g_lang'=>'cn',        //加载的语言包lang/下对应语言文件
+  'g_db_type'=>'mysql',  //数据库类型
   //允许跨域
-  'g_allow_origin'=>'1',
+  'g_allow_origin'=>'1',  //允许跨域访问数据
+  'g_upfile_check'=>'0', //上传文件检查内容是否合法；关闭上传速度加快（小于300K的都检查无论是否开启）；
+  'g_upfile_check_deal'=>'1',//非法文件处理方式0，删除，1隔离
   
   
 );
